@@ -9,18 +9,13 @@
     <div class="weui-cell__ft">
       <i class="weui-icon-warn" v-show="isValid"></i>
     </div>
-    <picker v-model="pickerShow" :data="selectData" :depth="1" @on-confirm="confirm"></picker>
   </div>
 </template>
 <script>
-import Picker from '../picker'
 export default {
   name: 've-input',
   created() {
     this.currentValue = (this.value === undefined || this.value === null) ? '' : this.value
-  },
-  components: {
-    Picker
   },
   props: {
     selectData: Array,

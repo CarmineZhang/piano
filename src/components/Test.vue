@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div>
+    <div style="padding:10px;">
       <swiper :list="swiperlist"></swiper>
       <search-bar @on-change="searchBar"></search-bar>
       <button class="ve-button ve-button-default" @click="showAlert">测试alert</button>
@@ -9,11 +9,11 @@
       <button class="ve-button ve-button-default" @click="showPicker">测试picker</button>
       <input type="text" v-model="phone">
       <input type="text" v-model.lazy="username">
-      <div class="weui-cell">
-        <div class="weui-cell__hd">
+      <div class="cell">
+        <div class="cell-hd">
           <label class="weui-label">qq</label>
         </div>
-        <div class="weui-cell__bd">
+        <div class="cell-bd">
           <input class="weui-input" type="number" :readonly="re" placeholder="请输入qq号">
         </div>
       </div>
@@ -229,10 +229,6 @@ export default {
 </script>
 
 <style lang='scss'>
-.main {
-  margin: 10px;
-}
-
 button {
   margin-top: 10px;
 }
