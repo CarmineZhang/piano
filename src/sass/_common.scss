@@ -1,0 +1,81 @@
+@import "variable";
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  line-height: 1.6;
+  font-family: $ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a,
+button,
+img,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+  outline: 0;
+}
+
+a img {
+  border: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+.router-view {
+  width: 100%;
+}
+
+a.link {
+  color: #333;
+}
+
+.ui-mask {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.weui-cells,
+.weui-picker__hd {
+  font-size: 14px;
+}
+
+.weui-cell_access {
+  .ve-cell-arrow-up {
+    &:after {
+      transform: matrix(.71, .71, -.71, .71, 0, 0) rotate(-90deg);
+    }
+  }
+  .ve-cell-arrow-down {
+    &:after {
+      transform: matrix(.71, .71, -.71, .71, 0, 0) rotate(90deg);
+    }
+  }
+  .ve-cell-arrow-transition {
+    &:after {
+      transition: transfrom .3s;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+@import "variable";
+@import "mixin";
+@import 'common';
+@import './icon/ui-font';
+
+/*
+基础组件样式
+*/
+
+@import './widget/button/button';
+@import './widget/mask/mask';
+@import './widget/dialog/dialog';
+@import './widget/searchbar/searchbar';
+@import './widget/toast/toast';
+@import './widget/swiper/swiper';
+@import './widget/picker/picker';
+@import './widget/cell/cell';
+@import 'animate';
+@import 'transition';
+@import 'flexbox';

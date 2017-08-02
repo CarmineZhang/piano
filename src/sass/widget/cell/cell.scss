@@ -1,0 +1,46 @@
+.cells {
+  margin-top: 20px;
+  background-color: $cellBg;
+  line-height: ($cellHeight - 2*$cellPaddingV) / $cellFontSize;
+  font-size: $cellFontSize;
+  overflow: hidden;
+  position: relative;
+  @include topline($cellBorderColor);
+  @include bottomline($cellBorderColor);
+}
+
+.cell {
+  padding: $cellPaddingV $cellPaddingH;
+  position: relative;
+  display: flex;
+  align-items: center;
+  @include topline($cellBorderColor);
+  &:before {
+    left: $cellPaddingH;
+    z-index: 2;
+  }
+  &:first-child {
+    &:before {
+      display: none;
+    }
+  }
+  .cell-bd {
+    flex: 1;
+  }
+  .cell-ft {
+    text-align: right;
+    color: $textColorGray;
+  }
+}
+
+.cell-access {
+  color: inherit;
+  &:active {
+    background-color: #ECECEC;
+  }
+  .cell-ft {
+    padding-right: 13px;
+    position: relative;
+    @include arrow(6px);
+  }
+}

@@ -1,0 +1,100 @@
+.ve-pop-out-enter-active,
+.ve-pop-out-leave-active,
+.ve-pop-in-enter-active,
+.ve-pop-in-leave-active {
+  will-change: transform;
+  transition: all 500ms;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
+.ve-pop-out-enter {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.ve-pop-out-leave-active {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+.ve-pop-in-enter {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+.ve-pop-in-leave-active {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.ve-dialog-enter {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.185)!important;
+}
+
+.ve-dialog-enter-active {
+  opacity: 1;
+  transition-duration: 400ms;
+  transform: translate(-50%, -50%) scale(1)!important;
+  transition-property: transform, opacity!important;
+}
+
+.ve-dialog-leave-active {
+  opacity: 0;
+  transition-duration: 300ms;
+  transition-property: transform, opacity!important;
+  transform: translate(-50%, -50%) scale(0.85)!important;
+}
+
+.ve-mask-enter,
+.ve-mask-leave-active {
+  opacity: 0;
+}
+
+.ve-mask-leave-active,
+.ve-mask-enter-active {
+  transition: opacity 300ms;
+}
+
+.ve-fade-enter-active,
+.ve-fade-leave-active {
+  opacity: 1;
+  transition: opacity linear 0.2s;
+}
+
+.ve-fade-enter,
+.ve-fade-leave-to {
+  opacity: 0;
+}
+
+.ve-slide-from-top-enter,
+.ve-slide-from-top-leave-active {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-100%)!important;
+}
+
+.ve-slide-from-bottom-enter,
+.ve-slide-from-bottom-leave-active {
+  opacity: 0;
+  transform: translateX(-50%) translateY(100%)!important;
+}
+
+.ve-slide-from-top-enter-active,
+.ve-slide-from-top-leave-active,
+.ve-slide-from-bottom-enter-active,
+.ve-slide-from-bottom-leave-active {
+  transition: all 400ms cubic-bezier(.36, .66, .04, 1);
+}
+
+.ve-actionsheet-mask-enter,
+.ve-actionsheet-mask-leave-active {
+  opacity: 0
+}
+
+.ve-actionsheet-mask-leave-active,
+.ve-actionsheet-mask-enter-active {
+  transition: opacity 300ms!important;
+}

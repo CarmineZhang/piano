@@ -1,0 +1,19 @@
+.ve-flexbox {
+  text-align: center;
+  display: flex;
+  .ve-flexbox-item {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+.ve-flexbox-col {
+  flex-direction: column;
+  .ve-flexbox-item {
+    width: 100%;
+  }
+}
+
+.ve-flexbox-row {
+  flex-direction: row;
+}

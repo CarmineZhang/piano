@@ -1,0 +1,58 @@
+.ve-slider {
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  height: 4.24rem;
+  background-color: #f7f6f5;
+  .ve-slider-hold {
+    position: relative;
+    .ve-slider-list {
+      position: relative;
+      z-index: 2;
+      transition: all .3s ease;
+      .ve-slider-item {
+        position: absolute;
+        top: 0;
+        text-align: center;
+        overflow: hidden;
+        width: 100%;
+        height: 4.24rem;
+        a {
+          display: block;
+        }
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .ve-slider-nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    bottom: 5px;
+    pointer-events: none;
+    z-index: 5;
+    .nav-bar {
+      position: absolute;
+      left: 16px;
+      bottom: 6px;
+      display: block;
+      font-size: 0;
+      b {
+        display: inline-block;
+        vertical-align: middle;
+        width: 4px;
+        height: 4px;
+        background-color: hsla(0, 0%, 100%, .7);
+        border-radius: 3px;
+        margin: 0 3px;
+      }
+      b.cur {
+        background-color: #e4393c;
+        width: 8px;
+      }
+    }
+  }
+}

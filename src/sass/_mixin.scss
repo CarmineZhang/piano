@@ -1,0 +1,147 @@
+@mixin font-dpr($font-size) {
+  font-size: $font-size;
+  @media screen and (min-width: 321px) and (max-width:375px) {
+    & {
+      font-size: $font-size + 1;
+    }
+  }
+  @media screen and (min-width: 376px) and (max-width:414px) {
+    & {
+      font-size: $font-size + 2;
+    }
+  }
+  @media screen and (min-width:414px) {
+    & {
+      font-size: $font-size + 3;
+    }
+  }
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin bottomline($color:#d5d5d6) {
+  &:after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-bottom: 1px solid $color;
+    color: $color;
+    transform-origin: 0 0;
+    transform: scaleY(.5);
+  }
+}
+
+@mixin topline($color:#d5d5d6) {
+  &:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid $color;
+    color: $color;
+    transform-origin: 0 0;
+    transform: scaleY(.5);
+  }
+}
+
+@mixin leftline($color:#d5d5d6) {
+  &:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    bottom: 0;
+    border-left: 1px solid $color;
+    color: $color;
+    transform-origin: 0 0;
+    transform: scaleX(.5);
+  }
+}
+
+@mixin rightline($color:#d5d5d6) {
+  &:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    bottom: 0;
+    border-right: 1px solid $color;
+    color: $color;
+    transform-origin: 0 0;
+    transform: scaleX(.5);
+  }
+}
+
+@mixin arrow($num:10px) {
+  &:after {
+    content: "";
+    display: block;
+    width: $num;
+    height: $num;
+    border-top: 2px solid #C8C8CD;
+    border-left: 2px solid #C8C8CD;
+    -webkit-transform-origin: 50%;
+    transform-origin: 50%;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    position: absolute;
+    top: 50%;
+    margin-top: -(($num / 2) + 1);
+    right: 2px;
+  }
+}
+
+@mixin close() {
+  &:after {
+    content: "";
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeBAMAAADJHrORAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAnUExURQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN0S+bUAAAANdFJOU00ARgwYLAUnEg40OzwIOFrEAAAAvklEQVQY02MQBAHXQww6IWAWAxCLFTGAgHoilO/EAAEqEL4oAwwEgvkL4HwuEB8hDVLAIOiAxGcRZBBTQOIzJTKIMyCDQgYhkLImIKEB0qjIACI5hBUYmAwbQDIMASBthkYMypIgg1gZNoC0KQsrGU4CMbgZwMYzGRpLQhhQc5UFJ6HYoyxoBGVB1U8WhqqHmCepZGgEMQ9i3ySgFRD7wO6RRLgH3b3o/kH3L3p4YIQXenhihDd6fGDEF3J8AgDkYx3BeW71dAAAAABJRU5ErkJggg==");
+    background-size: 15px;
+  }
+}
+
+@mixin ellipsis($w: auto) {
+  width: $w;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+@mixin ellipsisLn($line) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+}
+
+@mixin input-close() {
+  &:after {
+    content: "";
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeBAMAAADJHrORAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAnUExURQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN0S+bUAAAANdFJOU00ARgwYLAUnEg40OzwIOFrEAAAAvklEQVQY02MQBAHXQww6IWAWAxCLFTGAgHoilO/EAAEqEL4oAwwEgvkL4HwuEB8hDVLAIOiAxGcRZBBTQOIzJTKIMyCDQgYhkLImIKEB0qjIACI5hBUYmAwbQDIMASBthkYMypIgg1gZNoC0KQsrGU4CMbgZwMYzGRpLQhhQc5UFJ6HYoyxoBGVB1U8WhqqHmCepZGgEMQ9i3ySgFRD7wO6RRLgH3b3o/kH3L3p4YIQXenhihDd6fGDEF3J8AgDkYx3BeW71dAAAAABJRU5ErkJggg==");
+    background-size: 15px;
+  }
+}

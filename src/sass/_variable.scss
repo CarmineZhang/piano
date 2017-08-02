@@ -1,0 +1,42 @@
+$ff:-apple-system-font,
+"Helvetica Neue",
+"PingFang SC",
+"Hiragino Sans GB",
+"Microsoft YaHei",
+sans-serif;
+$lineColorLight: #E5E5E5;
+$colorPrimary: #1AAD19;
+$textColorGray: #999999;
+
+/*
+** toast
+*/
+
+$toast-content-font-size: 16px;
+$toast-top: 180px;
+$toast-position-top-offset: 10px;
+$toast-position-bottom-offset: 10px;
+$toast-z-index: 5000;
+
+/*
+dialog
+*/
+
+$btn-color: #3cc51f;
+
+/*
+cell
+*/
+
+$cellBg:#FFFFFF;
+$cellBorderColor:#e5e5e5;
+$cellHeight: 45px;
+$cellFontSize:17px;
+$cellPaddingV:10px;
+$cellPaddingH:15px;
+
+/*
+picker
+*/
+
+$pickerItemHeight: 34px;
