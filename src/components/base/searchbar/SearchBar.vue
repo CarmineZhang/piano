@@ -6,7 +6,7 @@
         <input type="search" v-model="searchValue" class="search-bar-input" v-focus="isFocus" placeholder="搜索" required="" @blur="inputBlur">
         <a href="javascript:" class="weui-icon-clear" @click="clear"></a>
       </div>
-      <label class="search-bar-label" @click="labelClick" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+      <label class="search-bar-label" @click="labelClick">
         <i class="weui-icon-search"></i>
         <span>搜索</span>
       </label>
