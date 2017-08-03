@@ -8,7 +8,7 @@
       </div>
       <label class="search-bar-label" @click="labelClick">
         <i class="weui-icon-search"></i>
-        <span>搜索</span>
+        <span>输入钢琴品牌型号关键字</span>
       </label>
     </form>
     <a href="javascript:" class="search-bar-cancel-btn" @click="cancel">取消</a>

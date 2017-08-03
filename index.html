@@ -5,7 +5,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <title>商城</title>
-  <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/flexible.js"></script>
+  <script>
+    var doc = window.document;
+    var docEl = doc.documentElement;
+    var width = docEl.getBoundingClientRect().width;
+    if (width > 540) {
+      width = 540;
+    }
+    var rem = width / 7.5;
+    docEl.style.fontSize = rem + 'px';
+
+  </script>
   <style>
     * {
       -webkit-tap-highlight-color: transparent;
@@ -13,6 +23,7 @@
     }
 
     body {
+      font-size: 16px;
       max-width: 540px;
       margin: 0 auto;
     }
