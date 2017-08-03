@@ -17,7 +17,7 @@
 .search-bar-form {
   position: relative;
   flex: auto;
-  background-color: #464649;
+  background-color: #323136;
   &:after {
     content: '';
     position: absolute;
@@ -95,7 +95,8 @@
   display: none;
   margin-left: 10px;
   line-height: .6rem;
-  color: #09BB07;
+  font-size: .28rem;
+  color: #6d6d6d;
   white-space: nowrap;
 }
 
