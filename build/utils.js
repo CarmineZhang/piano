@@ -7,9 +7,9 @@ exports.resolve = function (dir) {
 }
 
 exports.assetsPath = function (_path) {
-  var assetsSubDirectory = process.env.NODE_ENV === 'production'
-    ? config.build.assetsSubDirectory
-    : config.dev.assetsSubDirectory
+  var assetsSubDirectory = process.env.NODE_ENV === 'production' ?
+    config.build.assetsSubDirectory :
+    config.dev.assetsSubDirectory
   return path.posix.join(assetsSubDirectory, _path)
 }
 
@@ -23,10 +23,16 @@ exports.cssLoaders = function (options) {
       sourceMap: options.sourceMap
     }
   }
+  var postCssLoader = {
+    loader: 'postcss-loader',
+    options: {
+      sourceMap: options.sourceMap
+    }
+  }
 
   // generate loader string to be used with extract text plugin
-  function generateLoaders (loader, loaderOptions) {
-    var loaders = [cssLoader]
+  function generateLoaders(loader, loaderOptions) {
+    var loaders = [cssLoader, postCssLoader]
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
@@ -35,7 +41,6 @@ exports.cssLoaders = function (options) {
         })
       })
     }
-
     // Extract CSS when that option is specified
     // (which is the case during production build)
     if (options.extract) {
@@ -56,9 +61,11 @@ exports.cssLoaders = function (options) {
     // sass: generateLoaders('sass', { indentedSyntax: true,  includePaths: [
     //     exports.resolve('./src/sass')
     //   ]}),
-    scss: generateLoaders('sass',{includePaths: [
+    scss: generateLoaders('sass', {
+      includePaths: [
         exports.resolve('./src/sass')
-      ]}),
+      ]
+    }),
     stylus: generateLoaders('stylus'),
     styl: generateLoaders('stylus')
   }
