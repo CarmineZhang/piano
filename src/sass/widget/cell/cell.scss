@@ -41,6 +41,6 @@
   .cell-ft {
     padding-right: 13px;
     position: relative;
-    @include arrow(6px);
+    @include arrow-right(6px);
   }
 }

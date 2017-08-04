@@ -64,7 +64,7 @@ export default {
         color: #999;
         word-wrap: break-word;
       }
-      @include arrow();
+      @include arrow-right();
       &:after {
         right: 40px;
       }

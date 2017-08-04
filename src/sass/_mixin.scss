@@ -85,18 +85,50 @@
   }
 }
 
-@mixin arrow($num:10px) {
+@mixin arrow-right($num:10px) {
   &:after {
     content: "";
     display: block;
     width: $num;
     height: $num;
-    border-top: 2px solid #C8C8CD;
-    border-left: 2px solid #C8C8CD;
-    -webkit-transform-origin: 50%;
+    border-width: 2px 2px 0 0;
+    border-color: #C8C8CD;
     transform-origin: 50%;
-    -webkit-transform: rotate(135deg);
-    transform: rotate(135deg);
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+    position: absolute;
+    top: 50%;
+    margin-top: -(($num / 2) + 1);
+    right: 2px;
+  }
+}
+
+@mixin arrow-down($num:10px) {
+  &:after {
+    content: "";
+    display: block;
+    width: $num;
+    height: $num;
+    border-width: 2px 2px 0 0;
+    border-color: #C8C8CD;
+    transform-origin: 50%;
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0) rotate(90deg);
+    position: absolute;
+    top: 50%;
+    margin-top: -(($num / 2) + 1);
+    right: 2px;
+  }
+}
+
+@mixin arrow-up($num:10px) {
+  &:after {
+    content: "";
+    display: block;
+    width: $num;
+    height: $num;
+    border-width: 2px 2px 0 0;
+    border-color: #C8C8CD;
+    transform-origin: 50%;
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0) rotate(-90deg);
     position: absolute;
     top: 50%;
     margin-top: -(($num / 2) + 1);
