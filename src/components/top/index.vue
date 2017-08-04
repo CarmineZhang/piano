@@ -1,14 +1,14 @@
 <template>
   <flexbox class="top-nav">
-    <flexbox-item>
+    <a class="nav-rent  ve-flexbox-item">
       <img src="../../assets/rent.png" alt="">
-    </flexbox-item>
-    <flexbox-item>
+    </a>
+    <a class="nav-index  ve-flexbox-item">
       <img src="../../assets/index.png" alt="">
-    </flexbox-item>
-    <flexbox-item>
+    </a>
+    <a class="nav-me  ve-flexbox-item">
       <img src="../../assets/me.png" alt="">
-    </flexbox-item>
+    </a>
   </flexbox>
 </template>
 <script>
@@ -27,7 +27,7 @@ export default {
   line-height: .88rem;
   font-size: 0;
   background-color: #000;
-  .nav-left {
+  .nav-rent {
     padding-left: .3rem;
     text-align: left;
     img {
@@ -36,14 +36,14 @@ export default {
       height: .37rem;
     }
   }
-  .nav-center {
+  .nav-index {
     img {
       vertical-align: middle;
       width: .33rem;
       height: .52rem;
     }
   }
-  .nav-right {
+  .nav-me {
     padding-right: .3rem;
     text-align: right;
     img {

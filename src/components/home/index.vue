@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Top from './top'
+import Top from '../top'
 import VeFooter from './footer'
 import SearchBar from '../base/searchbar'
 import Swiper from '../base/swiper'
