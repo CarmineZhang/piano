@@ -2,13 +2,13 @@
   position: relative;
   overflow: hidden;
   z-index: 2;
-  height: 4.24rem;
   background-color: #f7f6f5;
   .ve-slider-hold {
     position: relative;
     .ve-slider-list {
       position: relative;
       z-index: 2;
+      padding-top: (600/750)*100%;
       transition: all .3s ease;
       .ve-slider-item {
         position: absolute;
@@ -16,7 +16,6 @@
         text-align: center;
         overflow: hidden;
         width: 100%;
-        height: 4.24rem;
         a {
           display: block;
         }
@@ -36,22 +35,22 @@
     z-index: 5;
     .nav-bar {
       position: absolute;
-      left: 16px;
+      left: 50%;
+      transform: translateX(-50%);
       bottom: 6px;
       display: block;
       font-size: 0;
       b {
         display: inline-block;
         vertical-align: middle;
-        width: 4px;
-        height: 4px;
-        background-color: hsla(0, 0%, 100%, .7);
-        border-radius: 3px;
+        width: .6rem;
+        height: .03rem;
+        background-color: #EAEAEA; // border-radius: 3px;
         margin: 0 3px;
       }
       b.cur {
-        background-color: #e4393c;
-        width: 8px;
+        background-color: #E0C782;
+        width: .6rem;
       }
     }
   }

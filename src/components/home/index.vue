@@ -12,21 +12,36 @@
       </flexbox-item>
     </flexbox>
     <search-bar></search-bar>
+    <swiper :list="swipers"></swiper>
   </div>
 </template>
 
 <script>
 import { Flexbox, FlexboxItem } from '../base/flexbox'
 import SearchBar from '../base/searchbar'
+import Swiper from '../base/swiper'
+import bannerSrc from '../../assets/banner.png'
 export default {
   name: 'home',
   components: {
     Flexbox,
     FlexboxItem,
-    SearchBar
+    SearchBar,
+    Swiper
   },
   data() {
-    return {}
+    return {
+      swipers: [{
+        href: '',
+        img: bannerSrc
+      }, {
+        href: '',
+        img: bannerSrc
+      }, {
+        href: '',
+        img: bannerSrc
+      }]
+    }
   }
 }
 </script>
