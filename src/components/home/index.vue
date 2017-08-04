@@ -1,33 +1,40 @@
 <template>
   <div class="main">
-    <flexbox class="top-nav">
-      <flexbox-item class="nav-left">
-        <img src="../../assets/rent.png" alt="">
-      </flexbox-item>
-      <flexbox-item class="nav-center">
-        <img src="../../assets/index.png" alt="">
-      </flexbox-item>
-      <flexbox-item class="nav-right">
-        <img src="../../assets/me.png" alt="">
-      </flexbox-item>
-    </flexbox>
+    <top></top>
     <search-bar></search-bar>
     <swiper :list="swipers"></swiper>
+    <recommend></recommend>
+    <div class="more">
+      <a>查看更多</a>
+    </div>
+    <service></service>
+    <news></news>
+    <div class="more">
+      <a>查看更多</a>
+    </div>
+    <ve-footer></ve-footer>
   </div>
 </template>
 
 <script>
-import { Flexbox, FlexboxItem } from '../base/flexbox'
+import Top from './top'
+import VeFooter from './footer'
 import SearchBar from '../base/searchbar'
 import Swiper from '../base/swiper'
 import bannerSrc from '../../assets/banner.png'
+import Recommend from './recommend'
+import Service from './service'
+import News from './news'
 export default {
   name: 'home',
   components: {
-    Flexbox,
-    FlexboxItem,
+    Top,
     SearchBar,
-    Swiper
+    Swiper,
+    Recommend,
+    Service,
+    News,
+    VeFooter
   },
   data() {
     return {
@@ -46,35 +53,15 @@ export default {
 }
 </script>
 <style lang="scss">
-.top-nav {
-  height: .88rem;
-  line-height: .88rem;
-  font-size: 0;
-  background-color: #000;
-  .nav-left {
-    padding-left: .3rem;
-    text-align: left;
-    img {
-      vertical-align: middle;
-      width: .41rem;
-      height: .37rem;
-    }
-  }
-  .nav-center {
-    img {
-      vertical-align: middle;
-      width: .33rem;
-      height: .52rem;
-    }
-  }
-  .nav-right {
-    padding-right: .3rem;
-    text-align: right;
-    img {
-      vertical-align: middle;
-      width: .36rem;
-      height: .41rem;
-    }
+.more {
+  height: .6rem;
+  line-height: .6rem;
+  background-color: #eee;
+  text-align: center;
+  font-size: .24rem;
+  color: #323136;
+  a {
+    display: inline-block;
   }
 }
 </style>
