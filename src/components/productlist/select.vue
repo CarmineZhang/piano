@@ -52,7 +52,6 @@ export default {
 <style lang="scss">
 .pl-search {
   height: .88rem;
-  z-index: 104;
   .options {
     position: relative;
     z-index: 1;
