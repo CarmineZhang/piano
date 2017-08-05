@@ -22,6 +22,11 @@
         </transition>
       </div>
     </div>
+    <div class="filter">
+      <span class="filter-item">雅马哈</span>
+      <span class="filter-item">月租</span>
+      <span class="filter-item">100~200 /月</span>
+    </div>
   </div>
 </template>
 <script>
@@ -48,16 +53,10 @@ export default {
 .pl-search {
   height: .88rem;
   z-index: 104;
-}
-
-.pl-mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, .3);
-  z-index: 103;
+  .options {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .pl-select {
@@ -110,6 +109,35 @@ export default {
       right: 10px;
       top: 50%;
       margin-top: -6px;
+    }
+  }
+}
+
+.filter {
+  height: .55rem;
+  background-color: #eaeaea;
+  padding: .075rem 0 0.075rem .3rem;
+  .filter-item {
+    font-size: .24rem;
+    color: #928f9c;
+    border: 1px solid #7f7c8b;
+    border-radius: 0.19rem;
+    height: .38rem;
+    line-height: .38rem;
+    margin-right: .1rem;
+    position: relative;
+    display: inline-block;
+    padding: 0 .6rem 0 .3rem;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      width: 12px;
+      height: 12px;
+      margin-top: -6px;
+      background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeBAMAAADJHrORAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAnUExURQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN0S+bUAAAANdFJOU00ARgwYLAUnEg40OzwIOFrEAAAAvklEQVQY02MQBAHXQww6IWAWAxCLFTGAgHoilO/EAAEqEL4oAwwEgvkL4HwuEB8hDVLAIOiAxGcRZBBTQOIzJTKIMyCDQgYhkLImIKEB0qjIACI5hBUYmAwbQDIMASBthkYMypIgg1gZNoC0KQsrGU4CMbgZwMYzGRpLQhhQc5UFJ6HYoyxoBGVB1U8WhqqHmCepZGgEMQ9i3ySgFRD7wO6RRLgH3b3o/kH3L3p4YIQXenhihDd6fGDEF3J8AgDkYx3BeW71dAAAAABJRU5ErkJggg==");
+      background-size: 12px;
     }
   }
 }
