@@ -40,6 +40,14 @@ exports.cssLoaders = function (options) {
           sourceMap: options.sourceMap
         })
       })
+      if (loader === 'sass') {
+        loaders.push({
+          loader: 'sass-resources-loader',
+          options: {
+            resources: [exports.resolve('./src/sass/_mixin.scss')]
+          }
+        })
+      }
     }
     // Extract CSS when that option is specified
     // (which is the case during production build)

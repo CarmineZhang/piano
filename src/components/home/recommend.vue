@@ -28,9 +28,9 @@ export default {
       list: [
         {
           img: re1,
-          title: '施坦威',
+          title: '斯坦威',
           subTitle: 'STEINWAY',
-          desc: '拥有一架施坦威钢琴，<br>不仅可以享受无语伦比的音乐体验，<br>还可以作为及其珍贵的投资力作。',
+          desc: '拥有一架斯坦威钢琴，<br>不仅可以享受无语伦比的音乐体验，<br>还可以作为及其珍贵的投资力作。',
           price: 2.5
         }, {
           img: re2,

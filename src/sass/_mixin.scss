@@ -85,14 +85,15 @@
   }
 }
 
-@mixin arrow-right($num:10px) {
+@mixin arrow-right($num:10px, $color:#C8C8CD) {
   &:after {
     content: "";
     display: block;
     width: $num;
     height: $num;
     border-width: 2px 2px 0 0;
-    border-color: #C8C8CD;
+    border-color: $color;
+    border-style: solid;
     transform-origin: 50%;
     transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
     position: absolute;
@@ -102,31 +103,33 @@
   }
 }
 
-@mixin arrow-down($num:10px) {
+@mixin arrow-down($num:10px, $color:#C8C8CD) {
   &:after {
     content: "";
     display: block;
     width: $num;
     height: $num;
     border-width: 2px 2px 0 0;
-    border-color: #C8C8CD;
+    border-color: $color;
+    border-style: solid;
     transform-origin: 50%;
     transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0) rotate(90deg);
     position: absolute;
     top: 50%;
-    margin-top: -(($num / 2) + 1);
+    margin-top: -$num;
     right: 2px;
   }
 }
 
-@mixin arrow-up($num:10px) {
+@mixin arrow-up($num:10px, $color:#C8C8CD) {
   &:after {
     content: "";
     display: block;
     width: $num;
     height: $num;
     border-width: 2px 2px 0 0;
-    border-color: #C8C8CD;
+    border-color: $color;
+    border-style: solid;
     transform-origin: 50%;
     transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0) rotate(-90deg);
     position: absolute;

@@ -1,15 +1,17 @@
 <template>
-  <flexbox class="top-nav">
-    <a class="nav-rent  ve-flexbox-item">
-      <img src="../../assets/rent.png" alt="">
-    </a>
-    <a class="nav-index  ve-flexbox-item">
-      <img src="../../assets/index.png" alt="">
-    </a>
-    <a class="nav-me  ve-flexbox-item">
-      <img src="../../assets/me.png" alt="">
-    </a>
-  </flexbox>
+  <div class="header">
+    <flexbox class="top-nav">
+      <a class="nav-rent  ve-flexbox-item">
+        <img src="../../assets/rent.png" alt="">
+      </a>
+      <a class="nav-index  ve-flexbox-item">
+        <img src="../../assets/index.png" alt="">
+      </a>
+      <a class="nav-me  ve-flexbox-item">
+        <img src="../../assets/me.png" alt="">
+      </a>
+    </flexbox>
+  </div>
 </template>
 <script>
 import { Flexbox, FlexboxItem } from '../base/flexbox'
