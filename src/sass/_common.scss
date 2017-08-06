@@ -57,6 +57,18 @@ a.link {
   background: rgba(0, 0, 0, 0.6);
 }
 
+.more {
+  height: .6rem;
+  line-height: .6rem;
+  background-color: #eee;
+  text-align: center;
+  font-size: .24rem;
+  color: #323136;
+  a {
+    display: inline-block;
+  }
+}
+
 .weui-cells,
 .weui-picker__hd {
   font-size: 14px;

@@ -52,17 +52,4 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.more {
-  height: .6rem;
-  line-height: .6rem;
-  background-color: #eee;
-  text-align: center;
-  font-size: .24rem;
-  color: #323136;
-  a {
-    display: inline-block;
-  }
-}
-</style>
 
