@@ -5,7 +5,8 @@ import Router from 'vue-router'
 // import ProductDetail from '@/components/productdetail'
 // import SelectAddress from '@/components/address'
 // import CostDetail from '@/components/costdetail'
-import OrderComplete from '@/components/ordercomplete'
+// import OrderComplete from '@/components/ordercomplete'
+import OrderList from '@/components/orderlist'
 import Test from '@/components/Test'
 import Widget from '@/plugins/widget'
 Vue.use(Router)
@@ -15,7 +16,7 @@ export default new Router({
   routes: [{
     path: '/',
     name: 'home',
-    component: OrderComplete,
+    component: OrderList,
   }, {
     path: '/test',
     component: Test
