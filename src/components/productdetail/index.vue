@@ -58,6 +58,10 @@
     </div>
     <div class="more">
     </div>
+    <div class="pt-action">
+      <a href="" class="act-rent">立即租赁</a>
+      <a href="" class="act-collect"></a>
+    </div>
   </div>
 </template>
 <script>
@@ -143,6 +147,27 @@ export default {
     background-color: #bf3737;
     border-radius: .1rem+.06rem;
     padding: 3px 5px;
+  }
+}
+
+.pt-action {
+  display: flex;
+  height: .88rem;
+  .act-rent {
+    flex: 1;
+    font-size: .3rem;
+    color: #fff;
+    background-color: #bf3737;
+    text-align: center;
+    line-height: .88rem;
+  }
+  .act-collect {
+    width: .88rem;
+    background-color: #7f7c8b;
+    background-image: url('../../assets/collect.png');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: .4rem .36rem;
   }
 }
 </style>
