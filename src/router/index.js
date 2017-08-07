@@ -10,7 +10,8 @@ import Router from 'vue-router'
 // import Login from '@/components/login'
 // import UserCenter from '@/components/usercenter'
 // import Coupon from '@/components/coupon'
-import News from '@/components/news'
+// import News from '@/components/news'
+import Account from '@/components/account'
 import Test from '@/components/Test'
 import Widget from '@/plugins/widget'
 Vue.use(Router)
@@ -20,7 +21,7 @@ export default new Router({
   routes: [{
     path: '/',
     name: 'home',
-    component: News,
+    component: Account,
   }, {
     path: '/test',
     component: Test
