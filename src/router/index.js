@@ -13,6 +13,7 @@ import UserCenter from '@/components/usercenter'
 // import News from '@/components/news'
 import Account from '@/components/account'
 import AddAddress from '@/components/address/add'
+import ChangePhone from '@/components/account/changephone'
 import Test from '@/components/Test'
 import Widget from '@/plugins/widget'
 Vue.use(Router)
@@ -38,6 +39,9 @@ export default new Router({
   }, {
     path: '/addaddress',
     component: AddAddress
+  }, {
+    path: '/changephone',
+    component: ChangePhone
   }, {
     path: '/test',
     component: Test

@@ -1,7 +1,7 @@
 <template>
   <cell-box>
-    <cell to="a">切换账号</cell>
-    <cell to="b">更改手机号</cell>
+    <cell to="/login">切换账号</cell>
+    <cell to="/changephone">更改手机号</cell>
   </cell-box>
 </template>
 <script>
