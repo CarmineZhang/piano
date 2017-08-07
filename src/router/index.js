@@ -9,7 +9,8 @@ import Router from 'vue-router'
 // import OrderList from '@/components/orderlist'
 // import Login from '@/components/login'
 // import UserCenter from '@/components/usercenter'
-import Coupon from '@/components/coupon'
+// import Coupon from '@/components/coupon'
+import News from '@/components/news'
 import Test from '@/components/Test'
 import Widget from '@/plugins/widget'
 Vue.use(Router)
@@ -19,7 +20,7 @@ export default new Router({
   routes: [{
     path: '/',
     name: 'home',
-    component: Coupon,
+    component: News,
   }, {
     path: '/test',
     component: Test

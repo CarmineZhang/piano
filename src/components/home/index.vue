@@ -18,7 +18,7 @@
 
 <script>
 import Top from '../top'
-import VeFooter from './footer'
+import VeFooter from '../footer'
 import SearchBar from '../base/searchbar'
 import Swiper from '../base/swiper'
 import bannerSrc from '../../assets/banner.png'
