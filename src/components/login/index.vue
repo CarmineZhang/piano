@@ -10,7 +10,7 @@
           <input type="text" class="item-bd ipt" placeholder="手机号码">
         </div>
         <div class="login-item">
-          <input type="tel" class="item-bd input" placeholder="请输入六位验证码">
+          <input type="tel" class="item-bd ipt" placeholder="请输入六位验证码">
           <button class="item-ft">获取验证码</button>
         </div>
         <div class="login-op-wrapper">
@@ -94,7 +94,7 @@ export default {
     }
     .login-op-wrapper {
       overflow: hidden;
-      margin-top: .3rem;
+      margin-top: .6rem;
     }
     .login-comment {
       padding: .2rem 0;

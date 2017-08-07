@@ -31,7 +31,7 @@
       </cell>
     </div>
     <div class="more"></div>
-    <a class="user-op">退出</a>
+    <a class="btn btn-default">退出</a>
   </div>
 </template>
 <script>
@@ -89,16 +89,6 @@ export default {
     background-position: 0 50%;
     background-size: .28rem .28rem;
   }
-}
-
-.user-op {
-  display: block;
-  height: .88rem;
-  line-height: .88rem;
-  text-align: center;
-  background-color: #928f9c;
-  font-size: .3rem;
-  color: #fff;
 }
 
 .more-mini {
