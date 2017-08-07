@@ -1,8 +1,14 @@
 .cell {
+  box-sizing: border-box;
+  height: .88rem;
   padding: 10px 15px;
   display: flex;
   position: relative;
   @include bottomline();
+  .cell-hd {
+    font-size: .28rem;
+    color: #323136;
+  }
   .cell-bd {
     flex: 1;
     font-size: .28rem;

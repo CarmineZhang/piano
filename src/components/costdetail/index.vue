@@ -2,38 +2,26 @@
   <div>
     <div class="cost">
       <div class="title">费用核算：</div>
-      <div class="cell">
-        <div class="cell-hd">预付押金：</div>
-        <div class="cell-bd">
-          <span>¥2,000</span>
-          <span class="cell-desc">总押金（20,000）</span>
-        </div>
-      </div>
-      <div class="cell">
+      <cell title="预付押金：">
+        <span>¥2,000</span>
+        <span class="cell-desc">总押金（20,000）</span>
+      </cell>
+      <cell>
         <div class="cell-comment">
           *线上预付20%的押金总额，货到付剩余押金。
         </div>
-      </div>
-      <div class="cell cell-access">
-        <div class="cell-hd">租金：</div>
-        <div class="cell-bd">
-          <span>¥300</span>
-          <span class="cell-desc">租期30天</span>
-        </div>
-        <div class="cell-ft"></div>
-      </div>
-      <div class="cell">
-        <div class="cell-hd">运费：</div>
-        <div class="cell-bd">
-          ¥2,000
-        </div>
-      </div>
-      <div class="cell cell-access">
-        <div class="cell-hd">优惠券：</div>
-        <div class="cell-bd">¥20</div>
-        <div class="cell-ft">
-        </div>
-      </div>
+      </cell>
+      <cell to="" title="租金：">
+        <span>¥300</span>
+        <span class="cell-desc">租期30天</span>
+      </cell>
+      <cell title="运费：">
+        ¥2,000
+      </cell>
+      <cell to="" title="优惠券：">
+        ¥20
+      </cell>
+  
     </div>
     <div class="more">
     </div>
@@ -49,8 +37,12 @@
   </div>
 </template>
 <script>
+import { Cell } from '../base/cell'
 export default {
-  name: 'cost-detail'
+  name: 'cost-detail',
+  components: {
+    Cell
+  }
 }
 </script>
 <style lang="scss">
@@ -65,11 +57,7 @@ export default {
     @include bottomline(#ccc);
   }
   .cell {
-    position: relative;
-    display: flex;
-    height: .88rem;
-    line-height: .88rem;
-    @include bottomline(#ccc);
+
     .cell-comment {
       font-size: .24rem;
       color: #bf3737;
@@ -79,20 +67,12 @@ export default {
       color: #323136;
     }
     .cell-bd {
-      flex: 1;
       font-size: .3rem;
       color: #323136;
       .cell-desc {
         font-size: .28rem;
         color: #ccc;
       }
-    }
-  }
-  .cell-access {
-    .cell-ft {
-      padding-right: 20px;
-      position: relative;
-      @include arrow-right(6px);
     }
   }
 }

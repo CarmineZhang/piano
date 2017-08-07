@@ -1,10 +1,9 @@
 <template>
   <div class="cell" :class="{'cell-access': to!==undefined}" @click="onClick">
-    <slot name="hd"></slot>
+    <div class="cell-hd" v-if="title" v-text="title"></div>
+    <slot name="hd" v-else></slot>
     <div class="cell-bd">
-      <p>
-        <slot></slot>
-      </p>
+      <slot></slot>
     </div>
     <div class="cell-ft" v-html="content" :class="valueClass"></div>
   </div>
@@ -13,6 +12,7 @@
 export default {
   name: 'cell',
   props: {
+    title: String,
     content: String,
     arrowDirection: String,
     to: String

@@ -4,7 +4,7 @@ import Router from 'vue-router'
 // import ProductList from '@/components/productlist'
 // import ProductDetail from '@/components/productdetail'
 // import SelectAddress from '@/components/address'
-// import CostDetail from '@/components/costdetail'
+import CostDetail from '@/components/costdetail'
 // import OrderComplete from '@/components/ordercomplete'
 // import OrderList from '@/components/orderlist'
 // import Login from '@/components/login'
@@ -28,6 +28,9 @@ export default new Router({
   }, {
     path: '/usercenter',
     component: UserCenter
+  }, {
+    path: '/costdetail',
+    component: CostDetail
   }, {
     path: '/test',
     component: Test
