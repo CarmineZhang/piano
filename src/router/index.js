@@ -8,7 +8,8 @@ import Router from 'vue-router'
 // import OrderComplete from '@/components/ordercomplete'
 // import OrderList from '@/components/orderlist'
 // import Login from '@/components/login'
-import UserCenter from '@/components/usercenter'
+// import UserCenter from '@/components/usercenter'
+import Coupon from '@/components/coupon'
 import Test from '@/components/Test'
 import Widget from '@/plugins/widget'
 Vue.use(Router)
@@ -18,7 +19,7 @@ export default new Router({
   routes: [{
     path: '/',
     name: 'home',
-    component: UserCenter,
+    component: Coupon,
   }, {
     path: '/test',
     component: Test
