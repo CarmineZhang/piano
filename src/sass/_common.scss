@@ -49,6 +49,16 @@ a.link {
   color: #333;
 }
 
+.ipt {
+  font-size: .28rem;
+  color: #999;
+  padding-left: 10px;
+  border: 0;
+  outline: 0;
+  -webkit-appearance: none;
+  background-color: transparent;
+}
+
 .ui-mask {
   position: fixed;
   z-index: 1000;
@@ -71,25 +81,20 @@ a.link {
   }
 }
 
-.weui-cells,
-.weui-picker__hd {
-  font-size: 14px;
+.btn {
+  display: block;
+  font-size: .3rem;
+  color: #fff;
+  text-align: center;
+  height: .88rem;
+  line-height: .88rem;
+  margin-bottom: .3rem;
 }
 
-.weui-cell_access {
-  .ve-cell-arrow-up {
-    &:after {
-      transform: matrix(.71, .71, -.71, .71, 0, 0) rotate(-90deg);
-    }
-  }
-  .ve-cell-arrow-down {
-    &:after {
-      transform: matrix(.71, .71, -.71, .71, 0, 0) rotate(90deg);
-    }
-  }
-  .ve-cell-arrow-transition {
-    &:after {
-      transition: transfrom .3s;
-    }
-  }
+.btn-primary {
+  background-color: #bf3737;
+}
+
+.btn-default {
+  background-color: #928f9c;
 }

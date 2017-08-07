@@ -12,6 +12,7 @@ import UserCenter from '@/components/usercenter'
 // import Coupon from '@/components/coupon'
 // import News from '@/components/news'
 import Account from '@/components/account'
+import AddAddress from '@/components/address/add'
 import Test from '@/components/Test'
 import Widget from '@/plugins/widget'
 Vue.use(Router)
@@ -21,7 +22,7 @@ export default new Router({
   routes: [{
     path: '/',
     name: 'home',
-    component: Test
+    component: AddAddress
   }, {
     path: '/account',
     component: Account
