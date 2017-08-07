@@ -8,7 +8,7 @@ import Router from 'vue-router'
 // import OrderComplete from '@/components/ordercomplete'
 // import OrderList from '@/components/orderlist'
 // import Login from '@/components/login'
-// import UserCenter from '@/components/usercenter'
+import UserCenter from '@/components/usercenter'
 // import Coupon from '@/components/coupon'
 // import News from '@/components/news'
 import Account from '@/components/account'
@@ -21,7 +21,13 @@ export default new Router({
   routes: [{
     path: '/',
     name: 'home',
-    component: Account,
+    component: Test
+  }, {
+    path: '/account',
+    component: Account
+  }, {
+    path: '/usercenter',
+    component: UserCenter
   }, {
     path: '/test',
     component: Test

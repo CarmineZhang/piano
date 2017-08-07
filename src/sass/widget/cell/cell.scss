@@ -3,14 +3,14 @@
   display: flex;
   position: relative;
   @include bottomline();
-  .cell-hd {
-    width: 1rem;
-  }
   .cell-bd {
     flex: 1;
     font-size: .28rem;
     color: #323136;
   }
+}
+
+.cell-access {
   .cell-ft {
     position: relative;
     padding-right: 20px;

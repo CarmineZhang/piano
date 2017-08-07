@@ -1,7 +1,10 @@
 <template>
-  <div class="cell" :class="{'cell-access': link}" @click="onClick">
+  <div class="cell" :class="{'cell-access': to!==undefined}" @click="onClick">
+    <slot name="hd"></slot>
     <div class="cell-bd">
-      <p v-html="title"></p>
+      <p>
+        <slot></slot>
+      </p>
     </div>
     <div class="cell-ft" v-html="content" :class="valueClass"></div>
   </div>
@@ -10,10 +13,9 @@
 export default {
   name: 'cell',
   props: {
-    title: String,
     content: String,
-    link: Boolean,
-    arrowDirection: String
+    arrowDirection: String,
+    to: String
   },
   computed: {
     valueClass() {
@@ -27,6 +29,7 @@ export default {
   methods: {
     onClick(e) {
       this.$emit('on-click', e)
+      this.$router.push({ 'path': this.to })
     }
   }
 }
