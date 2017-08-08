@@ -10,8 +10,8 @@
           <div class="item-hd">+86</div>
           <input type="text" class="item-bd ipt" placeholder="手机号码">
         </div>
-        <div class="form-item">
-          <input type="text" class="item-bd ipt" placeholder="收货地址">
+        <div class="form-item" @click="showArea">
+          <input type="text" class="item-bd ipt" placeholder="收货地址" readonly>
         </div>
         <div class="form-item">
           <input type="text" class="item-bd ipt" placeholder="详细地址">
@@ -28,14 +28,27 @@
         <a href="" class="btn btn-default">取消</a>
       </div>
     </div>
+    <select-area v-model="areaShow"></select-area>
   </div>
 </template>
 <script>
 import VeSwitch from '../base/switch/'
+import SelectArea from './selectarea'
 export default {
   name: 'add-address',
   components: {
-    VeSwitch
+    VeSwitch,
+    SelectArea
+  },
+  data() {
+    return {
+      areaShow: false
+    }
+  },
+  methods: {
+    showArea() {
+      this.areaShow = true
+    }
   }
 }
 </script>
