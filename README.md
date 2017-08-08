@@ -21,12 +21,13 @@ npm config set registry https://registry.npm.taobao.org
    这是淘宝提供的安装工具可以代替npm。如果使用了cnpm，下面的npm install 替换为cnpm install 
 
 ## Build Setup
+### 所有命令的目录都是当前目录，即package.json的目录
 
 ``` bash
-# install dependencies
+# 安装所有的依赖,时间可能稍长。
 npm install
 
-# 运行此命令可以本地调试
+# 运行此命令可以本地调试（会自动打开默认的浏览器，建议用chrome）
 npm run dev
 
 # build for production with minification
