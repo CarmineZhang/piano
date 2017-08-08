@@ -1,35 +1,35 @@
 <template>
   <div class="main">
     <!-- <div style="padding:10px;">
-                                                                                                                      <swiper :list="swiperlist"></swiper>
-                                                                                                                      <search-bar @on-change="searchBar"></search-bar>
-                                                                                                                      <button class="ve-button ve-button-default" @click="showAlert">测试alert</button>
-                                                                                                                      <button class="ve-button ve-button-default" @click="showConfirm">测试confirm</button>
-                                                                                                                      <button class="ve-button ve-button-default" @click="showToast">测试toast</button>
-                                                                                                                      <button class="ve-button ve-button-default" @click="showPicker">测试picker</button>
-                                                                                                                      <input type="text" v-model="phone">
-                                                                                                                      <input type="text" v-model.lazy="username">
-                                                                                                                      <div class="cell">
-                                                                                                                        <div class="cell-hd">
-                                                                                                                          <label class="weui-label">qq</label>
-                                                                                                                        </div>
-                                                                                                                        <div class="cell-bd">
-                                                                                                                          <input class="weui-input" type="number" :readonly="re" placeholder="请输入qq号">
-                                                                                                                        </div>
-                                                                                                                      </div>
-                                                                                                                      <ul>
-                                                                                                                        <li v-for="(value,key) in errors" :key="key" v-text="value"></li>
-                                                                                                                      </ul>
-                                                                                                                      <cell-box>
-                                                                                                                        <cell title="接收通知" content="已开启"></cell>
-                                                                                                                        <cell title="标题一" :link="true"></cell>
-                                                                                                                      </cell-box>
-                                                                                                                  
-                                                                                                                      <ve-input title="用户名" v-model="username"></ve-input>
-                                                                                                                      <ve-input title="密码" type="password"></ve-input>
-                                                                                                                      <ve-input title="手机验证码" type="number"></ve-input>
-                                                                                                                      <ve-input title="readonly" :readonly='true' v-model="username"></ve-input>
-                                                                                                                    </div> -->
+                                                                                                                            <swiper :list="swiperlist"></swiper>
+                                                                                                                            <search-bar @on-change="searchBar"></search-bar>
+                                                                                                                            <button class="ve-button ve-button-default" @click="showAlert">测试alert</button>
+                                                                                                                            <button class="ve-button ve-button-default" @click="showConfirm">测试confirm</button>
+                                                                                                                            <button class="ve-button ve-button-default" @click="showToast">测试toast</button>
+                                                                                                                            <button class="ve-button ve-button-default" @click="showPicker">测试picker</button>
+                                                                                                                            <input type="text" v-model="phone">
+                                                                                                                            <input type="text" v-model.lazy="username">
+                                                                                                                            <div class="cell">
+                                                                                                                              <div class="cell-hd">
+                                                                                                                                <label class="weui-label">qq</label>
+                                                                                                                              </div>
+                                                                                                                              <div class="cell-bd">
+                                                                                                                                <input class="weui-input" type="number" :readonly="re" placeholder="请输入qq号">
+                                                                                                                              </div>
+                                                                                                                            </div>
+                                                                                                                            <ul>
+                                                                                                                              <li v-for="(value,key) in errors" :key="key" v-text="value"></li>
+                                                                                                                            </ul>
+                                                                                                                            <cell-box>
+                                                                                                                              <cell title="接收通知" content="已开启"></cell>
+                                                                                                                              <cell title="标题一" :link="true"></cell>
+                                                                                                                            </cell-box>
+                                                                                                                        
+                                                                                                                            <ve-input title="用户名" v-model="username"></ve-input>
+                                                                                                                            <ve-input title="密码" type="password"></ve-input>
+                                                                                                                            <ve-input title="手机验证码" type="number"></ve-input>
+                                                                                                                            <ve-input title="readonly" :readonly='true' v-model="username"></ve-input>
+                                                                                                                          </div> -->
     <!-- <ve-footer></ve-footer> -->
     <cell to="/home">首页</cell>
     <cell to="/productlist">产品列表</cell>
@@ -39,6 +39,9 @@
     </cell>
     <cell to="/costdetail">
       费用详情
+    </cell>
+    <cell to="/ordercomplete">
+      订单完成页面
     </cell>
     <cell to="/login">
       登录
