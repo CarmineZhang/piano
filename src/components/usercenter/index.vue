@@ -13,11 +13,11 @@
         <div class="cell-hd cell-collect" slot="hd"></div>
         <p>收藏</p>
       </cell>
-      <cell to="">
+      <cell to="/orderlist">
         <div class="cell-hd cell-order" slot="hd"></div>
         <p>订单</p>
       </cell>
-      <cell to="">
+      <cell to="/coupon">
         <div class="cell-hd cell-coupon" slot="hd"></div>
         <p>优惠券</p>
       </cell>
@@ -25,7 +25,7 @@
         <div class="cell-hd cell-addr" slot="hd"></div>
         <p>地址管理</p>
       </cell>
-      <cell to="">
+      <cell to="/account">
         <div class="cell-hd cell-account" slot="hd"></div>
         <p>账户管理</p>
       </cell>

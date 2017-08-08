@@ -1,20 +1,22 @@
 <template>
-  <div class="coupon">
-    <div class="coupon-item">
-      <p class="ct">
-        <span class="ct-symbol">¥</span>
-        <span class="ct-price">50</span>
-        <span class="ct-desc">优惠券</span>
-      </p>
-      <p class="comment">首次租赁钢琴立减50元</p>
-    </div>
-    <div class="coupon-item coupon-item-blue">
-      <p class="ct">
-        <span class="ct-symbol">¥</span>
-        <span class="ct-price">50</span>
-        <span class="ct-desc">优惠券</span>
-      </p>
-      <p class="comment">首次租赁钢琴立减50元</p>
+  <div>
+    <div class="coupon">
+      <div class="coupon-item">
+        <p class="ct">
+          <span class="ct-symbol">¥</span>
+          <span class="ct-price">50</span>
+          <span class="ct-desc">优惠券</span>
+        </p>
+        <p class="comment">首次租赁钢琴立减50元</p>
+      </div>
+      <div class="coupon-item coupon-item-blue">
+        <p class="ct">
+          <span class="ct-symbol">¥</span>
+          <span class="ct-price">50</span>
+          <span class="ct-desc">优惠券</span>
+        </p>
+        <p class="comment">首次租赁钢琴立减50元</p>
+      </div>
     </div>
   </div>
 </template>

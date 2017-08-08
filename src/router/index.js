@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Home from '@/components/home'
-// import ProductList from '@/components/productlist'
-// import ProductDetail from '@/components/productdetail'
+import Home from '@/components/home'
+import ProductList from '@/components/productlist'
+import ProductDetail from '@/components/productdetail'
 import SelectAddress from '@/components/address'
 import CostDetail from '@/components/costdetail'
-// import OrderComplete from '@/components/ordercomplete'
-// import OrderList from '@/components/orderlist'
+import OrderComplete from '@/components/ordercomplete'
+import OrderList from '@/components/orderlist'
 import Login from '@/components/login'
 import UserCenter from '@/components/usercenter'
-// import Coupon from '@/components/coupon'
-// import News from '@/components/news'
+import Coupon from '@/components/coupon'
+import News from '@/components/news'
 import Account from '@/components/account'
 import AddAddress from '@/components/address/add'
 import ChangePhone from '@/components/account/changephone'
@@ -24,6 +24,27 @@ export default new Router({
     path: '/',
     name: 'home',
     component: Test
+  }, {
+    path: '/home',
+    component: Home
+  }, {
+    path: '/productlist',
+    component: ProductList
+  }, {
+    path: '/productdetail',
+    component: ProductDetail
+  }, {
+    path: '/orderlist',
+    component: OrderList
+  }, {
+    path: '/ordercomplete',
+    component: OrderComplete
+  }, {
+    path: '/news',
+    component: News
+  }, {
+    path: '/coupon',
+    component: Coupon
   }, {
     path: '/account',
     component: Account
