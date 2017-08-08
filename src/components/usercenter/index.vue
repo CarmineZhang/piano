@@ -9,7 +9,7 @@
     </div>
     <div class="more more-mini"></div>
     <div class="user-body">
-      <cell to="">
+      <cell to="/favorite">
         <div class="cell-hd cell-collect" slot="hd"></div>
         <p>收藏</p>
       </cell>

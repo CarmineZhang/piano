@@ -14,6 +14,7 @@ import News from '@/components/news'
 import Account from '@/components/account'
 import AddAddress from '@/components/address/add'
 import ChangePhone from '@/components/account/changephone'
+import Favorite from '@/components/favorite'
 import Test from '@/components/Test'
 import Widget from '@/plugins/widget'
 Vue.use(Router)
@@ -66,6 +67,9 @@ export default new Router({
   }, {
     path: '/address',
     component: Address
+  }, {
+    path: '/favorite',
+    component: Favorite
   }, {
     path: '/test',
     component: Test

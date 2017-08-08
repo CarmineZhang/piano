@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pl-item" v-for="item in list" :key="item">
+    <div class="pl-item" v-for="item in data" :key="item">
       <div class="pl-item-img">
         <img src="" alt="">
       </div>
@@ -20,55 +20,8 @@
 <script>
 export default {
   name: 'product-list',
-  data() {
-    return {
-      list: [{
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }]
-    }
+  props: {
+    data: Array
   }
 }
 </script>

@@ -1,34 +1,20 @@
 <template>
   <div>
-    <transition name="ve-fade">
-      <div class="pl-mask" v-show="maskShow"></div>
-    </transition>
-    <div class="search-head">
-      <div class="fixed-head">
-        <top></top>
-        <search-bar></search-bar>
-        <ve-select @on-select-show="showMask"></ve-select>
-      </div>
+    <div class="fav-title">
+      近一个月收藏
     </div>
     <list :data="list"></list>
   </div>
 </template>
 <script>
-import Top from '../top/'
-import SearchBar from '../base/searchbar'
-import VeSelect from './select'
-import List from './list'
+import List from '../productlist/list'
 export default {
-  name: 'product-list',
+  name: 'favorite',
   components: {
-    Top,
-    SearchBar,
-    VeSelect,
     List
   },
   data() {
     return {
-      maskShow: false,
       list: [{
         title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
         area: '北京',
@@ -76,34 +62,17 @@ export default {
         pledge: 30000
       }]
     }
-  },
-  methods: {
-    showMask(val) {
-      this.maskShow = val
-    }
   }
 }
 </script>
 <style lang="scss">
-.search-head {
-  height: .88rem * 3 + 0.55rem;
-  .fixed-head {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 104;
-  }
-}
-
-.pl-mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, .3);
-  z-index: 103;
+.fav-title {
+  padding-left: .3rem;
+  height: .55rem;
+  line-height: .55rem;
+  font-size: .24rem;
+  color: #1b1b1b;
+  background-color: #eee;
 }
 </style>
 
