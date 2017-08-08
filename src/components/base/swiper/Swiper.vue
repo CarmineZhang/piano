@@ -7,7 +7,7 @@
             <img :src="firstItem.img" alt="">
           </a>
         </div>
-        <div class="ve-slider-item" v-for="item in list" :key="item">
+        <div class="ve-slider-item" v-for="(item,index) in list" :key="index">
           <a :href="item.href">
             <img :src="item.img" alt="">
           </a>

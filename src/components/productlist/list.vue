@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pl-item" v-for="item in data" :key="item">
+    <div class="pl-item" v-for="(item,index) in data" :key="index">
       <div class="pl-item-img">
         <img src="" alt="">
       </div>

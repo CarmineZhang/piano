@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="re-pd" :class="{'re-pd-dark':index%2==1}" v-for="(item,index) in list" :key="item">
+    <div class="re-pd" :class="{'re-pd-dark':index%2==1}" v-for="(item,index) in list" :key="index">
       <div class="re-img">
         <img :src="item.img" alt="">
       </div>
