@@ -4,21 +4,19 @@
       <div class="addr-item" v-for="item in list" :key="item">
         <div class="addr-header">
           <div class="addr-user" v-text="item.name"></div>
-          <div class="addr-select">使用地址</div>
+          <div class="addr-tel" v-text="item.tel"></div>
         </div>
-        <div class="addr-body">
-          <div class="addr-body-area" v-text="item.area"></div>
-          <div class="addr-body-detail" v-text="item.detail"></div>
-          <div class="addr-body-tel">
-            <span>电话：</span>
-            <span v-text="item.tel"></span>
+        <div class="addr-body" v-text="item.detail">
+        </div>
+        <div class="addr-footer" :class="{'addr-default':item.isDefault}">
+          <a class="ft-left">默认地址</a>
+          <div class="ft-right">
+            <a class="ft-edit">编辑</a>
+            <a class="ft-delete">删除</a>
           </div>
         </div>
       </div>
       <div class="addr-new">
-        <div class="addr-header">
-          <div class="addr-user">姓名</div>
-        </div>
         <div class="addr-body">
           <a href="">
             添加地址
@@ -49,12 +47,14 @@ export default {
         name: '周杰',
         area: '北京',
         detail: '海淀区中关村大街188号创意大厦A座11层2002室',
-        tel: '13687654325'
+        tel: '13687654325',
+        isDefault: true
       }, {
         name: '周杰',
         area: '北京',
         detail: '海淀区中关村大街188号创意大厦A座11层2002室',
-        tel: '13687654325'
+        tel: '13687654325',
+        isDefault: false
       }]
     }
   }
@@ -62,17 +62,18 @@ export default {
 </script>
 <style lang="scss">
 .addr-list {
+  background-color: #eaeaea;
   width: 7.5rem;
   margin-bottom: .3rem;
-  .addr-item,
-  .addr-new {
+  .addr-item {
     box-sizing: border-box;
-    width: 7rem;
-    margin: .3rem auto;
-    border: 1px dashed #bf3737;
-    padding: .3rem .3rem;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 0 .3rem;
+    margin-bottom: .3rem;
+    height: 2.64rem;
     .addr-header {
-      padding: .3rem 0;
+      padding: .3rem 0 .3rem;
       line-height: .3rem;
       display: flex;
       .addr-user {
@@ -93,102 +94,125 @@ export default {
           background-size: .26rem .26rem;
         }
       }
-      .addr-select {
+      .addr-tel {
         flex: 1;
         text-align: right;
         font-size: .28rem;
-        color: #928f9c;
+        color: #323136;
         position: relative;
-        &::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 50%;
-          width: .26rem;
-          height: .26rem;
-          background-image: url('../../assets/icon-use.png');
-          background-repeat: no-repeat;
-          background-size: .26rem .26rem;
-        }
       }
     }
     .addr-body {
-      padding-top: .3rem;
-      background-color: #bf3737;
-      height: 2.7rem;
-      color: #fff;
-      >div {
-        margin: 8px 0;
-      }
-      .addr-body-area {
-        padding-left: .6rem;
-        font-size: .3rem;
+      padding: 0 0 .3rem;
+      background-color: #fff;
+      color: #1b1b1b;
+      font-size: .28rem;
+      word-wrap: break-word;
+      position: relative;
+      @include bottomline();
+    }
+    .addr-footer {
+      position: relative;
+      height: .88rem;
+      line-height: .88rem;
+      display: flex;
+      font-size: .28rem;
+      color: #323136;
+      .ft-left {
+        flex: 1;
+        padding-left: .4rem;
         position: relative;
         &::before {
           content: '';
           position: absolute;
           top: 50%;
-          left: 10px;
+          left: 0;
           width: .28rem;
           height: .28rem;
-          background: url('../../assets/icon-location.png') no-repeat;
-          background-size: .28rem .28rem;
-          margin-top: -(.28rem /2)
+          background: url('../../assets/icon-nouse.png') no-repeat;
+          background-size: 100%;
+          transform: translateY(-50%);
         }
       }
-      .addr-body-detail {
-        padding-left: .6rem;
-        font-size: .28rem;
-        word-wrap: break-word;
-      }
-      .addr-body-tel {
-        padding-left: .6rem;
-        font-size: .28rem;
-        position: relative;
-        &::before {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 10px;
-          width: .27rem;
-          height: .27rem;
-          background: url('../../assets/icon-phone.png') no-repeat;
-          background-size: .27rem .27rem;
-          margin-top: -(.27rem /2)
-        }
-      }
-    }
-  }
-  .addr-new {
-    border: 1px dashed #928f9c;
-    .addr-body {
-      padding-top: 0;
-      background-color: #928f9c;
-      display: flex;
-      a {
-        display: block;
+      .ft-right {
         flex: 1;
-        width: 100%;
-        font-size: .3rem;
-        color: #fff;
-        text-align: center;
+        display: flex;
+        .ft-edit {
+          flex: 1;
+          padding-left: .4rem;
+          position: relative;
+          &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: .24rem;
+            height: .24rem;
+            background: url('../../assets/icon-edit.png') no-repeat;
+            background-size: 100%;
+            transform: translateY(-50%);
+          }
+        }
+        .ft-delete {
+          flex: 1;
+          padding-left: .4rem;
+          position: relative;
+          &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: .26rem;
+            height: .27rem;
+            background: url('../../assets/icon-delete.png') no-repeat;
+            background-size: 100%;
+            transform: translateY(-50%);
+          }
+        }
+      }
+
+      @include bottomline();
+    }
+    .addr-default {
+      .ft-left {
         &::before {
-          content: "";
-          display: block;
-          height: 50%;
-          background-position: 50% 90%;
-          background-repeat: no-repeat;
-          background-size: .57rem .56rem;
-          background-image: url('../../assets/icon-add.png')
+          background: url('../../assets/icon-use.png') no-repeat;
+          background-size: 100%;
         }
       }
     }
   }
 }
 
+.addr-new {
+  .addr-body {
+    height: 2.64rem;
+    background-color: #fff;
+    display: flex;
+    a {
+      display: block;
+      flex: 1;
+      width: 100%;
+      font-size: .28rem;
+      color: #928f9c;
+      text-align: center;
+      &::before {
+        content: "";
+        display: block;
+        height: 50%;
+        background-position: 50% 90%;
+        background-repeat: no-repeat;
+        background-size: .45rem .45rem;
+        background-image: url('../../assets/icon-add.png')
+      }
+    }
+  }
+}
+
+
 .comment {
   width: 7rem;
-  padding: 0 .3rem;
+  padding: .3rem .3rem;
   color: #928f9c;
   font-size: .24rem;
 }
@@ -210,6 +234,7 @@ export default {
       font-size: .34rem;
     }
   }
+
   .addr-ok {
     width: 1.8rem;
     background-color: #bf3737;
