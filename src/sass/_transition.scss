@@ -98,3 +98,11 @@
 .ve-actionsheet-mask-enter-active {
   transition: opacity 300ms!important;
 }
+
+.ve-slide-enter-active {
+  animation: slideUp .3s;
+}
+
+.ve-slide-leave-active {
+  animation: slideDown .3s;
+}

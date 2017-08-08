@@ -2,7 +2,7 @@
   <div>
     <div class="cost">
       <div class="title">费用核算：</div>
-      <cell title="预付押金：">
+      <cell title="预付押金：" to="" @on-click="showDeposit()">
         <span>¥2,000</span>
         <span class="cell-desc">总押金（20,000）</span>
       </cell>
@@ -34,14 +34,27 @@
         确认支付
       </a>
     </div>
+    <select-deposit v-model="selectDepositShow"></select-deposit>
   </div>
 </template>
 <script>
 import { Cell } from '../base/cell'
+import SelectDeposit from './selectdeposit'
 export default {
   name: 'cost-detail',
+  data() {
+    return {
+      selectDepositShow: false
+    }
+  },
   components: {
-    Cell
+    Cell,
+    SelectDeposit
+  },
+  methods: {
+    showDeposit() {
+      this.selectDepositShow = true;
+    }
   }
 }
 </script>

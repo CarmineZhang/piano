@@ -29,7 +29,9 @@ export default {
   methods: {
     onClick(e) {
       this.$emit('on-click', e)
-      this.$router.push({ 'path': this.to })
+      if (this.to !== '') {
+        this.$router.push({ 'path': this.to })
+      }
     }
   }
 }
