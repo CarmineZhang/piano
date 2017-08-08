@@ -16,6 +16,12 @@
         <div class="form-item">
           <input type="text" class="item-bd ipt" placeholder="详细地址">
         </div>
+        <div class="addr-default">
+          <div class="item-bd">
+            是否设为默认地址
+          </div>
+          <ve-switch></ve-switch>
+        </div>
       </div>
       <div class="addr-op">
         <a href="" class="btn btn-primary">确定</a>
@@ -25,8 +31,12 @@
   </div>
 </template>
 <script>
+import VeSwitch from '../base/switch/'
 export default {
-  name: 'add-address'
+  name: 'add-address',
+  components: {
+    VeSwitch
+  }
 }
 </script>
 <style lang="scss">
@@ -50,11 +60,20 @@ export default {
       margin-top: -0.16rem;
     }
   }
-  .add-item {
+  .form-item {
     .ipt {
       font-size: .28rem;
       color: #928f9c;
       z-index: 1;
+    }
+  }
+  .addr-default {
+    display: flex;
+    padding-top: .1rem;
+    font-size: .28rem;
+    color: #928f9c;
+    .item-bd {
+      flex: 1;
     }
   }
   .addr-op {
