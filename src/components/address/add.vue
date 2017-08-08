@@ -73,6 +73,7 @@ export default {
     font-size: .28rem;
     color: #928f9c;
     .item-bd {
+      line-height: .6rem;
       flex: 1;
     }
   }
