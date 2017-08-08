@@ -13,10 +13,12 @@
 npm config set registry https://registry.npm.taobao.org 
 ```
    #### 建议
-	 window系统下，如果安装node-sass不成功,最好直接安装cnpm,这是淘宝提供的安装工具可以代替npm。如果使用了cnpm，下面的npm install 替换为cnpm install 
-```bash
-npm i -g cnpm --registry=https://registry.npm.taobao.org 
-```
+	 window系统下，直接安装cnpm 
+   
+   ```bash
+   npm install -g cnpm --registry=https://registry.npm.taobao.org 
+   ```
+   这是淘宝提供的安装工具可以代替npm。如果使用了cnpm，下面的npm install 替换为cnpm install 
 
 ## Build Setup
 
@@ -24,7 +26,7 @@ npm i -g cnpm --registry=https://registry.npm.taobao.org
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# 运行此命令可以本地调试
 npm run dev
 
 # build for production with minification
