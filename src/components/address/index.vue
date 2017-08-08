@@ -18,23 +18,11 @@
       </div>
       <div class="addr-new">
         <div class="addr-body">
-          <a href="">
+          <a href="javascript:void(0)" @click="add">
             添加地址
           </a>
         </div>
       </div>
-      <p class="comment">
-        注：地址确认后,配送地址不得修改。
-      </p>
-    </div>
-    <div class="addr-action">
-      <div class="order-cost">
-        <span class="tit">合计运费：</span>
-        <span class="ct">¥2,000</span>
-      </div>
-      <a href="" class="addr-ok">
-        确认地址
-      </a>
     </div>
   </div>
 </template>
@@ -56,6 +44,11 @@ export default {
         tel: '13687654325',
         isDefault: false
       }]
+    }
+  },
+  methods: {
+    add() {
+      this.$router.push({ path: '/addaddress' })
     }
   }
 }
@@ -185,6 +178,8 @@ export default {
 }
 
 .addr-new {
+  background-color: #eaeaea;
+  padding-bottom: .6rem;
   .addr-body {
     height: 2.64rem;
     background-color: #fff;
@@ -206,41 +201,6 @@ export default {
         background-image: url('../../assets/icon-add.png')
       }
     }
-  }
-}
-
-
-.comment {
-  width: 7rem;
-  padding: .3rem .3rem;
-  color: #928f9c;
-  font-size: .24rem;
-}
-
-.addr-action {
-  display: flex;
-  height: .88rem;
-  line-height: .88rem;
-  .order-cost {
-    flex: 1;
-    font-size: .28rem;
-    background-color: #7f7c8b;
-    text-align: center;
-    color: #fff;
-    .tit {
-      font-size: .28rem;
-    }
-    .ct {
-      font-size: .34rem;
-    }
-  }
-
-  .addr-ok {
-    width: 1.8rem;
-    background-color: #bf3737;
-    text-align: center;
-    font-size: .3rem;
-    color: #fff;
   }
 }
 </style>

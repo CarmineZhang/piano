@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/home'
 import ProductList from '@/components/productlist'
 import ProductDetail from '@/components/productdetail'
-import SelectAddress from '@/components/address'
+import Address from '@/components/address'
 import CostDetail from '@/components/costdetail'
 import OrderComplete from '@/components/ordercomplete'
 import OrderList from '@/components/orderlist'
@@ -64,8 +64,8 @@ export default new Router({
     path: '/changephone',
     component: ChangePhone
   }, {
-    path: '/selectaddress',
-    component: SelectAddress
+    path: '/address',
+    component: Address
   }, {
     path: '/test',
     component: Test

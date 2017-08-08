@@ -21,7 +21,7 @@
         <div class="cell-hd cell-coupon" slot="hd"></div>
         <p>优惠券</p>
       </cell>
-      <cell to="">
+      <cell to="/address">
         <div class="cell-hd cell-addr" slot="hd"></div>
         <p>地址管理</p>
       </cell>
