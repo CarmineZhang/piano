@@ -10,7 +10,7 @@
         <button class="item-ft">获取验证码</button>
       </div>
       <div class="form-op">
-        <a href="" class="btn btn-primay">下一步</a>
+        <a href="" class="btn btn-primary">下一步</a>
         <a href="" class="btn btn-default">取消</a>
       </div>
     </div>
