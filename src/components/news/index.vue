@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="news-fixed-header">
+    <div class="fixed-header">
       <top></top>
       <search-bar></search-bar>
     </div>
     <list class="news-body"></list>
-    <div class="news-fixed-footer">
+    <div class="fixed-footer">
       <ve-footer></ve-footer>
     </div>
   </div>
@@ -26,24 +26,8 @@ export default {
 }
 </script>
 <style lang="scss">
-.news-fixed-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-}
-
 .news-body {
-  padding: .88rem*2 0 1.5rem;
-}
-
-.news-fixed-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 101;
+  padding: .88rem+0.84rem 0 1.5rem;
 }
 </style>
 

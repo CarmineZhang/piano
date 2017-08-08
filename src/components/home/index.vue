@@ -1,16 +1,20 @@
 <template>
   <div class="main">
-    <top></top>
-    <search-bar></search-bar>
-    <swiper :list="swipers"></swiper>
-    <recommend></recommend>
-    <div class="more">
-      <a>查看更多</a>
+    <div class="fixed-header">
+      <top></top>
+      <search-bar></search-bar>
     </div>
-    <service></service>
-    <news></news>
-    <div class="more">
-      <a>查看更多</a>
+    <div class="index-body">
+      <swiper :list="swipers"></swiper>
+      <recommend></recommend>
+      <div class="more">
+        <a>查看更多</a>
+      </div>
+      <service></service>
+      <news></news>
+      <div class="more">
+        <a>查看更多</a>
+      </div>
     </div>
     <ve-footer></ve-footer>
   </div>
@@ -52,4 +56,10 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.index-body {
+  padding: .88rem+.84rem 0 1.5rem;
+}
+</style>
+
 
