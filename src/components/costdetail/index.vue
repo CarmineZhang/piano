@@ -58,8 +58,7 @@ export default {
 </script>
 <style lang="scss">
 .cost {
-  margin: 0 auto;
-  width: 6.9rem;
+  padding-left: .3rem;
   .title {
     position: relative;
     padding: .3rem 0;

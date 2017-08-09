@@ -61,6 +61,7 @@ export default {
 }
 
 .user-body {
+  padding-left: .3rem;
   .cell {
     &:last-child {
       &:after {
