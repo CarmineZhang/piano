@@ -2,27 +2,30 @@
   <div>
     <div class="cost">
       <div class="title">费用核算：</div>
-      <cell title="预付押金：" to="" @on-click="showDeposit()">
-        <span>¥2,000</span>
-        <span class="cell-desc">总押金（20,000）</span>
-      </cell>
-      <cell>
-        <div class="cell-comment">
-          *线上预付20%的押金总额，货到付剩余押金。
-        </div>
-      </cell>
-      <cell to="" title="租金：">
-        <span>¥300</span>
-        <span class="cell-desc">租期30天</span>
-      </cell>
-      <cell title="运费：">
-        ¥2,000
-      </cell>
-      <cell to="" title="优惠券：">
-        ¥20
-      </cell>
-  
+      <div>
+        <cell title="预付押金：" to="" @on-click="showDeposit()">
+          <span>¥2,000</span>
+          <span class="cell-desc">总押金（20,000）</span>
+        </cell>
+        <cell>
+          <div class="cell-comment">
+            *线上预付20%的押金总额，货到付剩余押金。
+          </div>
+        </cell>
+        <cell to="" title="租金：">
+          <span>¥300</span>
+          <span class="cell-desc">租期30天</span>
+        </cell>
+        <cell title="运费：">
+          ¥2,000
+        </cell>
+        <cell to="" title="优惠券：">
+          ¥20
+        </cell>
+      </div>
     </div>
+    <div class="more"></div>
+    <select-pay></select-pay>
     <div class="cost-action fixed-footer">
       <div class="order-cost">
         <span class="tit">费用总计：</span>
@@ -38,6 +41,7 @@
 <script>
 import { Cell } from '../base/cell'
 import SelectDeposit from './selectdeposit'
+import SelectPay from './selectpay.vue'
 export default {
   name: 'cost-detail',
   data() {
@@ -47,7 +51,8 @@ export default {
   },
   components: {
     Cell,
-    SelectDeposit
+    SelectDeposit,
+    SelectPay
   },
   methods: {
     showDeposit() {
@@ -67,7 +72,11 @@ export default {
     @include bottomline(#ccc);
   }
   .cell {
-
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
     .cell-comment {
       font-size: .24rem;
       color: #bf3737;
@@ -85,6 +94,10 @@ export default {
       }
     }
   }
+}
+
+.more {
+  height: .3rem;
 }
 
 .cost-action {
