@@ -11,7 +11,6 @@
         </div>
         <div class="form-item">
           <input type="tel" class="item-bd ipt" placeholder="请输入六位验证码">
-          <!-- <button class="item-ft">获取验证码</button> -->
           <count-down v-model="start" @on-click="startCountDown"></count-down>
         </div>
         <div class="form-op">

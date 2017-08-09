@@ -7,7 +7,7 @@
       </div>
       <div class="form-item">
         <input type="tel" class="item-bd ipt" placeholder="请输入六位验证码">
-        <button class="item-ft">获取验证码</button>
+        <count-down v-model="start" @on-click="startCountDown"></count-down>
       </div>
       <div class="form-op">
         <a href="" class="btn btn-primary">下一步</a>
@@ -17,8 +17,22 @@
   </div>
 </template>
 <script>
+import CountDown from '../base/countdown'
 export default {
-  name: 'change-phone'
+  name: 'change-phone',
+  components: {
+    CountDown
+  },
+  data() {
+    return {
+      start: false
+    }
+  },
+  methods: {
+    startCountDown() {
+      this.start = true
+    }
+  }
 }
 </script>
 .<style lang="scss">
