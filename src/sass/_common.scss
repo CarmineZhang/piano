@@ -147,7 +147,7 @@ a.link {
     flex: 1;
     z-index: 1;
   }
-  .item-ft {
+  .count-down {
     width: 1.76rem;
     height: .88rem;
     line-height: .88rem;
@@ -156,6 +156,9 @@ a.link {
     font-size: .28rem;
     text-align: center;
     z-index: 1;
+    &:disabled {
+      opacity: .6;
+    }
   }
 }
 
