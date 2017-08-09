@@ -128,9 +128,11 @@ export default {
     color: #323136;
   }
   .s2 {
-
     font-size: .28rem;
     color: #928f9c;
+    span {
+      margin-right: .2rem;
+    }
   }
   .s3 {
 

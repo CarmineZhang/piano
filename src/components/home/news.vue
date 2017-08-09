@@ -73,7 +73,7 @@ export default {
 <style lang="scss">
 @import '../../sass/mixin';
 .news {
-  padding: 0 .15rem;
+  padding: 0 .3rem;
   .news-title {
     padding-top: .3rem;
     font-size: .3rem;
@@ -81,9 +81,6 @@ export default {
   .news-list {
     display: flex;
     justify-content: space-between;
-    .list-item {
-      // flex: auto;
-    }
   }
   .news-item {
     width: 3.3rem;

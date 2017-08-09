@@ -61,6 +61,13 @@ export default {
 }
 
 .user-body {
+  .cell {
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+  }
   .cell-hd {
     width: 1rem;
   }

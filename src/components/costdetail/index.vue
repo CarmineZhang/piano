@@ -23,9 +23,7 @@
       </cell>
   
     </div>
-    <div class="more">
-    </div>
-    <div class="cost-action">
+    <div class="cost-action fixed-footer">
       <div class="order-cost">
         <span class="tit">费用总计：</span>
         <span class="ct">¥2,000</span>

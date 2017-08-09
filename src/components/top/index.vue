@@ -28,7 +28,7 @@ export default {
   height: .88rem;
   line-height: .88rem;
   font-size: 0;
-  background-color: #000;
+  background-color: #1b1b1b;
   .nav-rent {
     padding-left: .3rem;
     text-align: left;

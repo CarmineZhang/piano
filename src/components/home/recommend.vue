@@ -53,11 +53,12 @@ export default {
 <style lang="scss">
 .re-pd {
   position: relative;
+  height: 10rem;
   .re-img {
     padding-top: (670/750)*100%;
     img {
       width: 100%;
-      height: auto;
+      height: 6.7rem;
       position: absolute;
       left: 0;
       top: 0;
@@ -67,7 +68,7 @@ export default {
     text-align: center;
   }
   .re-title {
-    margin-top: .3rem;
+    margin-top: .15rem;
     font-size: .34rem;
     color: #1b1b1b;
   }
@@ -76,12 +77,12 @@ export default {
     color: #928f9c;
   }
   .re-desc {
-    margin-top: .3rem;
+    margin-top: .2rem;
     font-size: .24rem;
     color: #323136;
   }
   .re-price {
-    margin-top: .3rem;
+    margin-top: .2rem;
     line-height: .3rem;
     .re-price-title {
       font-size: .24rem;

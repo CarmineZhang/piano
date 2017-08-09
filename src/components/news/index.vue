@@ -5,9 +5,7 @@
       <search-bar></search-bar>
     </div>
     <list class="news-body"></list>
-    <div class="fixed-footer">
-      <ve-footer></ve-footer>
-    </div>
+    <ve-footer></ve-footer>
   </div>
 </template>
 <script>

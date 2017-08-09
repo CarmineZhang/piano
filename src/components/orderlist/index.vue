@@ -287,6 +287,7 @@ export default {
             }
           }
           .op {
+            margin-right: -.3rem;
             display: block;
             height: .88rem;
             width: 2rem;
