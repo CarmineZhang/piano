@@ -70,7 +70,8 @@ export default {
     }
   }
   .cell-hd {
-    width: 1rem;
+    margin-left: -.3rem;
+    width: .6rem;
   }
   .cell-collect {
     background: url('../../assets/me-collect.png') no-repeat;

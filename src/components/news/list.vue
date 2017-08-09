@@ -1,6 +1,6 @@
 <template>
   <div class="news-list">
-    <div class="news-item" v-for="item in list" :key="item">
+    <div class="news-item" v-for="(item,index) in list" :key="index">
       <div class="item-title" v-text="item.title"></div>
       <div class="item-date" v-text="item.date"></div>
       <div class="item-img">
