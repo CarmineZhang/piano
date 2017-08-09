@@ -58,8 +58,8 @@
   .weui-icon-search {
     position: absolute;
     left: 10px;
-    top: 0;
-    line-height: .6rem;
+    top: 50%;
+    transform: translateY(-50%);
   }
   .weui-icon-clear {
     position: absolute;
@@ -82,9 +82,9 @@
   color: #6d6d6d;
   background: #464649;
   span {
-    display: inline-block;
-    font-size: .28rem;
-    vertical-align: middle;
+    // display: inline-block;
+    font-size: .28rem; // vertical-align: middle;
+    line-height: .6rem;
   }
   .weui-icon-search {
     margin-left: 15px;
