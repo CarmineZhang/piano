@@ -4,7 +4,7 @@
       <div class="pl-mask" v-show="maskShow"></div>
     </transition>
     <div class="search-head">
-      <div class="fixed-head">
+      <div class="fixed-head" :style="style">
         <top></top>
         <search-bar></search-bar>
         <ve-select @on-select-show="showMask"></ve-select>
@@ -29,6 +29,7 @@ export default {
   data() {
     return {
       maskShow: false,
+      style: null,
       list: [{
         title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
         area: '北京',
@@ -76,6 +77,21 @@ export default {
         pledge: 30000
       }]
     }
+  },
+  beforeMount() {
+    console.log(this)
+    var self = this
+    window.onscroll = function () {
+      var top = document.body.scrollTop || document.documentElement.scrollTop
+      if (top > 50) {
+        self.style = { transform: 'translateY(-1.72rem)', transition: '0.5s ease 0s' }
+      } else {
+        self.style = { transform: 'translateY(0px)', transition: '0.5s ease 0s' }
+      }
+    }
+  },
+  beforeDestroy() {
+    window.onscroll = null
   },
   methods: {
     showMask(val) {
