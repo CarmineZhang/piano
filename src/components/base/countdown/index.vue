@@ -32,6 +32,9 @@ export default {
   watch: {
     value(val) {
       if (val) {
+        if (this.timerId) {
+          clearTimeout(this.timerId)
+        }
         this.disabled = true
         this.downtime = this.time
         this.countDown()
