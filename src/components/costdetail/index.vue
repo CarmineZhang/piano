@@ -12,7 +12,7 @@
             *线上预付20%的押金总额，货到付剩余押金。
           </div>
         </cell>
-        <cell to="" title="租金：">
+        <cell title="租金：">
           <span>¥300</span>
           <span class="cell-desc">租期30天</span>
         </cell>
