@@ -35,8 +35,9 @@ class Swiper {
   _init() {
     this.width = parseInt($.getStyle(document.querySelector(this._options.container), 'width'))
     this._setPosition()
-    this._setTransition()
+    this._setTransition('none')
     this._setTransform()
+    this.$navbarItem.eq(0).addClass('cur')
   }
   _bind() {
     var me = this
@@ -75,10 +76,7 @@ class Swiper {
         }
       }
     }
-    me.$sliderlist.on('touchstart', me.touchstartHandler)
-    me.$sliderlist.on('touchmove', me.touchMoveHandler)
-    me.$sliderlist.on('touchend', me.touchEndHandler)
-    me.$sliderlist.on('transitionend webkitTransitionEnd', (e) => {
+    me.transitionEndHandler = (e) => {
       e.preventDefault()
       if (me.current === me.realCount - 1) {
         me.current = 1;
@@ -103,7 +101,11 @@ class Swiper {
         me.navcurrent = 0
       }
       me.$navbarItem.removeClass('cur').eq(me.navcurrent).addClass('cur')
-    })
+    }
+    me.$sliderlist.on('touchstart', me.touchstartHandler)
+    me.$sliderlist.on('touchmove', me.touchMoveHandler)
+    me.$sliderlist.on('touchend', me.touchEndHandler)
+    me.$sliderlist.on('transitionend webkitTransitionEnd', me.transitionEndHandler)
   }
   _setPosition() {
     for (let i = 0; i < this.realCount; i++) {
