@@ -79,7 +79,6 @@ export default {
     }
   },
   beforeMount() {
-    console.log(this)
     var self = this
     window.onscroll = function () {
       var top = document.body.scrollTop || document.documentElement.scrollTop

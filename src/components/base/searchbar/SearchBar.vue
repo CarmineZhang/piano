@@ -1,15 +1,9 @@
 <template>
   <div class="search-bar" id="searchBar" :class="{'search-bar-focusing':isFocus}">
     <form class="search-bar-form">
-      <div class="search-bar-box">
-        <i class="weui-icon-search"></i>
-        <input type="search" v-model="searchValue" class="search-bar-input" v-focus="isFocus" placeholder="搜索" required="" @blur="inputBlur">
-        <a href="javascript:" class="weui-icon-clear" @click="clear"></a>
-      </div>
-      <label class="search-bar-label" @click="labelClick">
-        <i class="weui-icon-search"></i>
-        <span>输入钢琴品牌型号关键字</span>
-      </label>
+      <i class="weui-icon-search"></i>
+      <input type="search" v-model="searchValue" class="search-bar-input" v-focus="isFocus" placeholder="输入钢琴品牌型号关键字" @focus="iptFocus">
+      <a href="javascript:" class="weui-icon-clear" @click="clear" v-show="isFocus&&searchValue!==''"></a>
     </form>
     <a href="javascript:" class="search-bar-cancel-btn" @click="cancel">取消</a>
   </div>
@@ -23,15 +17,16 @@ export default {
       searchValue: ''
     }
   },
-  methods: {
-    labelClick() {
-      this.isFocus = true
-    },
-    inputBlur() {
-      this.isFocus = false
-      if (this.searchValue.length) {
-        this.$emit('on-change', this.searchValue)
+  watch: {
+    searchValue(val, oldval) {
+      if (val !== oldval) {
+        console.log(val)
       }
+    }
+  },
+  methods: {
+    iptFocus() {
+      this.isFocus = true
     },
     cancel() {
       this.searchValue = ''
