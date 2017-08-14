@@ -11,7 +11,7 @@
         </div>
         <div class="form-item">
           <input type="tel" class="item-bd ipt" placeholder="请输入六位验证码">
-          <count-down :time="1600" v-model="start" :disabled="$validator.invalid" @on-click="startCountDown"></count-down>
+          <count-down :time="60" v-model="start" :disabled="$validator.invalid" @on-click="startCountDown"></count-down>
         </div>
         <div class="form-op">
           <a class="btn btn-primary">
