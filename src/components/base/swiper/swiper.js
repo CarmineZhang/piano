@@ -39,6 +39,7 @@ class Swiper {
   _bind() {
     var me = this
     me.touchstartHandler = (e) => {
+      e.preventDefault()
       me.stop()
       me.start.x = e.changedTouches[0].pageX
       me.start.y = e.changedTouches[0].pageY
@@ -56,6 +57,7 @@ class Swiper {
     // }
 
     me.touchEndHandler = (e) => {
+      e.preventDefault()
       me.end.x = e.changedTouches[0].pageX
       me.end.y = e.changedTouches[0].pageY
 
