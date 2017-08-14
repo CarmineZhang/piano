@@ -1,5 +1,5 @@
 <template>
-  <button class="count-down" v-text='content' :disabled="disabled" @click="onClick">
+  <button class="count-down" v-text='content' :disabled="disabled||!isClick" @click="onClick">
     获取验证码</button>
 </template>
 <script>
@@ -10,19 +10,23 @@ export default {
       type: Number,
       default: 10
     },
+    disabled: {
+      type: Boolean,
+      default: true
+    },
     value: Boolean
   },
   data() {
     return {
       timerId: null,
-      disabled: false,
+      isClick: true,
       downtime: 10,
       initText: '获取验证码'
     }
   },
   computed: {
     content() {
-      if (!this.disabled) {
+      if (this.isClick) {
         return this.initText
       } else {
         return `${this.downtime} s后获取`
@@ -35,7 +39,7 @@ export default {
         if (this.timerId) {
           clearTimeout(this.timerId)
         }
-        this.disabled = true
+        this.isClick = false
         this.downtime = this.time
         this.countDown()
       }
@@ -48,7 +52,7 @@ export default {
         this.timerId = setTimeout(this.countDown, 1000)
       } else {
         this.$emit('input', false)
-        this.disabled = false
+        this.isClick = true
       }
     },
     onClick() {
