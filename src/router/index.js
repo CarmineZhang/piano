@@ -26,9 +26,6 @@ export default new Router({
   routes: [{
     path: '/',
     name: 'home',
-    component: Test
-  }, {
-    path: '/home',
     component: Home
   }, {
     path: '/productlist',

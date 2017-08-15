@@ -7,7 +7,7 @@
       <a class="nav-index  ve-flexbox-item">
         <img src="../../assets/index.png" alt="">
       </a>
-      <a class="nav-me  ve-flexbox-item">
+      <a class="nav-me  ve-flexbox-item" @click="gotoMe">
         <img src="../../assets/me.png" alt="">
       </a>
     </flexbox>
@@ -20,6 +20,11 @@ export default {
   components: {
     Flexbox,
     FlexboxItem
+  },
+  methods: {
+    gotoMe() {
+
+    }
   }
 }
 </script>
