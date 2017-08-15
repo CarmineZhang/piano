@@ -4,9 +4,9 @@
       <img src="../../assets/success.png" alt="">
     </div>
     <div class="success-msg">
-      恭喜您，租赁成功！
+      恭喜您，注册成功！
     </div>
-    <a class="action">2秒后自动转到订单详情</a>
+    <a class="action">2秒后自动转到登录页面</a>
   </div>
 </template>
 <script>

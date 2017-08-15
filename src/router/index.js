@@ -17,6 +17,8 @@ import ChangePhone from '@/components/account/changephone'
 import Favorite from '@/components/favorite'
 import Test from '@/components/Test'
 import Widget from '@/plugins/widget'
+import Register from '@/components/Register'
+import RegisterNext from '@/components/Register/setpwd'
 Vue.use(Router)
 Vue.use(Widget)
 
@@ -70,6 +72,12 @@ export default new Router({
   }, {
     path: '/favorite',
     component: Favorite
+  }, {
+    path: '/register',
+    component: Register
+  }, {
+    path: '/registernext',
+    component: RegisterNext
   }, {
     path: '/test',
     component: Test
