@@ -22,7 +22,7 @@
 </template>
 <script>
 import CountDown from '../base/countdown'
-import { sendCode } from '@/libs/httpUtil'
+import http from '@/libs/httpUtil'
 export default {
   name: 'login',
   components: {
@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     startCountDown() {
-      sendCode(this.phone).then((res) => {
+      http.sendCode(this.phone).then((res) => {
         if (res.errNo == 0) {
           this.start = true
         }

@@ -7,41 +7,59 @@
       <div class="login-wrapper">
         <div class="form-item">
           <div class="item-hd item-phone"></div>
-          <input type="text" class="item-bd ipt" v-model="phone" placeholder="手机号码">
+          <input type="tel" class="item-bd ipt" v-model="phone" placeholder="手机号码">
         </div>
         <div class="form-item">
           <div class="item-hd item-pwd"></div>
-          <input type="tel" class="item-bd ipt" placeholder="请输入密码">
+          <input type="password" class="item-bd ipt" v-model="pwd" placeholder="请输入密码">
         </div>
         <div class="form-op">
-          <a class="btn btn-primary">
+          <a class="btn btn-primary" @click="login" :class="{'btn-primay-disabled':$validator.invalid}">
             登录
           </a>
         </div>
         <div class="login-comment">
           <a @click="register">注册账号</a>
           <span>|</span>
-          <a href="">忘记密码？</a>
+          <a>忘记密码？</a>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import http from '@/libs/httpUtil'
 export default {
   name: 'login',
   validator: {
-    phone: ['required', 'mobile']
+    phone: [{ test: 'required', message: '手机号不能为空' }, { test: 'mobile', message: '手机号格式不正确' }],
+    pwd: { test: 'required', message: '密码不能为空' }
   },
   data() {
     return {
       phone: '',
-      start: false
+      pwd: ''
     }
+  },
+  beforeMount() {
+    this.$validator.check()
   },
   methods: {
     register() {
       this.$router.push('/register')
+    },
+    login() {
+      var validator = this.$validator
+      validator.check()
+      if (validator.valid) {
+        http.login(this.phone, this.pwd).then((res) => {
+          if (res.errNo == 0) {
+            this.$ve.toast('登录成功', 2000);
+          } else {
+            this.$ve.alert(res.errMsg)
+          }
+        })
+      }
     }
   }
 }

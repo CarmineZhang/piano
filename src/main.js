@@ -9,10 +9,12 @@ import store from './store'
 import router from './router'
 import Validator from '@/plugins/validator'
 import mixins from '@/mixins'
+import Widget from '@/plugins/widget'
 import './sass/main.scss'
 Vue.config.productionTip = false
 
 Vue.use(Validator)
+Vue.use(Widget)
 Vue.mixin(mixins)
 
 // sync(store, router)

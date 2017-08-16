@@ -32,15 +32,26 @@ axios.interceptors.response.use(
   }
 );
 
+function ajax(url, data) {
+  var signData = qs.stringify(signature(data))
+  return axios.post(url, signData)
+}
+
 function sendCode(phone) {
   var data = {
     phone: phone
   }
-  var signStr = qs.stringify(signature(data))
-  return axios.post('account/sendCode', signStr)
+  return ajax('account/sendCode', data)
 }
 
+function login(phone, pwd) {
+  return ajax('account/login', {
+    phone: phone,
+    password: pwd
+  })
+}
 
-export {
-  sendCode
+export default {
+  sendCode,
+  login
 }

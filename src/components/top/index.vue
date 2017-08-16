@@ -15,6 +15,7 @@
 </template>
 <script>
 import { Flexbox, FlexboxItem } from '../base/flexbox'
+import storage from '@/libs/storage'
 export default {
   name: 'top',
   components: {
@@ -23,7 +24,11 @@ export default {
   },
   methods: {
     gotoMe() {
-
+      if (storage.get('access-token')) {
+        this.$router.push('/usercenter')
+      } else {
+        this.$router.push('/login')
+      }
     }
   }
 }
