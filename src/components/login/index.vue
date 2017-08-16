@@ -50,7 +50,6 @@ export default {
     },
     login() {
       var validator = this.$validator
-      validator.check()
       if (validator.valid) {
         http.login(this.phone, this.pwd).then((res) => {
           if (res.errNo == 0) {

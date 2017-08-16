@@ -1,6 +1,6 @@
 <template>
   <div>
-    <send-phone></send-phone>
+    <send-phone @on-confirm="confirm"></send-phone>
   </div>
 </template>
 <script>
@@ -10,11 +10,10 @@ export default {
   components: {
     SendPhone
   },
-  data() {
-    return {
-    }
-  },
   methods: {
+    confirm(phone) {
+      this.$router.push({ name: 'registernext', params: { phone: phone } })
+    }
   }
 }
 </script>

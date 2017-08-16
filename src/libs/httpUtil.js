@@ -51,7 +51,23 @@ function login(phone, pwd) {
   })
 }
 
+function confirmCode(phone, code) {
+  return ajax('account/confirmCode', {
+    phone: phone,
+    code: code
+  })
+}
+
+function setUserPwd(phone, pwd) {
+  return ajax('account/setUserPassWord', {
+    phone: phone,
+    password: pwd
+  })
+}
+
 export default {
   sendCode,
-  login
+  login,
+  confirmCode,
+  setUserPwd
 }

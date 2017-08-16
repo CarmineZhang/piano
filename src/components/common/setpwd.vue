@@ -3,19 +3,19 @@
     <div class="set-wrapper">
       <p class="set-header">
         <span>您注册的手机号为</span>
-        <strong>13685426378</strong>
+        <strong v-text="phone"></strong>
       </p>
       <p class="set-sub-header">
         请设置登录密码
       </p>
       <div class="form-item">
-        <input type="password" class="item-bd ipt" placeholder="请输入密码">
+        <input type="password" v-model="pwd" class="item-bd ipt" placeholder="请输入密码">
       </div>
       <div class="form-item">
-        <input type="password" class="item-bd ipt" placeholder="请确认密码">
+        <input type="password" v-model="confirmPwd" class="item-bd ipt" placeholder="请确认密码">
       </div>
       <div class="form-op">
-        <a class="btn btn-primary">
+        <a class="btn btn-primary" @click="ok" :class="{'btn-primay-disabled':$validator.invalid}">
           完成
         </a>
       </div>
@@ -24,7 +24,47 @@
 </template>
 <script>
 export default {
-  name: 'set-pwd'
+  name: 'set-pwd',
+  data() {
+    return {
+      pwd: '',
+      confirmPwd: ''
+    }
+  },
+  validator: {
+    pwd: [{ test: /.{8,16}/, message: '密码不符合规则' }, {
+      test: function (value) {
+        if (this.confirmPwd === '') {
+          return true
+        }
+        return this.confirmPwd !== '' && value === this.confirmPwd
+      }, message: '两次输入的密码不一致'
+    }],
+    confirmPwd: [{ test: /.{8,16}/, message: '密码不符合规则' }, {
+      test: function (value) {
+        return value === this.pwd
+      }, message: '两次输入的密码不一致'
+    }]
+  },
+  computed: {
+    phone() {
+      return this.$store.state.route.params.phone
+    }
+  },
+  beforeMount() {
+    if (!this.phone) {
+      this.$router.push('/register')
+    } else {
+      this.$validator.check()
+    }
+  },
+  methods: {
+    ok() {
+      if (this.$validator.valid) {
+        this.$emit('on-confirm', this.phone, this.pwd)
+      }
+    }
+  }
 }
 </script>
 <style lang="scss">
