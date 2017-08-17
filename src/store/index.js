@@ -6,15 +6,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    direction: 'forward',
-    phone: ''
+    direction: 'forward'
   },
   mutations: {
     updateDirection(state, payload) {
       state.direction = payload.direction
-    },
-    updatePhone(state, payload) {
-      state.phone = payload.phone
     }
   }
 })

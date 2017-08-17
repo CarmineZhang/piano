@@ -43,19 +43,20 @@ export default {
   components: {
     Cell
   },
-  computed: {
-    phone() {
-      return this.$store.state.phone
+  data() {
+    return {
+      phone: ''
     }
+  },
+  beforeMount() {
+    this.phone = storage.get('phone')
   },
   methods: {
     logout() {
       http.logout().then(res => {
         if (res.errNo == 0) {
           storage.clear('access-token')
-          this.$store.commit('updatePhone', {
-            phone: ''
-          })
+          storage.phone('access-token')
           this.$ve.toast('登出成功', {
             duration: 2000, callback: () => {
               this.$router.push('/home')

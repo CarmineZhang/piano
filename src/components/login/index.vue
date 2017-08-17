@@ -57,9 +57,7 @@ export default {
       if (validator.valid) {
         http.login(this.phone, this.pwd).then((res) => {
           if (res.errNo == 0) {
-            this.$store.commit('updatePhone', {
-              phone: this.phone
-            })
+            storage.set('phone', this.phone)
             storage.set('access-toekn', res.memberToken)
             this.$ve.toast('登录成功', {
               duration: 2000, callback: () => {
