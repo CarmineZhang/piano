@@ -63,6 +63,7 @@ export default {
 <style lang="scss">
 @import '../../sass/mixin';
 .news {
+  background-color: #fff;
   padding: 0 .3rem;
   .news-title {
     padding-top: .3rem;
