@@ -19,6 +19,12 @@ Vue.mixin(mixins)
 
 sync(store, router)
 
+Vue.filter('dateformate', (val) => {
+  if (typeof val === 'string') {
+    return val.substring(0, 11)
+  }
+})
+
 var pageManager = {
   _pageStack: [],
   _pageIndex: 1,

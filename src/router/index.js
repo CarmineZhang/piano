@@ -20,7 +20,7 @@ import Widget from '@/plugins/widget'
 import Register from '@/components/register'
 import RegisterNext from '@/components/register/setpwd'
 import RegisterSuccess from '@/components/register/success'
-
+import Article from '@/components/home/article'
 import FindPwd from '@/components/findpwd'
 import FindPwdNext from '@/components/findpwd/setpwd'
 Vue.use(Router)
@@ -90,6 +90,9 @@ export default new Router({
       path: '/findpwdnext',
       name: 'findpwdnext',
       component: FindPwdNext
+    }, {
+      path: '/article',
+      component: Article
     },
     {
       path: '/test',

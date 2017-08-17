@@ -48,6 +48,11 @@ export default {
       phone: ''
     }
   },
+  beforeCreate() {
+    if (!storage.get('access-token')) {
+      this.$router.push('/login')
+    }
+  },
   beforeMount() {
     this.phone = storage.get('phone')
   },

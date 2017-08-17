@@ -34,7 +34,7 @@ axios.interceptors.response.use(
 
 function ajax(url, data) {
   var signData = qs.stringify(signature(data))
-  return axios.post(url, signData)
+  return axios.post('/api/' + url, signData)
 }
 
 function sendCode(phone) {
@@ -71,10 +71,25 @@ function logout(token) {
   })
 }
 
+function getInformations(no, size) {
+  return ajax('infomation/getInfomations', {
+    pageNo: no,
+    pageSize: size
+  })
+}
+
+function getArticle(id) {
+  return ajax('infomation/getInfomationDetails', {
+    id: id
+  })
+}
+
 export default {
   sendCode,
   login,
   confirmCode,
   setUserPwd,
-  logout
+  logout,
+  getInformations,
+  getArticle
 }
