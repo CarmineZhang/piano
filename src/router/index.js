@@ -20,6 +20,9 @@ import Widget from '@/plugins/widget'
 import Register from '@/components/register'
 import RegisterNext from '@/components/register/setpwd'
 import RegisterSuccess from '@/components/register/success'
+
+import FindPwd from '@/components/findpwd'
+import FindPwdNext from '@/components/findpwd/setpwd'
 Vue.use(Router)
 Vue.use(Widget)
 
@@ -80,6 +83,13 @@ export default new Router({
     }, {
       path: '/registersuccess',
       component: RegisterSuccess
+    }, {
+      path: '/findpwd',
+      component: FindPwd
+    }, {
+      path: '/findpwdnext',
+      name: 'findpwdnext',
+      component: FindPwdNext
     },
     {
       path: '/test',

@@ -21,7 +21,7 @@
         <div class="login-comment">
           <a @click="register">注册账号</a>
           <span>|</span>
-          <a>忘记密码？</a>
+          <a @click="findpwd">忘记密码？</a>
         </div>
       </div>
     </div>
@@ -29,6 +29,7 @@
 </template>
 <script>
 import http from '@/libs/httpUtil'
+import storage from '@/libs/storage'
 export default {
   name: 'login',
   validator: {
@@ -48,12 +49,23 @@ export default {
     register() {
       this.$router.push('/register')
     },
+    findpwd() {
+      this.$router.push('/findpwd')
+    },
     login() {
       var validator = this.$validator
       if (validator.valid) {
         http.login(this.phone, this.pwd).then((res) => {
           if (res.errNo == 0) {
-            this.$ve.toast('登录成功', 2000);
+            this.$store.commit('updatePhone', {
+              phone: this.phone
+            })
+            storage.set('access-toekn', res.memberToken)
+            this.$ve.toast('登录成功', {
+              duration: 2000, callback: () => {
+                this.$router.push('/usercenter')
+              }
+            });
           } else {
             this.$ve.alert(res.errMsg)
           }

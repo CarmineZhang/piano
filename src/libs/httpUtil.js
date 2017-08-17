@@ -65,9 +65,16 @@ function setUserPwd(phone, pwd) {
   })
 }
 
+function logout(token) {
+  return ajax('account/logout', {
+    memberToken: token
+  })
+}
+
 export default {
   sendCode,
   login,
   confirmCode,
-  setUserPwd
+  setUserPwd,
+  logout
 }

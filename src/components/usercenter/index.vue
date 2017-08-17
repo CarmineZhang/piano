@@ -4,7 +4,7 @@
       <p class="tit">当前账户</p>
       <p class="ct">
         <span>手机号：</span>
-        <span>13682374876</span>
+        <span v-text="phone"></span>
       </p>
     </div>
     <div class="more more-mini"></div>
@@ -31,15 +31,39 @@
       </cell>
     </div>
     <div class="more"></div>
-    <a class="btn btn-default">退出</a>
+    <a class="btn btn-default" @click="logout">退出</a>
   </div>
 </template>
 <script>
 import { Cell } from '../base/cell'
+import http from '@/libs/httpUtil'
+import storage from '@/libs/storage'
 export default {
   name: 'user-center',
   components: {
     Cell
+  },
+  computed: {
+    phone() {
+      return this.$store.state.phone
+    }
+  },
+  methods: {
+    logout() {
+      http.logout().then(res => {
+        if (res.errNo == 0) {
+          storage.clear('access-token')
+          this.$store.commit('updatePhone', {
+            phone: ''
+          })
+          this.$ve.toast('登出成功', {
+            duration: 2000, callback: () => {
+              this.$router.push('/home')
+            }
+          });
+        }
+      })
+    }
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <send-phone @on-confirm="confirm"></send-phone>
+    <send-phone @on-confirm="confirm" @on-cancel="cancel"></send-phone>
   </div>
 </template>
 <script>
@@ -10,9 +10,15 @@ export default {
   components: {
     SendPhone
   },
+  beforeMount() {
+    document.title = '注册'
+  },
   methods: {
     confirm(phone) {
       this.$router.push({ name: 'registernext', params: { phone: phone } })
+    },
+    cancel() {
+      this.$router.push('/login')
     }
   }
 }

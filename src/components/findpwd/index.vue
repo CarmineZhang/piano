@@ -1,6 +1,6 @@
 <template>
   <div>
-    <send-phone></send-phone>
+    <send-phone @on-confirm="confirm" @on-cancel="cancel"></send-phone>
   </div>
 </template>
 <script>
@@ -10,11 +10,16 @@ export default {
   components: {
     SendPhone
   },
-  data() {
-    return {
-    }
+  beforeMount() {
+    document.title = '找回密码'
   },
   methods: {
+    confirm(phone) {
+      this.$router.push({ name: 'findpwdnext', params: { phone: phone } })
+    },
+    cancel() {
+      this.$router.push('/login')
+    }
   }
 }
 </script>
