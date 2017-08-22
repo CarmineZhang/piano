@@ -127,6 +127,14 @@ function setAddressDefault(id) {
   })
 }
 
+function getCouponMemberInfos(no = 1, size = 10) {
+  return ajax('membercoupon/getCouponMemberInfos', {
+    pageNo: no,
+    pageSize: size,
+    memberToken: storage.get('access-token')
+  })
+}
+
 export default {
   sendCode,
   login,
@@ -139,5 +147,6 @@ export default {
   getAddressList,
   addAddress,
   deleteAddress,
-  setAddressDefault
+  setAddressDefault,
+  getCouponMemberInfos
 }
