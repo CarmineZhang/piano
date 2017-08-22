@@ -1,7 +1,7 @@
 <template>
   <flexbox class="footer-nav">
     <a href="" class="nav-about ve-flexbox-item">关于行龙</a>
-    <a href="" class="nav-news ve-flexbox-item">行龙资讯</a>
+    <a @click="showNews" class="nav-news ve-flexbox-item">行龙资讯</a>
     <a href="" class="nav-contact ve-flexbox-item">联系我们</a>
   </flexbox>
 </template>
@@ -12,6 +12,11 @@ export default {
   components: {
     Flexbox,
     FlexboxItem
+  },
+  methods: {
+    showNews() {
+      this.$router.push('/news')
+    }
   }
 }
 </script>

@@ -1,52 +1,34 @@
 <template>
   <div class="news-list">
-    <div class="news-item" v-for="(item,index) in list" :key="index">
+    <div class="news-item" v-for="item in list" :key="item.id" @click="showNew(item.id)">
       <div class="item-title" v-text="item.title"></div>
-      <div class="item-date" v-text="item.date"></div>
+      <div class="item-date">{{item.beginTime | dateformate}}</div>
       <div class="item-img">
-        <img :src="item.img" alt="">
-        <div class="item-img-desc" v-text="item.desc"></div>
+        <img :src="item.imageAddr" alt="">
+        <div class="item-img-desc" v-text="item.summary"></div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import newsSrc from '../../assets/new3.png'
+import http from '@/libs/httpUtil'
 export default {
   name: 'news-list',
   data() {
     return {
-      list: [{
-        title: '行龙乐器正式上线',
-        date: '2017-8-1',
-        img: newsSrc,
-        desc: '行龙乐器正式上线，优质进口的钢琴给您带来不一样的体验。'
-      }, {
-        title: '行龙乐器正式上线',
-        date: '2017-8-1',
-        img: newsSrc,
-        desc: '行龙乐器正式上线，优质进口的钢琴给您带来不一样的体验。'
-      }, {
-        title: '行龙乐器正式上线',
-        date: '2017-8-1',
-        img: newsSrc,
-        desc: '行龙乐器正式上线，优质进口的钢琴给您带来不一样的体验。'
-      }, {
-        title: '行龙乐器正式上线',
-        date: '2017-8-1',
-        img: newsSrc,
-        desc: '行龙乐器正式上线，优质进口的钢琴给您带来不一样的体验。'
-      }, {
-        title: '行龙乐器正式上线',
-        date: '2017-8-1',
-        img: newsSrc,
-        desc: '行龙乐器正式上线，优质进口的钢琴给您带来不一样的体验。'
-      }, {
-        title: '行龙乐器正式上线',
-        date: '2017-8-1',
-        img: newsSrc,
-        desc: '行龙乐器正式上线，优质进口的钢琴给您带来不一样的体验。'
-      }]
+      list: []
+    }
+  },
+  created() {
+    http.getInformations(1, 10).then(res => {
+      if (res.errNo == 0) {
+        this.list = res.data.dataList
+      }
+    })
+  },
+  methods: {
+    showNew(id) {
+      this.$router.push({ path: '/article', query: { id: id } })
     }
   }
 }
@@ -71,12 +53,12 @@ export default {
       position: relative;
       img {
         width: 100%;
+        height: 100%;
       }
       .item-img-desc {
         position: absolute;
         bottom: 0;
-        left: 0;
-        height: .88rem;
+        left: 0; // height: .88rem;
         background-color: #323136;
         opacity: .6;
         font-size: .24rem;
