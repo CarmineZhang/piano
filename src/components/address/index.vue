@@ -8,7 +8,7 @@
         </div>
         <div class="addr-body" v-text="item.detail">
         </div>
-        <div class="addr-footer" :class="{'addr-default':!!item.isDefault}">
+        <div class="addr-footer" :class="{'addr-default':item.isDefault==1}">
           <a class="ft-left" @click="setDefault(item.id)">默认地址</a>
           <div class="ft-right">
             <a class="ft-edit">编辑</a>
@@ -32,11 +32,18 @@ export default {
   name: 'address',
   data() {
     return {
-      list: []
+      list: [],
+      loading: null
     }
   },
   created() {
     this.getList()
+  },
+  beforeMount() {
+    this.loading = this.$ve.loading('数据加载中')
+  },
+  mounted() {
+    this.loading.hide()
   },
   methods: {
     getList() {
@@ -50,10 +57,12 @@ export default {
       this.$router.push({ path: '/addaddress' })
     },
     del(id) {
-      http.deleteAddress(id).then(res => {
-        if (res.errNo == 0) {
-          this.getList()
-        }
+      this.$ve.confirm('确定要删除此地址吗？', () => {
+        http.deleteAddress(id).then(res => {
+          if (res.errNo == 0) {
+            this.getList()
+          }
+        })
       })
     },
     setDefault(id) {

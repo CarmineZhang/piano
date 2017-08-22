@@ -6,7 +6,7 @@ export default {
   name: 'switch',
   data() {
     return {
-      checked: true
+      checked: false
     }
   },
   methods: {

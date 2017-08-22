@@ -49,7 +49,7 @@ export default {
       receiverName: '',
       phone: '',
       postcode: '',
-      area: '北京海淀',
+      area: '北京',
       detail: '',
       areaShow: false,
       isDefault: 1
@@ -63,7 +63,9 @@ export default {
       this.isDefault = +val
     },
     add() {
+      let loading = this.$ve.loading('处理中')
       http.addAddress(this.receiverName, this.phone, this.postcode, this.area, this.detail, this.isDefault).then((res) => {
+        loading.hide()
         if (res.errNo == 0) {
           this.$ve.toast('添加成功', {
             duration: 1000, callback: () => {
