@@ -4,28 +4,31 @@
       <div class="addr-title">新增地址</div>
       <div class="addr-add-body">
         <div class="form-item">
-          <input type="text" class="item-bd ipt" placeholder="收货人姓名">
+          <input type="text" class="item-bd ipt" v-model="receiverName" placeholder="收货人姓名">
         </div>
         <div class="form-item">
           <div class="item-hd">+86</div>
-          <input type="text" class="item-bd ipt" placeholder="手机号码">
+          <input type="tel" class="item-bd ipt" v-model="phone" placeholder="手机号码">
+        </div>
+        <div class="form-item">
+          <input type="text" class="item-bd ipt" v-model="postcode" placeholder="邮政编码">
         </div>
         <div class="form-item" @click="showArea">
           <input type="text" class="item-bd ipt" placeholder="收货地址" readonly>
         </div>
         <div class="form-item">
-          <input type="text" class="item-bd ipt" placeholder="详细地址">
+          <input type="text" class="item-bd ipt" v-model="detail" placeholder="详细地址">
         </div>
         <div class="addr-default">
           <div class="item-bd">
             是否设为默认地址
           </div>
-          <ve-switch></ve-switch>
+          <ve-switch @on-change="setDefault"></ve-switch>
         </div>
       </div>
       <div class="addr-op">
-        <a href="" class="btn btn-primary">确定</a>
-        <a href="" class="btn btn-default">取消</a>
+        <a class="btn btn-primary" @click="add">确定</a>
+        <a class="btn btn-default" @click="back">取消</a>
       </div>
     </div>
     <select-area v-model="areaShow"></select-area>
@@ -34,6 +37,7 @@
 <script>
 import VeSwitch from '../base/switch/'
 import SelectArea from './selectarea'
+import http from '@/libs/httpUtil'
 export default {
   name: 'add-address',
   components: {
@@ -42,12 +46,35 @@ export default {
   },
   data() {
     return {
-      areaShow: false
+      receiverName: '',
+      phone: '',
+      postcode: '',
+      area: '北京海淀',
+      detail: '',
+      areaShow: false,
+      isDefault: 1
     }
   },
   methods: {
     showArea() {
       this.areaShow = true
+    },
+    setDefault(val) {
+      this.isDefault = +val
+    },
+    add() {
+      http.addAddress(this.receiverName, this.phone, this.postcode, this.area, this.detail, this.isDefault).then((res) => {
+        if (res.errNo == 0) {
+          this.$ve.toast('添加成功', {
+            duration: 1000, callback: () => {
+              this.$router.go(-1)
+            }
+          });
+        }
+      })
+    },
+    back() {
+      this.$router.go(-1)
     }
   }
 }

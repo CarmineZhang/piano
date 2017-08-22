@@ -3,6 +3,7 @@ import {
   signature
 } from './comUtil'
 import qs from 'qs'
+import storage from './storage'
 axios.interceptors.response.use(
   response => {
     console.dir(response)
@@ -65,9 +66,9 @@ function setUserPwd(phone, pwd) {
   })
 }
 
-function logout(token) {
+function logout() {
   return ajax('account/logout', {
-    memberToken: token
+    memberToken: storage.get('access-token')
   })
 }
 
@@ -85,12 +86,44 @@ function getArticle(id) {
 }
 
 function getPiano(no = 1, size = 10, brand = '', rentTyp = '', priceDic = '') {
-  return ajax('/mall/pianos', {
+  return ajax('mall/pianos', {
     pageNo: no,
     pageSize: size,
     brand: brand,
     rentTyp: rentTyp,
     priceDic: priceDic
+  })
+}
+
+function getAddressList() {
+  return ajax('address/list', {
+    memberToken: storage.get('access-token')
+  })
+}
+
+function addAddress(name, phone, postcode, area, detail, isDefault) {
+  return ajax('address/add', {
+    memberToken: storage.get('access-token'),
+    name: name,
+    phone: phone,
+    postcode: postcode,
+    area: area,
+    detail: detail,
+    isDefault: isDefault
+  })
+}
+
+function deleteAddress(id) {
+  return ajax('address/del', {
+    memberToken: storage.get('access-token'),
+    addressId: id
+  })
+}
+
+function setAddressDefault(id) {
+  return ajax('address/chooseDefault', {
+    memberToken: storage.get('access-token'),
+    addressId: id
   })
 }
 
@@ -102,5 +135,9 @@ export default {
   logout,
   getInformations,
   getArticle,
-  getPiano
+  getPiano,
+  getAddressList,
+  addAddress,
+  deleteAddress,
+  setAddressDefault
 }

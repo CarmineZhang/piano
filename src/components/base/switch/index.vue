@@ -1,9 +1,20 @@
 <template>
-  <input class="switch-ipt" type="checkbox" checked="checked">
+  <input class="switch-ipt" type="checkbox" :checked="checked" @click="chkClick">
 </template>
 <script>
 export default {
-  name: 'switch'
+  name: 'switch',
+  data() {
+    return {
+      checked: true
+    }
+  },
+  methods: {
+    chkClick() {
+      this.checked = !this.checked
+      this.$emit('on-change', this.checked)
+    }
+  }
 }
 </script>
 <style lang="scss">

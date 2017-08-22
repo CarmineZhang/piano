@@ -58,7 +58,7 @@ export default {
         http.login(this.phone, this.pwd).then((res) => {
           if (res.errNo == 0) {
             storage.set('phone', this.phone)
-            storage.set('access-toekn', res.memberToken)
+            storage.set('access-token', res.data.memberToken)
             this.$ve.toast('登录成功', {
               duration: 2000, callback: () => {
                 this.$router.push('/usercenter')

@@ -9,7 +9,7 @@
       </div>
       <div class="mod-address-slide-body">
         <ul class="mod-address-slide-tabs">
-          <li :class="{'cur':level===index}" :data-level="index" v-for="(item,index) in header" :key="item" @click="changeArea">
+          <li :class="{'cur':level===index}" :data-level="index" v-for="(item,index) in header" :key="index" @click="changeArea">
             <span v-text="item.label"></span>
           </li>
         </ul>

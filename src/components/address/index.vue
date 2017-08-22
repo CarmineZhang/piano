@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="addr-list">
-      <div class="addr-item" v-for="item in list" :key="item">
+      <div class="addr-item" v-for="item in list" :key="item.memberId">
         <div class="addr-header">
           <div class="addr-user" v-text="item.name"></div>
           <div class="addr-tel" v-text="item.tel"></div>
         </div>
         <div class="addr-body" v-text="item.detail">
         </div>
-        <div class="addr-footer" :class="{'addr-default':item.isDefault}">
+        <div class="addr-footer" :class="{'addr-default':!!item.isDefault}">
           <a class="ft-left">默认地址</a>
           <div class="ft-right">
             <a class="ft-edit">编辑</a>
@@ -27,24 +27,20 @@
   </div>
 </template>
 <script>
+import http from '@/libs/httpUtil'
 export default {
   name: 'address',
   data() {
     return {
-      list: [{
-        name: '周杰',
-        area: '北京',
-        detail: '海淀区中关村大街188号创意大厦A座11层2002室',
-        tel: '13687654325',
-        isDefault: true
-      }, {
-        name: '周杰',
-        area: '北京',
-        detail: '海淀区中关村大街188号创意大厦A座11层2002室',
-        tel: '13687654325',
-        isDefault: false
-      }]
+      list: []
     }
+  },
+  created() {
+    http.getAddressList().then((res) => {
+      if (res.errNo == 0) {
+        this.list = res.data.addressList
+      }
+    })
   },
   methods: {
     add() {
