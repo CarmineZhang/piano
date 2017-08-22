@@ -42,7 +42,7 @@ function deserialize(strVal, defaultVal) {
 const store = {
   set(key, value) {
     if (value === undefined) {
-      return this.remove(key)
+      return remove(key)
     }
     write(key, serialize(value))
     return value

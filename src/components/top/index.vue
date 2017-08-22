@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <flexbox class="top-nav">
-      <a class="nav-rent  ve-flexbox-item">
+      <a class="nav-rent  ve-flexbox-item" @click="showPiano">
         <img src="../../assets/rent.png" alt="">
       </a>
       <a class="nav-index  ve-flexbox-item">
@@ -29,6 +29,9 @@ export default {
       } else {
         this.$router.push('/login')
       }
+    },
+    showPiano() {
+      this.$router.push('/productlist')
     }
   }
 }

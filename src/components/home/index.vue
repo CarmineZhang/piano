@@ -12,7 +12,7 @@
       </div>
       <service></service>
       <news></news>
-      <div class="more">
+      <div class="more" @click="showNews">
         <a>查看更多</a>
       </div>
     </div>
@@ -52,6 +52,11 @@ export default {
         href: '',
         img: bannerSrc
       }]
+    }
+  },
+  methods: {
+    showNews() {
+      this.$router.push('/news')
     }
   }
 }

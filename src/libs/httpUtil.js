@@ -84,6 +84,16 @@ function getArticle(id) {
   })
 }
 
+function getPiano(no = 1, size = 10, brand = '', rentTyp = '', priceDic = '') {
+  return ajax('/mall/pianos', {
+    pageNo: no,
+    pageSize: size,
+    brand: brand,
+    rentTyp: rentTyp,
+    priceDic: priceDic
+  })
+}
+
 export default {
   sendCode,
   login,
@@ -91,5 +101,6 @@ export default {
   setUserPwd,
   logout,
   getInformations,
-  getArticle
+  getArticle,
+  getPiano
 }

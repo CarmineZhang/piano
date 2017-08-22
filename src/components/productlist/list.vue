@@ -1,17 +1,17 @@
 <template>
   <div>
-    <div class="pl-item" v-for="(item,index) in data" :key="index">
+    <div class="pl-item" v-for="item in data" :key="item.id">
       <div class="pl-item-img">
-        <img src="" alt="">
+        <img :src="item.coverUrl" alt="">
       </div>
       <div class="pl-item-content">
-        <p class="title" v-text="item.title"></p>
-        <p class="area" v-text="item.area"></p>
+        <p class="title" v-text="item.pianoName"></p>
+        <p class="area"></p>
         <p class="price">
           <span class="tit">租金：</span>
-          <span class="ct">¥ {{item.price}} / 天</span>
+          <span class="ct">¥ {{item.rentActive}} / 天</span>
           <span class="pledge">押金：</span>
-          <span class="pledge">¥ {{item.pledge}}</span>
+          <span class="pledge">¥ {{item.marketPrices}}</span>
         </p>
       </div>
     </div>

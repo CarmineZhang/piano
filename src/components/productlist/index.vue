@@ -18,6 +18,7 @@ import Top from '../top/'
 import SearchBar from '../base/searchbar'
 import VeSelect from './select'
 import List from './list'
+import http from '@/libs/httpUtil'
 export default {
   name: 'product-list',
   components: {
@@ -30,53 +31,15 @@ export default {
     return {
       maskShow: false,
       style: null,
-      list: [{
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }]
+      list: []
     }
+  },
+  created() {
+    http.getPiano().then((res) => {
+      if (res.errNo == 0) {
+        this.list = res.list
+      }
+    })
   },
   beforeMount() {
     var self = this
