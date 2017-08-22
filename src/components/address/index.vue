@@ -9,10 +9,10 @@
         <div class="addr-body" v-text="item.detail">
         </div>
         <div class="addr-footer" :class="{'addr-default':!!item.isDefault}">
-          <a class="ft-left">默认地址</a>
+          <a class="ft-left" @click="setDefault(item.id)">默认地址</a>
           <div class="ft-right">
             <a class="ft-edit">编辑</a>
-            <a class="ft-delete">删除</a>
+            <a class="ft-delete" @click="del(item.id)">删除</a>
           </div>
         </div>
       </div>
@@ -36,15 +36,32 @@ export default {
     }
   },
   created() {
-    http.getAddressList().then((res) => {
-      if (res.errNo == 0) {
-        this.list = res.data.addressList
-      }
-    })
+    this.getList()
   },
   methods: {
+    getList() {
+      http.getAddressList().then((res) => {
+        if (res.errNo == 0) {
+          this.list = res.data.addressList
+        }
+      })
+    },
     add() {
       this.$router.push({ path: '/addaddress' })
+    },
+    del(id) {
+      http.deleteAddress(id).then(res => {
+        if (res.errNo == 0) {
+          this.getList()
+        }
+      })
+    },
+    setDefault(id) {
+      http.setAddressDefault(id).then(res => {
+        if (res.errNo == 0) {
+          this.getList()
+        }
+      })
     }
   }
 }
