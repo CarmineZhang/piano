@@ -9,7 +9,7 @@
         <p class="area"></p>
         <p class="price">
           <span class="tit">租金：</span>
-          <span class="ct">¥ {{item.rentActive}} / 天</span>
+          <span class="ct">¥ {{item.shortTermDeposit}} / 天</span>
           <span class="pledge">押金：</span>
           <span class="pledge">¥ {{item.marketPrices}}</span>
         </p>

@@ -1,31 +1,43 @@
 <template>
   <div>
+    <transition name="ve-fade">
+      <div class="pl-mask" v-show="maskShow" @click="maskClick"></div>
+    </transition>
     <div class="pl-search">
       <flexbox class="pl-select">
-        <a class="ve-flexbox-item" @click="showBrand" :class="{'pl-select-up':brandShow}">
+        <a class="ve-flexbox-item" @click="showBrand" :class="{'pl-select-up':show===1}">
           <span>品牌</span>
         </a>
-        <a class="ve-flexbox-item">
+        <a class="ve-flexbox-item" @click="showType" :class="{'pl-select-up':show===2}">
           <span>租期</span>
         </a>
-        <a class="ve-flexbox-item">
+        <a class="ve-flexbox-item" @click="showRent" :class="{'pl-select-up':show===3}">
           <span>租金</span>
         </a>
       </flexbox>
       <div class="options">
         <transition name="fade-down">
-          <ul class="brand" v-show="brandShow">
-            <li class="selected">斯坦威</li>
-            <li>雅马哈</li>
-            <li>卡瓦依</li>
+          <ul class="brand" v-show="show===1">
+            <li :class="{'selected':item===brank}" v-for="(item,index) in brandDic" :key="index" @click="selectBrand(item)">{{item.dicName}}</li>
+          </ul>
+        </transition>
+        <transition name="fade-down">
+          <ul class="brand" v-show="show===2">
+            <li :class="{'selected':rentType&&rentType.dicValue==='day'}" @click="dayrent">日租</li>
+            <li :class="{'selected':rentType&&rentType.dicValue==='month'}" @click="monthrent">月租</li>
+          </ul>
+        </transition>
+        <transition name="fade-down">
+          <ul class="brand" v-show="show===3">
+            <li :class="{'selected':item===rent}" v-for="(item,index) in rentList" :key="index" @click="selectRent(item)">{{item.dicName}}</li>
           </ul>
         </transition>
       </div>
     </div>
-    <div class="filter">
-      <span class="filter-item">雅马哈</span>
-      <span class="filter-item">月租</span>
-      <span class="filter-item">100~200 /月</span>
+    <div class="filter" v-show="filterShow">
+      <span class="filter-item" v-show="brank!==null" @click="delBrankFilter">{{brank&&brank.dicName}}</span>
+      <span class="filter-item" v-show="rentType!==null" @click="delTypeFilter">{{rentType&&rentType.dicName}}</span>
+      <span class="filter-item" v-show="rent!==null" @click="delRentFilter">{{rent&&rent.dicName}}</span>
     </div>
   </div>
 </template>
@@ -33,9 +45,24 @@
 import { Flexbox } from '../base/flexbox'
 export default {
   name: 'select',
+  props: {
+    brandDic: Array,
+    rentDay: Array,
+    rentMonth: Array
+  },
   data() {
     return {
-      brandShow: false
+      show: -1,
+      maskShow: false,
+      rentList: [],
+      rentType: null,
+      brank: null,
+      rent: null
+    }
+  },
+  computed: {
+    filterShow() {
+      return !!this.brank || !!this.rentType || !!this.rent
     }
   },
   components: {
@@ -43,8 +70,55 @@ export default {
   },
   methods: {
     showBrand() {
-      this.brandShow = !this.brandShow;
-      this.$emit('on-select-show', this.brandShow)
+      this.show === 1 ? this.show = -1 : this.show = 1
+      this.maskShow = !this.maskShow
+    },
+    showType() {
+      this.show === 2 ? this.show = -1 : this.show = 2
+      this.maskShow = !this.maskShow
+    },
+    showRent() {
+      if (this.rentList.length > 0) {
+        this.show === 3 ? this.show = -1 : this.show = 3
+        this.maskShow = !this.maskShow
+      }
+    },
+    maskClick() {
+      this.maskShow = false
+      this.show = -1
+    },
+    dayrent() {
+      this.rentType = { dicValue: 'day', dicName: '日租' }
+      this.rentList = this.rentDay
+      this.show = -1
+      this.maskShow = false
+    },
+    monthrent() {
+      this.rentType = { dicValue: 'month', dicName: '月租' }
+      this.rentList = this.rentMonth
+      this.show = -1
+      this.maskShow = false
+    },
+    selectBrand(item) {
+      this.brank = item
+      this.rent = null
+      this.show = -1
+      this.maskShow = false
+    },
+    selectRent(item) {
+      this.rent = item
+      this.show = -1
+      this.maskShow = false
+    },
+    delBrankFilter() {
+      this.brank = null
+    },
+    delTypeFilter() {
+      this.rentType = null
+      this.rent = null
+    },
+    delRentFilter() {
+      this.rent = null
     }
   }
 }
@@ -139,6 +213,15 @@ export default {
       background-size: 12px;
     }
   }
+}
+
+.pl-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .3);
 }
 </style>
 
