@@ -2,15 +2,15 @@
   <div>
     <div class="re-pd" :class="{'re-pd-dark':index%2==1}" v-for="(item,index) in list" :key="index">
       <div class="re-img">
-        <img :src="item.img" alt="">
+        <img :src="item.coverUrl" alt="">
       </div>
-      <p class="re-title" v-text="item.title"></p>
-      <p class="re-sub-title" v-text="item.subTitle"></p>
-      <p class="re-desc" v-html="item.desc"></p>
+      <p class="re-title" v-text="item.pianoName"></p>
+      <p class="re-sub-title" v-text="item.brand"></p>
+      <p class="re-desc" v-html="item.summary"></p>
       <p class="re-price">
         <span class="re-price-title">最低租金：</span>
         <span class="re-price-ct">
-          ¥{{item.price}} / 天
+          ¥{{item.rentActive}} / 天
         </span>
       </p>
     </div>
@@ -20,7 +20,7 @@
 import re1 from '../../assets/re1.png'
 import re2 from '../../assets/re2.png'
 import re3 from '../../assets/re3.png'
-
+import http from '@/libs/httpUtil'
 export default {
   name: 'recommend',
   data() {
@@ -47,6 +47,13 @@ export default {
         }
       ]
     }
+  },
+  created() {
+    http.getRecomments().then(res => {
+      if (res.errNo == 0) {
+        this.list = res.data.list
+      }
+    })
   }
 }
 </script>

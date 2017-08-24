@@ -135,6 +135,12 @@ function getCouponMemberInfos(no = 1, size = 10) {
   })
 }
 
+function getRecomments() {
+  return ajax('recomment/recomments', {
+    brand: ''
+  })
+}
+
 export default {
   sendCode,
   login,
@@ -148,5 +154,6 @@ export default {
   addAddress,
   deleteAddress,
   setAddressDefault,
-  getCouponMemberInfos
+  getCouponMemberInfos,
+  getRecomments
 }
