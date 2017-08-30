@@ -42,16 +42,7 @@ export default {
   },
   data() {
     return {
-      swipers: [{
-        href: '',
-        img: bannerSrc
-      }, {
-        href: '',
-        img: bannerSrc
-      }, {
-        href: '',
-        img: bannerSrc
-      }]
+      swipers: [bannerSrc, bannerSrc, bannerSrc]
     }
   },
   methods: {

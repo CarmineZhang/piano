@@ -30,11 +30,11 @@
 import Swiper from './swiper'
 export default {
   name: 've-swiper',
-  // mounted() {
-  //   this.$nextTick(() => {
-  //     this.render()
-  //   })
-  // },
+  mounted() {
+    this.$nextTick(() => {
+      this.render()
+    })
+  },
   props: {
     list: {
       type: Array,
