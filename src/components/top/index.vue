@@ -4,7 +4,7 @@
       <a class="nav-rent  ve-flexbox-item" @click="showPiano">
         <img src="../../assets/rent.png" alt="">
       </a>
-      <a class="nav-index  ve-flexbox-item">
+      <a class="nav-index  ve-flexbox-item" @click="showIndex">
         <img src="../../assets/index.png" alt="">
       </a>
       <a class="nav-me  ve-flexbox-item" @click="gotoMe">
@@ -32,6 +32,9 @@ export default {
     },
     showPiano() {
       this.$router.push('/productlist')
+    },
+    showIndex() {
+      this.$router.push({ name: 'home' })
     }
   }
 }
