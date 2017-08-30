@@ -141,6 +141,12 @@ function getRecomments() {
   })
 }
 
+function getPianoInfo(id) {
+  return ajax('mall/pianoInfo', {
+    pianoId: id
+  })
+}
+
 export default {
   sendCode,
   login,
@@ -155,5 +161,6 @@ export default {
   deleteAddress,
   setAddressDefault,
   getCouponMemberInfos,
-  getRecomments
+  getRecomments,
+  getPianoInfo
 }

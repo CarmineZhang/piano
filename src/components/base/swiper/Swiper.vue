@@ -1,20 +1,20 @@
 <template>
-  <div class="ve-slider" v-if="len>0">
+  <div class="ve-slider">
     <div class="ve-slider-hold">
       <div class="ve-slider-list">
         <div class="ve-slider-item">
-          <a :href="firstItem.href">
-            <img :src="firstItem.img" alt="">
+          <a>
+            <img :src="firstItem" alt="">
           </a>
         </div>
         <div class="ve-slider-item" v-for="(item,index) in list" :key="index">
-          <a :href="item.href">
-            <img :src="item.img" alt="">
+          <a>
+            <img :src="item" alt="">
           </a>
         </div>
         <div class="ve-slider-item">
-          <a :href="lastItem.href">
-            <img :src="lastItem.img" alt="">
+          <a>
+            <img :src="lastItem" alt="">
           </a>
         </div>
       </div>
@@ -30,11 +30,11 @@
 import Swiper from './swiper'
 export default {
   name: 've-swiper',
-  mounted() {
-    this.$nextTick(() => {
-      this.render()
-    })
-  },
+  // mounted() {
+  //   this.$nextTick(() => {
+  //     this.render()
+  //   })
+  // },
   props: {
     list: {
       type: Array,
@@ -71,6 +71,13 @@ export default {
         return this.list[0]
       }
       return null
+    }
+  },
+  watch: {
+    len() {
+      this.$nextTick(() => {
+        this.render()
+      })
     }
   },
   methods: {

@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="pl-item" v-for="item in data" :key="item.id">
-      <div class="pl-item-img">
+      <div class="pl-item-img" @click="showDetail(item.id)">
         <img :src="item.coverUrl" alt="">
       </div>
       <div class="pl-item-content">
         <p class="title" v-text="item.pianoName"></p>
-        <p class="area"></p>
+        <p class="area">北京</p>
         <p class="price">
           <span class="tit">租金：</span>
-          <span class="ct">¥ {{item.shortTermDeposit}} / 天</span>
+          <span class="ct">¥ {{item.longRentActive}} / 天</span>
           <span class="pledge">押金：</span>
-          <span class="pledge">¥ {{item.marketPrices}}</span>
+          <span class="pledge">¥ {{item.longTermDeposit}}</span>
         </p>
       </div>
     </div>
@@ -22,6 +22,11 @@ export default {
   name: 'product-list',
   props: {
     data: Array
+  },
+  methods: {
+    showDetail(id) {
+      this.$router.push({ path: '/productdetail', query: { id: id } })
+    }
   }
 }
 </script>
@@ -34,7 +39,6 @@ export default {
   .pl-item-img {
     width: 2.5rem;
     height: 2.5rem;
-    line-height: 2.5rem;
     img {
       width: 100%;
       vertical-align: middle;
@@ -42,7 +46,7 @@ export default {
   }
   .pl-item-content {
     flex: 1;
-    padding: .3rem, 0, 0, .3rem;
+    padding: .3rem 0 10px .3rem;
     .title {
       font-family: .28rem;
       color: #323136;
