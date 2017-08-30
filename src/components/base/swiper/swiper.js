@@ -153,13 +153,15 @@ class Swiper {
   }
   _moveIndex(num) {
     if (num !== 0) {
-      this.current += this.realCount
-      this.current += num
-      this.current %= this.realCount
+      this.current++;
+      this.navcurrent++
+        // this.current += this.realCount
+        // this.current += num
+        // this.current %= this.realCount
 
-      this.navcurrent += this.count
-      this.navcurrent += num
-      this.navcurrent %= this.count
+        // this.navcurrent += this.count
+        // this.navcurrent += num
+        // this.navcurrent %= this.count
 
     }
   }

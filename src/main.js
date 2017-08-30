@@ -25,6 +25,9 @@ Vue.filter('dateformate', (val) => {
   }
 })
 Vue.filter('ToThousands', (val) => {
+  if (typeof val === 'undefined' || isNaN(val)) {
+    return ''
+  }
   let ret = val
   if (typeof val === 'number') {
     ret = val.toFixed(2)
