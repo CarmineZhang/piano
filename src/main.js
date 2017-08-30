@@ -24,6 +24,13 @@ Vue.filter('dateformate', (val) => {
     return val.substring(0, 11)
   }
 })
+Vue.filter('ToThousands', (val) => {
+  let ret = val
+  if (typeof val === 'number') {
+    ret = val.toFixed(2)
+  }
+  return ret.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+})
 
 var pageManager = {
   _pageStack: [],
