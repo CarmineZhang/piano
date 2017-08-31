@@ -146,6 +146,7 @@ class Swiper {
     }, me._options.interval)
   }
   destory() {
+    this.stop()
     this.$sliderlist.offAll()
   }
   stop() {
