@@ -8,10 +8,10 @@
           <span>{{piano.deposit|ToThousands}}</span>
         </cell>
         <!-- <cell>
-                            <div class="cell-comment">
-                              *线上预付20%的押金总额，货到付剩余押金。
-                            </div>
-                          </cell> -->
+                              <div class="cell-comment">
+                                *线上预付20%的押金总额，货到付剩余押金。
+                              </div>
+                            </cell> -->
         <cell title="租金：">
           <span>
             <em>¥</em>{{piano.rent*piano.leaseNum|ToThousands}}</span>
@@ -32,7 +32,7 @@
         </cell>
       </div>
     </div>
-    <div class="more"></div>
+    <div class="cost-more"></div>
     <select-pay></select-pay>
     <div class="cost-action fixed-footer">
       <div class="order-cost">
@@ -111,7 +111,7 @@ export default {
   }
 }
 
-.more {
+.cost-more {
   height: .3rem;
 }
 
