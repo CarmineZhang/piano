@@ -57,6 +57,7 @@ export default new Router({
       component: UserCenter
     }, {
       path: '/costdetail',
+      name: 'cost-detail',
       component: CostDetail
     }, {
       path: '/login',

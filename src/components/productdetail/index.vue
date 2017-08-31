@@ -2,6 +2,7 @@
   <div>
     <swiper :list="data.otherImgs" class="pt-detail-swiper"></swiper>
     <div class="pt-detail">
+      <p class="title" v-text="data.pianoName"></p>
       <div class="flexbox">
         <span class="s2">市场价：</span>
         <span class="flex-item s2">
@@ -10,33 +11,32 @@
       <div class="flexbox">
         <span class="s1">租赁方式：</span>
         <div class="flex-ite2 s2">
-          <span class="cur">月租</span>
-          <span>日租</span>
+          <span :class="{'cur':leaseType===1}" @click="choose(1)">月租</span>
+          <span :class="{'cur':leaseType===0}" @click="choose(0)">日租</span>
         </div>
       </div>
       <div class="flexbox">
         <span class="s1">租赁时长：</span>
-        <div class="flex-item s2" @click="selectRentTime">
-          <span :class="{'cur':rentTime===1}" data-key="1">1个月</span>
-          <span :class="{'cur':rentTime===2}" data-key="2">3个月</span>
-          <span :class="{'cur':rentTime===3}" data-key="3">6个月</span>
-          <span :class="{'cur':rentTime===4}" data-key="4">9个月</span>
-          <span :class="{'cur':rentTime===5}" data-key="5">12个月</span>
+        <div class="flex-item s2">
+          <span :class="{'cur':leaseNum===item.leaseNumCode}" v-for="item in rentList" :key="item.leaseNumCode" v-text="item.leaseNumName" @click="selectRentTime(item)"></span>
         </div>
       </div>
       <div class="flexbox">
         <span class="s1">押金：</span>
         <span class="flex-item s1">
-          <em>¥</em>{{data.marketPrices*0.2|ToThousands}}</span>
+          <em>¥</em>{{deposit|ToThousands}}</span>
         </span>
       </div>
       <div class="flexbox">
         <span class="s1">租金：</span>
-        <span class="flex-item s1">300</span>
+        <span class="flex-item s1">
+          <em>¥</em>{{rent|ToThousands}}</span>
       </div>
       <div class="flexbox">
-        <span class="s1" style="line-height: .64rem;">押金+租金费用：</span>
-        <span class="flex-item total-price">4,300</span>
+        <span class="s1" style="line-height: .64rem;">押金+租金：</span>
+        <span class="flex-item total-price">
+          <em>¥</em>{{deposit+rent*leaseNum|ToThousands}}</span>
+        </span>
       </div>
       <div class="flexbox">
         <span class="s3">运费：</span>
@@ -64,7 +64,7 @@
     <div class="more">
     </div>
     <div class="pt-action">
-      <a href="" class="act-rent">立即租赁</a>
+      <a class="act-rent" @click="submit">立即租赁</a>
       <a href="" class="act-collect"></a>
     </div>
   </div>
@@ -77,31 +77,87 @@ export default {
   components: {
     Swiper
   },
+  computed: {
+    deposit() {
+      if (this.leaseType === 1) {
+        return this.data.longTermDeposit
+      } else {
+        return this.data.shortTermDeposit
+      }
+    },
+    rent() {
+      if (this.leaseType === 1) {
+        return this.data.longRentActive
+      } else {
+        return this.data.shortRentActive
+      }
+    }
+  },
   mounted() {
     document.title = '商品详情'
   },
   created() {
     let id = this.$store.state.route.query.id
     if (id) {
+      this.id = 0
       http.getPianoInfo(id).then(res => {
         if (res.errNo == 0) {
           this.data = res.data
+          let longNum = this.data.longLeaseNum
+          if (longNum.length > 0) {
+            this.leaseNum = longNum[0].leaseNumCode
+            this.rentList = longNum
+          }
         }
       })
     }
   },
   data() {
     return {
+      id: 0,
       data: {},
-      rentTime: 1
+      leaseType: 1,
+      leaseNum: 0,
+      leaseNumName: '',
+      rentList: []
     }
   },
   methods: {
-    selectRentTime(event) {
-      var t = event.target
-      if (t.nodeName === 'SPAN') {
-        this.rentTime = +t.dataset.key
+    choose(type) {
+      this.leaseType = type
+      if (type === 1) {
+        let longNum = this.data.longLeaseNum
+        if (longNum.length > 0) {
+          this.leaseNum = longNum[0].leaseNumCode
+          this.leaseNumName = longNum[0].leaseNumName
+          this.rentList = longNum
+        }
+      } else {
+        let shortNum = this.data.shortLeaseNum
+        if (shortNum.length > 0) {
+          this.leaseNum = shortNum[0].leaseNumCode
+          this.leaseNumName = shortNum[0].leaseNumName
+          this.rentList = shortNum
+        }
       }
+    },
+    selectRentTime(item) {
+      this.leaseNum = item.leaseNumCode
+      this.leaseNumName = item.leaseNumName
+    },
+    submit() {
+      this.$store.commit('selectPiano', {
+        id: this.id,
+        leaseType: this.leaseType,
+        leaseNum: this.leaseNum,
+        leaseName: this.leaseNumName,
+        deposit: this.deposit,
+        rent: this.rent,
+        pay: this.data.downPayment
+      })
+      this.$router.push({
+        name: 'cost-detail'
+      })
     }
   }
 }
@@ -114,6 +170,7 @@ export default {
 }
 
 .pt-info {
+  padding-bottom: .88rem;
   img {
     width: 100%;
   }
@@ -148,7 +205,10 @@ export default {
     font-size: .28rem;
     color: #928f9c;
     span {
-      margin-right: .2rem;
+      // margin-right: .2rem;
+      padding: 3px 5px;
+      float: left;
+      line-height: 1.5;
     }
   }
   .s3 {
@@ -163,11 +223,15 @@ export default {
     color: #fff;
     background-color: #bf3737;
     border-radius: .1rem+.06rem;
-    padding: 3px 5px;
+    box-sizing: border-box;
   }
 }
 
 .pt-action {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   height: .88rem;
   .act-rent {

@@ -147,6 +147,18 @@ function getPianoInfo(id) {
   })
 }
 
+function order(pianoId, leaseNum, deliveryPrice, leaseType, receiverId) {
+  return ajax('order/create', {
+    memberToken: storage.get('access-token'),
+    pianoId: pianoId,
+    leaseNum: leaseNum,
+    deliveryPrice: deliveryPrice,
+    leaseType: leaseType,
+    receiverId: receiverId,
+    channelType: 'web'
+  })
+}
+
 export default {
   sendCode,
   login,
@@ -162,5 +174,6 @@ export default {
   setAddressDefault,
   getCouponMemberInfos,
   getRecomments,
-  getPianoInfo
+  getPianoInfo,
+  order
 }

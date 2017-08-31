@@ -6,11 +6,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    direction: 'forward'
+    direction: 'forward',
+    selectPiano: {}
   },
   mutations: {
     updateDirection(state, payload) {
       state.direction = payload.direction
+    },
+    selectPiano(state, payload) {
+      state.selectPiano = payload
     }
   }
 })
