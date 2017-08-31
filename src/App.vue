@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <transition :name="'ve-pop-' + (direction === 'forward' ? 'in' : 'out')">
-      <router-view class="router-view"></router-view>
-    </transition>
+    <!-- <transition :name="'ve-pop-' + (direction === 'forward' ? 'in' : 'out')"> -->
+    <router-view class="router-view"></router-view>
+    <!-- </transition> -->
   </div>
 </template>
 
