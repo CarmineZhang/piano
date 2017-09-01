@@ -14,7 +14,7 @@
           <input type="text" class="item-bd ipt" v-model="postcode" placeholder="邮政编码">
         </div>
         <div class="form-item" @click="showArea">
-          <input type="text" class="item-bd ipt" placeholder="收货地址" readonly>
+          <input type="text" class="item-bd ipt" placeholder="收货地址" readonly v-text="addrtext">
         </div>
         <div class="form-item">
           <input type="text" class="item-bd ipt" v-model="detail" placeholder="详细地址">
@@ -44,15 +44,40 @@ export default {
     VeSwitch,
     SelectArea
   },
+  computed: {
+    getEditAddr() {
+      return this.$store.state.editaddr
+    },
+    addrtext() {
+      return this.province + this.city + this.area
+    }
+  },
+  created() {
+    let addr = this.getEditAddr
+    if (addr) {
+      this.receiverName = addr.name
+      this.phone = addr.phone
+      this.postcode = addr.postcode
+      this.province = addr.province
+      this.city = addr.city
+      this.area = addr.area
+      this.detail = addr.detail
+      this.isDefault = addr.isDefault
+      this.id = addr.id
+    }
+  },
   data() {
     return {
       receiverName: '',
       phone: '',
       postcode: '',
+      province: '',
+      city: '',
       area: '北京',
       detail: '',
       areaShow: false,
-      isDefault: 1
+      isDefault: 1,
+      id: 0
     }
   },
   methods: {
@@ -63,17 +88,43 @@ export default {
       this.isDefault = +val
     },
     add() {
+      var addr = {
+        name: this.receiverName,
+        phone: this.phone,
+        postcode: this.postcode,
+        province: this.province,
+        city: this.city,
+        area: this.area,
+        detail: this.detail,
+        isDefault: this.isDefault
+      }
+      if (this.id) {
+        addr.id = this.id
+      }
       let loading = this.$ve.loading('处理中')
-      http.addAddress(this.receiverName, this.phone, this.postcode, this.area, this.detail, this.isDefault).then((res) => {
-        loading.hide()
-        if (res.errNo == 0) {
-          this.$ve.toast('添加成功', {
-            duration: 1000, callback: () => {
-              this.$router.go(-1)
-            }
-          });
-        }
-      })
+      if (this.id) {
+        http.addAddress(addr).then((res) => {
+          loading.hide()
+          if (res.errNo == 0) {
+            this.$ve.toast('添加成功', {
+              duration: 1000, callback: () => {
+                this.$router.go(-1)
+              }
+            });
+          }
+        })
+      } else {
+        http.editAddres(addr).then(res => {
+          loading.hide()
+          if (res.errNo == 0) {
+            this.$ve.toast('修改成功', {
+              duration: 1000, callback: () => {
+                this.$router.go(-1)
+              }
+            })
+          }
+        })
+      }
     },
     back() {
       this.$router.go(-1)

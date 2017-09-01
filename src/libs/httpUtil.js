@@ -101,15 +101,32 @@ function getAddressList() {
   })
 }
 
-function addAddress(name, phone, postcode, area, detail, isDefault) {
+function addAddress(address) {
   return ajax('address/add', {
     memberToken: storage.get('access-token'),
-    name: name,
-    phone: phone,
-    postcode: postcode,
-    area: area,
-    detail: detail,
-    isDefault: isDefault
+    name: address.name,
+    phone: address.phone,
+    postcode: address.postcode,
+    province: address.province,
+    city: address.city,
+    area: address.area,
+    detail: address.detail,
+    isDefault: address.isDefault
+  })
+}
+
+function editAddress(address) {
+  return ajax('address/edit', {
+    memberToken: storage.get('access-token'),
+    id: address.id,
+    name: address.name,
+    phone: address.phone,
+    postcode: address.postcode,
+    province: address.province,
+    city: address.city,
+    area: address.area,
+    detail: address.detail,
+    isDefault: address.isDefault
   })
 }
 
@@ -170,6 +187,7 @@ export default {
   getPiano,
   getAddressList,
   addAddress,
+  editAddress,
   deleteAddress,
   setAddressDefault,
   getCouponMemberInfos,

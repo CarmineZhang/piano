@@ -9,10 +9,10 @@
         <div class="addr-body" v-text="item.detail">
         </div>
         <div class="addr-footer" :class="{'addr-default':item.isDefault==1}">
-          <a class="ft-left" @click="setDefault(item.id)">默认地址</a>
+          <a class="ft-left" @click="setDefault(item.id)" v-text="defaultText">默认地址</a>
           <div class="ft-right">
-            <a class="ft-edit">编辑</a>
-            <a class="ft-delete" @click="del(item.id)">删除</a>
+            <a class="ft-edit" @click="edit(item)">编辑</a>
+            <a class="ft-delete" @click="del(item)">删除</a>
           </div>
         </div>
       </div>
@@ -30,40 +30,58 @@
 import http from '@/libs/httpUtil'
 export default {
   name: 'address',
+  props: {
+    choose: Boolean
+  },
   data() {
     return {
-      list: [],
       loading: null
     }
   },
+  computed: {
+    defaultText() {
+      if (this.choose) {
+        return '选择地址'
+      }
+      return '默认地址'
+    },
+    list() {
+      return this.$store.state.addrlist
+    }
+  },
   created() {
+    // this.loading = this.$ve.loading('数据加载中')
     this.getList()
-  },
-  beforeMount() {
-    this.loading = this.$ve.loading('数据加载中')
-  },
-  mounted() {
-    this.loading.hide()
   },
   methods: {
     getList() {
       http.getAddressList().then((res) => {
         if (res.errNo == 0) {
-          this.list = res.data.addressList
+          this.$store.commit('recevieAddrList', res.data.addressList)
         }
       })
     },
     add() {
       this.$router.push({ path: '/addaddress' })
     },
-    del(id) {
-      this.$ve.confirm('确定要删除此地址吗？', () => {
-        http.deleteAddress(id).then(res => {
-          if (res.errNo == 0) {
-            this.getList()
-          }
+    edit(item) {
+      this.$store.commit('recevieEditAddr', item)
+      this.$router.push('/addaddress')
+    },
+    del(item) {
+      if (item.isDefault === 1) {
+        this.$ve.alert('默认地址不能删除')
+      } else {
+        this.$ve.confirm('确定要删除此地址吗？', () => {
+          http.deleteAddress(item.id).then(res => {
+            if (res.errNo == 0) {
+              this.$ve.alert('删除成功', () => {
+                this.getList()
+              })
+            }
+          })
         })
-      })
+      }
     },
     setDefault(id) {
       http.setAddressDefault(id).then(res => {

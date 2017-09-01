@@ -23,6 +23,7 @@ import RegisterSuccess from '@/components/register/success'
 import Article from '@/components/home/article'
 import FindPwd from '@/components/findpwd'
 import FindPwdNext from '@/components/findpwd/setpwd'
+import ChooseAddr from '@/components/address/chooseaddr'
 Vue.use(Router)
 Vue.use(Widget)
 
@@ -59,6 +60,9 @@ export default new Router({
       path: '/costdetail',
       name: 'cost-detail',
       component: CostDetail
+    }, {
+      path: '/chooseaddr',
+      component: ChooseAddr
     }, {
       path: '/login',
       component: Login

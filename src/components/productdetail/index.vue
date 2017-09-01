@@ -63,9 +63,9 @@
     </div>
     <div class="more">
     </div>
-    <div class="pt-action">
-      <a class="act-rent" @click="submit">立即租赁</a>
-      <a href="" class="act-collect"></a>
+    <div class="footer-action">
+      <a class="action" @click="submit">立即租赁</a>
+      <a class="act-collect"></a>
     </div>
   </div>
 </template>
@@ -155,9 +155,7 @@ export default {
         rent: this.rent,
         pay: this.data.downPayment
       })
-      this.$router.push({
-        name: 'cost-detail'
-      })
+      this.$router.push('/chooseaddr')
     }
   }
 }
@@ -227,21 +225,8 @@ export default {
   }
 }
 
-.pt-action {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  height: .88rem;
-  .act-rent {
-    flex: 1;
-    font-size: .3rem;
-    color: #fff;
-    background-color: #bf3737;
-    text-align: center;
-    line-height: .88rem;
-  }
+
+.footer-action {
   .act-collect {
     width: .88rem;
     background-color: #7f7c8b;

@@ -176,3 +176,20 @@ a.link {
 .form-op {
   padding-top: .3rem;
 }
+
+.footer-action {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  height: .88rem;
+  .action {
+    flex: 1;
+    font-size: .3rem;
+    color: #fff;
+    background-color: #bf3737;
+    text-align: center;
+    line-height: .88rem;
+  }
+}

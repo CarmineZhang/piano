@@ -44,6 +44,7 @@ function confirm(content = '', yes = $.noop, no = $.noop, options) {
   }
 
   options = $.extend({
+    title: '提示',
     content: content,
     buttons: [{
       label: '取消',
