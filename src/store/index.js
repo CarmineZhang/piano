@@ -9,7 +9,10 @@ export default new Vuex.Store({
     direction: 'forward',
     addrlist: [],
     editaddr: {},
-    selectPiano: {}
+    selectPiano: {},
+    province: [],
+    city: {},
+    county: {}
   },
   getters: {
     defaultAddr(state) {
@@ -34,6 +37,21 @@ export default new Vuex.Store({
     },
     recevieEditAddr(state, addr) {
       state.editaddr = addr
+    },
+    receiveProvince(state, list) {
+      state.province = [...list]
+    },
+    receiveCity(state, {
+      pcode,
+      list
+    }) {
+      state.city[pcode] = list
+    },
+    receiveCounty(state, {
+      ccode,
+      list
+    }) {
+      state.county[ccode] = list
     }
   }
 })

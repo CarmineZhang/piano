@@ -176,6 +176,22 @@ function order(pianoId, leaseNum, deliveryPrice, leaseType, receiverId) {
   })
 }
 
+function getProvince() {
+  return ajax('area/getProvinces', {})
+}
+
+function getCity(pCode) {
+  return ajax('area/getCitysByPro', {
+    proCode: pCode
+  })
+}
+
+function getCounty(cCode) {
+  return ajax('area/getCountysByCity', {
+    cityCode: cCode
+  })
+}
+
 export default {
   sendCode,
   login,
@@ -193,5 +209,8 @@ export default {
   getCouponMemberInfos,
   getRecomments,
   getPianoInfo,
-  order
+  order,
+  getProvince,
+  getCity,
+  getCounty
 }

@@ -5,6 +5,7 @@
     </transition>
     <div class="mod-address-slide-main" :class="{'mod-address-slide-toggle': show}">
       <div class="mod-address-slide-header">
+        选择地区
         <i class="close" @click="close"></i>
       </div>
       <div class="mod-address-slide-body">
@@ -14,58 +15,23 @@
           </li>
         </ul>
         <ul class="mod-address-slide-list">
-          <li :class="{'cur':key==selectKey}" :data-level="level" :data-key="key" v-for="(value, key) in data" :key="key" v-addr-text="value" @click="change"></li>
+          <li :class="{'cur':item.areaCode==selectKey}" :data-level="level" v-for="(item, index) in data" :key="index" v-text="item.areaName" @click="change($event,item)"></li>
         </ul>
       </div>
     </div>
   </div>
 </template>
 <script>
-const province = {
-  1: '北京市',
-  2: '上海市',
-  3: '天津市',
-  4: '重庆市',
-  5: '河北省',
-  6: '山西省',
-  7: '河南省',
-  8: '辽宁省',
-  9: '吉林省',
-  10: '黑龙江省',
-  11: '内蒙古',
-  12: '江苏省',
-  13: '山东省',
-  14: '安徽省',
-  15: '浙江省',
-  16: '福建省',
-  17: '湖北省',
-  18: '湖南省',
-  19: '广东省',
-  20: '广西自治区',
-  21: '江西省',
-  22: '四川省',
-  23: '海南省',
-  24: '贵州省',
-  25: '云南省',
-  26: '西藏自治区',
-  27: '陕西省',
-  28: '甘肃省',
-  29: '青海省',
-  30: '宁夏省',
-  31: '新疆自治区',
-  32: '台湾'
-}
-const areaList = {}
+import http from '@/libs/httpUtil'
 export default {
   name: 've-address',
   data() {
     return {
       show: false,
-      data: province,
+      data: [],
       province: 0, //省
       city: 0,//市
       county: 0,//县
-      town: 0, //镇
       level: 0,
       result: [],
       header: [{
@@ -78,6 +44,17 @@ export default {
   props: {
     value: Boolean
   },
+  computed: {
+    provinceList() {
+      return this.$store.state.province
+    },
+    cityList() {
+      return this.$store.state.city
+    },
+    countyList() {
+      return this.$store.state.county
+    }
+  },
   watch: {
     value(val) {
       this.show = val
@@ -85,11 +62,10 @@ export default {
     show(val) {
       this.$emit('input', val)
       if (val) {
-        this.data = province
+        this.getProvince()
         this.province = 0
         this.city = 0
         this.county = 0
-        this.town = 0
         this.level = 0
         this.result.splice(0)
         this.header.splice(0, this.header.length, {
@@ -109,6 +85,18 @@ export default {
     }
   },
   methods: {
+    getProvince() {
+      if (this.$store.state.province.length !== 0) {
+        this.data = this.$store.state.province
+      } else {
+        http.getProvince().then(res => {
+          if (res.errNo == 0) {
+            this.$store.commit('receiveProvince', res.data)
+            this.data = res.data
+          }
+        })
+      }
+    },
     close() {
       this.show = false
     },
@@ -130,71 +118,68 @@ export default {
       if (level === this.level) {
         return
       } else if (level === 0) {
-        this.data = province
+        this.data = this.provinceList
       } else if (level === 1) {
-        this.data = areaList[this.province]
+        this.data = this.cityList[this.province]
       } else if (level === 2) {
-        this.data = this.data[this.city][1]
-      } else if (level === 3) {
-        this.data = this.data[this.county]
+        this.data = this.countyList[this.city]
       }
       this.level = level
     },
-    change(e) {
+    change(e, item) {
       var target = e.target
       var ds = target.dataset
       var level = +ds.level
       this.setResult(level, {
-        key: +ds.key,
-        value: target.textContent
+        key: item.areaCode,
+        value: item.areaName
       })
       this.setHeader(level, {
-        label: target.textContent,
-        key: +ds.key
+        label: item.areaName,
+        key: item.areaCode
       })
       if (level === 0) {
-        this.province = +ds.key
-        if (areaList[this.province]) {
-          this.level = level + 1
-          this.data = areaList[this.province]
+        this.province = item.areaCode
+        this.level = level + 1
+        if (this.cityList[this.province]) {
+          this.data = this.cityList[this.province]
         } else {
-          // getArea(this.province).then(() => {
-          //   this.level = level + 1
-          //   this.data = areaList[this.province]
-          // })
+          this.data.splice(0, this.data.length)
+          http.getCity(this.province).then(res => {
+            if (res.errNo == 0) {
+              this.$store.commit('receiveCity', {
+                pcode: this.province,
+                list: res.data
+              })
+              this.data = res.data
+            }
+          })
         }
       } else if (level === 1) {
-        this.city = +ds.key
+        this.city = item.areaCode
         this.level = level + 1
-        this.data = this.data[this.city][1]
-      } else if (level === 2) {
-        this.county = +ds.key
-        this.level = level + 1
-        var list = this.data[this.county]
-        if (Array.isArray(list)) {
-          this.data = list[1]
+        if (this.countyList[this.city]) {
+          this.data = this.countyList[this.city]
         } else {
-          this.show = false
-          this.$emit('on-change', this.result)
+          this.data.splice(0, this.data.length)
+          http.getCounty(this.city).then(res => {
+            if (res.errNo == 0) {
+              this.$store.commit('receiveCounty', {
+                ccdoe: this.city,
+                list: res.data
+              })
+              this.data = res.data
+            }
+          })
         }
-      } else {
+      } else if (level === 2) {
+        this.county = item.areaCode
+        this.level = level + 1
         this.show = false
         this.$emit('on-change', this.result)
       }
     }
   },
-  directives: {
-    addrText: {
-      inserted: function (el, binding) {
-        var v = binding.value,
-          result = v
-        if (Array.isArray(v)) {
-          result = v[0]
-        }
-        el.innerHTML = result
-      }
-    }
-  }
 }
 </script>
 <style lang="scss">
@@ -233,6 +218,7 @@ export default {
   padding-left: 10px;
   color: #333;
   background-color: #f3f2f8;
+  text-align: center;
 }
 
 .mod-address-slide-header::after,
