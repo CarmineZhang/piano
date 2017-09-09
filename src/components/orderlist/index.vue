@@ -5,52 +5,54 @@
         <span>待支付订单</span>
       </div>
       <div class="list">
-        <div class="order-date">2017-8-6</div>
-        <div class="order-detail">
-          <div class="order-wrapper">
-            <div class="order-detail-addr">
-              <p>
-                <span>收件人：</span>
-                <span>张三</span>
-              </p>
-              <p>
-                <span>地址：</span>
-                <span>北京市海淀区中关村大厦</span>
-              </p>
-              <p>
-                <span>联系方式：</span>
-                <span>13682345674</span>
-              </p>
-            </div>
-            <div class="order-detail-o">
-              <p>
-                <span>钢琴：</span>
-                <span>日产进口雅马哈</span>
-              </p>
-              <p>
-                <span>租期：</span>
-                <span>30天</span>
-              </p>
-              <p class="price">
-                <span>总费用:</span>
-                <span>线上支付
-                  <b>¥2,000</b>+货到付款
-                  <b>¥16,000</b>
-                </span>
-                <span class="desc">(剩余押金)</span>
-              </p>
-            </div>
-            <div class="order-detail-op">
-              <div class="status">
-                <span>状态：</span>
-                <span class="desc">未支付</span>
+        <div v-for="item in noPaylist" :key="item.id">
+          <div class="order-date" v-text="item.orderTime"></div>
+          <div class="order-detail">
+            <div class="order-wrapper">
+              <div class="order-detail-addr">
+                <p>
+                  <span>收件人：</span>
+                  <span v-text="item.receiverPerson"></span>
+                </p>
+                <p>
+                  <span>地址：</span>
+                  <span v-text="item.receiverAddress"></span>
+                </p>
+                <p>
+                  <span>联系方式：</span>
+                  <span v-text="item.phone"></span>
+                </p>
               </div>
-              <a class="op">
-                继续支付
-              </a>
+              <div class="order-detail-o">
+                <p>
+                  <span>钢琴：</span>
+                  <span v-text="item.pianoName"></span>
+                </p>
+                <p>
+                  <span>租期：</span>
+                  <span v-text="item.leaseNum"></span>
+                </p>
+                <p class="price">
+                  <span>总费用:</span>
+                  <span>线上支付
+                    <b>¥{{item.downPayment|ToThousands}}</b>+货到付款
+                    <b>¥{{item.stillPay||ToThousands}}</b>
+                  </span>
+                  <span class="desc">(剩余押金)</span>
+                </p>
+              </div>
+              <div class="order-detail-op">
+                <div class="status">
+                  <span>状态：</span>
+                  <span class="desc">未支付</span>
+                </div>
+                <a class="op" @click="pay(item)">
+                  继续支付
+                </a>
+              </div>
             </div>
+            <div class="more"></div>
           </div>
-          <div class="more"></div>
         </div>
       </div>
     </div>
@@ -59,52 +61,54 @@
         <span>配送中</span>
       </div>
       <div class="list">
-        <div class="order-date">2017-8-6</div>
-        <div class="order-detail">
-          <div class="order-wrapper">
-            <div class="order-detail-addr">
-              <p>
-                <span>收件人：</span>
-                <span>张三</span>
-              </p>
-              <p>
-                <span>地址：</span>
-                <span>北京市海淀区中关村大厦</span>
-              </p>
-              <p>
-                <span>联系方式：</span>
-                <span>13682345674</span>
-              </p>
-            </div>
-            <div class="order-detail-o">
-              <p>
-                <span>钢琴：</span>
-                <span>日产进口雅马哈</span>
-              </p>
-              <p>
-                <span>租期：</span>
-                <span>30天</span>
-              </p>
-              <p class="price">
-                <span>总费用:</span>
-                <span>线上支付
-                  <b>¥2,000</b>+货到付款
-                  <b>¥16,000</b>
-                </span>
-                <span class="desc">(剩余押金)</span>
-              </p>
-            </div>
-            <div class="order-detail-op">
-              <div class="status">
-                <span>状态：</span>
-                <span class="desc">配送中</span>
+        <div v-for="item in deliverylist" :key="item.id">
+          <div class="order-date" v-text="item.orderTime"></div>
+          <div class="order-detail">
+            <div class="order-wrapper">
+              <div class="order-detail-addr">
+                <p>
+                  <span>收件人：</span>
+                  <span v-text="item.receiverPerson"></span>
+                </p>
+                <p>
+                  <span>地址：</span>
+                  <span v-text="item.receiverAddress"></span>
+                </p>
+                <p>
+                  <span>联系方式：</span>
+                  <span v-text="item.phone"></span>
+                </p>
               </div>
-              <a class="op">
-                取消订单
-              </a>
+              <div class="order-detail-o">
+                <p>
+                  <span>钢琴：</span>
+                  <span v-text="item.pianoName"></span>
+                </p>
+                <p>
+                  <span>租期：</span>
+                  <span v-text="item.leaseNum"></span>
+                </p>
+                <p class="price">
+                  <span>总费用:</span>
+                  <span>线上支付
+                    <b>¥{{item.downPayment|ToThousands}}</b>+货到付款
+                    <b>¥{{item.stillPay||ToThousands}}</b>
+                  </span>
+                  <span class="desc">(剩余押金)</span>
+                </p>
+              </div>
+              <div class="order-detail-op">
+                <div class="status">
+                  <span>状态：</span>
+                  <span class="desc">配送中</span>
+                </div>
+                <a class="op">
+                  取消订单
+                </a>
+              </div>
             </div>
+            <div class="more"></div>
           </div>
-          <div class="more"></div>
         </div>
       </div>
     </div>
@@ -113,52 +117,54 @@
         <span>使用中</span>
       </div>
       <div class="list">
-        <div class="order-date">2017-8-6</div>
-        <div class="order-detail">
-          <div class="order-wrapper">
-            <div class="order-detail-addr">
-              <p>
-                <span>收件人：</span>
-                <span>张三</span>
-              </p>
-              <p>
-                <span>地址：</span>
-                <span>北京市海淀区中关村大厦</span>
-              </p>
-              <p>
-                <span>联系方式：</span>
-                <span>13682345674</span>
-              </p>
-            </div>
-            <div class="order-detail-o">
-              <p>
-                <span>钢琴：</span>
-                <span>日产进口雅马哈</span>
-              </p>
-              <p>
-                <span>租期：</span>
-                <span>30天</span>
-              </p>
-              <p class="price">
-                <span>总费用:</span>
-                <span>线上支付
-                  <b>¥2,000</b>+货到付款
-                  <b>¥16,000</b>
-                </span>
-                <span class="desc">(剩余押金)</span>
-              </p>
-            </div>
-            <div class="order-detail-op">
-              <div class="status">
-                <span>状态：</span>
-                <span class="desc">使用中</span>
+        <div v-for="item in deliverylist" :key="item.id">
+          <div class="order-date" v-text="item.orderTime"></div>
+          <div class="order-detail">
+            <div class="order-wrapper">
+              <div class="order-detail-addr">
+                <p>
+                  <span>收件人：</span>
+                  <span v-text="item.receiverPerson"></span>
+                </p>
+                <p>
+                  <span>地址：</span>
+                  <span v-text="item.receiverAddress"></span>
+                </p>
+                <p>
+                  <span>联系方式：</span>
+                  <span v-text="item.phone"></span>
+                </p>
               </div>
-              <a class="op">
-                延长租期
-              </a>
+              <div class="order-detail-o">
+                <p>
+                  <span>钢琴：</span>
+                  <span v-text="item.pianoName"></span>
+                </p>
+                <p>
+                  <span>租期：</span>
+                  <span v-text="item.leaseNum"></span>
+                </p>
+                <p class="price">
+                  <span>总费用:</span>
+                  <span>线上支付
+                    <b>¥{{item.downPayment|ToThousands}}</b>+货到付款
+                    <b>¥{{item.stillPay||ToThousands}}</b>
+                  </span>
+                  <span class="desc">(剩余押金)</span>
+                </p>
+              </div>
+              <div class="order-detail-op">
+                <div class="status">
+                  <span>状态：</span>
+                  <span class="desc">使用中</span>
+                </div>
+                <!-- <a class="op">
+                                                  延长租期
+                                                </a> -->
+              </div>
             </div>
+            <div class="more"></div>
           </div>
-          <div class="more"></div>
         </div>
       </div>
     </div>
@@ -167,60 +173,104 @@
         <span>历史订单</span>
       </div>
       <div class="list">
-        <div class="order-date">2017-8-6</div>
-        <div class="order-detail">
-          <div class="order-wrapper">
-            <div class="order-detail-addr">
-              <p>
-                <span>收件人：</span>
-                <span>张三</span>
-              </p>
-              <p>
-                <span>地址：</span>
-                <span>北京市海淀区中关村大厦</span>
-              </p>
-              <p>
-                <span>联系方式：</span>
-                <span>13682345674</span>
-              </p>
-            </div>
-            <div class="order-detail-o">
-              <p>
-                <span>钢琴：</span>
-                <span>日产进口雅马哈</span>
-              </p>
-              <p>
-                <span>租期：</span>
-                <span>30天</span>
-              </p>
-              <p class="price">
-                <span>总费用:</span>
-                <span>线上支付
-                  <b>¥2,000</b>+货到付款
-                  <b>¥16,000</b>
-                </span>
-                <span class="desc">(剩余押金)</span>
-              </p>
-            </div>
-            <div class="order-detail-op">
-              <div class="status">
-                <span>状态：</span>
-                <span class="desc">已结束</span>
+        <div v-for="item in deliverylist" :key="item.id">
+          <div class="order-date" v-text="item.orderTime"></div>
+          <div class="order-detail">
+            <div class="order-wrapper">
+              <div class="order-detail-addr">
+                <p>
+                  <span>收件人：</span>
+                  <span v-text="item.receiverPerson"></span>
+                </p>
+                <p>
+                  <span>地址：</span>
+                  <span v-text="item.receiverAddress"></span>
+                </p>
+                <p>
+                  <span>联系方式：</span>
+                  <span v-text="item.phone"></span>
+                </p>
               </div>
-              <a class="op">
-                继续租赁
-              </a>
+              <div class="order-detail-o">
+                <p>
+                  <span>钢琴：</span>
+                  <span v-text="item.pianoName"></span>
+                </p>
+                <p>
+                  <span>租期：</span>
+                  <span v-text="item.leaseNum"></span>
+                </p>
+                <p class="price">
+                  <span>总费用:</span>
+                  <span>线上支付
+                    <b>¥{{item.downPayment|ToThousands}}</b>+货到付款
+                    <b>¥{{item.stillPay||ToThousands}}</b>
+                  </span>
+                  <span class="desc">(剩余押金)</span>
+                </p>
+              </div>
+              <div class="order-detail-op">
+                <div class="status">
+                  <span>状态：</span>
+                  <span class="desc">已结束</span>
+                </div>
+                <a class="op">
+                  继续租赁
+                </a>
+              </div>
             </div>
+            <div class="more"></div>
           </div>
-          <div class="more"></div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import http from '@/libs/httpUtil'
 export default {
-  name: 'order-list'
+  name: 'order-list',
+  data() {
+    return {
+      list: {}
+    }
+  },
+  computed: {
+    noPaylist() {
+      return this.list['status0']
+    },
+    noDeliverylist() {
+      return this.list['status1']
+    },
+    deliverylist() {
+      return this.list['status2']
+    },
+    deliveryCompleted() {
+      return this.list['status3']
+    },
+    usedlist() {
+      return this.list['status4']
+    },
+    canceledlist() {
+      return this.list['status5']
+    },
+    completedlist() {
+      return this.list['status6']
+    }
+  },
+  created() {
+    http.orderlist().then(res => {
+      if (res.errNo == 0) {
+        console.dir(res.data)
+        this.list = res.data
+      }
+    })
+  },
+  methods: {
+    pay(item) {
+      this.$router.push({ name: 'order-detail', query: { id: item.id } })
+    }
+  }
 }
 </script>
 <style lang="scss">

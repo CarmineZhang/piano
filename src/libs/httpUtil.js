@@ -231,6 +231,20 @@ function oderInfo(id) {
   })
 }
 
+function orderlist() {
+  return ajax('order/orders', {
+    memberToken: storage.get('access-token')
+  })
+}
+
+function wxPay(no, total, body) {
+  return ajax('wechatpay/unifiedOrder', {
+    body: body,
+    totalFee: total,
+    outTradeNo: no
+  })
+}
+
 export default {
   sendCode,
   login,
@@ -255,5 +269,7 @@ export default {
   getCollections,
   deleteCollection,
   order,
-  oderInfo
+  oderInfo,
+  orderlist,
+  wxPay
 }

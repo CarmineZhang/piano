@@ -20,13 +20,13 @@
         </cell>
         <cell title="预付费用：">
           <span>
-            <em>¥</em>{{piano.downPayment|ToThousands}}</span>
+            <em>¥</em>{{detail.downPayment|ToThousands}}</span>
           <span class="cost-comment">（部分租金+运费）</span>
           </span>
         </cell>
         <cell title="总费用：">
           <span>
-            <em>¥</em>{{piano.totalAmount|ToThousands}}</span>
+            <em>¥</em>{{detail.totalAmount|ToThousands}}</span>
           <span class="cost-comment">（押金+租金+运费）</span>
           </span>
         </cell>
@@ -38,10 +38,10 @@
       <div class="order-cost">
         <span class="tit">费用总计：</span>
         <span class="ct">
-          <em>¥</em>{{piano.downPayment|ToThousands}}</span>
+          <em>¥</em>{{detail.downPayment|ToThousands}}</span>
         </span>
       </div>
-      <a href="" class="cost-ok">
+      <a class="cost-ok" @click="pay">
         确认支付
       </a>
     </div>
@@ -55,7 +55,8 @@ export default {
   name: 'order-detail',
   data() {
     return {
-      detail: {}
+      detail: {},
+      h5pay: ''
     }
   },
   created() {
@@ -75,6 +76,17 @@ export default {
     SelectPay
   },
   methods: {
+    pay() {
+      let loading = this.$ve.loading('处理中...')
+      http.wxPay(this.detail.orderSn, this.detail.downPayment, '钢琴支付').then(res => {
+        loading.hide()
+        if (res.errNo == 0) {
+          window.location.href = res.data.codeUrl
+        } else {
+          this.$ve.alert(res.errMsg)
+        }
+      })
+    }
   }
 }
 </script>
