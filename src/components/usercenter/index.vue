@@ -61,7 +61,7 @@ export default {
       http.logout().then(res => {
         if (res.errNo == 0) {
           storage.clear('access-token')
-          storage.phone('access-token')
+          storage.clear('phone')
           this.$ve.toast('登出成功', {
             duration: 2000, callback: () => {
               this.$router.push('/home')
