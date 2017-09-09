@@ -221,6 +221,13 @@ function deleteCollection(id) {
   })
 }
 
+function checkCollection(id) {
+  return ajax('collect/checkCollection', {
+    memberToken: storage.get('access-token'),
+    pianoId: id
+  })
+}
+
 function order(piano, receiverId) {
   return ajax('order/create', {
     memberToken: storage.get('access-token'),
@@ -288,5 +295,6 @@ export default {
   orderlist,
   wxPay,
   changeMemberPhone,
-  uptatePassword
+  uptatePassword,
+  checkCollection
 }

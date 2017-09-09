@@ -110,6 +110,11 @@ export default {
           }
         }
       })
+      http.checkCollection(id).then(res => {
+        if (res.errNo == 0) {
+          this.isCollect = res.data.isExist
+        }
+      })
     }
   },
   data() {
@@ -119,13 +124,20 @@ export default {
       leaseType: 1,
       leaseNum: 0,
       leaseNumName: '',
-      rentList: []
+      rentList: [],
+      isCollect: 'N'
     }
   },
   methods: {
     collect() {
-      if (this.id) {
-        http.saveCollection(this.id)
+      if (this.isCollect === 'Y') {
+        this.$ve.alert('已收藏')
+      } else {
+        http.saveCollection(this.id).then(res => {
+          if (res.errNo == 0) {
+            this.isCollect = 'Y'
+          }
+        })
       }
     },
     choose(type) {
