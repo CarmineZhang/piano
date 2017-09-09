@@ -59,15 +59,19 @@ export default {
   },
   methods: {
     logout() {
+      let loading = this.$ve.loading('处理中...')
       http.logout().then(res => {
+        loading.hide()
         if (res.errNo == 0) {
           storage.clear('access-token')
           storage.clear('phone')
           this.$ve.toast('登出成功', {
-            duration: 2000, callback: () => {
-              this.$router.push('/home')
+            duration: 1000, callback: () => {
+              this.$router.push('/')
             }
-          });
+          })
+        } else {
+          this.$ve.alert(res.errMsg)
         }
       })
     }

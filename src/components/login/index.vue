@@ -61,7 +61,7 @@ export default {
             storage.set('phone', this.phone)
             storage.set('access-token', res.data.memberToken)
             this.$ve.toast('登录成功', {
-              duration: 2000, callback: () => {
+              duration: 1000, callback: () => {
                 this.$router.push('/usercenter')
               }
             });
