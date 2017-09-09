@@ -4,10 +4,12 @@
       <div class="fixed-head" :style="style">
         <top></top>
         <search-bar></search-bar>
-        <ve-select :brand-dic="brandDic" :rent-day="rentDay" :rent-month="rentMonth"></ve-select>
+        <ve-select :brand-dic="brandDic" :rent-day="rentDay" :rent-month="rentMonth" @on-brand="selectBrand" @on-rent-type="selectRentType" @on-rent="selectRent"></ve-select>
       </div>
     </div>
-    <list :data="list"></list>
+    <scroll-load @load-more="loadmore" :height="height" v-model="allowload">
+      <list :data="list"></list>
+    </scroll-load>
   </div>
 </template>
 <script>
@@ -16,13 +18,15 @@ import SearchBar from '../base/searchbar'
 import VeSelect from './select'
 import List from './list'
 import http from '@/libs/httpUtil'
+import ScrollLoad from '@/components/base/scrollload'
 export default {
   name: 'product-list',
   components: {
     Top,
     SearchBar,
     VeSelect,
-    List
+    List,
+    ScrollLoad
   },
   data() {
     return {
@@ -32,19 +36,22 @@ export default {
       brandDic: [],
       rentDay: [],
       rentMonth: [],
+      index: 1,
+      size: 0,
+      allowload: true,
+      brand: '',
+      rentType: '',
+      rent: ''
     }
   },
   created() {
-    http.getPiano().then((res) => {
-      if (res.errNo == 0) {
-        this.list = res.data.list
-        this.brandDic = res.data.brandDic
-        this.rentDay = res.data.rentDay
-        this.rentMonth = res.data.rentMonth
-      }
-    })
+    this.getList()
   },
   beforeMount() {
+    document.title = "钢琴列表"
+    var docEl = document.documentElement
+    var fontSize = parseFloat(docEl.style.fontSize)
+    this.height = docEl.clientHeight - (0.88 * 2 + 0.84) * fontSize
     var self = this
     window.onscroll = function() {
       var top = document.body.scrollTop || document.documentElement.scrollTop
@@ -57,6 +64,53 @@ export default {
   },
   beforeDestroy() {
     window.onscroll = null
+  },
+  methods: {
+    selectBrand(brand) {
+      this.brand = brand
+      this.getList()
+    },
+    selectRentType(type) {
+      this.rentType = type
+      this.rent = ''
+      this.getList()
+    },
+    selectRent(rent) {
+      this.rent = rent
+    },
+    getList() {
+      this.index = 1
+      http.getPiano(this.index, this.size, this.brand, this.rentType, this.rent).then((res) => {
+        if (res.errNo == 0) {
+          this.list = res.data.list
+          this.brandDic = res.data.brandDic
+          this.rentDay = res.data.rentDay
+          this.rentMonth = res.data.rentMonth
+          if (this.list.length < this.size) {
+            this.allowload = false
+          } else {
+            this.allowload = true
+          }
+        }
+      })
+    },
+    loadmore() {
+      this.index = this.index + 1
+      http.getPiano(this.index, this.size, this.brand, this.rentType, this.rent).then((res) => {
+        if (res.errNo == 0) {
+          let list = res.data.list
+          this.brandDic = res.data.brandDic
+          this.rentDay = res.data.rentDay
+          this.rentMonth = res.data.rentMonth
+          if (list.length < this.size) {
+            this.allowload = false
+          } else {
+            this.allowload = true
+          }
+          this.list = this.list.concat(list)
+        }
+      })
+    }
   }
 }
 </script>

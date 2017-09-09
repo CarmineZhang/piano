@@ -8,7 +8,7 @@
       <swiper :list="swipers"></swiper>
       <recommend></recommend>
       <div class="more">
-        <a>查看更多</a>
+        <a @click="showPianoList">查看更多</a>
       </div>
       <service></service>
       <news></news>
@@ -48,6 +48,9 @@ export default {
   methods: {
     showNews() {
       this.$router.push('/news')
+    },
+    showPianoList() {
+      this.$router.push('/productlist')
     }
   }
 }

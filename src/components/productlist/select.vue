@@ -92,33 +92,40 @@ export default {
       this.rentList = this.rentDay
       this.show = -1
       this.maskShow = false
+      this.$emit('on-rent-type', 'day')
     },
     monthrent() {
       this.rentType = { dicValue: 'month', dicName: '月租' }
       this.rentList = this.rentMonth
       this.show = -1
       this.maskShow = false
+      this.$emit('on-rent-type', 'month')
     },
     selectBrand(item) {
       this.brank = item
       this.rent = null
       this.show = -1
       this.maskShow = false
+      this.$emit('on-brand', item.dicValue)
     },
     selectRent(item) {
       this.rent = item
       this.show = -1
       this.maskShow = false
+      this.$emit('on-rent', item.dicValue)
     },
     delBrankFilter() {
       this.brank = null
+      this.$emit('on-brand', '')
     },
     delTypeFilter() {
       this.rentType = null
       this.rent = null
+      this.$emit('on-rent-type', '')
     },
     delRentFilter() {
       this.rent = null
+      this.$emit('on-rent', '')
     }
   }
 }
