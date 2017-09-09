@@ -1,66 +1,88 @@
 <template>
   <div>
-    <div class="fav-title">
-      近一个月收藏
-    </div>
-    <list :data="list"></list>
+    <scroll-load @load-more="loadmore" :height="height" v-model="allowload">
+      <div class="pl-item" v-for="item in list" :key="item.id">
+        <div class="pl-item-img" @click="showDetail(item.pianoId)">
+          <img :src="item.coverUrl" alt="">
+        </div>
+        <div class="pl-item-content">
+          <p class="title" v-text="item.pianoName"></p>
+          <p class="price">
+            <span class="tit">租金：</span>
+            <span class="ct">¥ {{item.longRentActive}} / 天</span>
+            <span class="pledge">押金：</span>
+            <span class="pledge">¥ {{item.longTermDeposit}}</span>
+          </p>
+          <p class="fa-actions">
+            <a class="action" @click="del(item.id)">删除</a>
+          </p>
+        </div>
+      </div>
+    </scroll-load>
   </div>
 </template>
 <script>
-import List from '../productlist/list'
+import ScrollLoad from '@/components/base/scrollload'
+import http from '@/libs/httpUtil'
 export default {
   name: 'favorite',
   components: {
-    List
+    ScrollLoad
+  },
+  created() {
+    this.getList()
+  },
+  beforeMount() {
+    document.title = '收藏'
+    this.height = document.documentElement.clientHeight
   },
   data() {
     return {
-      list: [{
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }, {
-        title: '雅马哈钢琴 YAMAHA 日本进口 YM131X',
-        area: '北京',
-        price: 150,
-        pledge: 30000
-      }]
+      list: [],
+      index: 1,
+      size: 0,
+      allowload: true
+    }
+  },
+  methods: {
+    getList() {
+      http.getCollections(this.index, this.size).then(res => {
+        if (res.errNo == 0) {
+          this.list = res.data.dataList
+          if (this.list.length < this.size) {
+            this.allowload = false
+          } else {
+            this.allowload = true
+          }
+        }
+      })
+    },
+    loadmore() {
+      this.index = this.index + 1
+      http.getCollections(this.index, this.size).then(res => {
+        if (res.errNo == 0) {
+          let list = res.data.dataList
+          if (list.length < this.size) {
+            this.allowload = false
+          } else {
+            this.allowload = true
+          }
+          this.list = this.list.concat(list)
+        }
+      })
+    },
+    del(id) {
+      let loading = this.$ve.loading('处理中...')
+      http.deleteCollection(id).then(res => {
+        loading.hide()
+        if (res.errNo == 0) {
+          this.$ve.alert('删除成功', () => {
+            this.getList()
+          })
+        } else {
+          this.$ve.alert(res.errMsg)
+        }
+      })
     }
   }
 }
@@ -73,6 +95,23 @@ export default {
   font-size: .24rem;
   color: #1b1b1b;
   background-color: #eee;
+}
+
+.fa-actions {
+  text-align: right;
+  .action {
+    margin-top: 10px;
+    margin-right: 10px;
+    height: 24px;
+    line-height: 24px;
+    display: inline-block;
+    background-color: #bf3737;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
 }
 </style>
 

@@ -11,20 +11,10 @@
   </div>
 </template>
 <script>
-import http from '@/libs/httpUtil'
 export default {
   name: 'news-list',
-  data() {
-    return {
-      list: []
-    }
-  },
-  created() {
-    http.getInformations(1, 10).then(res => {
-      if (res.errNo == 0) {
-        this.list = res.data.dataList
-      }
-    })
+  props: {
+    list: Array
   },
   methods: {
     showNew(id) {
