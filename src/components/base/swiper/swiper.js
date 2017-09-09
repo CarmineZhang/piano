@@ -78,7 +78,7 @@ class Swiper {
     }
     me.transitionEndHandler = (e) => {
       e.preventDefault()
-      if (me.current === me.realCount - 1) {
+      if (me.current >= me.realCount - 1) {
         me.current = 1;
         let distance = -me.current * me.width
         me.$sliderlist.css({
@@ -97,7 +97,7 @@ class Swiper {
           '-webkit-transition': `0ms`
         })
       }
-      if (me.navcurrent === me.count) {
+      if (me.navcurrent >= me.count) {
         me.navcurrent = 0
       }
       me.$navbarItem.removeClass('cur').eq(me.navcurrent).addClass('cur')

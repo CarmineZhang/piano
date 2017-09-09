@@ -4,9 +4,10 @@
 <script>
 export default {
   name: 'switch',
-  data() {
-    return {
-      checked: false
+  props: {
+    checked: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

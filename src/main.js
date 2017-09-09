@@ -35,6 +35,25 @@ Vue.filter('ToThousands', (val) => {
   return ret.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
 })
 
+Vue.directive('attrDetail', (el, binding) => {
+  var item = binding.value
+  let ret = ''
+  if (item && item.provinceName) {
+    ret += item.provinceName
+  }
+  if (item && item.cityName) {
+    ret += item.cityName
+  }
+  if (item && item.areaName) {
+    ret += item.areaName
+  }
+  if (item && item.detail) {
+    ret += item.detail
+  }
+  el.innerHTML = ret
+})
+
+
 // var pageManager = {
 //   _pageStack: [],
 //   _pageIndex: 1,

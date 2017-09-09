@@ -3,6 +3,7 @@ import {
   signature
 } from './comUtil'
 import qs from 'qs'
+import router from '../router'
 import storage from './storage'
 axios.interceptors.response.use(
   response => {
@@ -32,6 +33,16 @@ axios.interceptors.response.use(
     return Promise.reject(error.response.data) // 返回接口返回的错误信息
   }
 );
+
+axios.interceptors.response.use(res => {
+  if (res.errNo && (res.errNo == 5000 || res.errNo == 50099)) {
+    router.push('/login')
+    return res
+  } else {
+    return res;
+  }
+})
+
 
 function ajax(url, data) {
   var signData = qs.stringify(signature(data))
@@ -164,17 +175,6 @@ function getPianoInfo(id) {
   })
 }
 
-function order(pianoId, leaseNum, deliveryPrice, leaseType, receiverId) {
-  return ajax('order/create', {
-    memberToken: storage.get('access-token'),
-    pianoId: pianoId,
-    leaseNum: leaseNum,
-    deliveryPrice: deliveryPrice,
-    leaseType: leaseType,
-    receiverId: receiverId,
-    channelType: 'web'
-  })
-}
 
 function getProvince() {
   return ajax('area/getProvinces', {})
@@ -213,6 +213,24 @@ function deleteCollection(id) {
   })
 }
 
+function order(piano, receiverId) {
+  return ajax('order/create', {
+    memberToken: storage.get('access-token'),
+    pianoId: piano.id,
+    leaseNum: piano.leaseNum,
+    leaseType: piano.leaseType,
+    receiverId: receiverId,
+    channelType: 'web'
+  })
+}
+
+function oderInfo(id) {
+  return ajax('order/info', {
+    memberToken: storage.get('access-token'),
+    orderId: id
+  })
+}
+
 export default {
   sendCode,
   login,
@@ -230,11 +248,12 @@ export default {
   getCouponMemberInfos,
   getRecomments,
   getPianoInfo,
-  order,
   getProvince,
   getCity,
   getCounty,
   saveCollection,
   getCollections,
-  deleteCollection
+  deleteCollection,
+  order,
+  oderInfo
 }

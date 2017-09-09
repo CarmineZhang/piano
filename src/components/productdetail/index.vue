@@ -65,7 +65,7 @@
     </div>
     <div class="footer-action">
       <a class="action" @click="submit">立即租赁</a>
-      <a class="act-collect"></a>
+      <a class="act-collect" @click="collect"></a>
     </div>
   </div>
 </template>
@@ -99,7 +99,7 @@ export default {
   created() {
     let id = this.$store.state.route.query.id
     if (id) {
-      this.id = 0
+      this.id = id
       http.getPianoInfo(id).then(res => {
         if (res.errNo == 0) {
           this.data = res.data
@@ -123,6 +123,11 @@ export default {
     }
   },
   methods: {
+    collect() {
+      if (this.id) {
+        http.saveCollection(this.id)
+      }
+    },
     choose(type) {
       this.leaseType = type
       if (type === 1) {
@@ -149,11 +154,7 @@ export default {
       this.$store.commit('selectPiano', {
         id: this.id,
         leaseType: this.leaseType,
-        leaseNum: this.leaseNum,
-        leaseName: this.leaseNumName,
-        deposit: this.deposit,
-        rent: this.rent,
-        pay: this.data.downPayment
+        leaseNum: this.leaseNum
       })
       this.$router.push('/chooseaddr')
     }

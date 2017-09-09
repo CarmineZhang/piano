@@ -3,31 +3,31 @@
     <div class="cost">
       <div class="title">费用核算：</div>
       <div>
-        <cell title="押金：" to="">
-          <!-- <span>¥2,000</span> -->
-          <span>{{piano.deposit|ToThousands}}</span>
+        <cell title="押金：">
+          <span>{{detail.termDeposit|ToThousands}}</span>
         </cell>
-        <!-- <cell>
-                              <div class="cell-comment">
-                                *线上预付20%的押金总额，货到付剩余押金。
-                              </div>
-                            </cell> -->
         <cell title="租金：">
           <span>
-            <em>¥</em>{{piano.rent*piano.leaseNum|ToThousands}}</span>
+            <em>¥</em>{{detail.leaseAmount|ToThousands}}</span>
           </span>
-          <span class="cell-desc">租期{{piano.leaseName}}</span>
+          <span class="cell-desc">租期{{detail.leaseNum}}</span>
         </cell>
         <cell title="运费：">
-          ¥2,000
+          <span>{{detail.deliveryPrice|ToThousands}}</span>
         </cell>
         <cell to="" title="优惠券：">
           ¥20
         </cell>
         <cell title="预付费用：">
           <span>
-            <em>¥</em>{{piano.pay|ToThousands}}</span>
+            <em>¥</em>{{piano.downPayment|ToThousands}}</span>
           <span class="cost-comment">（部分租金+运费）</span>
+          </span>
+        </cell>
+        <cell title="总费用：">
+          <span>
+            <em>¥</em>{{piano.totalAmount|ToThousands}}</span>
+          <span class="cost-comment">（押金+租金+运费）</span>
           </span>
         </cell>
       </div>
@@ -38,41 +38,43 @@
       <div class="order-cost">
         <span class="tit">费用总计：</span>
         <span class="ct">
-          <em>¥</em>{{piano.pay|ToThousands}}</span>
+          <em>¥</em>{{piano.downPayment|ToThousands}}</span>
         </span>
       </div>
       <a href="" class="cost-ok">
         确认支付
       </a>
     </div>
-    <select-deposit v-model="selectDepositShow"></select-deposit>
   </div>
 </template>
 <script>
 import { Cell } from '../base/cell'
-import SelectDeposit from './selectdeposit'
 import SelectPay from './selectpay.vue'
+import http from '@/libs/httpUtil'
 export default {
-  name: 'cost-detail',
+  name: 'order-detail',
   data() {
     return {
-      selectDepositShow: false
+      detail: {}
     }
   },
-  computed: {
-    piano() {
-      return this.$store.state.selectPiano
+  created() {
+    let id = this.$store.state.route.query.id
+    if (id) {
+      http.oderInfo(id).then(res => {
+        if (res.errNo == 0) {
+          this.detail = res.data
+        }
+      })
+    } else {
+      this.$router.go(-1)
     }
   },
   components: {
     Cell,
-    SelectDeposit,
     SelectPay
   },
   methods: {
-    showDeposit() {
-      this.selectDepositShow = true;
-    }
   }
 }
 </script>

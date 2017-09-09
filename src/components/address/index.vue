@@ -2,11 +2,13 @@
   <div>
     <div class="addr-list">
       <div class="addr-item" v-for="item in list" :key="item.memberId">
-        <div class="addr-header">
-          <div class="addr-user" v-text="item.name"></div>
-          <div class="addr-tel" v-text="item.tel"></div>
-        </div>
-        <div class="addr-body" v-text="item.detail">
+        <div @click="setDefault(item.id)">
+          <div class="addr-header">
+            <div class="addr-user" v-text="item.name"></div>
+            <div class="addr-tel" v-text="item.tel"></div>
+          </div>
+          <div class="addr-body" v-attr-detail="item">
+          </div>
         </div>
         <div class="addr-footer" :class="{'addr-default':item.isDefault==1}">
           <a class="ft-left" @click="setDefault(item.id)" v-text="defaultText">默认地址</a>
@@ -38,6 +40,9 @@ export default {
       loading: null
     }
   },
+  directives: {
+
+  },
   computed: {
     defaultText() {
       if (this.choose) {
@@ -48,6 +53,7 @@ export default {
     list() {
       return this.$store.state.addrlist
     }
+
   },
   created() {
     // this.loading = this.$ve.loading('数据加载中')
@@ -84,7 +90,9 @@ export default {
       }
     },
     setDefault(id) {
+      let loading = this.$ve.loading('加载中...')
       http.setAddressDefault(id).then(res => {
+        loading.hide()
         if (res.errNo == 0) {
           this.getList()
         }

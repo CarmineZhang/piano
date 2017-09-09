@@ -165,7 +165,7 @@ export default {
           http.getCounty(this.city).then(res => {
             if (res.errNo == 0) {
               this.$store.commit('receiveCounty', {
-                ccdoe: this.city,
+                ccode: this.city,
                 list: res.data
               })
               this.data = res.data

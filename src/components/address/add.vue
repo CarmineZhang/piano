@@ -8,13 +8,13 @@
         </div>
         <div class="form-item">
           <div class="item-hd">+86</div>
-          <input type="tel" class="item-bd ipt" v-model="phone" placeholder="手机号码">
+          <input type="tel" class="item-bd ipt" maxlength="11" v-model="phone" placeholder="手机号码">
         </div>
         <div class="form-item">
-          <input type="text" class="item-bd ipt" v-model="postcode" placeholder="邮政编码">
+          <input type="text" class="item-bd ipt" maxlength="6" v-model="postcode" placeholder="邮政编码">
         </div>
         <div class="form-item" @click="showArea">
-          <input type="text" class="item-bd ipt" placeholder="收货地址" readonly v-text="addrtext">
+          <input type="text" class="item-bd ipt" placeholder="收货地址" readonly :value="addrtext">
         </div>
         <div class="form-item">
           <input type="text" class="item-bd ipt" v-model="detail" placeholder="详细地址">
@@ -23,7 +23,7 @@
           <div class="item-bd">
             是否设为默认地址
           </div>
-          <ve-switch @on-change="setDefault"></ve-switch>
+          <ve-switch :checked="isDefault==1" @on-change="setDefault"></ve-switch>
         </div>
       </div>
       <div class="addr-op">
@@ -31,7 +31,7 @@
         <a class="btn btn-default" @click="back">取消</a>
       </div>
     </div>
-    <select-area v-model="areaShow"></select-area>
+    <select-area v-model="areaShow" @on-change="changeArea"></select-area>
   </div>
 </template>
 <script>
@@ -49,7 +49,7 @@ export default {
       return this.$store.state.editaddr
     },
     addrtext() {
-      return this.province + this.city + this.area
+      return '' + this.province + this.city + this.area
     }
   },
   created() {
@@ -58,9 +58,12 @@ export default {
       this.receiverName = addr.name
       this.phone = addr.phone
       this.postcode = addr.postcode
-      this.province = addr.province
-      this.city = addr.city
-      this.area = addr.area
+      this.province = addr.provinceName
+      this.pcode = addr.province
+      this.city = addr.cityName
+      this.ccode = addr.city
+      this.area = addr.areaName
+      this.acode = addr.area
       this.detail = addr.detail
       this.isDefault = addr.isDefault
       this.id = addr.id
@@ -72,15 +75,26 @@ export default {
       phone: '',
       postcode: '',
       province: '',
+      pcode: '',
       city: '',
-      area: '北京',
+      ccode: '',
+      area: '',
+      acode: '',
       detail: '',
       areaShow: false,
-      isDefault: 1,
+      isDefault: 0,
       id: 0
     }
   },
   methods: {
+    changeArea(ret) {
+      this.province = ret[0].value
+      this.pcode = ret[0].key
+      this.city = ret[1].value
+      this.ccode = ret[1].key
+      this.area = ret[2].value
+      this.acode = ret[2].key
+    },
     showArea() {
       this.areaShow = true
     },
@@ -92,9 +106,9 @@ export default {
         name: this.receiverName,
         phone: this.phone,
         postcode: this.postcode,
-        province: this.province,
-        city: this.city,
-        area: this.area,
+        province: this.pcode,
+        city: this.ccode,
+        area: this.acode,
         detail: this.detail,
         isDefault: this.isDefault
       }
@@ -102,7 +116,7 @@ export default {
         addr.id = this.id
       }
       let loading = this.$ve.loading('处理中')
-      if (this.id) {
+      if (this.id === 0) {
         http.addAddress(addr).then((res) => {
           loading.hide()
           if (res.errNo == 0) {
@@ -114,7 +128,7 @@ export default {
           }
         })
       } else {
-        http.editAddres(addr).then(res => {
+        http.editAddress(addr).then(res => {
           loading.hide()
           if (res.errNo == 0) {
             this.$ve.toast('修改成功', {

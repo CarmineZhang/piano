@@ -4,7 +4,7 @@ import Home from '@/components/home'
 import ProductList from '@/components/productlist'
 import ProductDetail from '@/components/productdetail'
 import Address from '@/components/address'
-import CostDetail from '@/components/costdetail'
+import OrderDetail from '@/components/orderdetail'
 import OrderComplete from '@/components/ordercomplete'
 import OrderList from '@/components/orderlist'
 import Login from '@/components/login'
@@ -57,9 +57,9 @@ export default new Router({
       path: '/usercenter',
       component: UserCenter
     }, {
-      path: '/costdetail',
-      name: 'cost-detail',
-      component: CostDetail
+      path: '/orderdetail',
+      name: 'order-detail',
+      component: OrderDetail
     }, {
       path: '/chooseaddr',
       component: ChooseAddr

@@ -2,16 +2,17 @@
   <div>
     <addr-list choose></addr-list>
     <div class="footer-action choose-addr-footer">
-      <div class="desc">
-        合计：¥
-        <em class="price">{{deliverycost|ToThousands}}</em>
-      </div>
+      <!-- <div class="desc">
+                                                  合计：¥
+                                                  <em class="price">{{deliverycost|ToThousands}}</em>
+                                                </div> -->
       <a class="action" @click="confirmAddr">确认地址</a>
     </div>
   </div>
 </template>
 <script>
 import AddrList from './index'
+import http from '@/libs/httpUtil'
 export default {
   name: 'choose-addr',
   components: {
@@ -23,14 +24,23 @@ export default {
     }
   },
   computed: {
-    defaultAddr() {
-      return this.$store.state.defaultAddr
+    selectPiano() {
+      return this.$store.state.selectPiano
+    },
+    defaultAddrId() {
+      return this.$store.getters.defaultAddrId
     }
   },
   methods: {
     confirmAddr() {
-      if (this.defaultAddr) {
-        this.$router.push({ name: 'cost-detail' })
+      if (this.defaultAddrId) {
+        http.order(this.selectPiano, this.defaultAddrId).then(res => {
+          if (res.errNo == 0) {
+            this.$ve.alert('下单成功', () => {
+              this.$router.push({ name: 'order-detail', params: { orderId: res.data.id } })
+            })
+          }
+        })
       } else {
         this.$ve.alert('请选择一个地址')
       }
@@ -41,7 +51,8 @@ export default {
 <style lang="scss">
 .choose-addr-footer {
   .action {
-    flex: 0 0 1.8rem;
+    // flex: 0 0 1.8rem;
+    flex: 1;
   }
   .desc {
     background-color: #7f7c8b;

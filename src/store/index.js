@@ -8,21 +8,21 @@ export default new Vuex.Store({
   state: {
     direction: 'forward',
     addrlist: [],
-    editaddr: {},
-    selectPiano: {},
+    editaddr: null,
+    selectPiano: null,
     province: [],
     city: {},
     county: {}
   },
   getters: {
-    defaultAddr(state) {
+    defaultAddrId(state) {
       let ret = state.addrlist.filter(item => {
-        return item.isDefault === 1
+        return item.isDefault == 1
       })
       if (ret.length > 0) {
-        return ret[0]
+        return ret[0].id
       }
-      return null
+      return 0
     }
   },
   mutations: {
