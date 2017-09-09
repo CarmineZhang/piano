@@ -77,6 +77,14 @@ function setUserPwd(phone, pwd) {
   })
 }
 
+
+function uptatePassword(phone, pwd) {
+  return ajax('account/uptatePassword', {
+    phone: phone,
+    password: pwd
+  })
+}
+
 function logout() {
   return ajax('account/logout', {
     memberToken: storage.get('access-token')
@@ -245,6 +253,13 @@ function wxPay(no, total, body) {
   })
 }
 
+function changeMemberPhone(phone) {
+  return ajax('account/changeMemberPhone', {
+    memberToken: storage.get('access-token'),
+    phone: phone
+  })
+}
+
 export default {
   sendCode,
   login,
@@ -271,5 +286,7 @@ export default {
   order,
   oderInfo,
   orderlist,
-  wxPay
+  wxPay,
+  changeMemberPhone,
+  uptatePassword
 }

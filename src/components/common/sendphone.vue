@@ -44,9 +44,6 @@ export default {
       start: false
     }
   },
-  beforeMount() {
-    this.$validator.check()
-  },
   methods: {
     startCountDown() {
       let loading = this.$ve.loading('发送中...')

@@ -97,13 +97,6 @@ export default {
       return this.$store.state.route.params.phone
     }
   },
-  beforeMount() {
-    if (!this.phone) {
-      this.$router.push('/register')
-    } else {
-      this.$validator.check()
-    }
-  },
   methods: {
     ok() {
       if (this.$validator.valid) {

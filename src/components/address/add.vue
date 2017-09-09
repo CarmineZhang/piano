@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="addr-op">
-        <a class="btn btn-primary" @click="add">确定</a>
+        <a class="btn btn-primary" @click="beforeAdd">确定</a>
         <a class="btn btn-default" @click="back">取消</a>
       </div>
     </div>
@@ -43,6 +43,48 @@ export default {
   components: {
     VeSwitch,
     SelectArea
+  },
+  validator: {
+    receiverName: [{
+      test: 'required',
+      message: '请填写收货人姓名'
+    }, {
+      test: (val) => {
+        let temp = val.replace(/[^\x00-\xff]/g, 'aaa')
+        return temp.length >= 3
+      },
+      message: '收货人姓名太短，请输入正确的姓名'
+    }, {
+      test: (val) => {
+        let temp = val.replace(/[^\x00-\xff]/g, 'aaa')
+        return temp.length <= 30
+      },
+      message: '收货人姓名必须少于等于10个汉字'
+    }, {
+      test: (val) => {
+        let temp = val.replace(/[^\x00-\xff]/g, 'aaa')
+        return /^[\A-Za-z·]{3,30}$/.test(temp)
+      },
+      message: '收货人姓名只能输入中文和字母'
+    }],
+    phone: [{
+      test: 'required',
+      message: '请填写手机号码'
+    }, 'mobile'],
+    postcode: {
+      test: /\d{6}/, message: '请输入正确的邮政编码'
+    },
+    addrtext: { test: 'required', message: '请选择省市区县信息' },
+    detail: [{
+      test: 'required',
+      message: '请填写详细地址'
+    }, {
+      test: (val) => {
+        let temp = val.replace(/[^\x00-\xff]/g, 'aaa')
+        return temp.length <= 255
+      },
+      message: '详细地址太长，不能超过85个汉字'
+    }]
   },
   computed: {
     getEditAddr() {
@@ -103,6 +145,14 @@ export default {
     },
     setDefault(val) {
       this.isDefault = +val
+    },
+    beforeAdd() {
+      if (this.$validator.valid) {
+        this.add()
+      } else {
+        let errors = this.$validator.$errors
+        this.$ve.alert(errors.receiverName || errors.phone || errors.postcode || errors.addrtext || errors.detail)
+      }
     },
     add() {
       var addr = {

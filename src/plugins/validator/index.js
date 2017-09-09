@@ -79,6 +79,7 @@ const plugin = {
             check.call(this, rules[field], field, newVal)
           })
         })
+        this.$validator.check()
       }
     })
   }

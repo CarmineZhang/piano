@@ -14,7 +14,7 @@ export default {
     Cell
   },
   beforeMount() {
-    document.title = '设置'
+    document.title = '账户管理'
   }
 }
 </script>

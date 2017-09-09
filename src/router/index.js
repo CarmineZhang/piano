@@ -14,6 +14,9 @@ import News from '@/components/news'
 import Account from '@/components/account'
 import AddAddress from '@/components/address/add'
 import ChangePhone from '@/components/account/changephone'
+import ChangePhoneCompleted from '@/components/account/changephone/completed'
+import EditPwd from '@/components/account/editpwd'
+import EditPwdCompleted from '@/components/account/editpwd/completed'
 import Favorite from '@/components/favorite'
 import Test from '@/components/Test'
 import Widget from '@/plugins/widget'
@@ -72,6 +75,18 @@ export default new Router({
     }, {
       path: '/changephone',
       component: ChangePhone
+    }, {
+      path: '/changephone/completed',
+      name: 'change-phone-completed',
+      component: ChangePhoneCompleted
+    },
+    {
+      path: '/editpwd',
+      component: EditPwd
+    }, {
+      path: '/editpwd/completed',
+      name: 'editpwd-completed',
+      component: EditPwdCompleted
     }, {
       path: '/address',
       component: Address
