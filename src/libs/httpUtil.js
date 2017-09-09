@@ -192,6 +192,27 @@ function getCounty(cCode) {
   })
 }
 
+function saveCollection(pianoId) {
+  return ajax('collect/saveCollection', {
+    pianoId: pianoId,
+    memberToken: storage.get('access-token')
+  })
+}
+
+function getCollections(no, size = 10) {
+  return ajax('collect/getCollections', {
+    pageNo: no,
+    pageSize: size,
+    memberToken: storage.get('access-token')
+  })
+}
+
+function deleteCollection(id) {
+  return ajax('collect/deleteCollection', {
+    id: id
+  })
+}
+
 export default {
   sendCode,
   login,
@@ -212,5 +233,8 @@ export default {
   order,
   getProvince,
   getCity,
-  getCounty
+  getCounty,
+  saveCollection,
+  getCollections,
+  deleteCollection
 }

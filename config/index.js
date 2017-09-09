@@ -30,6 +30,7 @@ module.exports = {
     proxyTable: {
       '/api': {
         target: 'http://47.94.93.96/platform-longing-web/',
+        // target: 'http://www.chinapetbloodbank.com/platform-longing-web/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/',
