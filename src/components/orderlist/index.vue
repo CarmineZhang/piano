@@ -159,8 +159,8 @@
                   <span class="desc">使用中</span>
                 </div>
                 <!-- <a class="op">
-                                                  延长租期
-                                                </a> -->
+                                                    延长租期
+                                                  </a> -->
               </div>
             </div>
             <div class="more"></div>
@@ -265,6 +265,9 @@ export default {
         this.list = res.data
       }
     })
+  },
+  beforeMount() {
+    document.title = '订单列表'
   },
   methods: {
     pay(item) {

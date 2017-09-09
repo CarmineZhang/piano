@@ -52,6 +52,9 @@ export default {
       return '' + this.province + this.city + this.area
     }
   },
+  beforeMount() {
+    document.title = "新增地址"
+  },
   created() {
     let addr = this.getEditAddr
     if (addr) {

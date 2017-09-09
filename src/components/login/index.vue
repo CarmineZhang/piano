@@ -43,6 +43,7 @@ export default {
     }
   },
   beforeMount() {
+    document.title = '登录'
     this.$validator.check()
   },
   methods: {

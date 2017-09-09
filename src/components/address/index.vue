@@ -40,9 +40,6 @@ export default {
       loading: null
     }
   },
-  directives: {
-
-  },
   computed: {
     defaultText() {
       if (this.choose) {
@@ -58,6 +55,9 @@ export default {
   created() {
     // this.loading = this.$ve.loading('数据加载中')
     this.getList()
+  },
+  beforeMount() {
+    document.title = '地址选择'
   },
   methods: {
     getList() {

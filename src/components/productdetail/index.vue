@@ -94,7 +94,7 @@ export default {
     }
   },
   mounted() {
-    document.title = '商品详情'
+    document.title = '钢琴详情'
   },
   created() {
     let id = this.$store.state.route.query.id

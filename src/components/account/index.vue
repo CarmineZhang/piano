@@ -12,6 +12,9 @@ export default {
   components: {
     CellBox,
     Cell
+  },
+  beforeMount() {
+    document.title = '设置'
   }
 }
 </script>

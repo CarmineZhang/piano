@@ -71,6 +71,9 @@ export default {
       this.$router.go(-1)
     }
   },
+  beforeMount() {
+    document.title = '订单详情'
+  },
   components: {
     Cell,
     SelectPay

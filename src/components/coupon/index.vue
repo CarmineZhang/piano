@@ -24,9 +24,12 @@ export default {
   created() {
     this.getList()
   },
+  beforeMount() {
+    document.title = "优惠券"
+  },
   methods: {
-    getList(no, size) {
-      http.getCouponMemberInfos(no, size).then(res => {
+    getList() {
+      http.getCouponMemberInfos(1, 10).then(res => {
         if (res.errNo == 0) {
           this.list = res.data.dataList
         }

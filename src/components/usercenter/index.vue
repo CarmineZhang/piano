@@ -54,6 +54,7 @@ export default {
     }
   },
   beforeMount() {
+    document.title = '个人中心'
     this.phone = storage.get('phone')
   },
   methods: {
