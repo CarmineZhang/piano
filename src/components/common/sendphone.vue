@@ -49,9 +49,13 @@ export default {
   },
   methods: {
     startCountDown() {
+      let loading = this.$ve.loading('发送中...')
       http.sendCode(this.phone).then((res) => {
+        loading.hide()
         if (res.errNo == 0) {
           this.start = true
+        } else {
+          this.$ve.alert(res.errMsg)
         }
       })
     },

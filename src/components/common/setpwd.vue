@@ -14,8 +14,11 @@
       <div class="form-item">
         <input type="password" v-model="confirmPwd" class="item-bd ipt" placeholder="请确认密码">
       </div>
+      <div class="set-comment">
+        *密码长度8-16位，数字、字母、特殊字符至少包含两种
+      </div>
       <div class="form-op">
-        <a class="btn btn-primary" @click="ok" :class="{'btn-primay-disabled':$validator.invalid}">
+        <a class="btn btn-primary" @click="ok">
           完成
         </a>
       </div>
@@ -32,16 +35,59 @@ export default {
     }
   },
   validator: {
-    pwd: [{ test: /.{8,16}/, message: '密码不符合规则' }, {
-      test: function (value) {
+    pwd: [{
+      test: 'required',
+      message: '密码不能为空'
+    }, {
+      test: function(value) {
+        let len = value.length
+        if (len < 8 || len > 16) {
+          return false
+        }
+        let ret = 0
+        if (/[a-zA-Z]/.test(value)) {
+          ret += 1
+        }
+        if (/\d/.test(value)) {
+          ret += 1
+        }
+        if (ret >= 2) {
+          return true
+        }
+        return false
+      }, message: '密码不符合规则'
+    }, {
+      test: function(value) {
         if (this.confirmPwd === '') {
           return true
         }
         return this.confirmPwd !== '' && value === this.confirmPwd
       }, message: '两次输入的密码不一致'
     }],
-    confirmPwd: [{ test: /.{8,16}/, message: '密码不符合规则' }, {
-      test: function (value) {
+    confirmPwd: [{
+      test: 'required',
+      message: '确认密码不能为空'
+    }, {
+      test: function(value) {
+        let len = value.length
+        if (len < 8 || len > 16) {
+          return false
+        }
+        let ret = 0
+        if (/[a-zA-Z]/.test(value)) {
+          ret += 1
+        }
+        if (/\d/.test(value)) {
+          ret += 1
+        }
+        if (ret >= 2) {
+          return true
+        }
+        return false
+      },
+      message: '密码不符合规则'
+    }, {
+      test: function(value) {
         return value === this.pwd
       }, message: '两次输入的密码不一致'
     }]
@@ -62,6 +108,9 @@ export default {
     ok() {
       if (this.$validator.valid) {
         this.$emit('on-confirm', this.phone, this.pwd)
+      } else {
+        let errors = this.$validator.$errors
+        this.$ve.alert(errors.pwd || errors.confirmPwd)
       }
     }
   }
