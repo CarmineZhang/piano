@@ -45,6 +45,9 @@ export default {
       swipers: [bannerSrc, bannerSrc, bannerSrc]
     }
   },
+  beforeMount() {
+    document.title = '商城'
+  },
   methods: {
     showNews() {
       this.$router.push('/news')

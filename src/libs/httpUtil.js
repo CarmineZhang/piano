@@ -46,7 +46,7 @@ axios.interceptors.response.use(res => {
 
 function ajax(url, data) {
   var signData = qs.stringify(signature(data))
-  return axios.post('/api/' + url, signData)
+  return axios.post('/platform-longing-web/' + url, signData)
 }
 
 function sendCode(phone) {
