@@ -46,7 +46,7 @@ axios.interceptors.response.use(res => {
 
 function ajax(url, data) {
   var signData = qs.stringify(signature(data))
-  return axios.post('/platform-longing-web/' + url, signData)
+  return axios.post('http://pianoshare.cn/platform-longing-web/' + url, signData)
 }
 
 function sendCode(phone) {
