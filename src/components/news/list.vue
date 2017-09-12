@@ -38,17 +38,16 @@ export default {
       color: #928f9c;
     }
     .item-img {
-      margin-top: .2rem;
-      height: 3rem;
+      margin-top: .2rem; // height: 3rem;
       position: relative;
       img {
-        width: 100%;
-        height: 100%;
+        width: 100%; // height: 100%;
       }
       .item-img-desc {
         position: absolute;
         bottom: 0;
-        left: 0; // height: .88rem;
+        left: 0;
+        right: 0; // height: .88rem;
         background-color: #323136;
         opacity: .6;
         font-size: .24rem;
