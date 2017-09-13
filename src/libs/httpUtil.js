@@ -104,13 +104,15 @@ function getArticle(id) {
   })
 }
 
-function getPiano(no = 1, size = 10, brand = '', rentTyp = '', priceDic = '') {
+function getPiano(no = 1, size = 10, brand = '', rentTyp = '', priceDic = '', pianoName = '') {
   return ajax('mall/pianos', {
     pageNo: no,
     pageSize: size,
     brand: brand,
     rentTyp: rentTyp,
-    priceDic: priceDic
+    priceDic: priceDic,
+    ftuType: "2",
+    pianoName: pianoName
   })
 }
 

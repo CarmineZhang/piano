@@ -1,5 +1,5 @@
 <template>
-  <div @scroll="throttle()" :style="{height:height+'px'}" class="drop-wrapper">
+  <div class="drop-wrapper">
     <slot></slot>
     <div class="dropload" v-show="show">
       <span class="loading"></span>加载中...</div>
@@ -14,21 +14,17 @@ export default {
       type: Number,
       default: 20
     },
-    height: {
-      type: Number,
-      default: 0
-    },
     value: Boolean
   },
   watch: {
     value(val) {
       this.show = val
       this.loading = !val
-      console.log('loading==' + this.loading)
     }
   },
   mounted() {
-    this.throttle = throttle(this.scroll, 200)
+    this.clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+    window.onscroll = throttle(this.scroll, 200)
   },
   data() {
     return {
@@ -39,10 +35,9 @@ export default {
   methods: {
     scroll() {
       if (!this.loading) {
-        let scrollHeight = this.$el.scrollHeight
-        let clientHeight = this.$el.clientHeight
-        let scrollTop = this.$el.scrollTop
-        if ((scrollHeight - this.threshold) <= (clientHeight + scrollTop)) {
+        let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+        let scrollTop = window.pageYOffset
+        if ((scrollHeight - this.threshold) <= (this.clientHeight + scrollTop)) {
           this.show = true
           this.loading = true
           this.$emit('input', false)

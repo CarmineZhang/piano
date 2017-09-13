@@ -7,7 +7,7 @@
         <ve-select :brand-dic="brandDic" :rent-day="rentDay" :rent-month="rentMonth" @on-brand="selectBrand" @on-rent-type="selectRentType" @on-rent="selectRent"></ve-select>
       </div>
     </div>
-    <scroll-load @load-more="loadmore" :height="height" v-model="allowload">
+    <scroll-load @load-more="loadmore" v-model="allowload">
       <list :data="list"></list>
     </scroll-load>
   </div>
@@ -37,7 +37,7 @@ export default {
       rentDay: [],
       rentMonth: [],
       index: 1,
-      size: 0,
+      size: 10,
       allowload: true,
       brand: '',
       rentType: '',
@@ -49,12 +49,9 @@ export default {
   },
   beforeMount() {
     document.title = "钢琴列表"
-    var docEl = document.documentElement
-    var fontSize = parseFloat(docEl.style.fontSize)
-    this.height = docEl.clientHeight - (0.88 * 2 + 0.84) * fontSize
     var self = this
     window.onscroll = function() {
-      var top = document.body.scrollTop || document.documentElement.scrollTop
+      var top = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       if (top > 50) {
         self.style = { transform: 'translateY(-1.72rem)', transition: '0.5s ease 0s' }
       } else {

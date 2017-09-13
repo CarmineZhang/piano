@@ -4,7 +4,7 @@
       <top></top>
       <search-bar></search-bar>
     </div>
-    <scroll-load @load-more="loadmore" :height="height" v-model="allowload">
+    <scroll-load @load-more="loadmore" v-model="allowload">
       <list class="news-body" :list="list"></list>
     </scroll-load>
     <ve-footer></ve-footer>
@@ -31,14 +31,11 @@ export default {
       list: [],
       index: 1,
       size: 10,
-      allowload: true,
-      height: 0
+      allowload: true
     }
   },
   beforeMount() {
     document.title = '行龙资讯'
-    var fontSize = parseFloat(document.documentElement.style.fontSize)
-    this.height = document.documentElement.clientHeight - 1.72 * fontSize
   },
   created() {
     this.getNews()

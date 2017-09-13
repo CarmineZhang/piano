@@ -1,6 +1,6 @@
 <template>
   <div>
-    <scroll-load @load-more="loadmore" :height="height" v-model="allowload">
+    <scroll-load @load-more="loadmore" v-model="allowload">
       <div class="pl-item" v-for="item in list" :key="item.id">
         <div class="pl-item-img" @click="showDetail(item.pianoId)">
           <img :src="item.coverUrl" alt="">
@@ -34,7 +34,6 @@ export default {
   },
   beforeMount() {
     document.title = '收藏'
-    this.height = document.documentElement.clientHeight
   },
   data() {
     return {
