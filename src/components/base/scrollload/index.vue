@@ -24,7 +24,11 @@ export default {
   },
   mounted() {
     this.clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-    window.addEventListener('scroll', throttle(this.scroll, 200), false)
+    this.throttle = throttle(this.scroll, 200)
+    window.addEventListener('scroll', this.throttle, false)
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.throttle)
   },
   data() {
     return {
