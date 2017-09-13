@@ -24,7 +24,7 @@ export default {
   },
   mounted() {
     this.clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-    window.onscroll = throttle(this.scroll, 200)
+    window.addEventListener('scroll', throttle(this.scroll, 200), false)
   },
   data() {
     return {
