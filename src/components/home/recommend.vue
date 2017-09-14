@@ -17,35 +17,12 @@
   </div>
 </template>
 <script>
-import re1 from '../../assets/re1.png'
-import re2 from '../../assets/re2.png'
-import re3 from '../../assets/re3.png'
 import http from '@/libs/httpUtil'
 export default {
   name: 'recommend',
   data() {
     return {
-      list: [
-        {
-          img: re1,
-          title: '斯坦威',
-          subTitle: 'STEINWAY',
-          desc: '拥有一架斯坦威钢琴，<br>不仅可以享受无语伦比的音乐体验，<br>还可以作为及其珍贵的投资力作。',
-          price: 2.5
-        }, {
-          img: re2,
-          title: '雅马哈',
-          subTitle: 'YAMAHA',
-          desc: '一台伟大的钢琴，<br>是能够令你对听众产生深厚情感影响的钢琴，<br>雅马哈创造了这样的钢琴。',
-          price: 2.5
-        }, {
-          img: re3,
-          title: '卡瓦依',
-          subTitle: 'KAWAI',
-          desc: '绝妙的音色与触手极佳的手感，<br>对于SK-EX这架珍贵的琴中逸品，<br>唯有一个词语形容-无与伦比。',
-          price: 2.5
-        }
-      ]
+      list: []
     }
   },
   created() {
