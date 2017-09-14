@@ -27,12 +27,14 @@ export default {
         return;
       }
       this.pay = 'wx'
+      this.$emit('on-pay', 'wx')
     },
     aliPay() {
       if (this.pay === 'ali') {
         return;
       }
       this.pay = 'ali'
+      this.$emit('on-pay', 'ali')
     }
   }
 }

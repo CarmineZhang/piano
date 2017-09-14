@@ -1,5 +1,6 @@
 <template>
   <div>
+    <my-header content="确认订单"></my-header>
     <div class="cost">
       <div class="title">费用核算：</div>
       <div>
@@ -33,7 +34,7 @@
       </div>
     </div>
     <div class="cost-more"></div>
-    <select-pay></select-pay>
+    <select-pay @on-pay="selectPay"></select-pay>
     <div class="cost-action fixed-footer">
       <div class="order-cost">
         <span class="tit">费用总计：</span>
@@ -49,6 +50,7 @@
 </template>
 <script>
 import { Cell } from '../base/cell'
+import MyHeader from '@/components/header'
 import SelectPay from './selectpay.vue'
 import http from '@/libs/httpUtil'
 export default {
@@ -56,7 +58,7 @@ export default {
   data() {
     return {
       detail: {},
-      h5pay: ''
+      payType: 'wx',
     }
   },
   created() {
@@ -76,22 +78,46 @@ export default {
   },
   components: {
     Cell,
-    SelectPay
+    SelectPay,
+    MyHeader
   },
   methods: {
+    selectPay(type) {
+      this.payType = type
+    },
     pay() {
       let loading = this.$ve.loading('处理中...')
-      http.wxPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴--订单号' + this.detail.orderSn).then(res => {
-        loading.hide()
-        if (res.errNo == 0) {
-          window.location.href = res.data.codeUrl
-        } else {
-          this.$ve.alert(res.errMsg)
-        }
-      }).catch(() => {
-        loading.hide()
-        this.$ve.alert('服务器错误，请稍后再试')
-      })
+      if (this.payType === 'wx') {
+        http.wxPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴--订单号' + this.detail.orderSn).then(res => {
+          loading.hide()
+          if (res.errNo == 0) {
+            // window.location.href = res.data.codeUrl
+            let url = res.data.codeUrl
+            if (url) {
+              document.body.innerHTML += `<form name="punchout_form" method="post" action="${url}"></form>`
+              document.forms[0].submit()
+            }
+          } else {
+            this.$ve.alert(res.errMsg)
+          }
+        }).catch(() => {
+          loading.hide()
+          this.$ve.alert('服务器错误，请稍后再试')
+        })
+      } else {
+        http.aliPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴', '行龙租琴--订单号' + this.detail.orderSn).then(res => {
+          loading.hide()
+          if (res.errNo == 0) {
+            document.body.innerHTML += res.data.alipayTrade
+            document.forms[0].submit()
+          } else {
+            this.$ve.alert(res.errMsg)
+          }
+        }).catch(() => {
+          loading.hide()
+          this.$ve.alert('服务器错误，请稍后再试')
+        })
+      }
     }
   }
 }

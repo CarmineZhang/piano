@@ -27,11 +27,17 @@ import Article from '@/components/home/article'
 import FindPwd from '@/components/findpwd'
 import FindPwdNext from '@/components/findpwd/setpwd'
 import ChooseAddr from '@/components/address/chooseaddr'
+import NotFoundComponent from '@/components/notfound'
+import AliPayResult from '@/components/orderdetail/alipay'
 Vue.use(Router)
 Vue.use(Widget)
 
 export default new Router({
+  mode: 'history',
   routes: [{
+      path: '*',
+      component: NotFoundComponent
+    }, {
       path: '/',
       name: 'home',
       component: Home
@@ -117,6 +123,9 @@ export default new Router({
     {
       path: '/test',
       component: Test
+    }, {
+      path: '/ailpay/result',
+      component: AliPayResult
     }
   ]
 })

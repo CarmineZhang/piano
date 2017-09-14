@@ -262,6 +262,25 @@ function wxPay(no, total, body) {
   })
 }
 
+function aliPay(no, total, subject, body) {
+  return ajax('alipay/pay', {
+    memberToken: storage.get('access-token'),
+    totalAmount: total,
+    outTradeNo: no,
+    subject: subject,
+    body: body,
+    returnUrl: 'http://pianoshare.cn/ailpay/result?tradeno=' + no,
+    payType: '1'
+  })
+}
+
+function getAliPayResult(no) {
+  return ajax('alipay/alipayTradeResult', {
+    memberToken: storage.get('access-token'),
+    outTradeNo: no
+  })
+}
+
 function changeMemberPhone(phone) {
   return ajax('account/changeMemberPhone', {
     memberToken: storage.get('access-token'),
@@ -298,5 +317,7 @@ export default {
   wxPay,
   changeMemberPhone,
   uptatePassword,
-  checkCollection
+  checkCollection,
+  aliPay,
+  getAliPayResult
 }

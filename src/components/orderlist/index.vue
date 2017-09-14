@@ -161,8 +161,8 @@
                     <span class="desc">使用中</span>
                   </div>
                   <!-- <a class="op">
-                                                                              延长租期
-                                                                            </a> -->
+                                                                                延长租期
+                                                                              </a> -->
                 </div>
               </div>
               <div class="more"></div>
@@ -272,7 +272,6 @@ export default {
   created() {
     http.orderlist().then(res => {
       if (res.errNo == 0) {
-        console.dir(res.data)
         this.list = res.data
       }
     })
