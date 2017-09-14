@@ -3,10 +3,10 @@
     <my-header content="订单"></my-header>
     <div class="order-list">
       <div class="order-no-pay">
-        <div class="title">
+        <div class="title" @click="showNoPayList" :class="{'hide-title':!noPayFlag}">
           <span>待支付订单</span>
         </div>
-        <div class="list">
+        <div class="list" v-show="noPayFlag">
           <div v-for="item in noPaylist" :key="item.id">
             <div class="order-date" v-text="item.orderTime"></div>
             <div class="order-detail">
@@ -59,10 +59,10 @@
         </div>
       </div>
       <div class="order-distribution">
-        <div class="title">
+        <div class="title" @click="showDeliveryList" :class="{'hide-title':!deliveryFlag}">
           <span>配送中</span>
         </div>
-        <div class="list">
+        <div class="list" v-show="deliveryFlag">
           <div v-for="item in deliverylist" :key="item.id">
             <div class="order-date" v-text="item.orderTime"></div>
             <div class="order-detail">
@@ -115,10 +115,10 @@
         </div>
       </div>
       <div class="order-used">
-        <div class="title">
+        <div class="title" @click="showUsedList" :class="{'hide-title':!usedFlag}">
           <span>使用中</span>
         </div>
-        <div class="list">
+        <div class="list" v-show="usedFlag">
           <div v-for="item in deliverylist" :key="item.id">
             <div class="order-date" v-text="item.orderTime"></div>
             <div class="order-detail">
@@ -161,8 +161,8 @@
                     <span class="desc">使用中</span>
                   </div>
                   <!-- <a class="op">
-                                                          延长租期
-                                                        </a> -->
+                                                                              延长租期
+                                                                            </a> -->
                 </div>
               </div>
               <div class="more"></div>
@@ -171,10 +171,10 @@
         </div>
       </div>
       <div class="order-completed">
-        <div class="title">
+        <div class="title" @click="showHistoryList" :class="{'hide-title':!hisFlag}">
           <span>历史订单</span>
         </div>
-        <div class="list">
+        <div class="list" v-show="hisFlag">
           <div v-for="item in deliverylist" :key="item.id">
             <div class="order-date" v-text="item.orderTime"></div>
             <div class="order-detail">
@@ -239,7 +239,11 @@ export default {
   },
   data() {
     return {
-      list: {}
+      list: {},
+      noPayFlag: true,
+      deliveryFlag: false,
+      usedFlag: false,
+      hisFlag: false
     }
   },
   computed: {
@@ -279,6 +283,18 @@ export default {
   methods: {
     pay(item) {
       this.$router.push({ name: 'order-detail', query: { id: item.id } })
+    },
+    showNoPayList() {
+      this.noPayFlag = !this.noPayFlag
+    },
+    showDeliveryList() {
+      this.deliveryFlag = !this.deliveryFlag
+    },
+    showUsedList() {
+      this.usedFlag = !this.usedFlag
+    },
+    showHistoryList() {
+      this.hisFlag = !this.hisFlag
     }
   }
 }
@@ -301,6 +317,11 @@ export default {
         -webkit-transform .3s;
       }
       @include arrow-down(6px, white);
+    }
+  }
+  .hide-title {
+    span {
+      @include arrow-right(6px, white);
     }
   }
   .list {
