@@ -62,7 +62,7 @@ export default {
             storage.set('access-token', res.data.memberToken)
             this.$ve.toast('登录成功', {
               duration: 1000, callback: () => {
-                this.$router.push('/usercenter')
+                this.$router.push('/')
               }
             });
           } else {

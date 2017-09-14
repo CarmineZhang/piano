@@ -81,13 +81,16 @@ export default {
   methods: {
     pay() {
       let loading = this.$ve.loading('处理中...')
-      http.wxPay(this.detail.orderSn, this.detail.downPayment, '钢琴支付').then(res => {
+      http.wxPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴--订单号' + this.detail.orderSn).then(res => {
         loading.hide()
         if (res.errNo == 0) {
           window.location.href = res.data.codeUrl
         } else {
           this.$ve.alert(res.errMsg)
         }
+      }).catch(() => {
+        loading.hide()
+        this.$ve.alert('服务器错误，请稍后再试')
       })
     }
   }
