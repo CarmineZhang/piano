@@ -192,6 +192,7 @@ export default {
   .flexbox {
     display: flex;
     line-height: 2;
+    margin-bottom: 5px;
     .flex-item {
       flex: 1;
       word-wrap: break-word;

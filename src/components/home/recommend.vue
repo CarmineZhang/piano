@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="re-pd" :class="{'re-pd-dark':index%2==1}" v-for="(item,index) in list" :key="index">
+    <div class="re-pd" :class="{'re-pd-dark':index%2==1}" v-for="(item,index) in list" :key="index" @click="gotoDetail(item.pianoId)">
       <div class="re-img">
         <img :src="item.coverUrl" alt="">
       </div>
@@ -31,6 +31,11 @@ export default {
         this.list = res.data.list
       }
     })
+  },
+  methods: {
+    gotoDetail(id) {
+      this.$router.push({ path: '/productdetail', query: { id: id } })
+    }
   }
 }
 </script>
