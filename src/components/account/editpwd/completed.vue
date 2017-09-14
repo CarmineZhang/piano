@@ -1,15 +1,18 @@
 <template>
   <div>
+    <my-header content="修改密码"></my-header>
     <set-pwd @on-confirm="confirm"></set-pwd>
   </div>
 </template>
 <script>
 import SetPwd from '@/components/common/setpwd'
 import http from '@/libs/httpUtil'
+import MyHeader from '@/components/header'
 export default {
   name: 'editpwd-newpwd',
   components: {
-    SetPwd
+    SetPwd,
+    MyHeader
   },
   beforeMount() {
     document.title = '修改密码'

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <my-header content="地址管理"></my-header>
     <div class="addr-list">
       <div class="addr-item" v-for="item in list" :key="item.memberId">
         <div @click="setDefault(item.id)">
@@ -30,8 +31,12 @@
 </template>
 <script>
 import http from '@/libs/httpUtil'
+import MyHeader from '../header'
 export default {
   name: 'address',
+  components: {
+    MyHeader
+  },
   props: {
     choose: Boolean
   },

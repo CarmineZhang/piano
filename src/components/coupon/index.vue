@@ -1,5 +1,6 @@
 <template>
   <div>
+    <my-header content="优惠券"></my-header>
     <div class="coupon">
       <div class="coupon-item" v-for="(item,index) in list" :key="item.id" :class="{'coupon-item-blue':index%2==1}">
         <p class="ct">
@@ -14,8 +15,12 @@
 </template>
 <script>
 import http from '@/libs/httpUtil'
+import MyHeader from '../header'
 export default {
   name: 'coupon',
+  components: {
+    MyHeader
+  },
   data() {
     return {
       list: []

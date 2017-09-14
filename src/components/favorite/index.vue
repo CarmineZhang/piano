@@ -1,5 +1,6 @@
 <template>
   <div>
+    <my-header content="收藏"></my-header>
     <scroll-load @load-more="loadmore" v-model="allowload">
       <div class="pl-item" v-for="item in list" :key="item.id">
         <div class="pl-item-img" @click="showDetail(item.pianoId)">
@@ -24,10 +25,12 @@
 <script>
 import ScrollLoad from '@/components/base/scrollload'
 import http from '@/libs/httpUtil'
+import MyHeader from '../header'
 export default {
   name: 'favorite',
   components: {
-    ScrollLoad
+    ScrollLoad,
+    MyHeader
   },
   created() {
     this.getList()

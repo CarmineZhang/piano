@@ -1,15 +1,18 @@
 <template>
   <div>
+    <my-header content="注册"></my-header>
     <set-pwd @on-confirm="confirm"></set-pwd>
   </div>
 </template>
 <script>
-import SetPwd from '../common/setpwd'
+import SetPwd from '@/components/common/setpwd'
 import http from '@/libs/httpUtil'
+import MyHeader from '@/components/header'
 export default {
   name: 'register-set-pwd',
   components: {
-    SetPwd
+    SetPwd,
+    MyHeader
   },
   beforeMount() {
     if (!this.phone) {

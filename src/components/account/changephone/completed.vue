@@ -1,15 +1,18 @@
 <template>
   <div>
+    <my-header content="修改密码"></my-header>
     <send-phone @on-confirm="confirm" @on-cancel="cancel"></send-phone>
   </div>
 </template>
 <script>
 import SendPhone from '@/components/common/sendphone'
 import http from '@/libs/httpUtil'
+import MyHeader from '@/components/header'
 export default {
   name: 'change-phone',
   components: {
-    SendPhone
+    SendPhone,
+    MyHeader
   },
   beforeMount() {
     document.title = '更换手机'

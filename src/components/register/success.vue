@@ -1,17 +1,24 @@
 <template>
-  <div class="success">
-    <div class="success-img">
-      <img src="../../assets/success.png" alt="">
+  <div>
+    <my-header content="注册"></my-header>
+    <div class="success">
+      <div class="success-img">
+        <img src="../../assets/success.png" alt="">
+      </div>
+      <div class="success-msg">
+        恭喜您，注册成功！
+      </div>
+      <a class="action" v-text="content" @click="gotoMe()"></a>
     </div>
-    <div class="success-msg">
-      恭喜您，注册成功！
-    </div>
-    <a class="action" v-text="content" @click="gotoMe()"></a>
   </div>
 </template>
 <script>
+import MyHeader from '@/components/header'
 export default {
   name: 'register-complete',
+  components: {
+    MyHeader
+  },
   data() {
     return {
       duration: 2000

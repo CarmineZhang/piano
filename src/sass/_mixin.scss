@@ -103,6 +103,24 @@
   }
 }
 
+@mixin arrow-left($num:10px, $color:#666) {
+  &:before {
+    content: "";
+    display: block;
+    width: $num;
+    height: $num;
+    border-width: 1px 1px 0 0;
+    border-color: $color;
+    border-style: solid;
+    transform-origin: 50%;
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0) rotate(180deg);
+    position: absolute;
+    top: 50%;
+    margin-top: -(($num / 2) + 1);
+    left: 20px;
+  }
+}
+
 @mixin arrow-down($num:10px, $color:#C8C8CD) {
   &:after {
     content: "";

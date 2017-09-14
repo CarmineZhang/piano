@@ -1,5 +1,6 @@
 <template>
   <div>
+    <my-header content="我的"></my-header>
     <div class="user-header">
       <p class="tit">当前账户</p>
       <p class="ct">
@@ -38,10 +39,12 @@
 import { Cell } from '../base/cell'
 import http from '@/libs/httpUtil'
 import storage from '@/libs/storage'
+import MyHeader from '../header'
 export default {
   name: 'user-center',
   components: {
-    Cell
+    Cell,
+    MyHeader
   },
   data() {
     return {
