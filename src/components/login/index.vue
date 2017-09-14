@@ -56,7 +56,9 @@ export default {
     login() {
       var validator = this.$validator
       if (validator.valid) {
+        let loading = this.$ve.loading('登录中...')
         http.login(this.phone, this.pwd).then((res) => {
+          loading.hide()
           if (res.errNo == 0) {
             storage.set('phone', this.phone)
             storage.set('access-token', res.data.memberToken)
@@ -68,6 +70,9 @@ export default {
           } else {
             this.$ve.alert(res.errMsg)
           }
+        }).catch(() => {
+          loading.hide()
+          this.$ve.alert('服务器错误，请稍后重试')
         })
       }
     }
