@@ -1,5 +1,6 @@
 <template>
   <div>
+    <my-header content="钢琴详情"></my-header>
     <swiper :list="data.otherImgs" class="pt-detail-swiper"></swiper>
     <div class="pt-detail">
       <p class="title" v-text="data.pianoName"></p>
@@ -72,10 +73,12 @@
 <script>
 import Swiper from '../base/swiper'
 import http from '@/libs/httpUtil'
+import MyHeader from '@/components/header'
 export default {
   name: 'product-detail',
   components: {
-    Swiper
+    Swiper,
+    MyHeader
   },
   computed: {
     deposit() {
