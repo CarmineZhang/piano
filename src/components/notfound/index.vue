@@ -1,7 +1,7 @@
 <template>
   <div class="msg">
     <div class="msg-icon-area">
-      <i class="weui-icon-warn"></i>
+      <i class="weui-icon-warn weui-icon-msg"></i>
     </div>
     <div class="msg-text-area">
       <h2 class="msg-title">404，没有找到页面</h2>
@@ -23,10 +23,19 @@ export default {
 </script>
 <style lang="scss">
 .msg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   padding-top: 36px;
   text-align: center;
+  background: #fff;
   .msg-icon-area {
     margin-bottom: 30px
+  }
+  .weui-icon-msg {
+    font-size: 93px;
   }
   .msg-text-area {
     margin-bottom: 25px;
