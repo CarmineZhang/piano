@@ -31,7 +31,7 @@
       <div class="flexbox">
         <span class="s1">租金：</span>
         <span class="flex-item s1">
-          <em>¥</em>{{rent|ToThousands}}</span>
+          <em>¥</em>{{rent*leaseNum|ToThousands}}</span>
       </div>
       <div class="flexbox">
         <span class="s1" style="line-height: .64rem;">押金+租金：</span>

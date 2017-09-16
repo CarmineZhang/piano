@@ -35,7 +35,7 @@ axios.interceptors.response.use(
 );
 
 axios.interceptors.response.use(res => {
-  if (res.errNo && (res.errNo == 50000 || res.errNo == 50099)) {
+  if (res.errNo && res.errNo == 50000) {
     router.push('/login')
     return res
   } else {

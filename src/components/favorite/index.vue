@@ -85,6 +85,9 @@ export default {
           this.$ve.alert(res.errMsg)
         }
       })
+    },
+    showDetail(id) {
+      this.$router.push({ path: '/productdetail', query: { id: id } })
     }
   }
 }
