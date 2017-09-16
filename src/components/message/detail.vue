@@ -1,14 +1,21 @@
 <template>
-  <div class="msg-detail">
-    <p class="msg-detail-header" v-text="detail.title"></p>
-    <p class="msg-detail-content" v-text="detail.messageInfo"></p>
-    <p class="msg-detail-time" v-text="detail.creatTime"></p>
+  <div>
+    <my-header content="消息详情"></my-header>
+    <div class="msg-detail">
+      <p class="msg-detail-header" v-text="detail.title"></p>
+      <p class="msg-detail-content" v-text="detail.messageInfo"></p>
+      <p class="msg-detail-time" v-text="detail.creatTime"></p>
+    </div>
   </div>
 </template>
 <script>
+import MyHeader from '../header'
 import http from '@/libs/httpUtil'
 export default {
   name: 'message-detail',
+  components: {
+    MyHeader
+  },
   data() {
     return {
       detail: {}
