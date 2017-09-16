@@ -3,9 +3,9 @@
     <addr-list choose></addr-list>
     <div class="footer-action choose-addr-footer">
       <!-- <div class="desc">
-                                                          合计：¥
-                                                          <em class="price">{{deliverycost|ToThousands}}</em>
-                                                        </div> -->
+                                                                合计：¥
+                                                                <em class="price">{{deliverycost|ToThousands}}</em>
+                                                              </div> -->
       <a class="action" @click="confirmAddr">确认地址</a>
     </div>
   </div>
@@ -34,12 +34,18 @@ export default {
   methods: {
     confirmAddr() {
       if (this.defaultAddrId) {
+        let loading = this.$ve.loading('处理中...')
         http.order(this.selectPiano, this.defaultAddrId).then(res => {
+          loading.hide()
           if (res.errNo == 0) {
             this.$ve.alert('下单成功', () => {
               this.$router.push({ name: 'order-detail', query: { id: res.data.id } })
             })
+          } else {
+            this.$ve.alert(res.errMsg)
           }
+        }).catch(() => {
+          loading.hide()
         })
       } else {
         this.$ve.alert('请选择一个地址')
