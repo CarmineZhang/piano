@@ -65,26 +65,5 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.msg {
-  padding-top: 36px;
-  text-align: center;
-  .msg-icon-area {
-    margin-bottom: 30px
-  }
-  .msg-text-area {
-    margin-bottom: 25px;
-    padding: 0 20px;
-    .msg-title {
-      margin-bottom: 5px;
-      font-weight: 400;
-      font-size: 20px;
-    }
-    a {
-      color: #586C94;
-    }
-  }
-}
-</style>
 
 
