@@ -97,6 +97,11 @@ export default {
       return this.$store.state.route.params.phone
     }
   },
+  beforeMount() {
+    if (!this.phone) {
+      this.$router.go(-1)
+    }
+  },
   methods: {
     ok() {
       if (this.$validator.valid) {

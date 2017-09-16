@@ -14,11 +14,6 @@ export default {
     SetPwd,
     MyHeader
   },
-  beforeMount() {
-    if (!this.phone) {
-      this.$router.push('/register')
-    }
-  },
   methods: {
     confirm(phone, pwd) {
       let loading = this.$ve.loading('处理中...')

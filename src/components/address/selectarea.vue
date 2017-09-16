@@ -149,7 +149,7 @@ export default {
             if (res.errNo == 0) {
               this.$store.commit('receiveCity', {
                 pcode: this.province,
-                list: res.data
+                list: [...res.data]
               })
               this.data = res.data
             }
@@ -166,7 +166,7 @@ export default {
             if (res.errNo == 0) {
               this.$store.commit('receiveCounty', {
                 ccode: this.city,
-                list: res.data
+                list: [...res.data]
               })
               this.data = res.data
             }

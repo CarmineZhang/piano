@@ -4,7 +4,7 @@
     <div class="order-list">
       <div class="order-no-pay">
         <div class="title" @click="showNoPayList" :class="{'hide-title':!noPayFlag}">
-          <span>待支付订单</span>
+          <span>待支付订单({{noPaylist.length}})</span>
         </div>
         <div class="list" v-show="noPayFlag">
           <div v-for="item in noPaylist" :key="item.id">
@@ -60,7 +60,7 @@
       </div>
       <div class="order-distribution">
         <div class="title" @click="showDeliveryList" :class="{'hide-title':!deliveryFlag}">
-          <span>配送中</span>
+          <span>配送中({{deliverylist.length}})</span>
         </div>
         <div class="list" v-show="deliveryFlag">
           <div v-for="item in deliverylist" :key="item.id">
@@ -116,10 +116,10 @@
       </div>
       <div class="order-used">
         <div class="title" @click="showUsedList" :class="{'hide-title':!usedFlag}">
-          <span>使用中</span>
+          <span>使用中({{usedlist.length}})</span>
         </div>
         <div class="list" v-show="usedFlag">
-          <div v-for="item in deliverylist" :key="item.id">
+          <div v-for="item in usedlist" :key="item.id">
             <div class="order-date" v-text="item.orderTime"></div>
             <div class="order-detail">
               <div class="order-wrapper">
@@ -161,8 +161,8 @@
                     <span class="desc">使用中</span>
                   </div>
                   <!-- <a class="op">
-                                                                                延长租期
-                                                                              </a> -->
+                                                                                      延长租期
+                                                                                    </a> -->
                 </div>
               </div>
               <div class="more"></div>
@@ -172,10 +172,10 @@
       </div>
       <div class="order-completed">
         <div class="title" @click="showHistoryList" :class="{'hide-title':!hisFlag}">
-          <span>历史订单</span>
+          <span>历史订单({{completedlist.length}})</span>
         </div>
         <div class="list" v-show="hisFlag">
-          <div v-for="item in deliverylist" :key="item.id">
+          <div v-for="item in completedlist" :key="item.id">
             <div class="order-date" v-text="item.orderTime"></div>
             <div class="order-detail">
               <div class="order-wrapper">
