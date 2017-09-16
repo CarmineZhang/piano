@@ -12,7 +12,8 @@ export default new Vuex.Store({
     selectPiano: null,
     province: [],
     city: {},
-    county: {}
+    county: {},
+    backUrl: ''
   },
   getters: {
     defaultAddrId(state) {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    updateBackUrl(state, payload) {
+      state.backUrl = payload.backUrl
+    },
     updateDirection(state, payload) {
       state.direction = payload.direction
     },

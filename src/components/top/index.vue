@@ -27,6 +27,9 @@ export default {
       if (storage.get('access-token')) {
         this.$router.push('/usercenter')
       } else {
+        this.$store.commit('updateBackUrl', {
+          backUrl: '/usercenter'
+        })
         this.$router.push('/login')
       }
     },

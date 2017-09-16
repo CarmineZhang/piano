@@ -64,7 +64,11 @@ export default {
             storage.set('access-token', res.data.memberToken)
             this.$ve.toast('登录成功', {
               duration: 1000, callback: () => {
-                this.$router.push('/')
+                let url = this.$store.state.backUrl
+                if (url === '') {
+                  url = '/'
+                }
+                this.$router.push(url)
               }
             });
           } else {

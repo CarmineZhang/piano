@@ -4,6 +4,7 @@ import {
 } from './comUtil'
 import qs from 'qs'
 import router from '../router'
+import store from '../store'
 import storage from './storage'
 axios.interceptors.response.use(
   response => {
@@ -36,6 +37,10 @@ axios.interceptors.response.use(
 
 axios.interceptors.response.use(res => {
   if (res.errNo && res.errNo == 50000) {
+    console.dir(router.currentRoute.path)
+    store.commit('updateBackUrl', {
+      backUrl: router.currentRoute.path
+    })
     router.push('/login')
     return res
   } else {
