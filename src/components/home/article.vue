@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-header content="收藏"></my-header>
+    <my-header content="资讯详情"></my-header>
     <div class="new-detail">
       <p class="detail-header" v-text="detail.title"></p>
       <p class="detail-time">{{detail.beginTime|dateformate}}</p>
