@@ -41,6 +41,7 @@ export default {
 </script>
 <style lang="scss">
 .pay {
+  padding-bottom: .9rem;
   .title {
     padding-top: 30px;
     padding-left: .3rem;
