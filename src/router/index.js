@@ -47,6 +47,7 @@ export default new Router({
       alias: '/index.html'
     }, {
       path: '/productlist',
+      name: 'product-list',
       component: ProductList
     }, {
       path: '/productdetail',

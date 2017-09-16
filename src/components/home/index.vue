@@ -2,7 +2,7 @@
   <div class="main">
     <div class="fixed-header">
       <top></top>
-      <search-bar></search-bar>
+      <search-bar @on-search="search"></search-bar>
     </div>
     <div class="index-body">
       <swiper :list="swipers"></swiper>
@@ -54,6 +54,9 @@ export default {
     },
     showPianoList() {
       this.$router.push('/productlist')
+    },
+    search(val) {
+      this.$router.push({ name: 'product-list', params: { key: val } })
     }
   }
 }

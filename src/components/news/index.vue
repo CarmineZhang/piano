@@ -2,7 +2,7 @@
   <div>
     <div class="fixed-header">
       <top></top>
-      <search-bar></search-bar>
+      <!-- <search-bar></search-bar> -->
     </div>
     <scroll-load @load-more="loadmore" v-model="allowload">
       <list class="news-body" :list="list"></list>
@@ -12,7 +12,7 @@
 </template>
 <script>
 import Top from '../top'
-import SearchBar from '../base/searchbar'
+// import SearchBar from '../base/searchbar'
 import ScrollLoad from '@/components/base/scrollload'
 import VeFooter from '../footer'
 import List from './list'
@@ -21,7 +21,7 @@ export default {
   name: 'news',
   components: {
     Top,
-    SearchBar,
+    // SearchBar,
     VeFooter,
     List,
     ScrollLoad
@@ -72,7 +72,8 @@ export default {
 </script>
 <style lang="scss">
 .news-body {
-  padding: .88rem+0.84rem 0 1.5rem;
+  // padding: .88rem+0.84rem 0 1.5rem;
+  padding: .88rem 0 1.5rem;
 }
 </style>
 

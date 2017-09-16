@@ -3,7 +3,7 @@
     <div class="search-head">
       <div class="fixed-head" :style="style">
         <top></top>
-        <search-bar></search-bar>
+        <search-bar @on-search="search" @on-change="search" :default-value="pianoName"></search-bar>
         <ve-select :brand-dic="brandDic" :rent-day="rentDay" :rent-month="rentMonth" @on-brand="selectBrand" @on-rent-type="selectRentType" @on-rent="selectRent"></ve-select>
       </div>
     </div>
@@ -41,10 +41,15 @@ export default {
       allowload: true,
       brand: '',
       rentType: '',
-      rent: ''
+      rent: '',
+      pianoName: ''
     }
   },
   created() {
+    let key = this.$store.state.route.params.key
+    if (key) {
+      this.pianoName = key
+    }
     this.getList()
   },
   beforeMount() {
@@ -75,9 +80,13 @@ export default {
     selectRent(rent) {
       this.rent = rent
     },
+    search(val) {
+      this.pianoName = val
+      this.getList()
+    },
     getList() {
       this.index = 1
-      http.getPiano(this.index, this.size, this.brand, this.rentType, this.rent).then((res) => {
+      http.getPiano(this.index, this.size, this.brand, this.rentType, this.rent, this.pianoName).then((res) => {
         if (res.errNo == 0) {
           this.list = res.data.list
           this.brandDic = res.data.brandDic
@@ -93,7 +102,7 @@ export default {
     },
     loadmore() {
       this.index = this.index + 1
-      http.getPiano(this.index, this.size, this.brand, this.rentType, this.rent).then((res) => {
+      http.getPiano(this.index, this.size, this.brand, this.rentType, this.rent, this.pianoName).then((res) => {
         if (res.errNo == 0) {
           let list = res.data.list
           this.brandDic = res.data.brandDic
