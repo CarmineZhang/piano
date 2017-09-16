@@ -1,6 +1,8 @@
 <template>
   <div>
-    <my-header content="我的"></my-header>
+    <my-header content="我的">
+      <i class="icon-message" @click="showMessage"></i>
+    </my-header>
     <div class="user-header">
       <p class="tit">当前账户</p>
       <p class="ct">
@@ -61,6 +63,9 @@ export default {
     this.phone = storage.get('phone')
   },
   methods: {
+    showMessage() {
+      this.$router.push('/message')
+    },
     logout() {
       let loading = this.$ve.loading('处理中...')
       http.logout().then(res => {
@@ -82,6 +87,13 @@ export default {
 }
 </script>
 <style lang="scss">
+.icon-message {
+  width: 40px;
+  background: url('../../assets/message.png') no-repeat;
+  background-position: 50%;
+  background-size: .30rem;
+}
+
 .user-header {
   height: 1.3rem-2*0.2rem;
   background-color: #bf3737;

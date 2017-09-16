@@ -29,6 +29,9 @@ import FindPwdNext from '@/components/findpwd/setpwd'
 import ChooseAddr from '@/components/address/chooseaddr'
 import NotFoundComponent from '@/components/notfound'
 import AliPayResult from '@/components/orderdetail/alipay'
+import Message from '@/components/message'
+import MessageDetail from '@/components/message/detail'
+
 Vue.use(Router)
 Vue.use(Widget)
 
@@ -126,6 +129,13 @@ export default new Router({
     }, {
       path: '/ailpay/result',
       component: AliPayResult
+    }, {
+      path: '/message',
+      component: Message
+    }, {
+      path: '/message/detail',
+      name: 'message-detail',
+      component: MessageDetail
     }
   ]
 })

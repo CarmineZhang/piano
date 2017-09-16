@@ -2,6 +2,7 @@
   <div class="header-wrapper">
     <a class="header-back" @click="back"></a>
     <div class="header-info" v-text="content"></div>
+    <slot></slot>
   </div>
 </template>
 <script>

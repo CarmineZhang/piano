@@ -288,6 +288,34 @@ function changeMemberPhone(phone) {
   })
 }
 
+function getMessageList(no, size) {
+  return ajax('msg/getMessages', {
+    memberToken: storage.get('access-token'),
+    pageNo: no,
+    pageSize: size
+  })
+}
+
+function getMessageDetial(id) {
+  return ajax('msg/getMessageDetail', {
+    messageId: id
+  })
+}
+
+function delMessage(id) {
+  return ajax('msg/deleteMessage', {
+    messageId: id
+  })
+}
+
+function updateMessage(id) {
+  return ajax('msg/updaeMessage', {
+    messageId: id
+  })
+}
+
+
+
 export default {
   sendCode,
   login,
@@ -319,5 +347,9 @@ export default {
   uptatePassword,
   checkCollection,
   aliPay,
-  getAliPayResult
+  getAliPayResult,
+  getMessageList,
+  getMessageDetial,
+  delMessage,
+  updateMessage
 }
