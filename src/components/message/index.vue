@@ -164,7 +164,6 @@ export default {
 }
 
 .msg-list {
-  min-height: 300px;
   padding: 0 .3rem;
   .msg-item {
     .msg-time {
