@@ -1,7 +1,7 @@
 <template>
   <div>
     <my-header content="我的">
-      <i class="icon-message" @click="showMessage"></i>
+      <i class="icon-message" @click="showMessage" :class="{'icon-new-message':isNewMsg}"></i>
     </my-header>
     <div class="user-header">
       <p class="tit">当前账户</p>
@@ -50,19 +50,25 @@ export default {
   },
   data() {
     return {
-      phone: ''
+      phone: '',
+      isNewMsg: false
     }
   },
-  beforeCreate() {
-    if (!storage.get('access-token')) {
-      this.$router.push('/login')
-    }
+  created() {
+    this.getUnReadMessage()
   },
   beforeMount() {
-    document.title = '个人中心'
+    document.title = '我的'
     this.phone = storage.get('phone')
   },
   methods: {
+    getUnReadMessage() {
+      http.getUnReadMessage().then(res => {
+        if (res.errNo == 0) {
+          this.isNewMsg = +res.data.unreadCount > 0
+        }
+      })
+    },
     showMessage() {
       this.$router.push('/message')
     },
@@ -91,7 +97,21 @@ export default {
   width: 40px;
   background: url('../../assets/message.png') no-repeat;
   background-position: 50%;
-  background-size: .30rem;
+  background-size: 15px;
+  position: relative;
+}
+
+.icon-new-message {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 24px;
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: red;
+  }
 }
 
 .user-header {

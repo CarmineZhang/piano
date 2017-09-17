@@ -262,9 +262,11 @@ function orderlist() {
 
 function wxPay(no, total, body) {
   return ajax('wechatpay/unifiedOrder', {
+    memberToken: storage.get('access-token'),
     body: body,
     totalFee: total,
-    outTradeNo: no
+    outTradeNo: no,
+    type: '1'
   })
 }
 
@@ -320,6 +322,12 @@ function updateMessage(id) {
   })
 }
 
+function getUnReadMessage() {
+  return ajax('msg/unreadMsg', {
+    memberToken: storage.get('access-token')
+  })
+}
+
 
 
 export default {
@@ -357,5 +365,6 @@ export default {
   getMessageList,
   getMessageDetial,
   delMessage,
-  updateMessage
+  updateMessage,
+  getUnReadMessage
 }
