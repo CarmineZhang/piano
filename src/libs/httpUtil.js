@@ -296,28 +296,32 @@ function changeMemberPhone(phone) {
   })
 }
 
-function getMessageList(no, size) {
+function getMessageList(no, size, type) {
   return ajax('msg/getMessages', {
     memberToken: storage.get('access-token'),
     pageNo: no,
-    pageSize: size
+    pageSize: size,
+    type: type
   })
 }
 
 function getMessageDetial(id) {
   return ajax('msg/getMessageDetail', {
+    memberToken: storage.get('access-token'),
     messageId: id
   })
 }
 
 function delMessage(id) {
   return ajax('msg/deleteMessage', {
+    memberToken: storage.get('access-token'),
     messageId: id
   })
 }
 
 function updateMessage(id) {
   return ajax('msg/updaeMessage', {
+    memberToken: storage.get('access-token'),
     messageId: id
   })
 }

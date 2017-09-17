@@ -45,6 +45,7 @@
       <a class="cost-ok" @click="pay">
         确认支付
       </a>
+      <div v-html="payText"></div>
     </div>
   </div>
 </template>
@@ -59,6 +60,7 @@ export default {
     return {
       detail: {},
       payType: 'wx',
+      payText: ''
     }
   },
   created() {
@@ -91,12 +93,14 @@ export default {
         http.wxPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴--订单号' + this.detail.orderSn).then(res => {
           loading.hide()
           if (res.errNo == 0) {
-            // window.location.href = res.data.codeUrl
-            let url = res.data.codeUrl
-            if (url) {
-              document.body.innerHTML += `<form name="punchout_form" method="post" action="${url}"></form>`
-              document.forms[0].submit()
-            }
+            // let url = res.data.payUrl
+            // if (url) {
+            //   this.payText = `<form name="punchout_form" method="post" action="${url}"></form>`
+            //   this.$nextTick(() => {
+            //     document.forms[0].submit()
+            //   })
+            // }
+            window.location.href = res.data.payUrl
           } else {
             this.$ve.alert(res.errMsg)
           }
@@ -108,8 +112,10 @@ export default {
         http.aliPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴', '行龙租琴--订单号' + this.detail.orderSn).then(res => {
           loading.hide()
           if (res.errNo == 0) {
-            document.body.innerHTML += res.data.alipayTrade
-            document.forms[0].submit()
+            this.payText = res.data.alipayTrade
+            this.$nextTick(() => {
+              document.forms[0].submit()
+            })
           } else {
             this.$ve.alert(res.errMsg)
           }

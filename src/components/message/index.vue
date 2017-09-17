@@ -1,75 +1,100 @@
 <template>
   <div>
-    <my-header content="消息"></my-header>
-    <div class="msg-header">
-      <ul class="msg-nav">
-        <li :class="{'cur':type=='1'}" @click="showOderMessage">
-          <span>订单消息</span>
-        </li>
-        <li :class="{'cur':type=='2'}" @click="showSystemMessage">
-          <span>系统消息</span>
-        </li>
-      </ul>
-    </div>
-    <div class="msg-list">
-      <div class="msg-item" v-for="item in list " :key="item.id">
-        <div class="msg-time">
-          <span v-text="item.creatTime"></span>
-        </div>
-        <div class="msg-main">
-          <p class="msg-m-header" v-text="item.title"></p>
-          <p class="msg-m-content"></p>
-          <p class="msg-options">
-            <div class="action">
-              <a @click="del(item.id)">删除</a>
-            </div>
-            <div class="action detail-action">
-              <a @click="showDetail(item.id)">查看详情>></a>
-            </div>
-          </p>
+    <div class="msg-top">
+      <div class="msg-wrapper">
+        <my-header content="消息"></my-header>
+        <div class="msg-header">
+          <ul class="msg-nav">
+            <li :class="{'cur':type=='1'}" @click="showOderMessage">
+              <span>订单消息</span>
+            </li>
+            <li :class="{'cur':type=='2'}" @click="showSystemMessage">
+              <span>系统消息</span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
+    <scroll-load @load-more="loadmore" v-model="allowload">
+      <div class="msg-list">
+        <div class="msg-item" v-for="item in allList " :key="item.id">
+          <div class="msg-time">
+            <span v-text="item.creatTime"></span>
+          </div>
+          <div class="msg-main">
+            <p class="msg-m-header" v-text="item.title"></p>
+            <p class="msg-m-content"></p>
+            <p class="msg-options">
+              <div class="action">
+                <a @click="del(item.id)">删除</a>
+              </div>
+              <div class="action detail-action">
+                <a @click="showDetail(item.id)">查看详情>></a>
+              </div>
+            </p>
+          </div>
+        </div>
+      </div>
+    </scroll-load>
   </div>
 </template>
 <script>
 import MyHeader from '../header'
 import http from '@/libs/httpUtil'
+import ScrollLoad from '@/components/base/scrollload'
 export default {
   name: 'message',
   components: {
-    MyHeader
+    MyHeader,
+    ScrollLoad
   },
   data() {
     return {
       allowload: true,
-      no: 1,
+      index: 1,
       size: 100,
       allList: [],
       type: '1'
-    }
-  },
-  computed: {
-    list() {
-      return this.allList.filter(item => {
-        return item.type == this.type
-      })
     }
   },
   created() {
     this.getList()
   },
   methods: {
+    loadmore() {
+      this.index = this.index + 1
+      http.getMessageList(this.index, this.size, this.type).then(res => {
+        if (res.errNo == 0) {
+          let list = res.data.dataList
+          if (list.length < this.size) {
+            this.allowload = false
+          } else {
+            this.allowload = true
+          }
+          this.allList = this.allList.concat(list)
+        }
+      })
+    },
     showOderMessage() {
       this.type = "1"
+      this.getList()
     },
     showSystemMessage() {
       this.type = "2"
+      this.getList()
     },
     getList() {
-      http.getMessageList(this.no, this.size).then(res => {
+      this.index = 1
+      this.allowload = true
+      http.getMessageList(this.index, this.size, this.type).then(res => {
         if (res.errNo == 0) {
-          this.allList = res.data.dataList
+          let list = res.data.dataList
+          if (list.length < this.size) {
+            this.allowload = false
+          } else {
+            this.allowload = true
+          }
+          this.allList = list
         }
       })
     },
@@ -93,8 +118,19 @@ export default {
 }
 </script>
 <style lang="scss">
+.msg-top {
+  height: 80px;
+  .msg-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+  }
+}
+
 .msg-header {
-  height: .88rem;
+  height: 40px;
   .msg-nav {
     background-color: #7c7c8b;
     font-size: .28rem;
@@ -107,7 +143,7 @@ export default {
         display: inline-block;
         padding: 0 15px;
         position: relative;
-        line-height: .88rem;
+        line-height: 40px;
       }
     }
     li.cur {
@@ -128,6 +164,7 @@ export default {
 }
 
 .msg-list {
+  min-height: 300px;
   padding: 0 .3rem;
   .msg-item {
     .msg-time {
