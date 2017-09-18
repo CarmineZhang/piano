@@ -181,7 +181,8 @@ function getCouponMemberInfos(no = 1, size = 10) {
 
 function getRecomments() {
   return ajax('recomment/recomments', {
-    brand: ''
+    brand: '',
+    ftuType: '2'
   })
 }
 
@@ -266,6 +267,7 @@ function wxPay(no, total, body) {
     body: body,
     totalFee: total,
     outTradeNo: no,
+    returnUrl: 'http://pianoshare.cn/wxpay/result?tradeno=' + no,
     type: '1'
   })
 }
@@ -285,6 +287,12 @@ function aliPay(no, total, subject, body) {
 function getAliPayResult(no) {
   return ajax('alipay/alipayTradeResult', {
     memberToken: storage.get('access-token'),
+    outTradeNo: no
+  })
+}
+
+function getWxPayResult(no) {
+  return ajax('wechatpay/wechatPayResult', {
     outTradeNo: no
   })
 }
@@ -332,6 +340,14 @@ function getUnReadMessage() {
   })
 }
 
+function orderOperator(orderId, event) {
+  return ajax('order/orderOperate', {
+    memberToken: storage.get('access-token'),
+    orderId: orderId,
+    event: event
+  })
+}
+
 
 
 export default {
@@ -370,5 +386,7 @@ export default {
   getMessageDetial,
   delMessage,
   updateMessage,
-  getUnReadMessage
+  getUnReadMessage,
+  orderOperator,
+  getWxPayResult
 }

@@ -8,7 +8,7 @@
       </div>
     </div>
     <scroll-load @load-more="loadmore" v-model="allowload">
-      <list :data="list"></list>
+      <list :data="list" :rent-type="rentType"></list>
     </scroll-load>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
       size: 10,
       allowload: true,
       brand: '',
-      rentType: '',
+      rentType: 'month',
       rent: '',
       pianoName: ''
     }

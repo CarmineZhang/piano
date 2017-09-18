@@ -48,6 +48,7 @@
                     <span>状态：</span>
                     <span class="desc">未支付</span>
                   </div>
+                  <a class="op op-cancel" @click="cancel(item)">取消订单</a>
                   <a class="op" @click="pay(item)">
                     继续支付
                   </a>
@@ -104,9 +105,9 @@
                     <span>状态：</span>
                     <span class="desc">配送中</span>
                   </div>
-                  <a class="op">
-                    取消订单
-                  </a>
+                  <!-- <a class="op">
+                                                取消订单
+                                              </a> -->
                 </div>
               </div>
               <div class="more"></div>
@@ -161,8 +162,8 @@
                     <span class="desc">使用中</span>
                   </div>
                   <!-- <a class="op">
-                                                                                      延长租期
-                                                                                    </a> -->
+                                                                                                                      延长租期
+                                                                                                                    </a> -->
                 </div>
               </div>
               <div class="more"></div>
@@ -216,7 +217,8 @@
                     <span>状态：</span>
                     <span class="desc">已结束</span>
                   </div>
-                  <a class="op">
+                  <a class="op op-cancel" @click="deleteOrder(item)">删除订单</a>
+                  <a class="op" @click="continueRent(item)">
                     继续租赁
                   </a>
                 </div>
@@ -248,40 +250,72 @@ export default {
   },
   computed: {
     noPaylist() {
-      return this.list['status0']
+      return this.list['status0'] || []
     },
     noDeliverylist() {
-      return this.list['status1']
+      return this.list['status1'] || []
     },
     deliverylist() {
-      return this.list['status2']
+      return this.list['status2'] || []
     },
     deliveryCompleted() {
-      return this.list['status3']
+      return this.list['status3'] || []
     },
     usedlist() {
-      return this.list['status4']
+      return this.list['status4'] || []
     },
     canceledlist() {
-      return this.list['status5']
+      return this.list['status5'] || []
     },
     completedlist() {
-      return this.list['status6']
+      return this.list['status6'] || []
     }
   },
   created() {
-    http.orderlist().then(res => {
-      if (res.errNo == 0) {
-        this.list = res.data
-      }
-    })
+    this.getList()
   },
   beforeMount() {
     document.title = '订单列表'
   },
   methods: {
+    getList() {
+      http.orderlist().then(res => {
+        if (res.errNo == 0) {
+          this.list = res.data
+        }
+      })
+    },
     pay(item) {
       this.$router.push({ name: 'order-detail', query: { id: item.id } })
+    },
+    cancel(item) {
+      let loading = this.$ve.loading('处理中...')
+      http.orderOperator(item.id, "1").then(res => {
+        loading.hide()
+        if (res.errNo == 0) {
+          this.$ve.alert('取消成功', () => {
+            this.getList()
+          })
+        } else {
+          this.$ve.alert(res.errMsg)
+        }
+      })
+    },
+    deleteOrder(item) {
+      let loading = this.$ve.loading('处理中...')
+      http.orderOperator(item.id, "2").then(res => {
+        loading.hide()
+        if (res.errNo == 0) {
+          this.$ve.alert('删除成功', () => {
+            this.getList()
+          })
+        } else {
+          this.$ve.alert(res.errMsg)
+        }
+      })
+    },
+    continueRent(item) {
+      this.$router.push({ path: '/productdetail', query: { id: item.pianoId } })
     },
     showNoPayList() {
       this.noPayFlag = !this.noPayFlag
@@ -375,6 +409,10 @@ export default {
             font-size: .3rem;
             color: #fff;
             text-align: center;
+          }
+          .op-cancel {
+            background-color: #507ea1 !important;
+            margin-right: 5px;
           }
         }
       }
