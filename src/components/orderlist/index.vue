@@ -106,8 +106,8 @@
                     <span class="desc">配送中</span>
                   </div>
                   <!-- <a class="op">
-                                                取消订单
-                                              </a> -->
+                                                    取消订单
+                                                  </a> -->
                 </div>
               </div>
               <div class="more"></div>
@@ -162,8 +162,8 @@
                     <span class="desc">使用中</span>
                   </div>
                   <!-- <a class="op">
-                                                                                                                      延长租期
-                                                                                                                    </a> -->
+                                                                                                                          延长租期
+                                                                                                                        </a> -->
                 </div>
               </div>
               <div class="more"></div>
@@ -256,7 +256,7 @@ export default {
       return this.list['status1'] || []
     },
     deliverylist() {
-      return this.list['status2'] || []
+      return [...this.list['status1'], ...this.list['status2']]
     },
     deliveryCompleted() {
       return this.list['status3'] || []

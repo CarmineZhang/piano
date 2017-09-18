@@ -74,6 +74,9 @@ export default {
     },
     selectRentType(type) {
       this.rentType = type
+      if (this.rentType === '') {
+        this.rentType = 'month'
+      }
       this.rent = ''
       this.getList()
     },
