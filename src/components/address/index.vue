@@ -58,7 +58,7 @@ export default {
 
   },
   created() {
-    // this.loading = this.$ve.loading('数据加载中')
+    this.loading = this.$ve.loading('数据加载中')
     this.getList()
   },
   beforeMount() {
@@ -67,9 +67,17 @@ export default {
   methods: {
     getList() {
       http.getAddressList().then((res) => {
+        this.loading && this.loading.hide()
+        this.loading = null
         if (res.errNo == 0) {
           this.$store.commit('recevieAddrList', res.data.addressList)
+        } else {
+          this.$ve.alert(res.errMsg)
         }
+      }).catch(() => {
+        this.loading && loading.hide()
+        this.loading = null
+        this.$ve.alert('服务器错误，请稍后重试')
       })
     },
     add() {
