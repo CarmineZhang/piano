@@ -125,7 +125,7 @@ export default {
 </script>
 <style lang="scss">
 .search-head {
-  height: .88rem * 2+0.84rem;
+  height: .88rem * 2+0.84rem+0.55rem;
   .fixed-head {
     position: fixed;
     top: 0;
