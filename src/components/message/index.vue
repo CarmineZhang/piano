@@ -21,16 +21,11 @@
           <div class="msg-time">
             <span v-text="item.creatTime"></span>
           </div>
-          <div class="msg-main">
+          <div class="msg-main" :class="{'msg-main-read':item.state=='1'}">
             <p class="msg-m-header" v-text="item.title"></p>
             <p class="msg-m-content"></p>
-            <p class="msg-options">
-              <div class="action">
-                <a @click="del(item.id)">删除</a>
-              </div>
-              <div class="action detail-action">
-                <a @click="showDetail(item.id)">查看详情>></a>
-              </div>
+            <p class="msg-actions">
+              <a @click="showDetail(item.id)">查看详情>></a>
             </p>
           </div>
         </div>
@@ -187,20 +182,27 @@ export default {
         color: #928f9c;
         text-indent: 2em;
       }
-      .msg-options {
+      .msg-actions {
         font-size: .24rem;
-        display: flex;
-        .action {
-          flex: 1;
-          a {
-            display: inline-block;
-            color: #928f9c;
-            text-decoration: underline;
-          }
+        text-align: right;
+        a {
+          display: inline-block;
+          color: #928f9c;
+          text-decoration: underline;
         }
-        .detail-action {
-          text-align: right;
-        }
+      }
+    }
+  }
+  .msg-main-read {
+    .msg-m-header {
+      color: #d4d4d4;
+    }
+    .msg-m-content {
+      color: #d4d4d4;
+    }
+    .msg-actions {
+      a {
+        color: #d4d4d4;
       }
     }
   }
