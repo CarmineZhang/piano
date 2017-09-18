@@ -75,7 +75,7 @@ export default {
           this.$ve.alert(res.errMsg)
         }
       }).catch(() => {
-        this.loading && loading.hide()
+        this.loading && this.loading.hide()
         this.loading = null
         this.$ve.alert('服务器错误，请稍后重试')
       })
