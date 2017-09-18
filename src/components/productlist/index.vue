@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="search-head">
+    <div class="search-head" :class="{'show-filter':filterShow}">
       <div class="fixed-head" :style="style">
         <top></top>
         <search-bar @on-search="search" @on-change="search" :default-value="pianoName"></search-bar>
-        <ve-select :brand-dic="brandDic" :rent-day="rentDay" :rent-month="rentMonth" @on-brand="selectBrand" @on-rent-type="selectRentType" @on-rent="selectRent"></ve-select>
+        <ve-select @on-showfilter="showFilter" :brand-dic="brandDic" :rent-day="rentDay" :rent-month="rentMonth" @on-brand="selectBrand" @on-rent-type="selectRentType" @on-rent="selectRent"></ve-select>
       </div>
     </div>
     <scroll-load @load-more="loadmore" v-model="allowload">
@@ -42,7 +42,8 @@ export default {
       brand: '',
       rentType: 'month',
       rent: '',
-      pianoName: ''
+      pianoName: '',
+      filterShow: false
     }
   },
   created() {
@@ -68,6 +69,9 @@ export default {
     window.onscroll = null
   },
   methods: {
+    showFilter(val) {
+      this.filterShow = val
+    },
     selectBrand(brand) {
       this.brand = brand
       this.getList()
@@ -125,7 +129,7 @@ export default {
 </script>
 <style lang="scss">
 .search-head {
-  height: .88rem * 2+0.84rem+0.55rem;
+  height: .88rem * 2+0.84rem;
   .fixed-head {
     position: fixed;
     top: 0;
@@ -133,6 +137,10 @@ export default {
     right: 0;
     z-index: 104;
   }
+}
+
+.show-filter {
+  height: .88rem * 2+0.84rem+0.55rem;
 }
 </style>
 

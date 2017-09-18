@@ -62,7 +62,9 @@ export default {
   },
   computed: {
     filterShow() {
-      return !!this.brank || !!this.rentType || !!this.rent
+      let ret = !!this.brank || !!this.rentType || !!this.rent
+      this.$emit('on-showfilter', ret)
+      return ret
     }
   },
   components: {
