@@ -42,7 +42,7 @@ export default {
     color: #323136;
     font-size: .32rem;
     font-weight: 400;
-    line-height: 3;
+    line-height: 40px;
   }
 
   .detail-time {
