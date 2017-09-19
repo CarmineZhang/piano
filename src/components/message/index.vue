@@ -23,7 +23,9 @@
           </div>
           <div class="msg-main" :class="{'msg-main-read':item.state=='1'}">
             <p class="msg-m-header" v-text="item.title"></p>
-            <p class="msg-m-content"></p>
+            <div v-slider>
+              <p class="msg-m-content" v-text="item.msgInfo"></p>
+            </div>
             <p class="msg-actions">
               <a @click="showDetail(item.id)">查看详情>></a>
             </p>
@@ -37,11 +39,15 @@
 import MyHeader from '../header'
 import http from '@/libs/httpUtil'
 import ScrollLoad from '@/components/base/scrollload'
+import slider from './slider'
 export default {
   name: 'message',
   components: {
     MyHeader,
     ScrollLoad
+  },
+  directives: {
+    slider: slider
   },
   data() {
     return {
