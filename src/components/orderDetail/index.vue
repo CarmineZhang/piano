@@ -54,6 +54,7 @@ import { Cell } from '../base/cell'
 import MyHeader from '@/components/header'
 import SelectPay from './selectpay.vue'
 import http from '@/libs/httpUtil'
+import storage from '@/libs/storage'
 export default {
   name: 'order-detail',
   data() {
@@ -61,6 +62,11 @@ export default {
       detail: {},
       payType: 'wx',
       payText: ''
+    }
+  },
+  computed: {
+    isGZH() {
+      return /MicroMessenger\//.test(window.navigator.userAgent)
     }
   },
   created() {
@@ -90,24 +96,29 @@ export default {
     pay() {
       let loading = this.$ve.loading('处理中...')
       if (this.payType === 'wx') {
-        http.wxPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴--订单号' + this.detail.orderSn).then(res => {
+        let val = true
+        if (val) {
+          storage.set('gzhpayorder', {
+            body: '行龙租琴--订单号' + this.detail.orderSn,
+            total: this.detail.downPayment,
+            no: this.detail.orderSn
+          })
           loading.hide()
-          if (res.errNo == 0) {
-            // let url = res.data.payUrl
-            // if (url) {
-            //   this.payText = `<form name="punchout_form" method="post" action="${url}"></form>`
-            //   this.$nextTick(() => {
-            //     document.forms[0].submit()
-            //   })
-            // }
-            window.location.href = res.data.payUrl
-          } else {
-            this.$ve.alert(res.errMsg)
-          }
-        }).catch(() => {
-          loading.hide()
-          this.$ve.alert('服务器错误，请稍后再试')
-        })
+          let backurl = encodeURIComponent('http://pianoshare.cn/wxpay')
+          window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0bc8c8250cea6d79&redirect_uri=${backurl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
+        } else {
+          http.wxPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴--订单号' + this.detail.orderSn).then(res => {
+            loading.hide()
+            if (res.errNo == 0) {
+              window.location.href = res.data.payUrl
+            } else {
+              this.$ve.alert(res.errMsg)
+            }
+          }).catch(() => {
+            loading.hide()
+            this.$ve.alert('服务器错误，请稍后再试')
+          })
+        }
       } else {
         http.aliPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴', '行龙租琴--订单号' + this.detail.orderSn).then(res => {
           loading.hide()

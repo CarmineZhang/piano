@@ -3,7 +3,7 @@
     <div class="title">选择支付方式</div>
     <div class="pay-method">
       <a class="item item-wx" :class="{'on':pay==='wx'}" @click="wxPay">微信支付</a>
-      <a class="item item-ali" :class="{'on':pay==='ali'}" @click="aliPay">支付宝支付</a>
+      <a class="item item-ali" :class="{'on':pay==='ali'}" @click="aliPay" v-show="aliShow">支付宝支付</a>
     </div>
     <div class="comment" v-text="content"></div>
   </div>
@@ -17,6 +17,9 @@ export default {
     }
   },
   computed: {
+    aliShow() {
+      return !this.$parent.isGZH
+    },
     content() {
       return this.pay === 'wx' ? '*您选择了微信支付' : '*您选择了支付宝支付'
     }

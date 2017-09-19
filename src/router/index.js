@@ -29,7 +29,8 @@ import FindPwdNext from '@/components/findpwd/setpwd'
 import ChooseAddr from '@/components/address/chooseaddr'
 import NotFoundComponent from '@/components/notfound'
 import AliPayResult from '@/components/orderdetail/alipay'
-import WxPayResult from '@/components/orderdetail/wxpay'
+import WxPay from '@/components/orderdetail/wxpay'
+import WxPayResult from '@/components/orderdetail/wxpay/result'
 import Message from '@/components/message'
 import MessageDetail from '@/components/message/detail'
 
@@ -135,6 +136,9 @@ export default new Router({
     }, {
       path: '/wxpay/result',
       component: WxPayResult
+    }, {
+      path: '/wxpay',
+      component: WxPay
     }, {
       path: '/message',
       component: Message

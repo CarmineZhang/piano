@@ -291,6 +291,16 @@ function getAliPayResult(no) {
   })
 }
 
+function wxGzhPay(body, total, no, code) {
+  return ajax('wechatpay/jsPay', {
+    memberToken: storage.get('access-token'),
+    body: body,
+    totalFee: total,
+    outTradeNo: no,
+    code: code
+  })
+}
+
 function getWxPayResult(no) {
   return ajax('wechatpay/wechatPayResult', {
     outTradeNo: no
@@ -388,5 +398,6 @@ export default {
   updateMessage,
   getUnReadMessage,
   orderOperator,
-  getWxPayResult
+  getWxPayResult,
+  wxGzhPay
 }
