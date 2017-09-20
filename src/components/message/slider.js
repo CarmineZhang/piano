@@ -5,12 +5,14 @@ export default {
     $(el).on('touchstart', function (e) {
       var targetObj = this,
         startX = e.targetTouches[0].pageX,
-        startY = e.targetTouches[0].pageY
+        startY = e.targetTouches[0].pageY,
+        $el = $(this).find('.msg-slider')
+      console.dir($el)
       arr[targetObj] = {
         x: startX,
         y: startY,
-        el: $(this).find('ul'),
-        left: $(this).find('ul').offset().left
+        el: $el,
+        left: $el[0].offsetLeft
       }
     })
     $(el).on('touchmove', function (e) {
@@ -23,8 +25,8 @@ export default {
           e.preventDefault();
         }
         var left = currentObj.left
-        if (x < -70) {
-          x = -70
+        if (x < -105) {
+          x = -105
         }
         if (left === 0 && x >= 0) {
           x = 0
@@ -58,10 +60,10 @@ export default {
             '-webkit-transition': `all 500ms ease`,
             'transition': `all 500ms ease`,
           })
-        } else if (left === 0 && x < -50) {
+        } else if (left === 0 && x < -80) {
           currentObj.el.css({
-            '-webkit-transform': `translate3d(-70px,0, 0)`,
-            'transform': `translate3d(-70px, 0, 0)`,
+            '-webkit-transform': `translate3d(-105px,0, 0)`,
+            'transform': `translate3d(-105px, 0, 0)`,
             '-webkit-transition': `all 500ms ease`,
             'transition': `all 500ms ease`,
           })

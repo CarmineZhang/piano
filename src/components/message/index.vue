@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="message">
     <div class="msg-top">
       <div class="msg-wrapper">
         <my-header content="消息"></my-header>
@@ -19,15 +19,20 @@
       <div class="msg-list">
         <div class="msg-item" v-for="item in allList " :key="item.id">
           <div class="msg-time">
-            <span v-text="item.creatTime"></span>
+            <span>{{item.creatTime|dateformate}}</span>
           </div>
-          <div class="msg-main" :class="{'msg-main-read':item.state=='1'}">
-            <p class="msg-m-header" v-text="item.title"></p>
-            <div v-slider>
-              <p class="msg-m-content" v-text="item.msgInfo"></p>
+          <div class="msg-main" :class="{'msg-main-read':item.state=='1'}" v-slider>
+            <div class="msg-slider">
+              <p class="msg-m-header" v-text="item.title"></p>
+              <div>
+                <p class="msg-m-content" v-text="item.msgInfo"></p>
+              </div>
+              <p class="msg-actions">
+                <a @click="showDetail(item.id)">查看详情>></a>
+              </p>
             </div>
-            <p class="msg-actions">
-              <a @click="showDetail(item.id)">查看详情>></a>
+            <p class="msg-action-del" @click="del(item.id)">
+              <span>删除</span>
             </p>
           </div>
         </div>
@@ -103,22 +108,28 @@ export default {
       this.$router.push({ name: 'message-detail', query: { id: id } })
     },
     del(id) {
-      let loading = this.$ve.loading('处理中...')
-      http.delMessage(id).then(res => {
-        loading.hide()
-        if (res.errNo == 0) {
-          this.$ve.alert('删除成功', () => {
-            this.getList()
-          })
-        }
-      }).catch(() => {
-        loading.hide()
+      this.$ve.confirm('确定要删除此消息吗？', () => {
+        let loading = this.$ve.loading('处理中...')
+        http.delMessage(id).then(res => {
+          loading.hide()
+          if (res.errNo == 0) {
+            this.$ve.alert('删除成功', () => {
+              this.getList()
+            })
+          }
+        }).catch(() => {
+          loading.hide()
+        })
       })
     }
   }
 }
 </script>
 <style lang="scss">
+.message {
+  background-color: #eee;
+}
+
 .msg-top {
   height: 80px;
   .msg-wrapper {
@@ -165,7 +176,8 @@ export default {
 }
 
 .msg-list {
-  padding: 0 .3rem;
+  width: 6.9rem;
+  margin: 0 auto;
   .msg-item {
     .msg-time {
       padding: .3rem 0;
@@ -176,25 +188,52 @@ export default {
       }
     }
     .msg-main {
-      background: #fff;
-      padding: .3rem;
-      border-radius: 15px;
-      .msg-m-header {
-        font-size: .32rem;
-        color: #323136;
-      }
-      .msg-m-content {
-        font-size: .24rem;
-        color: #928f9c;
-        text-indent: 2em;
-      }
-      .msg-actions {
-        font-size: .24rem;
-        text-align: right;
-        a {
-          display: inline-block;
+      position: relative;
+      overflow: hidden;
+      border-radius: .22rem;
+      .msg-slider {
+        background: #fff;
+        padding: .3rem;
+        border-radius: .22rem;
+        position: relative;
+        background-color: #fff;
+        z-index: 2;
+        .msg-m-header {
+          font-size: .32rem;
+          color: #323136;
+        }
+        .msg-m-content {
+          font-size: .24rem;
           color: #928f9c;
-          text-decoration: underline;
+          text-indent: 2em;
+        }
+        .msg-actions {
+          font-size: .24rem;
+          text-align: right;
+          a {
+            display: inline-block;
+            color: #928f9c;
+            text-decoration: underline;
+          }
+        }
+      }
+      .msg-action-del {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin-left: 10px;
+        border-radius: .22rem;
+        background-color: #fff;
+        width: 95px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+          flex: 1;
+          font-size: .3rem;
+          color: #323136;
+          text-align: center;
         }
       }
     }
