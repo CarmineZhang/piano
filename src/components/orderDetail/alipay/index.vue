@@ -6,7 +6,7 @@
     <div class="msg-text-area">
       <h2 class="msg-title">{{result|status}}</h2>
       <p>
-        <a @click="gotoIndex">>返回订单列表</a>
+        <a @click="gotoIndex">返回订单列表</a>
       </p>
     </div>
   </div>

@@ -96,8 +96,7 @@ export default {
     pay() {
       let loading = this.$ve.loading('处理中...')
       if (this.payType === 'wx') {
-        let val = true
-        if (val) {
+        if (this.isGZH) {
           storage.set('gzhpayorder', {
             body: '行龙租琴--订单号' + this.detail.orderSn,
             total: this.detail.downPayment,
