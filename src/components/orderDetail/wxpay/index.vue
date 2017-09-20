@@ -30,7 +30,7 @@ export default {
       http.wxGzhPay(this.order.body, this.order.total, this.order.no, code).then(res => {
         if (res.errNo == 0) {
           let data = res.data
-          this.onBridgeReady(data.appId, data.timeStamp, data.nonceStr, data.orderPackage, data.paySign, data.signType)
+          this.onBridgeReady(data.appId, data.timeStamp, data.nonceStr, data.package, data.paySign, data.signType)
         } else {
           this.$ve.alert(res.errMsg)
         }

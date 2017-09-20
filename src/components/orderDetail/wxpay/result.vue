@@ -40,7 +40,7 @@ export default {
       this.$router.push('/orderlist')
     },
     getResult(no) {
-      http.getAliPayResult(no).then(res => {
+      http.getWxPayResult(no).then(res => {
         if (res.errNo == 0) {
           this.result = res.data
         } else {
