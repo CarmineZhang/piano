@@ -8,6 +8,7 @@
 <script>
 import http from '@/libs/httpUtil'
 import storage from '@/libs/storage'
+let data = null
 export default {
   name: 'wxpay',
   mounted() {
@@ -29,23 +30,32 @@ export default {
     wxpay(code) {
       http.wxGzhPay(this.order.body, this.order.total, this.order.no, code).then(res => {
         if (res.errNo == 0) {
-          let data = res.data
-          this.onBridgeReady(data.appId, data.timeStamp, data.nonceStr, data.package, data.paySign, data.signType)
+          data = res.data
+          if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+              document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady.bind(this), false);
+            } else if (document.attachEvent) {
+              document.attachEvent('WeixinJSBridgeReady', this.onBridgeReady.bind(this));
+              document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady.bind(this));
+            }
+          } else {
+            this.onBridgeReady();
+          }
         } else {
           this.$ve.alert(res.errMsg)
         }
       })
     },
-    onBridgeReady(appid, timestamp, noncestr, orderPackage, pagsign, signType) {
+    onBridgeReady() {
       if (this.wxVersion >= 5) {
         WeixinJSBridge.invoke(
           'getBrandWCPayRequest', {
-            "appId": appid,
-            "timeStamp": timestamp, //时间戳，自1970年以来的秒数
-            "nonceStr": noncestr, //随机串
-            "package": orderPackage,
-            "signType": signType, //微信签名方式：
-            "paySign": pagsign
+            "appId": data.appId,
+            "timeStamp": data.timeStamp, //时间戳，自1970年以来的秒数
+            "nonceStr": data.nonceStr, //随机串
+            "package": data.package,
+            "signType": data.signType, //微信签名方式：
+            "paySign": data.paySign
           },
           (res) => {
             if (res.err_msg == "get_brand_wcpay_request:ok") {
