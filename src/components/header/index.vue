@@ -9,11 +9,19 @@
 export default {
   name: 'header',
   props: {
-    content: String
+    content: String,
+    dynamic: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
     back() {
-      this.$router.go(-1)
+      if (!this.dynamic) {
+        this.$router.go(-1)
+      } else {
+        this.$emit('on-back')
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-header content="我的">
+    <my-header dynamic content="我的" @on-back="back">
       <i class="icon-message" @click="showMessage" :class="{'icon-new-message':isNewMsg}"></i>
     </my-header>
     <div class="user-header">
@@ -62,6 +62,9 @@ export default {
     this.phone = storage.get('phone')
   },
   methods: {
+    back() {
+      this.$router.push('/')
+    },
     getUnReadMessage() {
       http.getUnReadMessage().then(res => {
         if (res.errNo == 0) {

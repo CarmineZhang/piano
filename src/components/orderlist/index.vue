@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-header content="订单"></my-header>
+    <my-header dynamic content="订单" @on-back="back"></my-header>
     <div class="order-list">
       <div class="order-no-pay">
         <div class="title" @click="showNoPayList" :class="{'hide-title':!noPayFlag}">
@@ -106,8 +106,8 @@
                     <span class="desc">配送中</span>
                   </div>
                   <!-- <a class="op">
-                                                      取消订单
-                                                    </a> -->
+                                                          取消订单
+                                                        </a> -->
                 </div>
               </div>
               <div class="more"></div>
@@ -162,8 +162,8 @@
                     <span class="desc">使用中</span>
                   </div>
                   <!-- <a class="op">
-                                                                                                                            延长租期
-                                                                                                                          </a> -->
+                                                                                                                                延长租期
+                                                                                                                              </a> -->
                 </div>
               </div>
               <div class="more"></div>
@@ -278,6 +278,9 @@ export default {
     document.title = '订单列表'
   },
   methods: {
+    back() {
+      this.$router.push('/usercenter')
+    },
     getList() {
       http.orderlist().then(res => {
         if (res.errNo == 0) {
