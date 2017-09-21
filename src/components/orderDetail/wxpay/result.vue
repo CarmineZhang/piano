@@ -1,7 +1,8 @@
 <template>
   <div class="msg">
+    <h3>支付结果</h3>
     <div class="msg-icon-area">
-      <i class="weui-icon-msg" :class="[result==='success' ? 'weui-icon-success' : 'weui-icon-warn']"></i>
+      <i class="weui-icon-msg" :class="[iconClass]"></i>
     </div>
     <div class="msg-text-area">
       <h2 class="msg-title">{{result|status}}</h2>
@@ -18,6 +19,18 @@ export default {
   data() {
     return {
       result: ''
+    }
+  },
+  computed: {
+    iconClass() {
+      if (this.result) {
+        if (this.result === 'success') {
+          return 'weui-icon-success'
+        } else {
+          return 'weui-icon-warn'
+        }
+      }
+      return ''
     }
   },
   filters: {
@@ -51,5 +64,6 @@ export default {
   }
 }
 </script>
+
 
 

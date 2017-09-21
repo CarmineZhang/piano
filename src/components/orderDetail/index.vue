@@ -47,6 +47,7 @@
       </a>
       <div v-html="payText"></div>
     </div>
+    <my-dialog v-model="show" @on-confirm="searchResult"></my-dialog>
   </div>
 </template>
 <script>
@@ -55,13 +56,17 @@ import MyHeader from '@/components/header'
 import SelectPay from './selectpay.vue'
 import http from '@/libs/httpUtil'
 import storage from '@/libs/storage'
+import MyDialog from './dialog'
 export default {
   name: 'order-detail',
   data() {
     return {
       detail: {},
       payType: 'wx',
-      payText: ''
+      payText: '',
+      show: false,
+      tradeno: '',
+      id: ''
     }
   },
   computed: {
@@ -69,15 +74,23 @@ export default {
       return /MicroMessenger\//.test(window.navigator.userAgent)
     }
   },
-  created() {
-    let id = this.$store.state.route.query.id
+  mounted() {
+    let query = this.$store.state.route.query
+    let id = query.id
+    let no = query.tradeno
     if (id) {
+      this.id = id
       http.oderInfo(id).then(res => {
         if (res.errNo == 0) {
           this.detail = res.data
         }
       })
-    } else {
+    }
+    if (no) {
+      this.tradeno = no
+      this.show = true
+    }
+    if (!id && !no) {
       this.$router.go(-1)
     }
   },
@@ -87,7 +100,8 @@ export default {
   components: {
     Cell,
     SelectPay,
-    MyHeader
+    MyHeader,
+    MyDialog
   },
   methods: {
     selectPay(type) {
@@ -106,7 +120,7 @@ export default {
           let backurl = encodeURIComponent('http://pianoshare.cn/wxpay')
           window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0bc8c8250cea6d79&redirect_uri=${backurl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         } else {
-          http.wxPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴--订单号' + this.detail.orderSn).then(res => {
+          http.wxPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴--订单号' + this.detail.orderSn, this.id).then(res => {
             loading.hide()
             if (res.errNo == 0) {
               window.location.href = res.data.payUrl
@@ -119,7 +133,7 @@ export default {
           })
         }
       } else {
-        http.aliPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴', '行龙租琴--订单号' + this.detail.orderSn).then(res => {
+        http.aliPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴', '行龙租琴--订单号' + this.detail.orderSn, this.id).then(res => {
           loading.hide()
           if (res.errNo == 0) {
             this.payText = res.data.alipayTrade
@@ -133,6 +147,13 @@ export default {
           loading.hide()
           this.$ve.alert('服务器错误，请稍后再试')
         })
+      }
+    },
+    searchResult() {
+      if (this.payType === 'wx') {
+        this.$router.push({ path: '/wxpay/result', query: { tradeno: this.tradeno } })
+      } else {
+        this.$router.push({ path: '/ailpay/result', query: { tradeno: this.tradeno } })
       }
     }
   }

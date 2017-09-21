@@ -261,25 +261,25 @@ function orderlist() {
   })
 }
 
-function wxPay(no, total, body) {
+function wxPay(no, total, body, id) {
   return ajax('wechatpay/unifiedOrder', {
     memberToken: storage.get('access-token'),
     body: body,
     totalFee: total,
     outTradeNo: no,
-    returnUrl: 'http://pianoshare.cn/wxpay/result?tradeno=' + no,
+    returnUrl: 'http://pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
     type: '1'
   })
 }
 
-function aliPay(no, total, subject, body) {
+function aliPay(no, total, subject, body, id) {
   return ajax('alipay/pay', {
     memberToken: storage.get('access-token'),
     totalAmount: total,
     outTradeNo: no,
     subject: subject,
     body: body,
-    returnUrl: 'http://pianoshare.cn/ailpay/result?tradeno=' + no,
+    returnUrl: 'http://pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
     payType: '1'
   })
 }

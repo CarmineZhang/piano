@@ -248,35 +248,11 @@ a.link {
   padding-top: 36px;
   text-align: center;
   background: #fff;
-  .msg-icon-area {
-    margin-bottom: 30px
+  h3 {
+    margin-bottom: 20px;
+    font-size: .32rem;
+    color: #323136;
   }
-  .weui-icon-msg {
-    font-size: 93px;
-  }
-  .msg-text-area {
-    margin-bottom: 25px;
-    padding: 0 20px;
-    .msg-title {
-      margin-bottom: 5px;
-      font-weight: 400;
-      font-size: 20px;
-    }
-    a {
-      color: #586C94;
-    }
-  }
-}
-
-.msg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding-top: 36px;
-  text-align: center;
-  background: #fff;
   .msg-icon-area {
     margin-bottom: 30px
   }
