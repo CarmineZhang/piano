@@ -65,20 +65,24 @@
     <div class="more">
     </div>
     <div class="footer-action">
+      <a class="act-tel" @click="tel">在线电话</a>
       <a class="action" @click="submit">立即租赁</a>
       <a class="act-collect" @click="collect"></a>
     </div>
+    <tel-dialog v-model="show"></tel-dialog>
   </div>
 </template>
 <script>
 import Swiper from '../base/swiper'
 import http from '@/libs/httpUtil'
 import MyHeader from '@/components/header'
+import TelDialog from './dialog'
 export default {
   name: 'product-detail',
   components: {
     Swiper,
-    MyHeader
+    MyHeader,
+    TelDialog
   },
   computed: {
     deposit() {
@@ -128,10 +132,14 @@ export default {
       leaseNum: 0,
       leaseNumName: '',
       rentList: [],
-      isCollect: 'N'
+      isCollect: 'N',
+      show: false
     }
   },
   methods: {
+    tel() {
+      this.show = true
+    },
     collect() {
       if (this.isCollect === 'Y') {
         this.$ve.alert('已收藏')
@@ -244,6 +252,14 @@ export default {
 
 
 .footer-action {
+  .act-tel {
+    width: 1.6rem;
+    background-color: #ebab21;
+    color: #fff;
+    text-align: center;
+    font-size: .3rem;
+    line-height: .88rem;
+  }
   .act-collect {
     width: .88rem;
     background-color: #7f7c8b;
