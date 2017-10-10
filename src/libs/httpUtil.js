@@ -52,7 +52,7 @@ axios.interceptors.response.use(res => {
 
 function ajax(url, data) {
   var signData = qs.stringify(signature(data))
-  return axios.post('http://pianoshare.cn/platform-longing-web/' + url, signData)
+  return axios.post('/platform-longing-web/' + url, signData)
 }
 
 function sendCode(phone) {
@@ -267,7 +267,7 @@ function wxPay(no, total, body, id) {
     body: body,
     totalFee: total,
     outTradeNo: no,
-    returnUrl: 'http://pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
+    returnUrl: 'http://p.pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
     type: '1'
   })
 }
@@ -279,7 +279,7 @@ function aliPay(no, total, subject, body, id) {
     outTradeNo: no,
     subject: subject,
     body: body,
-    returnUrl: 'http://pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
+    returnUrl: 'http://p.pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
     payType: '1'
   })
 }

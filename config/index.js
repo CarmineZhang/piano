@@ -28,8 +28,8 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
-        target: 'http://47.94.93.96/platform-longing-web/',
+      '/platform-longing-web': {
+        target: 'http://pianoshare.cn',
         // target: 'http://www.chinapetbloodbank.com/platform-longing-web/',
         changeOrigin: true,
         pathRewrite: {
