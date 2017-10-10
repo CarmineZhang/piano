@@ -117,7 +117,7 @@ export default {
             no: this.detail.orderSn
           })
           loading.hide()
-          let backurl = encodeURIComponent('http://p.pianoshare.cn/wxpay')
+          let backurl = encodeURIComponent('http://m.pianoshare.cn/wxpay')
           window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0bc8c8250cea6d79&redirect_uri=${backurl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         } else {
           http.wxPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴--订单号' + this.detail.orderSn, this.id).then(res => {
