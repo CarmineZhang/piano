@@ -267,7 +267,7 @@ function wxPay(no, total, body, id) {
     body: body,
     totalFee: total,
     outTradeNo: no,
-    returnUrl: 'http://p.pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
+    returnUrl: 'http://m.pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
     type: '1'
   })
 }
@@ -279,7 +279,7 @@ function aliPay(no, total, subject, body, id) {
     outTradeNo: no,
     subject: subject,
     body: body,
-    returnUrl: 'http://p.pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
+    returnUrl: 'http://m.pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
     payType: '1'
   })
 }
