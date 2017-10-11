@@ -18,7 +18,9 @@ export function signature(obj) {
   var str = "";
   for (var i = 0; i < arr.length; i++) {
     let key = arr[i];
-    str += key + "=" + obj[key] + "&";
+    if (typeof obj[key] !== 'undefined') {
+      str += key + "=" + obj[key] + "&";
+    }
   }
   var key = getPassword();
   str += "key=" + key;
