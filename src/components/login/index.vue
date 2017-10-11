@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     wxLogon() {
-      let backurl = encodeURIComponent('http://m.pianoshare.cn/wxLogon')
+      let backurl = encodeURIComponent('http://m.pianoshare.cn/wxlogon')
       window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0bc8c8250cea6d79&redirect_uri=${backurl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
     },
     register() {
