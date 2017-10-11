@@ -19,6 +19,8 @@
           </a>
         </div>
         <div class="login-comment">
+          <a @click="wxLogon">微信授权</a>
+          <span>|</span>
           <a @click="register">注册账号</a>
           <span>|</span>
           <a @click="findpwd">忘记密码？</a>
@@ -47,6 +49,10 @@ export default {
     this.$validator.check()
   },
   methods: {
+    wxLogon() {
+      let backurl = encodeURIComponent('http://m.pianoshare.cn/wxLogon')
+      window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0bc8c8250cea6d79&redirect_uri=${backurl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
+    },
     register() {
       this.$router.push('/register')
     },

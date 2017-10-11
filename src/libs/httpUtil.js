@@ -358,6 +358,11 @@ function orderOperator(orderId, event) {
   })
 }
 
+function wxLogin(code) {
+  return ajax('login/wechat', {
+    code: code
+  })
+}
 
 
 export default {
@@ -399,5 +404,6 @@ export default {
   getUnReadMessage,
   orderOperator,
   getWxPayResult,
-  wxGzhPay
+  wxGzhPay,
+  wxLogin
 }
