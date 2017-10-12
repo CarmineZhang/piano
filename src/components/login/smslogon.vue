@@ -6,12 +6,12 @@
     <div class="login-form">
       <div class="login-wrapper">
         <div class="form-item">
-          <div class="item-hd item-phone"></div>
-          <input type="tel" class="item-bd ipt" v-model="phone" placeholder="手机号码">
+          <div class="item-hd">+86</div>
+          <input type="tel" class="item-bd ipt" maxlength="11" v-model="phone" placeholder="手机号码">
         </div>
         <div class="form-item">
-          <div class="item-hd item-pwd"></div>
-          <input type="password" class="item-bd ipt" v-model="pwd" placeholder="请输入密码">
+          <input type="tel" class="item-bd ipt" maxlength="6" v-model="code" placeholder="请输入六位验证码">
+          <count-down :time="60" v-model="start" :disabled="disabled" @on-click="startCountDown"></count-down>
         </div>
         <div class="form-op">
           <a class="btn btn-primary" @click="login" :class="{'btn-primay-disabled':$validator.invalid}">
@@ -19,7 +19,7 @@
           </a>
         </div>
         <div class="login-comment">
-          <a @click="smsLogon">短信快捷登录</a>
+          <a @click="logon">账号密码登录</a>
           <span>|</span>
           <a @click="wxLogon">微信授权</a>
           <span>|</span>
@@ -32,31 +32,52 @@
   </div>
 </template>
 <script>
+import CountDown from '../base/countdown'
 import http from '@/libs/httpUtil'
 import storage from '@/libs/storage'
 export default {
-  name: 'login',
+  name: 'sms-login',
   validator: {
     phone: [{ test: 'required', message: '手机号不能为空' }, { test: 'mobile', message: '手机号格式不正确' }],
-    pwd: { test: 'required', message: '密码不能为空' }
+    code: { test: /\d{6}/, message: '验证码不正确' }
   },
   data() {
     return {
       phone: '',
-      pwd: ''
+      code: '',
+      start: false
+    }
+  },
+  components: {
+    CountDown
+  },
+  computed: {
+    disabled() {
+      return this.$validator.$errors.phone !== undefined
     }
   },
   beforeMount() {
-    document.title = '登录'
+    document.title = '短信快捷登录'
     this.$validator.check()
   },
   methods: {
+    startCountDown() {
+      let loading = this.$ve.loading('发送中...')
+      http.sendSms(this.phone).then((res) => {
+        loading.hide()
+        if (res.errNo == 0) {
+          this.start = true
+        } else {
+          this.$ve.alert(res.errMsg)
+        }
+      })
+    },
     wxLogon() {
       let backurl = encodeURIComponent('http://m.pianoshare.cn/wxlogon')
       window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0bc8c8250cea6d79&redirect_uri=${backurl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
     },
-    smsLogon() {
-      this.$router.push('/smslogon')
+    logon() {
+      this.$router.push('/login')
     },
     register() {
       this.$router.push('/register')
@@ -68,7 +89,7 @@ export default {
       var validator = this.$validator
       if (validator.valid) {
         let loading = this.$ve.loading('登录中...')
-        http.login(this.phone, this.pwd).then((res) => {
+        http.smsLogon(this.phone, this.code).then((res) => {
           loading.hide()
           if (res.errNo == 0) {
             storage.set('phone', this.phone)
@@ -94,70 +115,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.login-img {
-  position: relative;
-  height: 0;
-  padding-top: (410/750)*100%;
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
-}
-
-.login-form {
-  background-color: #fff;
-  padding: .5rem 0 0;
-  .login-wrapper {
-    width: 6.9rem;
-    margin: 0 auto;
-    .item-phone {
-      position: relative;
-      &::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate3d(-50%, -50%, 0);
-        width: .22rem;
-        height: .35rem;
-        background: url('../../assets/login-phone.png') no-repeat;
-        background-size: 100%;
-      }
-    }
-    .item-pwd {
-      position: relative;
-      &::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate3d(-50%, -50%, 0);
-        width: .3rem;
-        height: .36rem;
-        background: url('../../assets/login-pwd.png') no-repeat;
-        background-size: 100%;
-      }
-    }
-    .login-op-wrapper {
-      overflow: hidden;
-      margin-top: .6rem;
-    }
-    .login-comment {
-      padding: .4rem 0;
-      text-align: center;
-      font-size: .28rem;
-      color: #999;
-      a {
-        color: #999;
-      }
-      span {
-        margin: 0 .1rem;
-      }
-    }
-  }
-}
-</style>
-

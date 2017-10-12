@@ -364,6 +364,19 @@ function wxLogin(code) {
   })
 }
 
+function sendSms(phone) {
+  return ajax('login/code', {
+    phone: phone
+  })
+}
+
+function smsLogon(phone, code) {
+  return ajax('login/phone', {
+    phone: phone,
+    code: code
+  })
+}
+
 
 export default {
   sendCode,
@@ -405,5 +418,7 @@ export default {
   orderOperator,
   getWxPayResult,
   wxGzhPay,
-  wxLogin
+  wxLogin,
+  smsLogon,
+  sendSms
 }

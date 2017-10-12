@@ -34,6 +34,7 @@ import WxPayResult from '@/components/orderdetail/wxpay/result'
 import Message from '@/components/message'
 import MessageDetail from '@/components/message/detail'
 import WxLogon from '@/components/login/wxlogon'
+import SmsLogin from '@/components/login/smslogon'
 Vue.use(Router)
 Vue.use(Widget)
 
@@ -85,6 +86,9 @@ export default new Router({
     }, {
       path: '/wxlogon',
       component: WxLogon
+    }, {
+      path: '/smslogon',
+      component: SmsLogin
     }, {
       path: '/addaddress',
       component: AddAddress
