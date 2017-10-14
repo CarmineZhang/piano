@@ -5,6 +5,9 @@
     </transition>
     <div class="pl-search">
       <flexbox class="pl-select">
+        <a class="ve-flexbox-item" @click="showPurpose" :class="{'pl-select-up':show===4}">
+          <span>用途</span>
+        </a>
         <a class="ve-flexbox-item" @click="showBrand" :class="{'pl-select-up':show===1}">
           <span>品牌</span>
         </a>
@@ -16,6 +19,11 @@
         </a>
       </flexbox>
       <div class="options">
+        <transition name="fade-down">
+          <ul class="brand" v-show="show===4">
+            <li :class="{'selected':item===brank}" v-for="(item,index) in purposeDic" :key="index" @click="selectPurpose(item)">{{item.dicName}}</li>
+          </ul>
+        </transition>
         <transition name="fade-down">
           <ul class="brand" v-show="show===1">
             <li :class="{'selected':item===brank}" v-for="(item,index) in brandDic" :key="index" @click="selectBrand(item)">{{item.dicName}}</li>
@@ -38,6 +46,7 @@
       <span class="filter-item" v-show="brank!==null" @click="delBrankFilter">{{brank&&brank.dicName}}</span>
       <span class="filter-item" v-show="rentType!==null" @click="delTypeFilter">{{rentType&&rentType.dicName}}</span>
       <span class="filter-item" v-show="rent!==null" @click="delRentFilter">{{rent&&rent.dicName}}</span>
+      <span class="filter-item" v-show="purpose!==null" @click="delPurposeFilter">{{purpose&&purpose.dicName}}</span>
     </div>
   </div>
 </template>
@@ -46,6 +55,7 @@ import { Flexbox } from '../base/flexbox'
 export default {
   name: 'select',
   props: {
+    purposeDic: Array,
     brandDic: Array,
     rentDay: Array,
     rentMonth: Array
@@ -55,6 +65,7 @@ export default {
       show: -1,
       maskShow: false,
       rentList: [],
+      purpose: null,
       rentType: null,
       brank: null,
       rent: null
@@ -62,7 +73,7 @@ export default {
   },
   computed: {
     filterShow() {
-      let ret = !!this.brank || !!this.rentType || !!this.rent
+      let ret = !!this.brank || !!this.rentType || !!this.rent || !!this.purpose
       this.$emit('on-showfilter', ret)
       return ret
     }
@@ -71,6 +82,10 @@ export default {
     Flexbox
   },
   methods: {
+    showPurpose() {
+      this.show === 4 ? this.show = -1 : this.show = 4
+      this.maskShow = !this.maskShow
+    },
     showBrand() {
       this.show === 1 ? this.show = -1 : this.show = 1
       this.maskShow = !this.maskShow
@@ -116,6 +131,12 @@ export default {
       this.maskShow = false
       this.$emit('on-rent', item.dicValue)
     },
+    selectPurpose(item) {
+      this.purpose = item
+      this.show = -1
+      this.maskShow = false
+      this.$emit('on-purpose', item.dicValue)
+    },
     delBrankFilter() {
       this.brank = null
       this.$emit('on-brand', '')
@@ -128,6 +149,10 @@ export default {
     delRentFilter() {
       this.rent = null
       this.$emit('on-rent', '')
+    },
+    delPurposeFilter() {
+      this.purpose = null
+      this.$emit('on-purpose', '')
     }
   }
 }

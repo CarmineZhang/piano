@@ -4,7 +4,7 @@
       <div class="fixed-head" :style="style">
         <top></top>
         <search-bar @on-search="search" @on-change="search" :default-value="pianoName"></search-bar>
-        <ve-select @on-showfilter="showFilter" :brand-dic="brandDic" :rent-day="rentDay" :rent-month="rentMonth" @on-brand="selectBrand" @on-rent-type="selectRentType" @on-rent="selectRent"></ve-select>
+        <ve-select @on-showfilter="showFilter" :purpose-dic="purposeDic" :brand-dic="brandDic" :rent-day="rentDay" :rent-month="rentMonth" @on-brand="selectBrand" @on-rent-type="selectRentType" @on-rent="selectRent" @on-purpose="selectPurpose"></ve-select>
       </div>
     </div>
     <scroll-load @load-more="loadmore" v-model="allowload">
@@ -33,6 +33,7 @@ export default {
       maskShow: false,
       style: null,
       list: [],
+      purposeDic: [],
       brandDic: [],
       rentDay: [],
       rentMonth: [],
@@ -43,6 +44,7 @@ export default {
       rentType: 'month',
       rent: '',
       pianoName: '',
+      purpose: '',
       filterShow: false
     }
   },
@@ -87,15 +89,20 @@ export default {
     selectRent(rent) {
       this.rent = rent
     },
+    selectPurpose(purpose) {
+      this.purpose = purpose
+      this.getList()
+    },
     search(val) {
       this.pianoName = val
       this.getList()
     },
     getList() {
       this.index = 1
-      http.getPiano(this.index, this.size, this.brand, this.rentType, this.rent, this.pianoName).then((res) => {
+      http.getPiano(this.index, this.size, this.brand, this.rentType, this.rent, this.pianoName, this.purpose).then((res) => {
         if (res.errNo == 0) {
           this.list = res.data.list
+          this.purposeDic = res.data.purposeDic
           this.brandDic = res.data.brandDic
           this.rentDay = res.data.rentDay
           this.rentMonth = res.data.rentMonth
@@ -109,7 +116,7 @@ export default {
     },
     loadmore() {
       this.index = this.index + 1
-      http.getPiano(this.index, this.size, this.brand, this.rentType, this.rent, this.pianoName).then((res) => {
+      http.getPiano(this.index, this.size, this.brand, this.rentType, this.rent, this.pianoName, this.purpose).then((res) => {
         if (res.errNo == 0) {
           let list = res.data.list
           this.brandDic = res.data.brandDic
