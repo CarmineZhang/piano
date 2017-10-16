@@ -31,12 +31,12 @@
       <div class="flexbox">
         <span class="s1">租金：</span>
         <span class="flex-item s1">
-          <em>¥</em>{{rent*leaseNum|ToThousands}}</span>
+          <em>¥</em>{{rent*leaseNum*benfit[leaseNum]|ToThousands}}</span>
       </div>
       <div class="flexbox">
         <span class="s1" style="line-height: .64rem;">押金+租金：</span>
         <span class="flex-item total-price">
-          <em>¥</em>{{deposit+rent*leaseNum|ToThousands}}</span>
+          <em>¥</em>{{deposit+rent*leaseNum*benfit[leaseNum]|ToThousands}}</span>
         </span>
       </div>
       <div class="flexbox">
@@ -114,6 +114,7 @@ export default {
           if (longNum.length > 0) {
             this.leaseNum = longNum[0].leaseNumCode
             this.rentList = longNum
+            this.benfit = this.data.longLeaseDis
           }
         }
       })
@@ -133,7 +134,8 @@ export default {
       leaseNumName: '',
       rentList: [],
       isCollect: 'N',
-      show: false
+      show: false,
+      benfit: {}
     }
   },
   methods: {
@@ -159,6 +161,7 @@ export default {
           this.leaseNum = longNum[0].leaseNumCode
           this.leaseNumName = longNum[0].leaseNumName
           this.rentList = longNum
+          this.benfit = this.data.longLeaseDis
         }
       } else {
         let shortNum = this.data.shortLeaseNum
@@ -166,6 +169,7 @@ export default {
           this.leaseNum = shortNum[0].leaseNumCode
           this.leaseNumName = shortNum[0].leaseNumName
           this.rentList = shortNum
+          this.benfit = this.data.shortLeaseDis
         }
       }
     },
