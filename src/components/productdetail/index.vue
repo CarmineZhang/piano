@@ -77,6 +77,7 @@ import Swiper from '../base/swiper'
 import http from '@/libs/httpUtil'
 import MyHeader from '@/components/header'
 import TelDialog from './dialog'
+import storage from '@/libs/storage'
 export default {
   name: 'product-detail',
   components: {
@@ -118,11 +119,13 @@ export default {
           }
         }
       })
-      http.checkCollection(id).then(res => {
-        if (res.errNo == 0) {
-          this.isCollect = res.data.isExist
-        }
-      })
+      if (storage.get('access-token')) {
+        http.checkCollection(id).then(res => {
+          if (res.errNo == 0) {
+            this.isCollect = res.data.isExist
+          }
+        })
+      }
     }
   },
   data() {
