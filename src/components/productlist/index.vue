@@ -4,7 +4,7 @@
       <div class="fixed-head" :style="style">
         <top></top>
         <search-bar @on-search="search" @on-change="search" :default-value="pianoName"></search-bar>
-        <ve-select @on-showfilter="showFilter" :purpose-dic="purposeDic" :brand-dic="brandDic" :rent-day="rentDay" :rent-month="rentMonth" @on-brand="selectBrand" @on-rent-type="selectRentType" @on-rent="selectRent" @on-purpose="selectPurpose"></ve-select>
+        <ve-select @on-showfilter="showFilter" :default-purpose="purpose" :purpose-dic="purposeDic" :brand-dic="brandDic" :rent-day="rentDay" :rent-month="rentMonth" @on-brand="selectBrand" @on-rent-type="selectRentType" @on-rent="selectRent" @on-purpose="selectPurpose"></ve-select>
       </div>
     </div>
     <scroll-load @load-more="loadmore" v-model="allowload">
@@ -52,6 +52,10 @@ export default {
     let key = this.$store.state.route.params.key
     if (key) {
       this.pianoName = key
+    }
+    let purpose = this.$store.state.route.query.purpose
+    if (purpose) {
+      this.purpose = purpose
     }
     this.getList()
   },

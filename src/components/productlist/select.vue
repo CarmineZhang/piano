@@ -21,12 +21,12 @@
       <div class="options">
         <transition name="fade-down">
           <ul class="brand" v-show="show===4">
-            <li :class="{'selected':item===brank}" v-for="(item,index) in purposeDic" :key="index" @click="selectPurpose(item)">{{item.dicName}}</li>
+            <li :class="{'selected':purpose&&item.dicValue===purpose.dicValue}" v-for="(item,index) in purposeDic" :key="index" @click="selectPurpose(item)">{{item.dicName}}</li>
           </ul>
         </transition>
         <transition name="fade-down">
           <ul class="brand" v-show="show===1">
-            <li :class="{'selected':item===brank}" v-for="(item,index) in brandDic" :key="index" @click="selectBrand(item)">{{item.dicName}}</li>
+            <li :class="{'selected':brank&&item.dicValue===brank.dicValue}" v-for="(item,index) in brandDic" :key="index" @click="selectBrand(item)">{{item.dicName}}</li>
           </ul>
         </transition>
         <transition name="fade-down">
@@ -37,7 +37,7 @@
         </transition>
         <transition name="fade-down">
           <ul class="brand" v-show="show===3">
-            <li :class="{'selected':item===rent}" v-for="(item,index) in rentList" :key="index" @click="selectRent(item)">{{item.dicName}}</li>
+            <li :class="{'selected':rent&&item.dicValue===rent.dicValue}" v-for="(item,index) in rentList" :key="index" @click="selectRent(item)">{{item.dicName}}</li>
           </ul>
         </transition>
       </div>
@@ -58,7 +58,11 @@ export default {
     purposeDic: Array,
     brandDic: Array,
     rentDay: Array,
-    rentMonth: Array
+    rentMonth: Array,
+    defaultPurpose: {
+      type: String,
+      default: ''
+    }
   },
   data() {
     return {
@@ -76,6 +80,19 @@ export default {
       let ret = !!this.brank || !!this.rentType || !!this.rent || !!this.purpose
       this.$emit('on-showfilter', ret)
       return ret
+    }
+  },
+  watch: {
+    purposeDic: {
+      handler: function(val) {
+        if (val) {
+          let list = val.filter(item => item.dicValue === this.defaultPurpose)
+          if (list.length === 1) {
+            this.purpose = list[0]
+          }
+        }
+      },
+      immediate: true
     }
   },
   components: {
