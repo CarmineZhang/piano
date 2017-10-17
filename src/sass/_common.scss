@@ -272,3 +272,40 @@ a.link {
     }
   }
 }
+
+.icon-feature {
+  background-position: center center;
+  background-size: .88rem .88rem;
+  background-repeat: no-repeat;
+}
+
+.icon-zero-rent {
+  background-image: url('../assets/zerorent-no.png');
+}
+
+.icon-import {
+  background-image: url('../assets/import-no.png');
+}
+
+.icon-gift {
+  background-image: url('../assets/gift-no.png');
+}
+
+.icon-buy {
+  background-image: url('../assets/buy-no.png');
+}
+
+.active {
+  .icon-zero-rent {
+    background-image: url('../assets/zerorent.png');
+  }
+  .icon-import {
+    background-image: url('../assets/import.png');
+  }
+  .icon-gift {
+    background-image: url('../assets/gift.png');
+  }
+  .icon-buy {
+    background-image: url('../assets/buy.png');
+  }
+}

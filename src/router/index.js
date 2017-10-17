@@ -35,6 +35,7 @@ import Message from '@/components/message'
 import MessageDetail from '@/components/message/detail'
 import WxLogon from '@/components/login/wxlogon'
 import SmsLogin from '@/components/login/smslogon'
+import Feature from '@/components/feature'
 Vue.use(Router)
 Vue.use(Widget)
 
@@ -61,6 +62,10 @@ export default new Router({
     }, {
       path: '/ordercomplete',
       component: OrderComplete
+    }, {
+      path: '/feature',
+      name: 'feature',
+      component: Feature
     }, {
       path: '/news',
       component: News

@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="re-header">
+      行龙推荐
+    </div>
     <div class="re-pd" :class="{'re-pd-dark':index%2==1}" v-for="(item,index) in list" :key="index" @click="gotoDetail()">
       <div class="re-img">
         <img :src="item.coverUrl" alt="">
@@ -41,8 +44,16 @@ export default {
 }
 </script>
 <style lang="scss">
+.re-header {
+  background-color: #fff;
+  padding: .3rem;
+  font-size: .3rem;
+  color: #323136;
+}
+
 .re-pd {
   position: relative;
+  background: #fff;
   height: 10rem;
   .re-img {
     padding-top: (670/750)*100%;

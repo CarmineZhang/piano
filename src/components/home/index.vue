@@ -5,6 +5,29 @@
       <search-bar @on-search="search"></search-bar>
     </div>
     <div class="index-body">
+      <div class="index-nav">
+        <div class="nav-header">
+          行龙特色
+        </div>
+        <ul class="nav-body">
+          <li @click="gotoFeature(0)" class="active">
+            <i class="icon-feature icon-zero-rent"></i>
+            <span class="title">零租金</span>
+          </li>
+          <li @click="gotoFeature(1)" class="active">
+            <i class="icon-feature icon-import"></i>
+            <span class="title">纯进口</span>
+          </li>
+          <li @click="gotoFeature(2)" class="active">
+            <i class="icon-feature icon-gift"></i>
+            <span class="title">有豪礼</span>
+          </li>
+          <li @click="gotoFeature(3)" class="active">
+            <i class="icon-feature icon-buy"></i>
+            <span class="title">租转购</span>
+          </li>
+        </ul>
+      </div>
       <swiper :list="swipers"></swiper>
       <recommend></recommend>
       <div class="more">
@@ -57,13 +80,51 @@ export default {
     },
     search(val) {
       this.$router.push({ name: 'product-list', params: { key: val } })
+    },
+    gotoFeature(status) {
+      this.$router.push({ name: 'feature', params: { status: status } })
     }
   }
 }
 </script>
 <style lang="scss">
+.index-nav {
+  margin: .3rem 0;
+  background-color: #fff;
+  padding: .3rem;
+  .nav-header {
+    font-size: .3rem;
+    color: #323136;
+  }
+  @at-root {
+    .nav-body {
+      padding: .3rem 0;
+      display: flex;
+      li {
+        flex: 1;
+        i {
+          height: 1rem;
+        }
+        i,
+        span {
+          font-size: .28rem;
+          color: #727278;
+          display: block;
+          text-align: center;
+        }
+      }
+      .active {
+        span {
+          color: #323136;
+        }
+      }
+    }
+  }
+}
+
 .index-body {
   padding: .88rem+.84rem 0 0;
+  background-color: #eee;
 }
 </style>
 
