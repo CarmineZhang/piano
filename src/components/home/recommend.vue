@@ -3,7 +3,7 @@
     <div class="re-header">
       行龙推荐
     </div>
-    <div class="re-pd" :class="{'re-pd-dark':index%2==1}" v-for="(item,index) in list" :key="index" @click="gotoDetail()">
+    <div class="re-pd" :class="{'re-pd-dark':index%2==1}" v-for="(item,index) in list" :key="index" @click="gotoDetail(item.purpose)">
       <div class="re-img">
         <img :src="item.coverUrl" alt="">
       </div>
@@ -36,9 +36,8 @@ export default {
     })
   },
   methods: {
-    gotoDetail() {
-      // this.$router.push({ path: '/productdetail', query: { id: id } })
-      this.$router.push({ name: 'product-list', query: { purpose: 'piano_professional' } })
+    gotoDetail(purpose) {
+      this.$router.push({ name: 'product-list', query: { purpose: purpose } })
     }
   }
 }
