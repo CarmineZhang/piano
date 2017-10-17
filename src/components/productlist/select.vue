@@ -31,8 +31,8 @@
         </transition>
         <transition name="fade-down">
           <ul class="brand" v-show="show===2">
-            <li :class="{'selected':rentType&&rentType.dicValue==='day'}" @click="dayrent">日租</li>
-            <li :class="{'selected':rentType&&rentType.dicValue==='month'}" @click="monthrent">月租</li>
+            <li :class="{'selected':rentType&&rentType.dicValue==='day'}" @click="dayrent">短租</li>
+            <li :class="{'selected':rentType&&rentType.dicValue==='month'}" @click="monthrent">长租</li>
           </ul>
         </transition>
         <transition name="fade-down">
