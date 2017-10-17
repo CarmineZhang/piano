@@ -5,6 +5,7 @@
       <search-bar @on-search="search"></search-bar>
     </div>
     <div class="index-body">
+      <swiper :list="swipers"></swiper>
       <div class="index-nav">
         <div class="nav-header">
           行龙特色
@@ -28,7 +29,6 @@
           </li>
         </ul>
       </div>
-      <swiper :list="swipers"></swiper>
       <recommend></recommend>
       <div class="more">
         <a @click="showPianoList">查看更多</a>
