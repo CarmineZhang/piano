@@ -12,8 +12,8 @@
       <div class="flexbox">
         <span class="s1">租赁方式：</span>
         <div class="flex-ite2 s2">
-          <span :class="{'cur':leaseType===1}" @click="choose(1)">月租</span>
-          <span :class="{'cur':leaseType===0}" @click="choose(0)">日租</span>
+          <span :class="{'cur':leaseType===1}" @click="choose(1)">长租</span>
+          <span :class="{'cur':leaseType===0}" @click="choose(0)">短租</span>
         </div>
       </div>
       <div class="flexbox">
