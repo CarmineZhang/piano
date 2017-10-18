@@ -19,7 +19,7 @@
       <div class="flexbox">
         <span class="s1">租赁时长：</span>
         <div class="flex-item s2">
-          <span :class="{'cur':leaseNum===item.leaseNumCode}" v-for="item in rentList" :key="item.leaseNumCode" v-text="item.leaseNumName" @click="selectRentTime(item)"></span>
+          <span :class="{'cur':leaseNum===item.dicValue}" v-for="item in rentList" :key="item.dicValue" v-text="item.dicName" @click="selectRentTime(item)"></span>
         </div>
       </div>
       <div class="flexbox">
@@ -113,7 +113,7 @@ export default {
           this.data = res.data
           let longNum = this.data.longLeaseNum
           if (longNum.length > 0) {
-            this.leaseNum = longNum[0].leaseNumCode
+            this.leaseNum = longNum[0].dicValue
             this.rentList = longNum
             this.benfit = this.data.longLeaseDis
           }
@@ -161,24 +161,24 @@ export default {
       if (type === 1) {
         let longNum = this.data.longLeaseNum
         if (longNum.length > 0) {
-          this.leaseNum = longNum[0].leaseNumCode
-          this.leaseNumName = longNum[0].leaseNumName
+          this.leaseNum = longNum[0].dicValue
+          this.leaseNumName = longNum[0].dicName
           this.rentList = longNum
           this.benfit = this.data.longLeaseDis
         }
       } else {
         let shortNum = this.data.shortLeaseNum
         if (shortNum.length > 0) {
-          this.leaseNum = shortNum[0].leaseNumCode
-          this.leaseNumName = shortNum[0].leaseNumName
+          this.leaseNum = shortNum[0].dicValue
+          this.leaseNumName = shortNum[0].dicName
           this.rentList = shortNum
           this.benfit = this.data.shortLeaseDis
         }
       }
     },
     selectRentTime(item) {
-      this.leaseNum = item.leaseNumCode
-      this.leaseNumName = item.leaseNumName
+      this.leaseNum = item.dicValue
+      this.leaseNumName = item.dicName
     },
     submit() {
       this.$store.commit('selectPiano', {
