@@ -36,71 +36,94 @@ import MessageDetail from '@/components/message/detail'
 import WxLogon from '@/components/login/wxlogon'
 import SmsLogin from '@/components/login/smslogon'
 import Feature from '@/components/feature'
+import AboutUs from '@/components/aboutus'
+import ContactUs from '@/components/contactus'
+import Activity from '@/components/activity'
+import PianoInfo from '@/components/pianoinfo'
 Vue.use(Router)
 Vue.use(Widget)
 
 export default new Router({
   mode: 'history',
-  routes: [{
+  routes: [
+    {
       path: '*',
       component: NotFoundComponent
-    }, {
+    },
+    {
       path: '/',
       name: 'home',
       component: Home,
       alias: '/index.html'
-    }, {
+    },
+    {
       path: '/productlist',
       name: 'product-list',
       component: ProductList
-    }, {
+    },
+    {
       path: '/productdetail',
       component: ProductDetail
-    }, {
+    },
+    {
       path: '/orderlist',
       component: OrderList
-    }, {
+    },
+    {
       path: '/ordercomplete',
       component: OrderComplete
-    }, {
+    },
+    {
       path: '/feature',
       name: 'feature',
       component: Feature
-    }, {
+    },
+    {
       path: '/news',
       component: News
-    }, {
+    },
+    {
       path: '/coupon',
       component: Coupon
-    }, {
+    },
+    {
       path: '/account',
       component: Account
-    }, {
+    },
+    {
       path: '/usercenter',
       component: UserCenter
-    }, {
+    },
+    {
       path: '/orderdetail',
       name: 'order-detail',
       component: OrderDetail
-    }, {
+    },
+    {
       path: '/chooseaddr',
       component: ChooseAddr
-    }, {
+    },
+    {
       path: '/login',
       component: Login
-    }, {
+    },
+    {
       path: '/wxlogon',
       component: WxLogon
-    }, {
+    },
+    {
       path: '/smslogon',
       component: SmsLogin
-    }, {
+    },
+    {
       path: '/addaddress',
       component: AddAddress
-    }, {
+    },
+    {
       path: '/changephone',
       component: ChangePhone
-    }, {
+    },
+    {
       path: '/changephone/completed',
       name: 'change-phone-completed',
       component: ChangePhoneCompleted
@@ -108,56 +131,86 @@ export default new Router({
     {
       path: '/editpwd',
       component: EditPwd
-    }, {
+    },
+    {
       path: '/editpwd/completed',
       name: 'editpwd-completed',
       component: EditPwdCompleted
-    }, {
+    },
+    {
       path: '/address',
       component: Address
-    }, {
+    },
+    {
       path: '/favorite',
       component: Favorite
-    }, {
+    },
+    {
       path: '/register',
       component: Register
-    }, {
+    },
+    {
       path: '/registernext',
       name: 'registernext',
       component: RegisterNext
-    }, {
+    },
+    {
       path: '/registersuccess',
       component: RegisterSuccess
-    }, {
+    },
+    {
       path: '/findpwd',
       component: FindPwd
-    }, {
+    },
+    {
       path: '/findpwdnext',
       name: 'findpwdnext',
       component: FindPwdNext
-    }, {
+    },
+    {
       path: '/article',
       component: Article
     },
     {
       path: '/test',
       component: Test
-    }, {
+    },
+    {
       path: '/ailpay/result',
       component: AliPayResult
-    }, {
+    },
+    {
       path: '/wxpay/result',
       component: WxPayResult
-    }, {
+    },
+    {
       path: '/wxpay',
       component: WxPay
-    }, {
+    },
+    {
       path: '/message',
       component: Message
-    }, {
+    },
+    {
       path: '/message/detail',
       name: 'message-detail',
       component: MessageDetail
+    },
+    {
+      path: '/aboutus',
+      component: AboutUs
+    },
+    {
+      path: '/contactus',
+      component: ContactUs
+    },
+    {
+      path: '/activity',
+      component: Activity
+    },
+    {
+      path: '/pianoinfo',
+      component: PianoInfo
     }
   ]
 })

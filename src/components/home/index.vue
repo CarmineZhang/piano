@@ -48,7 +48,9 @@ import Top from '../top'
 import VeFooter from '../footer'
 import SearchBar from '../base/searchbar'
 import Swiper from '../base/swiper'
-import bannerSrc from '../../assets/banner.png'
+import bannerSrc1 from '../../assets/banner1.jpg'
+import bannerSrc2 from '../../assets/banner2.jpg'
+import bannerSrc3 from '../../assets/banner3.jpg'
 import Recommend from './recommend'
 import Service from './service'
 import News from './news'
@@ -65,7 +67,11 @@ export default {
   },
   data() {
     return {
-      swipers: [bannerSrc, bannerSrc, bannerSrc]
+      swipers: [
+        { img: bannerSrc1, url: '/aboutus' },
+        { img: bannerSrc2, url: '/pianoinfo' },
+        { img: bannerSrc3, url: '/activity' }
+      ]
     }
   },
   beforeMount() {
@@ -89,16 +95,16 @@ export default {
 </script>
 <style lang="scss">
 .index-nav {
-  margin: .3rem 0;
+  margin: 0.3rem 0;
   background-color: #fff;
-  padding: .3rem;
+  padding: 0.3rem;
   .nav-header {
-    font-size: .3rem;
+    font-size: 0.3rem;
     color: #323136;
   }
   @at-root {
     .nav-body {
-      padding: .3rem 0;
+      padding: 0.3rem 0;
       display: flex;
       li {
         flex: 1;
@@ -107,7 +113,7 @@ export default {
         }
         i,
         span {
-          font-size: .28rem;
+          font-size: 0.28rem;
           color: #727278;
           display: block;
           text-align: center;
@@ -123,7 +129,7 @@ export default {
 }
 
 .index-body {
-  padding: .88rem+.84rem 0 0;
+  padding: 0.88rem+0.84rem 0 0;
   background-color: #eee;
 }
 </style>

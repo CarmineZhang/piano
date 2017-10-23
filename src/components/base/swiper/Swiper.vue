@@ -3,19 +3,19 @@
     <div class="ve-slider-hold">
       <div class="ve-slider-list">
         <div class="ve-slider-item">
-          <a>
-            <img :src="firstItem" alt="">
-          </a>
+          <router-link :to="firstItem.url">
+            <img :src="firstItem.img" alt="">
+          </router-link>
         </div>
         <div class="ve-slider-item" v-for="(item,index) in list" :key="index">
-          <a>
-            <img :src="item" alt="">
-          </a>
+          <router-link :to="item.url">
+            <img :src="item.img" alt="">
+          </router-link>
         </div>
         <div class="ve-slider-item">
-          <a>
-            <img :src="lastItem" alt="">
-          </a>
+          <router-link :to="lastItem.url">
+            <img :src="lastItem.img" alt="">
+          </router-link>
         </div>
       </div>
     </div>
