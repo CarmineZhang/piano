@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="order-detail">
     <my-header content="确认订单"></my-header>
     <div class="cost">
       <div class="title">费用核算：</div>
@@ -35,6 +35,9 @@
     </div>
     <div class="cost-more"></div>
     <select-pay @on-pay="selectPay"></select-pay>
+    <div class="proto">
+      <input type="checkbox" v-model="checked"><a @click="showProto"><<行龙乐器用户服务协议>></a>
+    </div>
     <div class="cost-action fixed-footer">
       <div class="order-cost">
         <span class="tit">费用总计：</span>
@@ -42,12 +45,13 @@
           <em>¥</em>{{detail.downPayment|ToThousands}}</span>
         </span>
       </div>
-      <a class="cost-ok" @click="pay">
+      <a class="cost-ok" @click="pay" :class="{'cost-fail':!checked}">
         确认支付
       </a>
       <div v-html="payText"></div>
     </div>
-    <my-dialog v-model="show" @on-confirm="searchResult"></my-dialog>
+    <ResultConfirm v-model="show" @on-confirm="searchResult"></ResultConfirm>
+    <protocal v-model="protoShow"></protocal>
   </div>
 </template>
 <script>
@@ -56,7 +60,8 @@ import MyHeader from '@/components/header'
 import SelectPay from './selectpay.vue'
 import http from '@/libs/httpUtil'
 import storage from '@/libs/storage'
-import MyDialog from './dialog'
+import ResultConfirm from './confirm'
+import Protocal from './protocal'
 export default {
   name: 'order-detail',
   data() {
@@ -66,7 +71,9 @@ export default {
       payText: '',
       show: false,
       tradeno: '',
-      id: ''
+      id: '',
+      checked: true,
+      protoShow: false
     }
   },
   computed: {
@@ -101,13 +108,20 @@ export default {
     Cell,
     SelectPay,
     MyHeader,
-    MyDialog
+    ResultConfirm,
+    Protocal
   },
   methods: {
+    showProto() {
+      this.protoShow = true
+    },
     selectPay(type) {
       this.payType = type
     },
     pay() {
+      if (!this.checked) {
+        return
+      }
       let loading = this.$ve.loading('处理中...')
       if (this.payType === 'wx') {
         if (this.isGZH) {
@@ -120,53 +134,79 @@ export default {
           let backurl = encodeURIComponent('http://m.pianoshare.cn/wxpay')
           window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0bc8c8250cea6d79&redirect_uri=${backurl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         } else {
-          http.wxPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴--订单号' + this.detail.orderSn, this.id).then(res => {
+          http
+            .wxPay(
+              this.detail.orderSn,
+              this.detail.downPayment,
+              '行龙租琴--订单号' + this.detail.orderSn,
+              this.id
+            )
+            .then(res => {
+              loading.hide()
+              if (res.errNo == 0) {
+                window.location.href = res.data.payUrl
+              } else {
+                this.$ve.alert(res.errMsg)
+              }
+            })
+            .catch(() => {
+              loading.hide()
+              this.$ve.alert('服务器错误，请稍后再试')
+            })
+        }
+      } else {
+        http
+          .aliPay(
+            this.detail.orderSn,
+            this.detail.downPayment,
+            '行龙租琴',
+            '行龙租琴--订单号' + this.detail.orderSn,
+            this.id
+          )
+          .then(res => {
             loading.hide()
             if (res.errNo == 0) {
-              window.location.href = res.data.payUrl
+              this.payText = res.data.alipayTrade
+              this.$nextTick(() => {
+                document.forms[0].submit()
+              })
             } else {
               this.$ve.alert(res.errMsg)
             }
-          }).catch(() => {
+          })
+          .catch(() => {
             loading.hide()
             this.$ve.alert('服务器错误，请稍后再试')
           })
-        }
-      } else {
-        http.aliPay(this.detail.orderSn, this.detail.downPayment, '行龙租琴', '行龙租琴--订单号' + this.detail.orderSn, this.id).then(res => {
-          loading.hide()
-          if (res.errNo == 0) {
-            this.payText = res.data.alipayTrade
-            this.$nextTick(() => {
-              document.forms[0].submit()
-            })
-          } else {
-            this.$ve.alert(res.errMsg)
-          }
-        }).catch(() => {
-          loading.hide()
-          this.$ve.alert('服务器错误，请稍后再试')
-        })
       }
     },
     searchResult() {
       if (this.payType === 'wx') {
-        this.$router.push({ path: '/wxpay/result', query: { tradeno: this.tradeno } })
+        this.$router.push({
+          path: '/wxpay/result',
+          query: { tradeno: this.tradeno }
+        })
       } else {
-        this.$router.push({ path: '/ailpay/result', query: { tradeno: this.tradeno } })
+        this.$router.push({
+          path: '/ailpay/result',
+          query: { tradeno: this.tradeno }
+        })
       }
     }
   }
 }
 </script>
 <style lang="scss">
+.order-detail {
+  padding-bottom: 0.88rem;
+}
 .cost {
-  padding-left: .3rem;
+  padding-left: 0.3rem;
   .title {
     position: relative;
-    padding: .3rem 0;
+    padding: 0.3rem 0;
     color: #323136;
-    font-size: .32rem;
+    font-size: 0.32rem;
     @include bottomline(#ccc);
   }
   .cell {
@@ -176,18 +216,18 @@ export default {
       }
     }
     .cell-comment {
-      font-size: .24rem;
+      font-size: 0.24rem;
       color: #bf3737;
     }
     .cell-hd {
-      font-size: .3rem;
+      font-size: 0.3rem;
       color: #323136;
     }
     .cell-bd {
-      font-size: .3rem;
+      font-size: 0.3rem;
       color: #323136;
       .cell-desc {
-        font-size: .28rem;
+        font-size: 0.28rem;
         color: #ccc;
       }
     }
@@ -195,7 +235,7 @@ export default {
 }
 
 .cost-more {
-  height: .3rem;
+  height: 0.3rem;
 }
 
 .cost-comment {
@@ -204,21 +244,21 @@ export default {
 
 .cost-action {
   display: flex;
-  height: .88rem;
-  line-height: .88rem;
+  height: 0.88rem;
+  line-height: 0.88rem;
   .order-cost {
     flex: 1;
-    font-size: .28rem;
+    font-size: 0.28rem;
     background-color: #7f7c8b;
     text-align: center;
     color: #fff;
     .tit {
-      font-size: .28rem;
+      font-size: 0.28rem;
     }
     .ct {
-      font-size: .34rem;
+      font-size: 0.34rem;
       em {
-        font-size: .28rem;
+        font-size: 0.28rem;
       }
     }
   }
@@ -226,8 +266,27 @@ export default {
     width: 1.8rem;
     background-color: #bf3737;
     text-align: center;
-    font-size: .3rem;
+    font-size: 0.3rem;
     color: #fff;
+  }
+  .cost-fail {
+    opacity: 0.6;
+  }
+}
+.proto {
+  line-height: 0.3rem;
+  padding: 0.3rem 0 0.3rem 0.3rem;
+  input {
+    height: 0.24rem;
+    width: 0.24rem;
+    vertical-align: middle;
+  }
+  a {
+    text-decoration: underline;
+    font-size: 0.24rem;
+    color: #928f9c;
+    vertical-align: middle;
+    margin-left: 0.1rem;
   }
 }
 </style>

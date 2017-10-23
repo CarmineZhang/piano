@@ -12,13 +12,13 @@
 </template>
 <script>
 export default {
-  name: 'result-dialog',
+  name: 'result-confirm',
   props: {
     value: Boolean
   },
   data() {
     return {
-      show: false,
+      show: false
     }
   },
   watch: {
@@ -31,11 +31,11 @@ export default {
   },
   methods: {
     confirm() {
-      this.show = false;
+      this.show = false
       this.$emit('on-confirm')
     },
     close() {
-      this.show = false;
+      this.show = false
     }
   }
 }

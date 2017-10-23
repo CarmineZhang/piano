@@ -10,7 +10,7 @@
 </template>
 <script>
 export default {
-  name: "select-pay",
+  name: 'select-pay',
   data() {
     return {
       pay: 'wx'
@@ -27,14 +27,14 @@ export default {
   methods: {
     wxPay() {
       if (this.pay === 'wx') {
-        return;
+        return
       }
       this.pay = 'wx'
       this.$emit('on-pay', 'wx')
     },
     aliPay() {
       if (this.pay === 'ali') {
-        return;
+        return
       }
       this.pay = 'ali'
       this.$emit('on-pay', 'ali')
@@ -44,11 +44,11 @@ export default {
 </script>
 <style lang="scss">
 .pay {
-  padding-bottom: .9rem;
+  // padding-bottom: .9rem;
   .title {
     padding-top: 30px;
-    padding-left: .3rem;
-    font-size: .32rem;
+    padding-left: 0.3rem;
+    font-size: 0.32rem;
     color: #323136;
   }
   .pay-method {
@@ -58,7 +58,7 @@ export default {
       text-align: center;
       flex: 1;
       position: relative;
-      font-size: .28rem;
+      font-size: 0.28rem;
       color: #928f9c;
       &.on {
         color: #323136;
@@ -68,9 +68,9 @@ export default {
       &::before {
         content: '';
         display: block;
-        width: .99rem;
-        height: .98rem;
-        margin: .7rem auto .2rem;
+        width: 0.99rem;
+        height: 0.98rem;
+        margin: 0.7rem auto 0.2rem;
         background-image: url('../../assets/pay-wx.png');
         background-repeat: no-repeat;
         background-size: 100%;
@@ -88,7 +88,7 @@ export default {
         display: block;
         width: 1rem;
         height: 1rem;
-        margin: .7rem auto .2rem;
+        margin: 0.7rem auto 0.2rem;
         background-image: url('../../assets/pay-ali.png');
         background-repeat: no-repeat;
         background-size: 100%;
@@ -102,10 +102,10 @@ export default {
     }
   }
   .comment {
-    padding-top: .5rem;
-    padding-left: .3rem;
+    padding-top: 0.3rem;
+    padding-left: 0.3rem;
     color: #bf3737;
-    font-size: .24rem;
+    font-size: 0.24rem;
   }
 }
 </style>
