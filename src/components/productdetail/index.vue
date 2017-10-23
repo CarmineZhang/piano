@@ -117,6 +117,10 @@ export default {
             this.rentList = longNum
             this.benfit = this.data.longLeaseDis
           }
+        } else if (res.errNO == '10000') {
+          this.$ve.alert(res.errMsg, () => {
+            this.$router.back()
+          })
         }
       })
       if (storage.get('access-token')) {
@@ -199,14 +203,14 @@ export default {
 }
 
 .pt-info {
-  padding-bottom: .88rem;
+  padding-bottom: 0.88rem;
   img {
     width: 100%;
   }
 }
 
 .pt-detail {
-  padding: .3rem 0 0 .3rem;
+  padding: 0.3rem 0 0 0.3rem;
   .flexbox {
     display: flex;
     line-height: 2;
@@ -217,22 +221,22 @@ export default {
     }
   }
   .title {
-    font-size: .3rem;
+    font-size: 0.3rem;
     color: #323136;
   }
   .group {
     display: inline-block;
   }
   .total-price {
-    font-size: .32rem;
+    font-size: 0.32rem;
     color: #bf3737;
   }
   .s1 {
-    font-size: .28rem;
+    font-size: 0.28rem;
     color: #323136;
   }
   .s2 {
-    font-size: .28rem;
+    font-size: 0.28rem;
     color: #928f9c;
     span {
       // margin-right: .2rem;
@@ -242,21 +246,20 @@ export default {
     }
   }
   .s3 {
-    font-size: .24rem;
+    font-size: 0.24rem;
     color: #323136;
   }
   .s4 {
-    font-size: .24rem;
+    font-size: 0.24rem;
     color: #928f9c;
   }
   .cur {
     color: #fff;
     background-color: #bf3737;
-    border-radius: .1rem+.06rem;
+    border-radius: 0.1rem+0.06rem;
     box-sizing: border-box;
   }
 }
-
 
 .footer-action {
   .act-tel {
@@ -264,16 +267,16 @@ export default {
     background-color: #ebab21;
     color: #fff;
     text-align: center;
-    font-size: .3rem;
-    line-height: .88rem;
+    font-size: 0.3rem;
+    line-height: 0.88rem;
   }
   .act-collect {
-    width: .88rem;
+    width: 0.88rem;
     background-color: #7f7c8b;
     background-image: url('../../assets/collect.png');
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    background-size: .4rem .36rem;
+    background-size: 0.4rem 0.36rem;
   }
 }
 </style>
