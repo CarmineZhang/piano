@@ -2,7 +2,7 @@
   <div>
     <top class="fixed"></top>
     <div class="imgBody">
-        <img src="../../assets/contactus.jpg">
+        <img src="../../assets/contact.png">
     </div>
     <ve-footer></ve-footer>
   </div>

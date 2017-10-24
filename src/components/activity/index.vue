@@ -2,7 +2,7 @@
   <div class="activity">
     <top></top>
     <div>
-      <img src="../../assets/banner3.jpg">
+      <img src="../../assets/banner3.png">
     </div>
     <div class="action">
         <a>立即领取</a>
