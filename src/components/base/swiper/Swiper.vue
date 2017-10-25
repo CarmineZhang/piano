@@ -3,19 +3,19 @@
     <div class="ve-slider-hold">
       <div class="ve-slider-list">
         <div class="ve-slider-item">
-          <router-link :to="firstItem.url">
-            <img :src="firstItem.img" alt="">
-          </router-link>
+          <a @click="goto(firstItem)">
+            <img :src="firstItem&&firstItem.img||firstItem" alt="">
+          </a>
         </div>
         <div class="ve-slider-item" v-for="(item,index) in list" :key="index">
-          <router-link :to="item.url">
-            <img :src="item.img" alt="">
-          </router-link>
+          <a @click="goto(item)">
+            <img :src="item&&item.img||item" alt="">
+          </a>
         </div>
         <div class="ve-slider-item">
-          <router-link :to="lastItem.url">
-            <img :src="lastItem.img" alt="">
-          </router-link>
+          <a @click="goto(lastItem)">
+            <img :src="lastItem&&lastItem.img||lastItem" alt="">
+          </a>
         </div>
       </div>
     </div>
@@ -86,6 +86,11 @@ export default {
       this.swiper = new Swiper({
         count: this.len
       })
+    },
+    goto(item) {
+      if (item.url) {
+        this.$router.push(item.url)
+      }
     }
   }
 }
