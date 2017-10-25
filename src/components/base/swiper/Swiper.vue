@@ -3,18 +3,18 @@
     <div class="ve-slider-hold">
       <div class="ve-slider-list">
         <div class="ve-slider-item">
-          <a @click="goto(firstItem)">
-            <img :src="firstItem&&firstItem.img||firstItem" alt="">
+          <a @click="goto(firstItem)" v-if="firstItem">
+            <img :src="firstItem.img||firstItem" alt="">
           </a>
         </div>
         <div class="ve-slider-item" v-for="(item,index) in list" :key="index">
           <a @click="goto(item)">
-            <img :src="item&&item.img||item" alt="">
+            <img :src="item.img||item" alt="">
           </a>
         </div>
         <div class="ve-slider-item">
-          <a @click="goto(lastItem)">
-            <img :src="lastItem&&lastItem.img||lastItem" alt="">
+          <a @click="goto(lastItem)" v-if="lastItem">
+            <img :src="lastItem.img||lastItem" alt="">
           </a>
         </div>
       </div>
@@ -61,13 +61,13 @@ export default {
       return this.list.length
     },
     firstItem() {
-      if (this.len) {
+      if (this.len > 1) {
         return this.list[this.len - 1]
       }
       return null
     },
     lastItem() {
-      if (this.len) {
+      if (this.len > 1) {
         return this.list[0]
       }
       return null
