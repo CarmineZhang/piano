@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      status: 1,
+      status: 0,
       imgSrcs: [zeroSrc, importSrc, giftSrc, buySrc],
       imgsrc: zeroSrc
     }
