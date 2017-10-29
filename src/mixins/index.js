@@ -1,23 +1,30 @@
-export var focus = {
-  inserted: function (el, binding) {
-    if (binding.value) el.focus();
-    else el.blur();
+import storage from '@/libs/storage'
+var focus = {
+  inserted: function(el, binding) {
+    if (binding.value) el.focus()
+    else el.blur()
   },
 
-  componentUpdated: function (el, binding) {
+  componentUpdated: function(el, binding) {
     if (binding.modifiers.lazy) {
       if (Boolean(binding.value) === Boolean(binding.oldValue)) {
-        return;
+        return
       }
     }
 
-    if (binding.value) el.focus();
-    else el.blur();
-  },
-};
+    if (binding.value) el.focus()
+    else el.blur()
+  }
+}
 
 export default {
-  directives: {
-    focus: focus,
+  beforeMounted() {
+    let id = this.$store.state.route.query.cid
+    if (!storage.set('cid') && id) {
+      storage.set('cid', id)
+    }
   },
-};
+  directives: {
+    focus: focus
+  }
+}

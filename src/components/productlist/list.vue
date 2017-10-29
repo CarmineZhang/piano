@@ -6,7 +6,6 @@
       </div>
       <div class="pl-item-content">
         <p class="title" v-text="item.pianoName"></p>
-        <p class="area">北京</p>
         <p class="price">
           <span class="pledge">原价押金：</span>
           <span class="pledge txt-line">¥ {{item.marketPrices}}</span>

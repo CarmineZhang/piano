@@ -1,8 +1,8 @@
 <template>
   <div class="search-bar" id="searchBar" :class="{'search-bar-focusing':isFocus}">
-    <form class="search-bar-form">
+    <form class="search-bar-form" @submit.prevent="search">
       <i class="weui-icon-search"></i>
-      <input type="search" v-model="searchValue" class="search-bar-input" v-focus="isFocus" @search="search" placeholder="输入钢琴品牌型号关键字" @focus="iptFocus">
+      <input type="search" v-model="searchValue" class="search-bar-input" v-focus="isFocus"  placeholder="输入钢琴品牌型号关键字" @focus="iptFocus">
       <a class="weui-icon-clear" @click="clear" v-show="isFocus&&searchValue!==''"></a>
     </form>
     <a class="search-bar-cancel-btn" @click="cancel" v-text="actionText"></a>

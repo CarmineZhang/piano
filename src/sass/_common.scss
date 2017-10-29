@@ -196,7 +196,6 @@ a.link {
 
 .pl-item {
   display: flex;
-  padding: 5px 0;
   position: relative;
   @include bottomline();
   .pl-item-img {
@@ -218,11 +217,6 @@ a.link {
       font-size: 0.28rem;
       color: #323136;
       word-wrap: break-word;
-    }
-    .area {
-      margin-top: 0.1rem;
-      font-size: 0.24rem;
-      color: #928f9c;
     }
     .price {
       margin-top: 0.1rem;
