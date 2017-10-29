@@ -48,6 +48,9 @@ axios.interceptors.response.use(res => {
 })
 
 function ajax(url, data) {
+  if (storage.get('cid')) {
+    data.cid = storage.get('cid')
+  }
   var signData = qs.stringify(signature(data))
   return axios.post('/platform-longing-web/' + url, signData)
 }

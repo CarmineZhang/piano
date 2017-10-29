@@ -18,9 +18,9 @@ var focus = {
 }
 
 export default {
-  beforeMounted() {
+  beforeMount() {
     let id = this.$store.state.route.query.cid
-    if (!storage.set('cid') && id) {
+    if (!storage.get('cid') && id) {
       storage.set('cid', id)
     }
   },
