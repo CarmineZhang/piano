@@ -7,13 +7,13 @@
       <div class="re-img">
         <img :src="item.coverUrl" alt="">
       </div>
-      <p class="re-title" v-text="item.pianoName"></p>
-      <p class="re-sub-title" v-text="item.brand"></p>
+      <!-- <p class="re-title" v-text="item.pianoName"></p>
+      <p class="re-sub-title" v-text="item.brand"></p> -->
       <p class="re-desc" v-html="item.summary"></p>
       <p class="re-price">
-        <span class="re-price-title">最低租金：</span>
+        <span class="re-price-title">租金：</span>
         <span class="re-price-ct">
-          ¥{{item.rentActive}} / 天
+          ¥{{item.rentActive}} / 月
         </span>
       </p>
     </div>
@@ -45,15 +45,15 @@ export default {
 <style lang="scss">
 .re-header {
   background-color: #fff;
-  padding: .3rem;
-  font-size: .3rem;
+  padding: 0.3rem;
+  font-size: 0.3rem;
   color: #323136;
 }
 
 .re-pd {
   position: relative;
   background: #fff;
-  height: 10rem;
+  height: 9rem;
   .re-img {
     padding-top: (670/750)*100%;
     img {
@@ -68,35 +68,35 @@ export default {
     text-align: center;
   }
   .re-title {
-    margin-top: .15rem;
-    font-size: .34rem;
+    margin-top: 0.15rem;
+    font-size: 0.34rem;
     color: #1b1b1b;
   }
   .re-sub-title {
-    font-size: .24rem;
+    font-size: 0.24rem;
     color: #928f9c;
   }
   .re-desc {
-    margin-top: .2rem;
-    font-size: .24rem;
+    margin-top: 0.2rem;
+    font-size: 0.24rem;
     color: #323136;
   }
   .re-price {
-    margin-top: .2rem;
-    line-height: .3rem;
+    margin-top: 0.2rem;
+    line-height: 0.3rem;
     .re-price-title {
-      font-size: .24rem;
+      font-size: 0.24rem;
       color: #323136;
     }
     .re-price-ct {
-      font-size: .3rem;
+      font-size: 0.3rem;
       color: #bf3737;
     }
   }
 }
 
 .re-pd-dark {
-  background-color: #1C1C1C;
+  background-color: #1c1c1c;
   .re-title {
     color: #fff;
   }

@@ -5,11 +5,6 @@
     <div class="pt-detail">
       <p class="title" v-text="data.pianoName"></p>
       <div class="flexbox">
-        <span class="s2">市场价：</span>
-        <span class="flex-item s2">
-          <em>¥</em>{{data.marketPrices|ToThousands}}</span>
-      </div>
-      <div class="flexbox">
         <span class="s1">租赁方式：</span>
         <div class="flex-ite2 s2">
           <span :class="{'cur':leaseType===1}" @click="choose(1)">长租</span>
@@ -23,15 +18,30 @@
         </div>
       </div>
       <div class="flexbox">
-        <span class="s1">押金：</span>
+        <span class="s2 txt-line">原价押金：</span>
+        <span class="flex-item s2 txt-line">
+          <em>¥</em>{{data.marketPrices|ToThousands}}</span>
+      </div>
+      <div class="flexbox">
+        <span class="s1">现价押金：</span>
         <span class="flex-item s1">
           <em>¥</em>{{deposit|ToThousands}}</span>
         </span>
       </div>
+       <!-- <div class="flexbox">
+        <span class="s2 txt-line">原价租金：</span>
+        <span class="flex-item s2 txt-line">
+          <em>¥</em>{{oldRent*leaseNum*benfit[leaseNum]|ToThousands}}</span>
+      </div> -->
       <div class="flexbox">
-        <span class="s1">租金：</span>
+        <span class="s1">现价租金：</span>
         <span class="flex-item s1">
           <em>¥</em>{{rent*leaseNum*benfit[leaseNum]|ToThousands}}</span>
+      </div>
+      <div class="flexbox">
+        <span class="s1">预付款：</span>
+        <span class="flex-item s1 txt-red">
+          <em>¥</em>{{data.downPayment|ToThousands}}</span>
       </div>
       <div class="flexbox">
         <span class="s1" style="line-height: .64rem;">押金+租金：</span>
@@ -98,6 +108,13 @@ export default {
         return this.data.longRentActive
       } else {
         return this.data.shortRentActive
+      }
+    },
+    oldRent() {
+      if (this.leaseType === 1) {
+        return this.data.longRentOld
+      } else {
+        return this.data.shortRentOld
       }
     }
   },
@@ -223,6 +240,7 @@ export default {
   .title {
     font-size: 0.3rem;
     color: #323136;
+    margin-bottom: 10px;
   }
   .group {
     display: inline-block;
@@ -234,6 +252,9 @@ export default {
   .s1 {
     font-size: 0.28rem;
     color: #323136;
+  }
+  .s1.txt-red {
+    color: #bf3737;
   }
   .s2 {
     font-size: 0.28rem;
