@@ -16,7 +16,7 @@
         <cell title="运费：">
           <span>{{detail.deliveryPrice|ToThousands}}</span>
         </cell>
-        <cell to="" title="优惠券：">
+        <cell to="" title="优惠券：" @on-click="showSelectCoupon">
           ¥20
         </cell>
         <cell title="预付费用：">
@@ -35,6 +35,7 @@
     </div>
     <div class="cost-more"></div>
     <select-pay @on-pay="selectPay"></select-pay>
+    <coupon v-model="couponShow"></coupon>
     <div class="proto">
       <input type="checkbox" v-model="checked"><a @click="showProto"><<行龙乐器用户服务协议>></a>
     </div>
@@ -58,6 +59,7 @@
 import { Cell } from '../base/cell'
 import MyHeader from '@/components/header'
 import SelectPay from './selectpay.vue'
+import Coupon from './selectcoupon.vue'
 import http from '@/libs/httpUtil'
 import storage from '@/libs/storage'
 import ResultConfirm from './confirm'
@@ -73,7 +75,8 @@ export default {
       tradeno: '',
       id: '',
       checked: true,
-      protoShow: false
+      protoShow: false,
+      couponShow: false
     }
   },
   computed: {
@@ -109,9 +112,13 @@ export default {
     SelectPay,
     MyHeader,
     ResultConfirm,
-    Protocal
+    Protocal,
+    Coupon
   },
   methods: {
+    showSelectCoupon() {
+      this.couponShow = true
+    },
     showProto() {
       this.protoShow = true
     },

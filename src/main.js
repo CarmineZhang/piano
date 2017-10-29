@@ -1,9 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import {
-  sync
-} from 'vuex-router-sync'
+import { sync } from 'vuex-router-sync'
 import App from './App'
 import store from './store'
 import router from './router'
@@ -19,20 +17,20 @@ Vue.mixin(mixins)
 
 sync(store, router)
 
-Vue.filter('dateformate', (val) => {
+Vue.filter('dateformate', val => {
   if (typeof val === 'string') {
     return val.substring(0, 11)
   }
 })
-Vue.filter('ToThousands', (val) => {
+Vue.filter('ToThousands', val => {
   if (typeof val === 'undefined' || isNaN(val)) {
     return ''
   }
   let ret = val
   if (typeof val === 'number') {
-    ret = val.toFixed(2)
+    ret = val.toFixed(0)
   }
-  return ret.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+  return ret.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 })
 
 Vue.directive('attrDetail', (el, binding) => {
@@ -52,69 +50,6 @@ Vue.directive('attrDetail', (el, binding) => {
   }
   el.innerHTML = ret
 })
-
-
-// var pageManager = {
-//   _pageStack: [],
-//   _pageIndex: 1,
-//   init() {
-//     this._pageStack.length = 0;
-//   },
-//   find(path) {
-//     var found = null;
-//     for (var i = this._pageStack.length - 1; i >= 0; i--) {
-//       var stack = this._pageStack[i];
-//       if (stack.path === path) {
-//         found = stack;
-//         break;
-//       }
-//     }
-//     return found;
-//   },
-//   pageIndex() {
-//     return this._pageIndex
-//   },
-//   push(ob) {
-//     this._pageStack.push(ob)
-//     this._pageIndex++;
-//   },
-//   pop() {
-//     this._pageIndex--;
-//     var stack = this._pageStack.pop();
-//     if (!stack) {
-//       return;
-//     }
-//   }
-// }
-// pageManager.init()
-
-// router.beforeEach((to, from, next) => {
-//   console.log(to.path)
-//   var page = pageManager.find(to.path)
-//   if (!page) {
-//     store.commit('updateDirection', {
-//       direction: 'forward'
-//     })
-//     pageManager.push({
-//       'path': to.path,
-//       'pageIndex': pageManager.pageIndex()
-//     })
-//   } else if (page.pageIndex < pageManager.pageIndex()) {
-//     store.commit('updateDirection', {
-//       direction: 'reverse'
-//     })
-//     pageManager.pop()
-//   } else {
-//     store.commit('updateDirection', {
-//       direction: 'forward'
-//     })
-//     pageManager.push({
-//       'path': to.path,
-//       'pageIndex': pageManager.pageIndex()
-//     })
-//   }
-//   next()
-// })
 
 /* eslint-disable no-new */
 new Vue({

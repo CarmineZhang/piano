@@ -1,7 +1,5 @@
 import axios from 'axios'
-import {
-  signature
-} from './comUtil'
+import { signature } from './comUtil'
 import qs from 'qs'
 import router from '../router'
 import store from '../store'
@@ -14,7 +12,7 @@ axios.interceptors.response.use(
       let resData = response.data
       if (typeof resData === 'string') {
         try {
-          return JSON.parse(resData);
+          return JSON.parse(resData)
         } catch (e) {
           console.log(e)
         }
@@ -23,8 +21,8 @@ axios.interceptors.response.use(
       }
     }
     return {
-      "errNo": "-99999",
-      "errMsg": "服务器异常"
+      errNo: '-99999',
+      errMsg: '服务器异常'
     }
   },
   error => {
@@ -33,7 +31,7 @@ axios.interceptors.response.use(
     }
     return Promise.reject(error.response.data) // 返回接口返回的错误信息
   }
-);
+)
 
 axios.interceptors.response.use(res => {
   if (res.errNo && res.errNo == 50000) {
@@ -48,7 +46,6 @@ axios.interceptors.response.use(res => {
     return res
   }
 })
-
 
 function ajax(url, data) {
   var signData = qs.stringify(signature(data))
@@ -83,7 +80,6 @@ function setUserPwd(phone, pwd) {
   })
 }
 
-
 function uptatePassword(phone, pwd) {
   return ajax('account/uptatePassword', {
     phone: phone,
@@ -110,14 +106,22 @@ function getArticle(id) {
   })
 }
 
-function getPiano(no = 1, size = 10, brand = '', rentTyp = '', priceDic = '', pianoName = '', purpose = '') {
+function getPiano(
+  no = 1,
+  size = 10,
+  brand = '',
+  rentTyp = '',
+  priceDic = '',
+  pianoName = '',
+  purpose = ''
+) {
   return ajax('mall/pianos', {
     pageNo: no,
     pageSize: size,
     brand: brand,
     rentTyp: rentTyp,
     priceDic: priceDic,
-    ftuType: "2",
+    ftuType: '2',
     pianoName: pianoName,
     purpose: purpose
   })
@@ -192,7 +196,6 @@ function getPianoInfo(id) {
     pianoId: id
   })
 }
-
 
 function getProvince() {
   return ajax('area/getProvinces', {})
@@ -378,6 +381,22 @@ function smsLogon(phone, code) {
   })
 }
 
+function getCoupons() {
+  return ajax('membercoupon/getCouponMemberInfosForHome', {})
+}
+
+function getPayCoupons() {
+  return ajax('membercoupon/getPayCoupons', {
+    memberToken: storage.get('access-token')
+  })
+}
+
+function receiveCoupon(id) {
+  return ajax('membercoupon/receviceCoupon', {
+    memberToken: storage.get('access-token'),
+    couponId: id
+  })
+}
 
 export default {
   sendCode,
@@ -421,5 +440,8 @@ export default {
   wxGzhPay,
   wxLogin,
   smsLogon,
-  sendSms
+  sendSms,
+  getCoupons,
+  receiveCoupon,
+  getPayCoupons
 }

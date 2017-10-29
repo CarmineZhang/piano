@@ -5,15 +5,14 @@
     </transition>
     <transition name="ve-slide">
       <div class="st-deposit" v-if="show">
-        <div class="sd-header">选择押金</div>
+        <div class="sd-header">选择优惠券<i class="close"  @click="close"></i></div>
         <div class="sd-body">
-          <div class="sd-item" @click="select(100)">
-            <div class="sd-item-bd">支付全额押金</div>
-            <div class="sd-item-ft" :class="{'sd-item-default':100==result}"></div>
-          </div>
-          <div class="sd-item" @click="select(20)">
-            <div class="sd-item-bd">支付20%押金</div>
-            <div class="sd-item-ft" :class="{'sd-item-default':20==result}"></div>
+          <div class="sd-item" @click="select(item.id)" v-for="item in list" :key="item.id">
+            <div class="sd-item-bd">
+              <span>{{item.name}}</span>
+              <span><em>¥</em><strong>{{item.amount}}</strong></span>
+            </div>
+            <div class="sd-item-ft" :class="{'sd-item-default':selectId==item.id}"></div>
           </div>
         </div>
         <div class="sd-footer">
@@ -24,6 +23,7 @@
   </div>
 </template>
 <script>
+import http from '@/libs/httpUtil'
 export default {
   name: 'select-deposit',
   props: {
@@ -32,8 +32,12 @@ export default {
   data() {
     return {
       show: false,
-      result: 20
+      selectId: 0,
+      list: []
     }
+  },
+  beforeMount() {
+    this.getCoupons()
   },
   watch: {
     value(val) {
@@ -45,13 +49,20 @@ export default {
   },
   methods: {
     confirm() {
-      this.show = false;
+      this.show = false
+    },
+    getCoupons() {
+      http.getPayCoupons().then(res => {
+        if (res.errNo == 0) {
+          this.list = res.data.couponList
+        }
+      })
     },
     select(val) {
-      this.result = val
+      this.selectId = val
     },
     close() {
-      this.show = false;
+      this.show = false
     }
   }
 }
@@ -66,27 +77,28 @@ export default {
   height: 8rem;
   z-index: 5000;
   .sd-header {
-    padding: .4rem 0 .3rem;
+    line-height: 40px;
     text-align: center;
-    font-size: .32rem;
+    font-size: 0.3rem;
     color: #323136;
+    position: relative;
   }
   .sd-body {
     width: 7.2rem;
     margin: 0 auto;
     .sd-item {
-      height: .88rem;
-      line-height: .88rem;
+      height: 0.88rem;
+      line-height: 0.88rem;
       position: relative;
       display: flex;
       @include bottomline(#ccc);
       .sd-item-bd {
         flex: 1;
-        font-size: .28rem;
+        font-size: 0.28rem;
         color: #323136;
       }
       .sd-item-ft {
-        padding-left: .8rem;
+        padding-left: 0.8rem;
         position: relative;
         &::before {
           content: '';
@@ -97,14 +109,14 @@ export default {
           left: 0;
           background: url('../../assets/select-no-check.png') no-repeat;
           background-position: 0 50%;
-          background-size: .4rem;
+          background-size: 0.4rem;
         }
       }
       .sd-item-default {
         &::before {
           background: url('../../assets/select-checked.png') no-repeat;
           background-position: 0 50%;
-          background-size: .4rem;
+          background-size: 0.4rem;
         }
       }
     }
@@ -114,7 +126,7 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    height: .88rem;
+    height: 0.88rem;
   }
 }
 </style>
