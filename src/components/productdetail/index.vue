@@ -202,12 +202,19 @@ export default {
       this.leaseNumName = item.dicName
     },
     submit() {
-      this.$store.commit('selectPiano', {
-        id: this.id,
-        leaseType: this.leaseType,
-        leaseNum: this.leaseNum
-      })
-      this.$router.push('/chooseaddr')
+      if (storage.get('access-token')) {
+        this.$store.commit('selectPiano', {
+          id: this.id,
+          leaseType: this.leaseType,
+          leaseNum: this.leaseNum
+        })
+        this.$router.push('/chooseaddr')
+      } else {
+        this.$store.commit('updateBackUrl', {
+          backUrl: this.$router.currentRoute.fullPath
+        })
+        this.$router.push('/login')
+      }
     }
   }
 }

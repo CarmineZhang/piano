@@ -35,8 +35,6 @@ axios.interceptors.response.use(
 
 axios.interceptors.response.use(res => {
   if (res.errNo && res.errNo == 50000) {
-    console.dir(router.currentRoute.path)
-    console.dir(router.currentRoute.fullPath)
     store.commit('updateBackUrl', {
       backUrl: router.currentRoute.fullPath
     })
