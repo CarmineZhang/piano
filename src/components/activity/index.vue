@@ -1,9 +1,8 @@
 <template>
-  <div class="activity">
-    <top></top>
-    <div>
+  <div>
+    <top class="fixed"></top>
+    <div  class="activity">
       <img src="../../assets/banner3.png">
-    </div>
     <ul class="coupon-list">
       <li class="list-item" v-for="item in list" :key="item.id">
         <p class="content">
@@ -15,7 +14,18 @@
         </p>
       </li>
     </ul>
-    <ve-footer class="footer-fixed"></ve-footer>
+    <div class="ins">
+      <p>说明：</p>
+      <p>1、本优惠券有效期为：1个月，超出有效期不得使用；</p>
+      <p>2、优惠券不得与其他优惠券同时使用，每单只能使用一
+     张优惠券；</p>
+      <p>3、使用优惠券支付订单，如果退货优惠券抵扣金额不能
+     退还，只退还实际支付商品金额；</p>
+      <p>4、行龙乐器在法律范围内保留对优惠券使用明细的最终
+     解释权。</p>
+    </div>
+     </div>
+    <ve-footer></ve-footer>
   </div>
 </template>
 <script>
@@ -50,7 +60,7 @@ export default {
           this.$ve.alert('领取成功', () => {
             this.getCoupons()
           })
-        }else{
+        } else {
           this.$ve.alert(res.errMsg)
         }
       })
@@ -59,23 +69,23 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.footer-fixed {
+.fixed {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
-  height: 1.5rem;
+  height: 0.88rem;
 }
 .activity {
-  display: flex;
-  flex-direction: column;
+  padding-top: 0.88rem;
   img {
+    display: block;
     width: 100%;
   }
 }
 .coupon-list {
   background-color: #eee;
-  padding: 20px 10px;
+  padding: 10px;
   .list-item {
     background-color: #fff;
     padding: 10px 10px 0;
@@ -122,5 +132,10 @@ export default {
       }
     }
   }
+}
+.ins {
+  padding: 0 10px 10px;
+  font-size: 0.24rem;
+  color: #323136;
 }
 </style>

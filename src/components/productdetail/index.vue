@@ -70,14 +70,13 @@
       </div>
     </div>
     <div class="pt-info" v-html="data.pianoIntro">
-
     </div>
     <div class="more">
     </div>
     <div class="footer-action">
       <a class="act-tel" @click="tel">在线电话</a>
       <a class="action" @click="submit">立即租赁</a>
-      <a class="act-collect" @click="collect"></a>
+      <a class="act-collect" :class="{'act-collected':isCollect==='Y'}" @click="collect"></a>
     </div>
     <tel-dialog v-model="show"></tel-dialog>
   </div>
@@ -170,11 +169,20 @@ export default {
       if (this.isCollect === 'Y') {
         this.$ve.alert('已收藏')
       } else {
-        http.saveCollection(this.id).then(res => {
-          if (res.errNo == 0) {
-            this.isCollect = 'Y'
-          }
-        })
+        let loading = this.$ve.loading('处理中...')
+        http
+          .saveCollection(this.id)
+          .then(res => {
+            loading.hide()
+            if (res.errNo == 0) {
+              this.isCollect = 'Y'
+            } else {
+              this.$ve.alert(res.errMsg)
+            }
+          })
+          .catch(() => {
+            loading.hide()
+          })
       }
     },
     choose(type) {
@@ -305,6 +313,10 @@ export default {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: 0.4rem 0.36rem;
+  }
+  .act-collected {
+    background-image: url('../../assets/collected.png');
+    background-color: #fff;
   }
 }
 </style>

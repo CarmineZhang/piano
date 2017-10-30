@@ -67,7 +67,7 @@ export default {
     },
     getUnReadMessage() {
       http.getUnReadMessage().then(res => {
-        if (res.errNo == 0) {
+        if (res && res.errNo == 0) {
           this.isNewMsg = +res.data.unreadCount > 0
         }
       })
@@ -83,7 +83,8 @@ export default {
           storage.clear('access-token')
           storage.clear('phone')
           this.$ve.toast('登出成功', {
-            duration: 1000, callback: () => {
+            duration: 1000,
+            callback: () => {
               this.$router.push('/')
             }
           })
@@ -120,21 +121,21 @@ export default {
 .user-header {
   height: 1.3rem-2*0.2rem;
   background-color: #bf3737;
-  padding: .2rem .3rem;
+  padding: 0.2rem 0.3rem;
   .tit {
-    font-size: .28rem;
+    font-size: 0.28rem;
     color: #fff;
-    line-height: ((1.3rem-2*0.2rem) /2)
+    line-height: ((1.3rem-2*0.2rem) /2);
   }
   .ct {
-    font-size: .24rem;
+    font-size: 0.24rem;
     color: #f5a8a8;
-    line-height: ((1.3rem-2*0.2rem)/2)
+    line-height: ((1.3rem-2*0.2rem)/2);
   }
 }
 
 .user-body {
-  padding-left: .3rem;
+  padding-left: 0.3rem;
   .cell {
     &:last-child {
       &:after {
@@ -143,38 +144,38 @@ export default {
     }
   }
   .cell-hd {
-    margin-left: -.3rem;
-    width: .6rem;
+    margin-left: -0.3rem;
+    width: 0.6rem;
   }
   .cell-collect {
     background: url('../../assets/me-collect.png') no-repeat;
     background-position: 0 50%;
-    background-size: .3rem .26rem;
+    background-size: 0.3rem 0.26rem;
   }
   .cell-coupon {
     background: url('../../assets/me-coupon.png') no-repeat;
     background-position: 0 50%;
-    background-size: .39rem .26rem;
+    background-size: 0.39rem 0.26rem;
   }
   .cell-order {
     background: url('../../assets/me-order.png') no-repeat;
     background-position: 0 50%;
-    background-size: .3rem .3rem;
+    background-size: 0.3rem 0.3rem;
   }
   .cell-addr {
     background: url('../../assets/me-addr.png') no-repeat;
     background-position: 0 50%;
-    background-size: .24rem .28rem;
+    background-size: 0.24rem 0.28rem;
   }
   .cell-account {
     background: url('../../assets/me-account.png') no-repeat;
     background-position: 0 50%;
-    background-size: .28rem .28rem;
+    background-size: 0.28rem 0.28rem;
   }
 }
 
 .more-mini {
-  height: .3rem;
+  height: 0.3rem;
 }
 </style>
 
