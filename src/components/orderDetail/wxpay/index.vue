@@ -28,37 +28,56 @@ export default {
   },
   methods: {
     wxpay(code) {
-      http.wxGzhPay(this.order.body, this.order.total, this.order.no, code).then(res => {
-        if (res.errNo == 0) {
-          data = res.data
-          if (typeof WeixinJSBridge == "undefined") {
-            if (document.addEventListener) {
-              document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady.bind(this), false);
-            } else if (document.attachEvent) {
-              document.attachEvent('WeixinJSBridgeReady', this.onBridgeReady.bind(this));
-              document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady.bind(this));
+      http
+        .wxGzhPay(
+          this.order.body,
+          this.order.total,
+          this.order.no,
+          code,
+          this.order.couponId
+        )
+        .then(res => {
+          if (res.errNo == 0) {
+            data = res.data
+            if (typeof WeixinJSBridge == 'undefined') {
+              if (document.addEventListener) {
+                document.addEventListener(
+                  'WeixinJSBridgeReady',
+                  this.onBridgeReady.bind(this),
+                  false
+                )
+              } else if (document.attachEvent) {
+                document.attachEvent(
+                  'WeixinJSBridgeReady',
+                  this.onBridgeReady.bind(this)
+                )
+                document.attachEvent(
+                  'onWeixinJSBridgeReady',
+                  this.onBridgeReady.bind(this)
+                )
+              }
+            } else {
+              this.onBridgeReady()
             }
           } else {
-            this.onBridgeReady();
+            this.$ve.alert(res.errMsg)
           }
-        } else {
-          this.$ve.alert(res.errMsg)
-        }
-      })
+        })
     },
     onBridgeReady() {
       if (this.wxVersion >= 5) {
         WeixinJSBridge.invoke(
-          'getBrandWCPayRequest', {
-            "appId": data.appId,
-            "timeStamp": data.timeStamp, //时间戳，自1970年以来的秒数
-            "nonceStr": data.nonceStr, //随机串
-            "package": data.package,
-            "signType": data.signType, //微信签名方式：
-            "paySign": data.paySign
+          'getBrandWCPayRequest',
+          {
+            appId: data.appId,
+            timeStamp: data.timeStamp, //时间戳，自1970年以来的秒数
+            nonceStr: data.nonceStr, //随机串
+            package: data.package,
+            signType: data.signType, //微信签名方式：
+            paySign: data.paySign
           },
-          (res) => {
-            if (res.err_msg == "get_brand_wcpay_request:ok") {
+          res => {
+            if (res.err_msg == 'get_brand_wcpay_request:ok') {
               this.$router.replace('/wxpay/result?tradeno=' + this.order.no)
             } else {
               this.$router.replace('/wxpay/result?tradeno=' + this.order.no)

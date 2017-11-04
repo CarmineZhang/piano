@@ -5,14 +5,19 @@
     </transition>
     <transition name="ve-slide">
       <div class="st-deposit" v-if="show">
-        <div class="sd-header">选择优惠券<i class="close"  @click="close"></i></div>
+        <div class="sd-header">选择优惠券
+          <i class="close" @click="close"></i>
+        </div>
         <div class="sd-body">
-          <div class="sd-item" @click="select(item.id)" v-for="item in list" :key="item.id">
+          <div class="sd-item" @click="select(item)" v-for="item in list" :key="item.id">
             <div class="sd-item-bd">
               <span>{{item.name}}</span>
-              <span><em>¥</em><strong>{{item.amount}}</strong></span>
+              <span>
+                <em>¥</em>
+                <strong>{{item.amount}}</strong>
+              </span>
             </div>
-            <div class="sd-item-ft" :class="{'sd-item-default':selectId==item.id}"></div>
+            <div class="sd-item-ft" :class="{'sd-item-default':couponId==item.id}"></div>
           </div>
         </div>
         <div class="sd-footer">
@@ -32,7 +37,8 @@ export default {
   data() {
     return {
       show: false,
-      selectId: 0,
+      selectCoupon: null,
+      couponId: 0,
       list: []
     }
   },
@@ -49,7 +55,12 @@ export default {
   },
   methods: {
     confirm() {
-      this.show = false
+      if (!this.selectCoupon) {
+        this.$ve.alert('请选择优惠券')
+      } else {
+        this.show = false
+        this.$emit('on-confirm', this.selectCoupon)
+      }
     },
     getCoupons() {
       http.getPayCoupons().then(res => {
@@ -58,8 +69,9 @@ export default {
         }
       })
     },
-    select(val) {
-      this.selectId = val
+    select(item) {
+      this.selectCoupon = item
+      this.couponId = item.id
     },
     close() {
       this.show = false
@@ -75,7 +87,7 @@ export default {
   background-color: #fff;
   width: 100%;
   height: 8rem;
-  z-index: 5000;
+  z-index: 1001;
   .sd-header {
     line-height: 40px;
     text-align: center;

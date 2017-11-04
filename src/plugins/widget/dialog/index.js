@@ -1,5 +1,5 @@
 var tpl = `<div class="<%=className%>">
-    <div class="mask"></div>
+    <div class="mask-dialog"></div>
     <div class="dialog">
         <% if(title){ %>
         <div class="dialog-hd"><strong class="dialog-title"><%=title%></strong></div>
@@ -13,10 +13,9 @@ var tpl = `<div class="<%=className%>">
     </div>
 </div>`
 
+import $ from '../util'
 
-import $ from '../util';
-
-let _sington;
+let _sington
 
 /**
  * dialog，弹窗，alert和confirm的父类
@@ -54,59 +53,64 @@ let _sington;
  * });
  */
 function dialog(options = {}) {
-  if (_sington) return _sington;
+  if (_sington) return _sington
 
-  const isAndroid = $.os.android;
-  options = $.extend({
-    title: null,
-    content: '',
-    className: '',
-    buttons: [{
-      label: '确定',
-      type: 'primary',
-      onClick: $.noop
-    }],
-    isAndroid: isAndroid
-  }, options);
+  const isAndroid = $.os.android
+  options = $.extend(
+    {
+      title: null,
+      content: '',
+      className: '',
+      buttons: [
+        {
+          label: '确定',
+          type: 'primary',
+          onClick: $.noop
+        }
+      ],
+      isAndroid: isAndroid
+    },
+    options
+  )
 
-  const $dialogWrap = $($.render(tpl, options));
-  const $dialog = $dialogWrap.find('.dialog');
-  const $mask = $dialogWrap.find('.mask');
+  const $dialogWrap = $($.render(tpl, options))
+  const $dialog = $dialogWrap.find('.dialog')
+  const $mask = $dialogWrap.find('.mask')
 
-  var _hide = function (callback) {
-    _hide = $.noop; // 防止二次调用导致报错
+  var _hide = function(callback) {
+    _hide = $.noop // 防止二次调用导致报错
 
-    $mask.addClass('animate-fade-out');
+    $mask.addClass('animate-fade-out')
     $dialog
       .addClass('animate-fade-out')
-      .on('animationend webkitAnimationEnd', function () {
+      .on('animationend webkitAnimationEnd', function() {
         console.log('animation')
-        $dialogWrap.remove();
-        _sington = false;
-        callback && callback();
-      });
+        $dialogWrap.remove()
+        _sington = false
+        callback && callback()
+      })
   }
 
   function hide(callback) {
-    _hide(callback);
+    _hide(callback)
   }
 
-  $('body').append($dialogWrap);
+  $('body').append($dialogWrap)
   // 不能直接把.weui-animate-fade-in加到$dialog，会导致mask的z-index有问题
-  $mask.addClass('animate-fade-in');
-  $dialog.addClass('animate-fade-in');
+  $mask.addClass('animate-fade-in')
+  $dialog.addClass('animate-fade-in')
 
-  $dialogWrap.on('click', '.dialog-btn', function (evt) {
-    const index = $(this).index();
+  $dialogWrap.on('click', '.dialog-btn', function(evt) {
+    const index = $(this).index()
     if (options.buttons[index].onClick) {
-      if (options.buttons[index].onClick.call(this, evt) !== false) hide();
+      if (options.buttons[index].onClick.call(this, evt) !== false) hide()
     } else {
-      hide();
+      hide()
     }
-  });
+  })
 
-  _sington = $dialogWrap[0];
-  _sington.hide = hide;
-  return _sington;
+  _sington = $dialogWrap[0]
+  _sington.hide = hide
+  return _sington
 }
-export default dialog;
+export default dialog

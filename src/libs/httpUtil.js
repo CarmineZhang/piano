@@ -266,18 +266,19 @@ function orderlist() {
   })
 }
 
-function wxPay(no, total, body, id) {
+function wxPay(no, total, body, id, couponId) {
   return ajax('wechatpay/unifiedOrder', {
     memberToken: storage.get('access-token'),
     body: body,
     totalFee: total,
     outTradeNo: no,
     returnUrl: 'http://m.pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
-    type: '1'
+    type: '1',
+    couponId
   })
 }
 
-function aliPay(no, total, subject, body, id) {
+function aliPay(no, total, subject, body, id, couponId) {
   return ajax('alipay/pay', {
     memberToken: storage.get('access-token'),
     totalAmount: total,
@@ -285,7 +286,8 @@ function aliPay(no, total, subject, body, id) {
     subject: subject,
     body: body,
     returnUrl: 'http://m.pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
-    payType: '1'
+    payType: '1',
+    couponId: couponId
   })
 }
 
@@ -296,13 +298,14 @@ function getAliPayResult(no) {
   })
 }
 
-function wxGzhPay(body, total, no, code) {
+function wxGzhPay(body, total, no, code, couponId) {
   return ajax('wechatpay/jsPay', {
     memberToken: storage.get('access-token'),
     body: body,
     totalFee: total,
     outTradeNo: no,
-    code: code
+    code: code,
+    couponId: couponId
   })
 }
 

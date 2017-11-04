@@ -28,7 +28,7 @@
           <em>¥</em>{{deposit|ToThousands}}</span>
         </span>
       </div>
-       <div class="flexbox">
+      <div class="flexbox">
         <span class="s2 txt-line">原价租金：</span>
         <span class="flex-item s2 txt-line">
           <em>¥</em>{{oldRent*leaseNum*benfit[leaseNum]|ToThousands}}</span>
@@ -316,7 +316,6 @@ export default {
   }
   .act-collected {
     background-image: url('../../assets/collected.png');
-    background-color: #fff;
   }
 }
 </style>

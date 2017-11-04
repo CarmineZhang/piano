@@ -17,7 +17,12 @@
           <span>{{detail.deliveryPrice|ToThousands}}</span>
         </cell>
         <cell to="" title="优惠券：" @on-click="showSelectCoupon">
-          ¥20
+          <template v-if="couponId!==0">
+            ¥{{couponAmount}}
+          </template>
+          <template v-else>
+            无
+          </template>
         </cell>
         <cell title="预付费用：">
           <span>
@@ -27,7 +32,7 @@
         </cell>
         <cell title="总费用：">
           <span>
-            <em>¥</em>{{detail.totalAmount|ToThousands}}</span>
+            <em>¥</em>{{detail.totalAmount-couponAmount|ToThousands}}</span>
           <span class="cost-comment">（押金+租金+运费）</span>
           </span>
         </cell>
@@ -35,9 +40,11 @@
     </div>
     <div class="cost-more"></div>
     <select-pay @on-pay="selectPay"></select-pay>
-    <coupon v-model="couponShow"></coupon>
+    <coupon v-model="couponShow" @on-confirm="couponConfirm"></coupon>
     <div class="proto">
-      <input type="checkbox" v-model="checked"><a @click="showProto"><<行龙乐器用户服务协议>></a>
+      <input type="checkbox" v-model="checked">
+      <a @click="showProto">
+        <<行龙乐器用户服务协议>></a>
     </div>
     <div class="cost-action fixed-footer">
       <div class="order-cost">
@@ -76,7 +83,9 @@ export default {
       id: '',
       checked: true,
       protoShow: false,
-      couponShow: false
+      couponShow: false,
+      couponId: 0,
+      couponAmount: 0
     }
   },
   computed: {
@@ -116,6 +125,12 @@ export default {
     Coupon
   },
   methods: {
+    couponConfirm(item) {
+      if (item) {
+        this.couponId = item.id
+        this.couponAmount = item.amount
+      }
+    },
     showSelectCoupon() {
       this.couponShow = true
     },
@@ -135,7 +150,8 @@ export default {
           storage.set('gzhpayorder', {
             body: '行龙租琴--订单号' + this.detail.orderSn,
             total: this.detail.downPayment,
-            no: this.detail.orderSn
+            no: this.detail.orderSn,
+            couponId: this.couponId
           })
           loading.hide()
           let backurl = encodeURIComponent('http://m.pianoshare.cn/wxpay')
@@ -146,7 +162,8 @@ export default {
               this.detail.orderSn,
               this.detail.downPayment,
               '行龙租琴--订单号' + this.detail.orderSn,
-              this.id
+              this.id,
+              this.couponId
             )
             .then(res => {
               loading.hide()
@@ -168,7 +185,8 @@ export default {
             this.detail.downPayment,
             '行龙租琴',
             '行龙租琴--订单号' + this.detail.orderSn,
-            this.id
+            this.id,
+            this.couponId
           )
           .then(res => {
             loading.hide()
