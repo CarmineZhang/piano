@@ -84,7 +84,7 @@ export default {
       checked: true,
       protoShow: false,
       couponShow: false,
-      couponId: 0,
+      couponId: -1,
       couponAmount: 0
     }
   },

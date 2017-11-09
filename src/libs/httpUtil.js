@@ -267,28 +267,34 @@ function orderlist() {
 }
 
 function wxPay(no, total, body, id, couponId) {
-  return ajax('wechatpay/unifiedOrder', {
+  let ob = {
     memberToken: storage.get('access-token'),
     body: body,
     totalFee: total,
     outTradeNo: no,
     returnUrl: 'http://m.pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
-    type: '1',
-    couponId: couponId
-  })
+    type: '1'
+  }
+  if (couponId !== -1) {
+    ob.couponId = couponId
+  }
+  return ajax('wechatpay/unifiedOrder', ob)
 }
 
 function aliPay(no, total, subject, body, id, couponId) {
-  return ajax('alipay/pay', {
+  let ob = {
     memberToken: storage.get('access-token'),
     totalAmount: total,
     outTradeNo: no,
     subject: subject,
     body: body,
     returnUrl: 'http://m.pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
-    payType: '1',
-    couponId: couponId
-  })
+    payType: '1'
+  }
+  if (couponId !== -1) {
+    ob.couponId = couponId
+  }
+  return ajax('alipay/pay', ob)
 }
 
 function getAliPayResult(no) {
@@ -299,14 +305,17 @@ function getAliPayResult(no) {
 }
 
 function wxGzhPay(body, total, no, code, couponId) {
-  return ajax('wechatpay/jsPay', {
+  let ob = {
     memberToken: storage.get('access-token'),
     body: body,
     totalFee: total,
     outTradeNo: no,
-    code: code,
-    couponId: couponId
-  })
+    code: code
+  }
+  if (couponId !== -1) {
+    ob.couponId = couponId
+  }
+  return ajax('wechatpay/jsPay', ob)
 }
 
 function getWxPayResult(no) {
