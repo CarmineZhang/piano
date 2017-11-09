@@ -100,20 +100,20 @@ export default {
   },
   methods: {
     showPurpose() {
-      this.show === 4 ? this.show = -1 : this.show = 4
+      this.show === 4 ? (this.show = -1) : (this.show = 4)
       this.maskShow = !this.maskShow
     },
     showBrand() {
-      this.show === 1 ? this.show = -1 : this.show = 1
+      this.show === 1 ? (this.show = -1) : (this.show = 1)
       this.maskShow = !this.maskShow
     },
     showType() {
-      this.show === 2 ? this.show = -1 : this.show = 2
+      this.show === 2 ? (this.show = -1) : (this.show = 2)
       this.maskShow = !this.maskShow
     },
     showRent() {
       if (this.rentList.length > 0) {
-        this.show === 3 ? this.show = -1 : this.show = 3
+        this.show === 3 ? (this.show = -1) : (this.show = 3)
         this.maskShow = !this.maskShow
       }
     },
@@ -122,14 +122,14 @@ export default {
       this.show = -1
     },
     dayrent() {
-      this.rentType = { dicValue: 'day', dicName: '日租' }
+      this.rentType = { dicValue: 'day', dicName: '短租' }
       this.rentList = this.rentDay
       this.show = -1
       this.maskShow = false
       this.$emit('on-rent-type', 'day')
     },
     monthrent() {
-      this.rentType = { dicValue: 'month', dicName: '月租' }
+      this.rentType = { dicValue: 'month', dicName: '长租' }
       this.rentList = this.rentMonth
       this.show = -1
       this.maskShow = false
@@ -176,7 +176,7 @@ export default {
 </script>
 <style lang="scss">
 .pl-search {
-  height: .88rem;
+  height: 0.88rem;
   .options {
     position: relative;
     z-index: 1;
@@ -184,9 +184,9 @@ export default {
 }
 
 .pl-select {
-  height: .88rem;
-  line-height: .88rem;
-  font-size: .28rem;
+  height: 0.88rem;
+  line-height: 0.88rem;
+  font-size: 0.28rem;
   color: #fff;
   background-color: #7c7c8b;
   span {
@@ -194,8 +194,7 @@ export default {
     display: inline-block;
     padding-right: 20px;
     &:after {
-      transition: transform .3s,
-      -webkit-transform .3s;
+      transition: transform 0.3s, -webkit-transform 0.3s;
     }
     @include arrow-down(6px, white);
   }
@@ -215,9 +214,9 @@ export default {
     white-space: nowrap;
     position: relative;
     box-sizing: border-box;
-    height: .8rem;
-    line-height: .8rem;
-    font-size: .28rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    font-size: 0.28rem;
     color: #fff;
     padding: 0 35px 0 20px;
     @include topline();
@@ -227,7 +226,8 @@ export default {
       content: '';
       width: 12px;
       height: 12px;
-      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAUCAMAAACgaw2xAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAA8UExURUdwTOQ6OtQqKuQ4O/8AAOM4O+Q4POI4OuM4O+Q4O+M4O+M5POQ4O+M4O+U4OuU2POQ4POQ4O+Q5O+Q5POG6XjYAAAATdFJOUwAvBl4BstwRzseW9XvrRR2+iVGqKQ+qAAAAaUlEQVQY023PSQ6AIBBEUSZpBhGTuv9dnRAiVq869VdPKXZmj3RXCTxYlMp2nbGxXTxWtrsFi2NhhRe2b8ia7bXAUllEam+M8pWZNyAIlUkY5SsbZZa95S9rhcjuQmVX4bKzdNlcuuy5A/z7BLUpU+pnAAAAAElFTkSuQmCC) no-repeat;
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAUCAMAAACgaw2xAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAA8UExURUdwTOQ6OtQqKuQ4O/8AAOM4O+Q4POI4OuM4O+Q4O+M4O+M5POQ4O+M4O+U4OuU2POQ4POQ4O+Q5O+Q5POG6XjYAAAATdFJOUwAvBl4BstwRzseW9XvrRR2+iVGqKQ+qAAAAaUlEQVQY023PSQ6AIBBEUSZpBhGTuv9dnRAiVq869VdPKXZmj3RXCTxYlMp2nbGxXTxWtrsFi2NhhRe2b8ia7bXAUllEam+M8pWZNyAIlUkY5SsbZZa95S9rhcjuQmVX4bKzdNlcuuy5A/z7BLUpU+pnAAAAAElFTkSuQmCC)
+        no-repeat;
       background-size: 12px auto;
       position: absolute;
       right: 10px;
@@ -238,29 +238,29 @@ export default {
 }
 
 .filter {
-  height: .55rem;
+  height: 0.55rem;
   background-color: #eaeaea;
-  padding: .075rem 0 0.075rem .3rem;
+  padding: 0.075rem 0 0.075rem 0.3rem;
   .filter-item {
-    font-size: .24rem;
+    font-size: 0.24rem;
     color: #928f9c;
     border: 1px solid #7f7c8b;
     border-radius: 0.19rem;
-    height: .38rem;
-    line-height: .38rem;
-    margin-right: .1rem;
+    height: 0.38rem;
+    line-height: 0.38rem;
+    margin-right: 0.1rem;
     position: relative;
     display: inline-block;
-    padding: 0 .6rem 0 .3rem;
+    padding: 0 0.6rem 0 0.3rem;
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       top: 50%;
       right: 10px;
       width: 12px;
       height: 12px;
       margin-top: -6px;
-      background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeBAMAAADJHrORAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAnUExURQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN0S+bUAAAANdFJOU00ARgwYLAUnEg40OzwIOFrEAAAAvklEQVQY02MQBAHXQww6IWAWAxCLFTGAgHoilO/EAAEqEL4oAwwEgvkL4HwuEB8hDVLAIOiAxGcRZBBTQOIzJTKIMyCDQgYhkLImIKEB0qjIACI5hBUYmAwbQDIMASBthkYMypIgg1gZNoC0KQsrGU4CMbgZwMYzGRpLQhhQc5UFJ6HYoyxoBGVB1U8WhqqHmCepZGgEMQ9i3ySgFRD7wO6RRLgH3b3o/kH3L3p4YIQXenhihDd6fGDEF3J8AgDkYx3BeW71dAAAAABJRU5ErkJggg==");
+      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeBAMAAADJHrORAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAnUExURQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN0S+bUAAAANdFJOU00ARgwYLAUnEg40OzwIOFrEAAAAvklEQVQY02MQBAHXQww6IWAWAxCLFTGAgHoilO/EAAEqEL4oAwwEgvkL4HwuEB8hDVLAIOiAxGcRZBBTQOIzJTKIMyCDQgYhkLImIKEB0qjIACI5hBUYmAwbQDIMASBthkYMypIgg1gZNoC0KQsrGU4CMbgZwMYzGRpLQhhQc5UFJ6HYoyxoBGVB1U8WhqqHmCepZGgEMQ9i3ySgFRD7wO6RRLgH3b3o/kH3L3p4YIQXenhihDd6fGDEF3J8AgDkYx3BeW71dAAAAABJRU5ErkJggg==');
       background-size: 12px;
     }
   }
@@ -272,7 +272,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, .3);
+  background: rgba(0, 0, 0, 0.3);
 }
 </style>
 

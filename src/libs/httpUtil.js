@@ -274,7 +274,7 @@ function wxPay(no, total, body, id, couponId) {
     outTradeNo: no,
     returnUrl: 'http://m.pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
     type: '1',
-    couponId
+    couponId: couponId
   })
 }
 

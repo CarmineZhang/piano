@@ -60,14 +60,23 @@ export default {
     this.getList()
   },
   beforeMount() {
-    document.title = "钢琴列表"
+    document.title = '钢琴列表'
     var self = this
     window.onscroll = function() {
-      var top = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      var top =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop
       if (top > 50) {
-        self.style = { transform: 'translateY(-1.72rem)', transition: '0.5s ease 0s' }
+        self.style = {
+          transform: 'translateY(-1.72rem)',
+          transition: '0.5s ease 0s'
+        }
       } else {
-        self.style = { transform: 'translateY(0px)', transition: '0.5s ease 0s' }
+        self.style = {
+          transform: 'translateY(0px)',
+          transition: '0.5s ease 0s'
+        }
       }
     }
   },
@@ -92,6 +101,7 @@ export default {
     },
     selectRent(rent) {
       this.rent = rent
+      this.getList()
     },
     selectPurpose(purpose) {
       this.purpose = purpose
@@ -103,44 +113,64 @@ export default {
     },
     getList() {
       this.index = 1
-      http.getPiano(this.index, this.size, this.brand, this.rentType, this.rent, this.pianoName, this.purpose).then((res) => {
-        if (res.errNo == 0) {
-          this.list = res.data.list
-          this.purposeDic = res.data.purposeDic
-          this.brandDic = res.data.brandDic
-          this.rentDay = res.data.rentDay
-          this.rentMonth = res.data.rentMonth
-          if (this.list.length < this.size) {
-            this.allowload = false
-          } else {
-            this.allowload = true
+      http
+        .getPiano(
+          this.index,
+          this.size,
+          this.brand,
+          this.rentType,
+          this.rent,
+          this.pianoName,
+          this.purpose
+        )
+        .then(res => {
+          if (res.errNo == 0) {
+            this.list = res.data.list
+            this.purposeDic = res.data.purposeDic
+            this.brandDic = res.data.brandDic
+            this.rentDay = res.data.rentDay
+            this.rentMonth = res.data.rentMonth
+            if (this.list.length < this.size) {
+              this.allowload = false
+            } else {
+              this.allowload = true
+            }
           }
-        }
-      })
+        })
     },
     loadmore() {
       this.index = this.index + 1
-      http.getPiano(this.index, this.size, this.brand, this.rentType, this.rent, this.pianoName, this.purpose).then((res) => {
-        if (res.errNo == 0) {
-          let list = res.data.list
-          this.brandDic = res.data.brandDic
-          this.rentDay = res.data.rentDay
-          this.rentMonth = res.data.rentMonth
-          if (list.length < this.size) {
-            this.allowload = false
-          } else {
-            this.allowload = true
+      http
+        .getPiano(
+          this.index,
+          this.size,
+          this.brand,
+          this.rentType,
+          this.rent,
+          this.pianoName,
+          this.purpose
+        )
+        .then(res => {
+          if (res.errNo == 0) {
+            let list = res.data.list
+            this.brandDic = res.data.brandDic
+            this.rentDay = res.data.rentDay
+            this.rentMonth = res.data.rentMonth
+            if (list.length < this.size) {
+              this.allowload = false
+            } else {
+              this.allowload = true
+            }
+            this.list = this.list.concat(list)
           }
-          this.list = this.list.concat(list)
-        }
-      })
+        })
     }
   }
 }
 </script>
 <style lang="scss">
 .search-head {
-  height: .88rem * 2+0.84rem;
+  height: 0.88rem * 2+0.84rem;
   .fixed-head {
     position: fixed;
     top: 0;
@@ -151,7 +181,7 @@ export default {
 }
 
 .show-filter {
-  height: .88rem * 2+0.84rem+0.55rem;
+  height: 0.88rem * 2+0.84rem+0.55rem;
 }
 </style>
 
