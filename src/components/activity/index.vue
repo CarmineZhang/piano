@@ -1,30 +1,33 @@
 <template>
   <div>
     <top class="fixed"></top>
-    <div  class="activity">
+    <div class="activity">
       <img src="../../assets/banner3.png">
-    <ul class="coupon-list">
-      <li class="list-item" v-for="item in list" :key="item.id">
-        <p class="content">
-          <span class="item-name" v-text="item.name"></span>
-          <span class="item-price"><em>¥</em><strong v-text="item.amount"></strong></span>
+      <ul class="coupon-list">
+        <li class="list-item" v-for="item in list" :key="item.id">
+          <p class="content">
+            <span class="item-name" v-text="item.name"></span>
+            <span class="item-price">
+              <em>¥</em>
+              <strong v-text="item.amount"></strong>
+            </span>
+          </p>
+          <p class="action">
+            <a @click="receive(item.id)">领取</a>
+          </p>
+        </li>
+      </ul>
+      <div class="ins">
+        <p>说明：</p>
+        <p>1、本优惠券有效期为：1个月，超出有效期不得使用；</p>
+        <p>2、优惠券不得与其他优惠券同时使用，每单只能使用一 张优惠券；
         </p>
-        <p class="action">
-          <a @click="receive(item.id)">领取</a>
+        <p>3、使用优惠券支付订单，如果退货优惠券抵扣金额不能 退还，只退还实际支付商品金额；
         </p>
-      </li>
-    </ul>
-    <div class="ins">
-      <p>说明：</p>
-      <p>1、本优惠券有效期为：1个月，超出有效期不得使用；</p>
-      <p>2、优惠券不得与其他优惠券同时使用，每单只能使用一
-     张优惠券；</p>
-      <p>3、使用优惠券支付订单，如果退货优惠券抵扣金额不能
-     退还，只退还实际支付商品金额；</p>
-      <p>4、行龙乐器在法律范围内保留对优惠券使用明细的最终
-     解释权。</p>
+        <p>4、行龙乐器在法律范围内保留对优惠券使用明细的最终 解释权。
+        </p>
+      </div>
     </div>
-     </div>
     <ve-footer></ve-footer>
   </div>
 </template>
@@ -57,7 +60,16 @@ export default {
     receive(id) {
       http.receiveCoupon(id).then(res => {
         if (res.errNo == 0) {
-          this.$ve.alert('领取成功', () => {
+          let flag = res.data.flag,
+            msg = ''
+          if (flag === 'true') {
+            msg = '领取成功'
+          } else if (flag === 'exist') {
+            msg = '已领取'
+          } else {
+            msg = '领取失败'
+          }
+          this.$ve.alert(msg, () => {
             this.getCoupons()
           })
         } else {

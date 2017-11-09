@@ -75,7 +75,7 @@ export default {
     }
   },
   beforeMount() {
-    document.title = '商城'
+    document.title = '行龙共享钢琴'
   },
   methods: {
     showNews() {
