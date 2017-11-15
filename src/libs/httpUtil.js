@@ -272,7 +272,12 @@ function wxPay(no, total, body, id, couponId) {
     body: body,
     totalFee: total,
     outTradeNo: no,
-    returnUrl: 'http://m.pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
+    returnUrl:
+      'http://m.pianoshare.cn/orderdetail?id=' +
+      id +
+      '&tradeno=' +
+      no +
+      '&paytype=wx',
     type: '1'
   }
   if (couponId !== -1) {
@@ -288,7 +293,12 @@ function aliPay(no, total, subject, body, id, couponId) {
     outTradeNo: no,
     subject: subject,
     body: body,
-    returnUrl: 'http://m.pianoshare.cn/orderdetail?id=' + id + '&tradeno=' + no,
+    returnUrl:
+      'http://m.pianoshare.cn/orderdetail?id=' +
+      id +
+      '&tradeno=' +
+      no +
+      '&paytype=ali',
     payType: '1'
   }
   if (couponId !== -1) {

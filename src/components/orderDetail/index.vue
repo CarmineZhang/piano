@@ -97,6 +97,10 @@ export default {
     let query = this.$store.state.route.query
     let id = query.id
     let no = query.tradeno
+    let payType = query.paytype
+    if (payType) {
+      this.payType = payType
+    }
     if (id) {
       this.id = id
       http.oderInfo(id).then(res => {
