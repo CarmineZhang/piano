@@ -3,27 +3,26 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-
 export default new Vuex.Store({
   state: {
     direction: 'forward',
     addrlist: [],
     editaddr: null,
-    selectPiano: null,
+    selectPiano: {},
     province: [],
     city: {},
     county: {},
     backUrl: ''
   },
   getters: {
-    defaultAddrId(state) {
+    defaultAddr(state) {
       let ret = state.addrlist.filter(item => {
         return item.isDefault == 1
       })
       if (ret.length > 0) {
-        return ret[0].id
+        return ret[0]
       }
-      return 0
+      return null
     }
   },
   mutations: {
@@ -33,8 +32,8 @@ export default new Vuex.Store({
     updateDirection(state, payload) {
       state.direction = payload.direction
     },
-    selectPiano(state, payload) {
-      state.selectPiano = payload
+    updateSelectedPiano(state, payload) {
+      state.selectPiano = { ...state.selectPiano, ...payload }
     },
     recevieAddrList(state, list) {
       state.addrlist = list
@@ -45,16 +44,10 @@ export default new Vuex.Store({
     receiveProvince(state, list) {
       state.province = [...list]
     },
-    receiveCity(state, {
-      pcode,
-      list
-    }) {
+    receiveCity(state, { pcode, list }) {
       state.city[pcode] = list
     },
-    receiveCounty(state, {
-      ccode,
-      list
-    }) {
+    receiveCounty(state, { ccode, list }) {
       state.county[ccode] = list
     }
   }

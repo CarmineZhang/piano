@@ -256,7 +256,7 @@ export default {
       return this.list['status1'] || []
     },
     deliverylist() {
-      return [...this.list['status1'] || [], ...this.list['status2'] || []]
+      return [...(this.list['status1'] || []), ...(this.list['status2'] || [])]
     },
     deliveryCompleted() {
       return this.list['status3'] || []
@@ -289,11 +289,11 @@ export default {
       })
     },
     pay(item) {
-      this.$router.push({ name: 'order-detail', query: { id: item.id } })
+      this.$router.push({ name: 'order-settle', query: { id: item.id } })
     },
     cancel(item) {
       let loading = this.$ve.loading('处理中...')
-      http.orderOperator(item.id, "1").then(res => {
+      http.orderOperator(item.id, '1').then(res => {
         loading.hide()
         if (res.errNo == 0) {
           this.$ve.alert('取消成功', () => {
@@ -306,7 +306,7 @@ export default {
     },
     deleteOrder(item) {
       let loading = this.$ve.loading('处理中...')
-      http.orderOperator(item.id, "2").then(res => {
+      http.orderOperator(item.id, '2').then(res => {
         loading.hide()
         if (res.errNo == 0) {
           this.$ve.alert('删除成功', () => {
@@ -338,19 +338,18 @@ export default {
 <style lang="scss">
 .order-list {
   .title {
-    height: .88rem;
-    line-height: .88rem;
-    font-size: .3rem;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    font-size: 0.3rem;
     color: #fff;
-    padding-left: .3rem;
+    padding-left: 0.3rem;
 
     span {
       position: relative;
       display: inline-block;
-      padding-right: .3rem;
+      padding-right: 0.6rem;
       &:after {
-        transition: transform .3s,
-        -webkit-transform .3s;
+        transition: transform 0.3s, -webkit-transform 0.3s;
       }
       @include arrow-down(6px, white);
     }
@@ -364,52 +363,52 @@ export default {
     box-sizing: border-box;
     background-color: #eee;
     .order-date {
-      padding: .3rem .3rem .15rem;
+      padding: 0.3rem 0.3rem 0.15rem;
       color: #928f9c;
-      font-size: .28rem;
+      font-size: 0.28rem;
       background-color: #fff;
     }
     .order-detail {
       background-color: #fff;
       .order-wrapper {
-        margin: 0 .3rem .3rem;
-        border: 1px dashed #7F7C8B;
-        padding: .15rem .3rem 0;
+        margin: 0 0.3rem 0.3rem;
+        border: 1px dashed #7f7c8b;
+        padding: 0.15rem 0.3rem 0;
         color: #323136;
-        font-size: .28rem;
+        font-size: 0.28rem;
         .order-detail-addr {
-          padding-bottom: .3rem;
+          padding-bottom: 0.3rem;
           position: relative;
           @include bottomline();
         }
         .order-detail-o {
-          padding: .3rem 0 .6rem;
+          padding: 0.3rem 0 0.6rem;
           .price {
             b {
               color: #bf3737;
             }
           }
           .desc {
-            font-size: .24rem;
+            font-size: 0.24rem;
             color: #928f9c;
           }
         }
         .order-detail-op {
           display: flex;
-          line-height: .88rem;
+          line-height: 0.88rem;
           .status {
             flex: 1;
             .desc {
-              color: #bf3737
+              color: #bf3737;
             }
           }
           .op {
-            margin-right: -.3rem;
+            margin-right: -0.3rem;
             display: block;
-            height: .88rem;
+            height: 0.88rem;
             width: 2rem;
             background-color: #bf3737;
-            font-size: .3rem;
+            font-size: 0.3rem;
             color: #fff;
             text-align: center;
           }
@@ -474,7 +473,7 @@ export default {
 }
 
 .more {
-  height: .3rem;
+  height: 0.3rem;
 }
 </style>
 

@@ -40,6 +40,7 @@ import AboutUs from '@/components/aboutus'
 import ContactUs from '@/components/contactus'
 import Activity from '@/components/activity'
 import PianoInfo from '@/components/pianoinfo'
+import Settle from '@/components/orderdetail/settle'
 Vue.use(Router)
 Vue.use(Widget)
 
@@ -211,6 +212,11 @@ export default new Router({
     {
       path: '/pianoinfo',
       component: PianoInfo
+    },
+    {
+      path: '/settle',
+      name: 'order-settle',
+      component: Settle
     }
   ]
 })

@@ -242,14 +242,15 @@ function checkCollection(id) {
   })
 }
 
-function order(piano, receiverId) {
+function order(piano, receiverId, couponId) {
   return ajax('order/create', {
     memberToken: storage.get('access-token'),
     pianoId: piano.id,
     leaseNum: piano.leaseNum,
     leaseType: piano.leaseType,
     receiverId: receiverId,
-    channelType: 'web'
+    channelType: 'web',
+    couponId
   })
 }
 
@@ -273,7 +274,7 @@ function wxPay(no, total, body, id, couponId) {
     totalFee: total,
     outTradeNo: no,
     returnUrl:
-      'http://m.pianoshare.cn/orderdetail?id=' +
+      'http://m.pianoshare.cn/settle?id=' +
       id +
       '&tradeno=' +
       no +
@@ -294,7 +295,7 @@ function aliPay(no, total, subject, body, id, couponId) {
     subject: subject,
     body: body,
     returnUrl:
-      'http://m.pianoshare.cn/orderdetail?id=' +
+      'http://m.pianoshare.cn/settle?id=' +
       id +
       '&tradeno=' +
       no +

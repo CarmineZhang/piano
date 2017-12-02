@@ -147,7 +147,7 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
-  height: 50%;
+  height: 60%;
   transform: translate3d(-50%, -50%, 0);
   border-radius: 10px;
   z-index: 1001;

@@ -30,14 +30,16 @@ export default {
       show: false,
       data: [],
       province: 0, //省
-      city: 0,//市
-      county: 0,//县
+      city: 0, //市
+      county: 0, //县
       level: 0,
       result: [],
-      header: [{
-        label: '请选择',
-        key: -1
-      }],
+      header: [
+        {
+          label: '请选择',
+          key: -1
+        }
+      ],
       selectKey: 0
     }
   },
@@ -179,7 +181,7 @@ export default {
         this.$emit('on-change', this.result)
       }
     }
-  },
+  }
 }
 </script>
 <style lang="scss">
@@ -190,7 +192,7 @@ export default {
   left: 0;
   right: 0;
   z-index: 110;
-  background-color: rgba(0, 0, 0, .7);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .mod-address-slide-main {
@@ -230,29 +232,9 @@ export default {
   bottom: 0;
   content: '';
   position: absolute;
-  -webkit-transform: scaleY(.5);
-  transform: scaleY(.5);
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
 }
-
-.close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40px;
-  height: 40px;
-  &:after {
-    content: '\20';
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    width: 20px;
-    height: 20px;
-    margin-top: -10px;
-    background: url('../../assets/area.png') no-repeat;
-    background-size: 20px 80px;
-  }
-}
-
 .mod-address-slide-tabs {
   overflow: hidden;
   padding: 0 10px;
@@ -310,7 +292,7 @@ export default {
       right: 0;
       top: 50%;
       margin-top: -10px;
-      background: url("../../assets/area.png") no-repeat;
+      background: url('../../assets/area.png') no-repeat;
       background-size: 20px 80px;
       background-position: 0 -20px;
     }

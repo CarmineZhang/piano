@@ -211,10 +211,14 @@ export default {
     },
     submit() {
       if (storage.get('access-token')) {
-        this.$store.commit('selectPiano', {
+        this.$store.commit('updateSelectedPiano', {
           id: this.id,
           leaseType: this.leaseType,
-          leaseNum: this.leaseNum
+          leaseNum: this.leaseNum,
+          leaseNumName: this.leaseNumName,
+          deposit: this.deposit,
+          rent: this.rent * this.leaseNum * this.benfit[this.leaseNum],
+          downPay: this.data.downPayment
         })
         this.$router.push('/chooseaddr')
       } else {
