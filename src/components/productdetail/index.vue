@@ -20,12 +20,12 @@
       <div class="flexbox">
         <span class="s2 txt-line">原价押金：</span>
         <span class="flex-item s2 txt-line">
-          <em>¥</em>{{data.marketPrices|ToThousands}}</span>
+          <em>¥</em>{{data.marketPrices}}</span>
       </div>
       <div class="flexbox">
         <span class="s1">现价押金：</span>
         <span class="flex-item s1">
-          <em>¥</em>{{deposit|ToThousands}}</span>
+          <em>¥</em>{{deposit}}</span>
         </span>
       </div>
       <div class="flexbox">
@@ -41,12 +41,12 @@
       <div class="flexbox">
         <span class="s1">预付款：</span>
         <span class="flex-item s1 txt-red">
-          <em>¥</em>{{data.downPayment|ToThousands}}</span>
+          <em>¥</em>{{data.downPayment}}</span>
       </div>
       <div class="flexbox">
         <span class="s1" style="line-height: .64rem;">押金+租金：</span>
         <span class="flex-item total-price">
-          <em>¥</em>{{deposit+rent*leaseNum*benfit[leaseNum]|ToThousands}}</span>
+          <em>¥</em>{{deposit+rent*leaseNum*benfit[leaseNum]}}</span>
         </span>
       </div>
       <div class="flexbox">

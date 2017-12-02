@@ -5,16 +5,16 @@
       <div class="title">费用核算：</div>
       <div>
         <cell title="押金：">
-          <span>{{detail.deposit|ToThousands}}</span>
+          <span>{{detail.deposit}}</span>
         </cell>
         <cell title="租金：">
           <span>
-            <em>¥</em>{{detail.rent|ToThousands}}</span>
+            <em>¥</em>{{detail.rent}}</span>
           </span>
           <span class="cell-desc">租期{{detail.leaseNumName}}</span>
         </cell>
         <cell title="运费：">
-          <span>{{detail.deliveryPrice|ToThousands}}</span>
+          <span>{{detail.deliveryPrice}}</span>
         </cell>
         <cell to="" title="优惠券：" @on-click="showSelectCoupon">
           <template v-if="couponId!==0">
@@ -26,13 +26,13 @@
         </cell>
         <cell title="预付费用：">
           <span>
-            <em>¥</em>{{detail.downPay|ToThousands}}</span>
+            <em>¥</em>{{detail.downPay}}</span>
           <span class="cost-comment">（部分租金+运费）</span>
           </span>
         </cell>
         <cell title="总费用：">
           <span>
-            <em>¥</em>{{detail.deposit+detail.rent+detail.deliveryPrice-couponAmount|ToThousands}}</span>
+            <em>¥</em>{{detail.deposit+detail.rent+detail.deliveryPrice-couponAmount}}</span>
           <span class="cost-comment">（押金+租金+运费）</span>
           </span>
         </cell>

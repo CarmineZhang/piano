@@ -30,7 +30,7 @@ Vue.filter('ToThousands', val => {
   if (typeof val === 'number') {
     ret = val.toFixed(0)
   }
-  return ret.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  return ret
 })
 
 Vue.directive('attrDetail', (el, binding) => {
