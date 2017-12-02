@@ -33,7 +33,9 @@ class Swiper {
     this._auto()
   }
   _init() {
-    this.width = parseInt($.getStyle(document.querySelector(this._options.container), 'width'))
+    this.width = parseInt(
+      $.getStyle(document.querySelector(this._options.container), 'width')
+    )
     this._setPosition()
     this._setTransition('none')
     this._setTransform()
@@ -41,13 +43,13 @@ class Swiper {
   }
   _bind() {
     var me = this
-    me.touchstartHandler = (e) => {
+    me.touchstartHandler = e => {
       me.stop()
       me.start.x = e.changedTouches[0].pageX
       me.start.y = e.changedTouches[0].pageY
       me._setTransition('none')
     }
-    me.touchMoveHandler = (e) => {
+    me.touchMoveHandler = e => {
       me.move.x = e.changedTouches[0].pageX
       me.move.y = e.changedTouches[0].pageY
       let distanceX = me.move.x - me.start.x
@@ -59,7 +61,7 @@ class Swiper {
       noScrollerY && e.preventDefault()
     }
 
-    me.touchEndHandler = (e) => {
+    me.touchEndHandler = e => {
       me.end.x = e.changedTouches[0].pageX
       me.end.y = e.changedTouches[0].pageY
 
@@ -76,36 +78,42 @@ class Swiper {
         }
       }
     }
-    me.transitionEndHandler = (e) => {
+    me.transitionEndHandler = e => {
       e.preventDefault()
       if (me.current >= me.realCount - 1) {
-        me.current = 1;
+        me.current = 1
         let distance = -me.current * me.width
         me.$sliderlist.css({
           '-webkit-transform': `translate3d(${distance}px,0, 0)`,
-          'transform': `translate3d(${distance}px, 0, 0)`,
-          'transition': `0ms`,
+          transform: `translate3d(${distance}px, 0, 0)`,
+          transition: `0ms`,
           '-webkit-transition': `0ms`
         })
       } else if (me.current === 0) {
-        me.current = me.current + this.count;
+        me.current = me.current + this.count
         let distance = -me.current * me.width
         me.$sliderlist.css({
           '-webkit-transform': `translate3d(${distance}px,0, 0)`,
-          'transform': `translate3d(${distance}px, 0, 0)`,
-          'transition': `0ms`,
+          transform: `translate3d(${distance}px, 0, 0)`,
+          transition: `0ms`,
           '-webkit-transition': `0ms`
         })
       }
       if (me.navcurrent >= me.count) {
         me.navcurrent = 0
       }
-      me.$navbarItem.removeClass('cur').eq(me.navcurrent).addClass('cur')
+      me.$navbarItem
+        .removeClass('cur')
+        .eq(me.navcurrent)
+        .addClass('cur')
     }
     me.$sliderlist.on('touchstart', me.touchstartHandler)
     me.$sliderlist.on('touchmove', me.touchMoveHandler)
     me.$sliderlist.on('touchend', me.touchEndHandler)
-    me.$sliderlist.on('transitionend webkitTransitionEnd', me.transitionEndHandler)
+    me.$sliderlist.on(
+      'transitionend webkitTransitionEnd',
+      me.transitionEndHandler
+    )
   }
   _setPosition() {
     for (let i = 0; i < this.realCount; i++) {
@@ -119,12 +127,12 @@ class Swiper {
     duration = duration || (this._options.duration || 'none')
     if (duration === 'none') {
       this.$sliderlist.css({
-        'transition': 'none',
+        transition: 'none',
         '-webkit-transition': 'none'
       })
     } else {
       this.$sliderlist.css({
-        'transition': `all ${duration}ms ease`,
+        transition: `all ${duration}ms ease`,
         '-webkit-transition': `all ${duration}ms ease`
       })
     }
@@ -135,7 +143,7 @@ class Swiper {
     let distance = -this.current * this.width + offset
     this.$sliderlist.css({
       '-webkit-transform': `translate3d(${distance}px,0, 0)`,
-      'transform': `translate3d(${distance}px, 0, 0)`,
+      transform: `translate3d(${distance}px, 0, 0)`
     })
   }
   _auto() {
@@ -154,16 +162,18 @@ class Swiper {
   }
   _moveIndex(num) {
     if (num !== 0) {
-      this.current++;
-      this.navcurrent++
-        // this.current += this.realCount
-        // this.current += num
-        // this.current %= this.realCount
+      this.current = this.current + num
+      this.navcurrent = this.navcurrent + num
+      if (this.navcurrent < 0) {
+        this.navcurrent = this.count - 1
+      }
+      // this.current += this.realCount
+      // this.current += num
+      // this.current %= this.realCount
 
-        // this.navcurrent += this.count
-        // this.navcurrent += num
-        // this.navcurrent %= this.count
-
+      // this.navcurrent += this.count
+      // this.navcurrent += num
+      // this.navcurrent %= this.count
     }
   }
   next(num) {

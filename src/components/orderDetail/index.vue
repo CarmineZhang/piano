@@ -32,7 +32,7 @@
         </cell>
         <cell title="总费用：">
           <span>
-            <em>¥</em>{{detail.deposit+detail.rent+detail.deliveryPrice|ToThousands}}</span>
+            <em>¥</em>{{detail.deposit+detail.rent+detail.deliveryPrice-couponAmount|ToThousands}}</span>
           <span class="cost-comment">（押金+租金+运费）</span>
           </span>
         </cell>
@@ -75,6 +75,9 @@ export default {
     } else {
       this.$router.go(-1)
     }
+    if (!this.detail || Object.keys(this.detail).length === 0) {
+      this.$router.push('/')
+    }
   },
   beforeMount() {
     document.title = '订单详情'
@@ -89,6 +92,9 @@ export default {
       if (item) {
         this.couponId = item.id
         this.couponAmount = item.amount
+      } else {
+        this.couponId = -1
+        this.couponAmount = 0
       }
     },
     showSelectCoupon() {

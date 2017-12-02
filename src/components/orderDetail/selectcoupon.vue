@@ -6,7 +6,7 @@
     <transition name="ve-slide">
       <div class="st-deposit" v-if="show">
         <div class="sd-header">选择优惠券
-          <i class="close" @click="close"></i>
+          <span class="unuse" @click="close">暂不使用</span>
         </div>
         <div class="sd-body">
           <div class="sd-item" @click="select(item)" v-for="item in list" :key="item.id">
@@ -75,6 +75,8 @@ export default {
     },
     close() {
       this.show = false
+      this.couponId = 0
+      this.$emit('on-confirm')
     }
   }
 }
@@ -94,6 +96,16 @@ export default {
     font-size: 0.3rem;
     color: #323136;
     position: relative;
+  }
+  .unuse {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    height: 40px;
+    line-height: 40px;
+    width: 60px;
+    font-size: 0.28rem;
+    color: #666;
   }
   .sd-body {
     width: 7.2rem;
