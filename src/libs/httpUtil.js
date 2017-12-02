@@ -243,15 +243,18 @@ function checkCollection(id) {
 }
 
 function order(piano, receiverId, couponId) {
-  return ajax('order/create', {
+  let req = {
     memberToken: storage.get('access-token'),
     pianoId: piano.id,
     leaseNum: piano.leaseNum,
     leaseType: piano.leaseType,
     receiverId: receiverId,
-    channelType: 'web',
-    couponId
-  })
+    channelType: 'web'
+  }
+  if (couponId !== -1) {
+    req.couponId = couponId
+  }
+  return ajax('order/create', req)
 }
 
 function oderInfo(id) {
