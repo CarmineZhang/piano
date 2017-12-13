@@ -41,6 +41,7 @@ import ContactUs from '@/components/contactus'
 import Activity from '@/components/activity'
 import PianoInfo from '@/components/pianoinfo'
 import Settle from '@/components/orderdetail/settle'
+import Services from '@/components/services'
 Vue.use(Router)
 Vue.use(Widget)
 
@@ -217,6 +218,10 @@ export default new Router({
       path: '/settle',
       name: 'order-settle',
       component: Settle
+    },
+    {
+      path: '/services',
+      component: Services
     }
   ]
 })

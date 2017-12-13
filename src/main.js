@@ -6,6 +6,7 @@ import App from './App'
 import store from './store'
 import router from './router'
 import Validator from '@/plugins/validator'
+import VueLazyLoad from 'vue-lazyload'
 import mixins from '@/mixins'
 import Widget from '@/plugins/widget'
 import './sass/main.scss'
@@ -14,6 +15,7 @@ Vue.config.productionTip = false
 Vue.use(Validator)
 Vue.use(Widget)
 Vue.mixin(mixins)
+Vue.use(VueLazyLoad)
 
 sync(store, router)
 
