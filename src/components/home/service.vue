@@ -10,6 +10,11 @@
       <div>
         <img src="../../assets/service-front.png" alt="">
       </div>
+      <div class="se-desc-wrap">
+        <span class="se-desc">
+          钢琴调律、整理工艺
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -53,6 +58,21 @@ export default {
     img {
       width: 5.78rem;
       height: 5rem;
+    }
+    .se-desc-wrap {
+      position: relative;
+      margin: 0.3rem 0 0 0.3rem;
+      .se-desc {
+        display: inline-block;
+        width: 5.78rem - 0.3rem;
+        font-size: 0.24rem;
+        color: #999;
+        word-wrap: break-word;
+      }
+      @include arrow-right();
+      &:after {
+        right: 40px;
+      }
     }
   }
 }

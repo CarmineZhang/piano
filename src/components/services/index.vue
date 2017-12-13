@@ -285,6 +285,8 @@ export default {
     border-radius: 0 0 0.22rem 0.22rem;
     margin-bottom: 0.4rem;
     color: #1d1b18;
+    line-height: 1.5;
+
     .s-ct-title {
       font-size: 0.3rem;
       padding: 0.3rem 0;
