@@ -18,7 +18,12 @@ export default {
         if (res.errNo == 0) {
           // storage.set('phone', this.phone)
           storage.set('access-token', res.data.memberToken)
-          this.$router.push('/')
+          let backUrl = storage.get('updateBackUrl')
+          if (backUrl) {
+            this.$router.push(backUrl)
+          } else {
+            this.$router.push('/')
+          }
         }
       })
     }

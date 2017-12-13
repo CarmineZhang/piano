@@ -38,6 +38,7 @@ axios.interceptors.response.use(res => {
     store.commit('updateBackUrl', {
       backUrl: router.currentRoute.fullPath
     })
+    storage.set('updateBackUrl', router.currentRoute.fullPath)
     router.replace('/login')
     return res
   } else {
