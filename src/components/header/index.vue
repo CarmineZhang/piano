@@ -7,7 +7,7 @@
 </template>
 <script>
 export default {
-  name: 'header',
+  name: 'my-header',
   props: {
     content: String,
     dynamic: {

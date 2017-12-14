@@ -33,7 +33,7 @@
 import http from '@/libs/httpUtil'
 import MyHeader from '../header'
 export default {
-  name: 'address',
+  name: 'my-address',
   components: {
     MyHeader
   },
@@ -55,7 +55,6 @@ export default {
     list() {
       return this.$store.state.addrlist
     }
-
   },
   created() {
     this.loading = this.$ve.loading('数据加载中')
@@ -66,21 +65,25 @@ export default {
   },
   methods: {
     getList() {
-      http.getAddressList().then((res) => {
-        this.loading && this.loading.hide()
-        this.loading = null
-        if (res.errNo == 0) {
-          this.$store.commit('recevieAddrList', res.data.addressList)
-        } else {
-          this.$ve.alert(res.errMsg)
-        }
-      }).catch(() => {
-        this.loading && this.loading.hide()
-        this.loading = null
-        this.$ve.alert('服务器错误，请稍后重试')
-      })
+      http
+        .getAddressList()
+        .then(res => {
+          this.loading && this.loading.hide()
+          this.loading = null
+          if (res.errNo == 0) {
+            this.$store.commit('recevieAddrList', res.data.addressList)
+          } else {
+            this.$ve.alert(res.errMsg)
+          }
+        })
+        .catch(() => {
+          this.loading && this.loading.hide()
+          this.loading = null
+          this.$ve.alert('服务器错误，请稍后重试')
+        })
     },
     add() {
+      this.$store.commit('recevieEditAddr', {})
       this.$router.push({ path: '/addaddress' })
     },
     edit(item) {
@@ -118,71 +121,71 @@ export default {
 .addr-list {
   background-color: #eaeaea;
   width: 7.5rem;
-  margin-bottom: .3rem;
+  margin-bottom: 0.3rem;
   .addr-item {
     box-sizing: border-box;
     background-color: #fff;
     box-sizing: border-box;
-    padding: 0 .3rem;
-    margin-bottom: .3rem;
+    padding: 0 0.3rem;
+    margin-bottom: 0.3rem;
     height: 2.64rem;
     .addr-header {
-      padding: .3rem 0 .3rem;
-      line-height: .3rem;
+      padding: 0.3rem 0 0.3rem;
+      line-height: 0.3rem;
       display: flex;
       .addr-user {
         flex: 1;
-        font-size: .3rem;
+        font-size: 0.3rem;
         color: #323136;
-        padding-left: .4rem;
+        padding-left: 0.4rem;
         position: relative;
         &::before {
           content: '';
           position: absolute;
           top: 0;
           left: 0;
-          width: .26rem;
-          height: .26rem;
+          width: 0.26rem;
+          height: 0.26rem;
           background-image: url('../../assets/icon-user.png');
           background-repeat: no-repeat;
-          background-size: .26rem .26rem;
+          background-size: 0.26rem 0.26rem;
         }
       }
       .addr-tel {
         flex: 1;
         text-align: right;
-        font-size: .28rem;
+        font-size: 0.28rem;
         color: #323136;
         position: relative;
       }
     }
     .addr-body {
-      padding: 0 0 .3rem;
+      padding: 0 0 0.3rem;
       background-color: #fff;
       color: #1b1b1b;
-      font-size: .28rem;
+      font-size: 0.28rem;
       word-wrap: break-word;
       position: relative;
       @include bottomline();
     }
     .addr-footer {
       position: relative;
-      height: .88rem;
-      line-height: .88rem;
+      height: 0.88rem;
+      line-height: 0.88rem;
       display: flex;
-      font-size: .28rem;
+      font-size: 0.28rem;
       color: #323136;
       .ft-left {
         flex: 1;
-        padding-left: .4rem;
+        padding-left: 0.4rem;
         position: relative;
         &::before {
           content: '';
           position: absolute;
           top: 50%;
           left: 0;
-          width: .28rem;
-          height: .28rem;
+          width: 0.28rem;
+          height: 0.28rem;
           background: url('../../assets/icon-nouse.png') no-repeat;
           background-size: 100%;
           transform: translateY(-50%);
@@ -193,15 +196,15 @@ export default {
         display: flex;
         .ft-edit {
           flex: 1;
-          padding-left: .4rem;
+          padding-left: 0.4rem;
           position: relative;
           &::before {
             content: '';
             position: absolute;
             top: 50%;
             left: 0;
-            width: .24rem;
-            height: .24rem;
+            width: 0.24rem;
+            height: 0.24rem;
             background: url('../../assets/icon-edit.png') no-repeat;
             background-size: 100%;
             transform: translateY(-50%);
@@ -209,15 +212,15 @@ export default {
         }
         .ft-delete {
           flex: 1;
-          padding-left: .4rem;
+          padding-left: 0.4rem;
           position: relative;
           &::before {
             content: '';
             position: absolute;
             top: 50%;
             left: 0;
-            width: .26rem;
-            height: .27rem;
+            width: 0.26rem;
+            height: 0.27rem;
             background: url('../../assets/icon-delete.png') no-repeat;
             background-size: 100%;
             transform: translateY(-50%);
@@ -240,7 +243,7 @@ export default {
 
 .addr-new {
   background-color: #eaeaea;
-  padding-bottom: .6rem;
+  padding-bottom: 0.6rem;
   .addr-body {
     height: 2.64rem;
     background-color: #fff;
@@ -249,17 +252,17 @@ export default {
       display: block;
       flex: 1;
       width: 100%;
-      font-size: .28rem;
+      font-size: 0.28rem;
       color: #928f9c;
       text-align: center;
       &::before {
-        content: "";
+        content: '';
         display: block;
         height: 50%;
         background-position: 50% 90%;
         background-repeat: no-repeat;
-        background-size: .45rem .45rem;
-        background-image: url('../../assets/icon-add.png')
+        background-size: 0.45rem 0.45rem;
+        background-image: url('../../assets/icon-add.png');
       }
     }
   }
