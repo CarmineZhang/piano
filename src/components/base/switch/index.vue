@@ -1,5 +1,5 @@
 <template>
-  <input class="switch-ipt" type="checkbox" :checked="checked" @click="chkClick">
+  <input class="switch-ipt" type="checkbox" :checked="isDefault" @click="chkClick">
 </template>
 <script>
 export default {
