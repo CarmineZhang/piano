@@ -6,7 +6,7 @@ import store from '../store'
 import storage from './storage'
 axios.interceptors.response.use(
   response => {
-    console.dir(response)
+    // console.dir(response)
     let status = response.status
     if (status === 200) {
       let resData = response.data
@@ -98,7 +98,8 @@ function logout() {
 function getInformations(no, size) {
   return ajax('infomation/getInfomations', {
     pageNo: no,
-    pageSize: size
+    pageSize: size,
+    ftuType: '2'
   })
 }
 
