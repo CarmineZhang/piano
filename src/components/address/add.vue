@@ -121,7 +121,7 @@ export default {
       this.area = addr.areaName || ''
       this.acode = addr.area || ''
       this.detail = addr.detail || ''
-      this.isDefault = addr.isDefault || ''
+      this.isDefault = addr.isDefault || 0
       this.id = addr.id || 0
     }
   },

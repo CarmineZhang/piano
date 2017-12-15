@@ -94,14 +94,21 @@ export default {
       if (item.isDefault === 1) {
         this.$ve.alert('默认地址不能删除')
       } else {
-        this.$ve.confirm('确定要删除此地址吗？', () => {
+        let confirm = this.$ve.confirm('确定要删除此地址吗？', () => {
           http.deleteAddress(item.id).then(res => {
             if (res.errNo == 0) {
-              this.$ve.alert('删除成功', () => {
-                this.getList()
+              confirm.hide(() => {
+                this.$ve.alert('删除成功', () => {
+                  this.getList()
+                })
+              })
+            } else {
+              confirm.hide(() => {
+                this.$ve.alert(res.errMsg)
               })
             }
           })
+          return false
         })
       }
     },
